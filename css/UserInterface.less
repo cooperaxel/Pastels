@@ -1,0 +1,857 @@
+/* LESS(CSS) User Interface document */
+
+@dark-shadow:rgba(0,0,0,0.1);
+@bright-shadow:rgba(255,255,255,0.3);
+
+.square (@size) { width:@size; height:@size; }
+.background (@str: none) { background-color:@str; }
+.border (@color: #afafaf, @width: 1px, @type: solid) { border-color:@color; border-width:@width; border-style:@type; }
+.linear-gradient (@from: top, @start: white, @end: black) { 
+	background-image:-webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
+	background-image:-webkit-linear-gradient(@from, @start, @end);
+	background-image:-moz-linear-gradient(@from, @start, @end);
+	background-image:-ms-linear-gradient(@from, @start, @end);
+	background-image:-o-linear-gradient(@from, @start, @end);
+	background-image:linear-gradient(@from, @start, @end);
+}
+.linear-3-gradient (@first: white, @second: transparent, @third: black, @from: top) {
+	background-image:-webkit-gradient(linear, left top, left bottom, from(@first), color-stop(@second, 0.5), to(@third));
+	background-image:-webkit-linear-gradient(@from, @first, @second, @third);
+	background-image:-moz-linear-gradient(@from, @first, @second, @third);
+	background-image:-ms-linear-gradient(@from, @first, @second, @third);
+	background-image:-o-linear-gradient(@from, @first, @second, @third);
+	background-image:linear-gradient(@from, @first, @second, @third);
+}
+.radial-gradient (@start: white, @end: black, @shape: circle cover, @pos: center center) {
+	background-image:-webkit-radial-gradient(@pos, @shape, @start, @end);
+	background-image:-moz-radial-gradient(@pos, @shape, @start, @end);
+	background-image:radial-gradient(@pos, @shape, @start, @end);
+}
+.shadow (@str: none) {
+	-webkit-box-shadow:@str;
+	-moz-box-shadow:@str;
+	-ms-box-shadow:@str;
+	-o-box-shadow:@str;
+	box-shadow:@str;
+}
+.outset-shadow (@color: @dark-shadow, @blur: 15px) { box-shadow:1px 0 @blur @color, -1px 0 @blur @color, 0 1px @blur @color, 0 -1px @blur @color; }
+.inset-shadow (@color: @bright-shadow, @blur: 0) { box-shadow:inset 0 0 @blur 1px @color; }
+
+.round-corner (@radius: 5px) { border-radius:@radius; }
+.text-shadow (@color: @dark-shadow, @blur: 5px, @x:-1px, @y:-1px) {
+	@str:@x @y @blur @color;
+	-webkit-text-shadow:@str;
+	-moz-text-shadow:@str;
+	-ms-text-shadow:@str;
+	-o-text-shadow:@str;
+	text-shadow:@str;
+}
+.transition (@time: .2s, @delegate: all, @effect: ease-in-out) {
+	@str: @delegate @time @effect;
+	-webkit-transition:@str;
+	-moz-transition:@str;
+	-ms-transition:@str;
+	-o-transition:@str;
+	transition:@str;
+}
+.transform (@f: none) {
+	-webkit-transform:@f;
+	-moz-transform:@f;
+	-ms-transform:@f;
+	-o-transform:@f;
+	transform:@f;
+}
+.flex-parent (@o: horizontal) {
+	display:-webkit-box;
+	display:-moz-box;
+	display:-ms-box;
+	display:-o-box;
+	display:box;
+	-webkit-box-orient:@o;
+	-moz-box-orient:@o;
+	-ms-box-orient:@o;
+	-o-box-orient:@o;
+	box-orient:@o;
+}
+.flex (@f: 1) {
+	-webkit-box-flex:@f;
+	-moz-box-flex:@f;
+	-ms-box-flex:@f;
+	-o-box-flex:@f;
+	box-flex:@f;
+}
+.animation (@name, @time: .2s, @i: 1, @function: ease-in-out) {
+	@str: @name @time @i @function;
+	-webkit-animation:@str;
+	-moz-animation:@str;
+	-o-animation:@str;
+	animation:@str;
+}
+
+/* ############################ */
+/* ## ## ## UIElements ## ## ## */
+
+* { 
+	margin:0; padding:0;
+	color:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+	font-style:inherit;
+	font-family:'Helvetica Neue', 'Helvetica', sans-serif;
+	outline:none;
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body { height:100%; padding:0; margin:0; }
+html { -webkit-user-select:none; }
+body {
+    width:100%;
+    height:100%;
+	position:absolute; top:0; right:0; bottom:0; left:0;
+}
+body.dark {
+	-webkit-filter:invert(100%);
+}
+
+h1, h2, h3, h4 {
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+}
+h1.bold, h2.bold, h3.bold, h4.bold, p.bold, span.bold {
+    font-weight:bold;
+}
+h2.italic, h2.italic, h3.italic, h4.italic, p.italic, span.italic {
+    font-style:italic;
+}
+
+h1 {
+    font-size:21px;
+}
+h2 {
+    font-size:18px;
+}
+h3 {
+    font-size:16px;
+}
+h4 {
+    font-size:14px;
+}
+p {
+    font-size:14px;
+}
+span {
+    font-size:12px;
+}
+
+a { 
+    .transition(.3s);
+    color:#666;
+	font-family:inherit;
+	font-size:14px;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:default;
+}
+a:hover {
+    .text-shadow(#777, 12px, 0, 0);
+    color:#444;
+    text-decoration:underline;
+}
+
+/* ########################## */
+/* ## ## ## UINavBar ## ## ## */
+
+nav.bar {
+    height:36px;
+	margin:-1px auto 1px;
+	background:-webkit-linear-gradient(top, rgba(255,255,255,1), rgba(220,220,220,1));
+	border:1px solid rgba(132,138,155,1);
+	border-width:1px 0;
+	box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0), 0 0 10px rgba(150,150,150,0.9);
+	color:#666;
+	vertical-align:top;
+	position:relative;
+    z-index:3;
+}
+nav.bar.dark {
+	background:-webkit-linear-gradient(top, rgba(79,80,83,1), rgba(41,42,43,1));
+	border-bottom:1px solid #131415;
+	box-shadow:inset 0 1px 0 rgba(105,106,109,1), inset 0 -1px 0 rgba(73,73,75,1), 0 0 10px rgba(0,0,0,0.9);
+}
+nav.bar > * {
+	vertical-align:middle;
+}
+
+/* ################################### */
+/* ## ## ## UIButton, UIInput ## ## ## */
+
+button, select, input[type=submit], input[type=reset], input[type=cancel], input[type=button] {
+	display:inline-block;
+	margin:2px 5px;
+    padding:5px 15px 4px;
+	background-image:-webkit-linear-gradient(top, rgba(255,255,255,1), rgba(230,230,230,1));
+	border:1px solid rgba(175,175,175,1);
+	border-radius:5px;
+	box-shadow:inset 0 0 0 1px white;
+	color:#666;
+	font-size:14px;
+	text-align:center;
+	text-shadow:1px -1px 0 white;
+	-webkit-transition:all .3s ease-in-out;
+}
+button:hover, select:hover, input[type=submit]:hover, input[type=reset]:hover, input[type=cancel]:hover, input[type=button]:hover {
+	border-color:rgba(149,149,149,1);
+	box-shadow:inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.1);
+	color:#444;
+}
+button:active, select:active, input[type=submit]:active, input[type=reset]:active, input[type=cancel]:active, input[type=button]:active {
+	border-color:rgba(129,129,129,1);
+	box-shadow:inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 10px rgba(0,0,0,0.15);
+	color:#222;
+}
+.action, .danger, .warning, .success, .info, .inverse {
+	.linear-gradient(top, fade(white, 25%), fade(black, 20%)) !important;
+	.border(rgba(0,0,0,0.4));
+	.inset-shadow() !important;
+	.transition(0.2s);
+	.text-shadow(transparent);
+	border-bottom-color:fade(black, 55%);
+	color:white;
+}
+.action:hover, .danger:hover, .warning:hover, .success:hover, .info:hover, .inverse:hover {
+	.border(rgba(0,0,0,0.5));
+    .inset-shadow();
+	color:white;
+}
+.action.active, .danger.active, .warning.active, .success.active, .info.active, .inverse.active, 
+.action:active, .danger:active, .warning:active, .success:active, .info:active, .inverse:active,
+.action:focus, .danger:focus, .warning:focus, .success:focus, .info:focus, .inverse:focus {
+	.linear-gradient(top, fade(black, 20%), fade(white, 12%)) !important;
+	.border(rgba(0,0,0,0.6));
+	.inset-shadow();
+	color:white;
+}
+
+.action 							{ background-color:#1a9cff; }
+.action:hover, .action.active		{ background-color:darken(#1a9cff, 10%); }
+
+.danger 							{ background-color:#ee666f; }
+.danger:hover, .danger.active		{ background-color:darken(#ee666f, 10%); }
+
+.warning 							{ background-color:#faa937; }
+.warning:hover, .warning.active		{ background-color:darken(#faa937, 10%); }
+
+.success 							{ background-color:#62c462; }
+.success:hover, .success.active		{ background-color:darken(#62c462, 10%); }
+
+.info 								{ background-color:#5bc0de; }
+.info:hover, .info.active			{ background-color:darken(#5bc0de, 10%); }
+
+.inverse 							{ background-color:#666666; }
+.inverse:hover, .inverse.active		{ background-color:darken(#666666, 10%); }
+
+button.large 		{ padding:7px 18px 6px; font-size:17px; }
+button.small 		{ padding:4px 8px 3px; font-size:11px; }
+button.mini 		{ padding:1px 6px 0; font-size:11px; }
+
+button[data-badge-value]::after {
+	.square(12px);
+	.linear-gradient(top, fade(white, 70%), red 70%);
+	.border(white, 2px);
+	.round-corner(10px);
+	.outset-shadow();
+	padding:1px 2px 4px 3px;
+	background-color:red;
+	content:attr(data-badge-value);
+	font-size:13px;
+	font-weight:bold;
+	color:white;
+	text-shadow:none;
+	position:absolute; top:-8px; right:-9px;
+}
+
+select {
+    .round-corner(15px);
+    text-align:left;
+    -webkit-appearance:none;
+}
+select option {
+    font-size:11px;
+}
+input[type=text], input[type=number], textarea {
+	display:inline-block;
+	width:120px;
+	margin:2px 5px; padding:3px 9px;
+	background-color:white;
+	border:1px solid rgba(175,175,175,1);
+	border-radius:15px;
+	box-shadow:inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
+	font-size:13px;
+	color:#666;
+	-webkit-transition:all .3s ease-in-out;
+}
+textarea {
+    .round-corner(3px);
+}
+input[type=text]:hover, input[type=number]:hover, textarea:hover {
+	border-color:rgba(149,149,149,1);
+	box-shadow:inset 0 0 7px rgba(0,0,0,0.15), 0 0 5px rgba(0,0,0,0.1);
+	color:#444;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus {
+    .border(rgba(129,129,129,1));
+	.shadow(e("inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3)"));
+	color:#222;
+}
+
+/* ###################################### */
+/* ## ## ## UICheckbox & UIRadio ## ## ## */
+
+input[type=checkbox], input[type=radio] { 
+	.square(16px);
+	.linear-gradient(top, white, #e2e2e2);
+	.border(#afafaf);
+	.inset-shadow();
+	.transition(0.3s);
+	
+	display:inline-block;
+	vertical-align:top;
+	margin:2px; padding:0;
+	color:#444;
+	position:relative;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+}
+
+input[type=checkbox] 		{ .round-corner(2px); }
+input[type=radio]			{ .round-corner(10px); }
+
+input[type=checkbox].large,			input[type=radio].large 	{ .square(18px); }
+input[type=checkbox].large::after								{ font-size:15px; top:-1px; left:2px; }
+
+input[type=checkbox].small,			input[type=radio].small 	{ .square(14px); }
+input[type=checkbox].small::after								{ font-size:12px; top:-2px; left:1px; }
+
+input[type=checkbox].mini,			input[type=radio].mini 		{ .square(12px); }
+input[type=checkbox].mini::after								{ font-size:10px; }
+
+
+input[type=checkbox]:active, input[type=radio]:active {
+	.border(#999);
+	box-shadow:inset 0 1px 5px rgba(0,0,0,0.15);
+}
+input[type=checkbox]:checked, input[type=radio]:checked {
+	.linear-gradient(top, #eaeaea, white);
+	.border(#888);
+}
+input[type=checkbox]::after 			{ opacity:0; font-size:14px; position:relative; top:-2px; left:1px; }
+input[type=checkbox]:checked::after 	{ opacity:1; }
+input[type=checkbox]::after 			{ content:"✔"; }
+
+input[type=radio]::after { 
+	.square(6px);
+	.round-corner(12px);
+	content:"";
+	display:block;
+	background:#555;
+	box-shadow:0 0 2px fade(white, 20%);
+	position:relative; top:4px; left:4px;
+	opacity:0;
+}
+
+input[type=radio]:checked::after 		{ opacity:1; }
+input[type=radio].large::after			{ .square(8px); top:4px; left:4px; }
+input[type=radio].small::after			{ .square(6px); top:3px; left:3px; }
+input[type=radio].mini::after			{ .square(4px); top:3px; left:3px; }
+
+/* #################################### */
+/* ## ## ## UISegmentedControl ## ## ## */
+
+div.segmentedcontrol {
+	.round-corner(5px);
+	margin:2px 10px; 
+	display:inline-block;
+	vertical-align:top;
+	font-size:13px;
+	list-style-type:none;
+}
+div.segmentedcontrol button {
+	.round-corner(0);
+	display:inline-block;
+	vertical-align:middle;
+	margin:0 0 0 -5px;
+	padding:4px 18px 4px;
+}
+div.segmentedcontrol button:first-child {
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+}
+div.segmentedcontrol button:last-child {
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+div.segmentedcontrol.large button { padding:6px 24px 5px; font-size:17px; }
+div.segmentedcontrol.small button { padding:4px 16px 3px; font-size:11px; }
+div.segmentedcontrol.mini button { padding:1px 13px 0; font-size:11px; }
+
+/* ################################ */
+/* ## ## ## UINotification ## ## ## */
+
+.notification {
+	background-image:-webkit-linear-gradient(top, rgba(255,255,255,0.9), rgba(230,230,230,0.9));
+	min-width:10%;
+	max-width:25%;
+	margin:0;
+	border:1px solid rgb(169,169,169);
+	border-radius:5px;
+	box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+	color:#444;
+	position:fixed; top:30px; right:15px;
+	z-index:70;
+	cursor:default;
+}
+.notification > header *, .notification > section * { margin:0; padding:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.notification h1 { font-size:13px; }
+.notification p { font-size:11px; }
+.notification > header {
+	padding:15px 25px 0;
+	font-weight:bold;
+}
+.notification > section {
+	padding:0 25px 15px;
+	font-style:italic;
+}
+.notification > footer {
+	display:-webkit-box;
+	margin:0; padding:0 5px;
+	border-top:1px solid rgb(190,190,190);
+	box-shadow:inset 0 1px 0 white;
+}
+.notification > footer button {
+	display:-webkit-box;
+	margin:5px;
+	font-size:10px;
+	-webkit-box-flex:1;
+}
+
+/* ########################### */
+/* ## ## ## UIPopOver ## ## ## */
+
+div.popover { 
+	background:-webkit-linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
+	border:1px solid rgba(169, 169, 169, 1);
+	border-radius:4px;
+	min-height:40px; 
+	min-width:60px; 
+	padding:0; 
+	box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+	font:12px Tahoma,Arial; 
+	color:#555;
+	text-align:center;
+	position:absolute; 
+	opacity:0;
+	z-index:99;
+	cursor:default;
+}
+
+div.popover * 			{ pointer-events:none; }
+div.popover.active * 	{ pointer-events:all; }
+
+div.popover > header, div.popover > form > header {
+	padding:10px 15px 7px;
+	border-bottom:1px solid rgba(190,190,190,1);
+	box-shadow:0 1px 0 white;
+	font-size:13px;
+	font-weight:normal;
+	color:rgba(100,100,100,1);
+}
+div.popover > section, div.popover > form > section {
+	display:inline-block;
+    padding:10px 15px;
+}
+div.popover > section > div, div.popover > form > section > div {
+	margin:13px 0;
+}
+div.popover footer, div.popover > form > footer {
+    display:block;
+	padding:5px 10px;
+	border-top:1px solid rgba(190,190,190,1);
+	box-shadow:inset 0 1px 0 white;
+}
+
+div.popover div.popover-arrow { 
+	width:22px; height:22px;
+	background:rgb(246,246,246);
+	border:2px solid rgba(169,169,169,0.9);
+	border-width:2px 0 0 2px;
+	border-radius:1px 0 0 0;
+	box-shadow:inset 1px 0 0 rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.9);
+	position:absolute; left:45%; 
+	z-index:9;
+	-webkit-transform:rotate(45deg);
+	-webkit-mask:-webkit-gradient(linear, left top, right bottom, from(black), color-stop(0.56, black), color-stop(0.57, transparent), to(transparent));
+}
+
+div.popover.below div.popover-arrow {
+	top:-13px;
+}
+div.popover.above div.popover-arrow {
+	background-color:rgba(222,222,222,1);
+	bottom:-13px;
+	-webkit-transform:rotate(-135deg);
+	-moz-transform:rotate(-135deg);
+}
+div.popover.right div.popover-arrow {
+	background-color:rgba(233,233,233,1);
+	-webkit-transform:rotate(-45deg);
+}
+div.popover.left div.popover-arrow {
+	background-color:rgba(233,233,233,1);
+	-webkit-transform:rotate(135deg);
+}
+
+div.popover											{ font-size:13px; }
+div.popover					div.popover-arrow		{ width:15px; height:15px; }
+div.popover.below			div.popover-arrow		{ top:-9px; }
+div.popover.above			div.popover-arrow		{ bottom:-9px; }
+
+div.popover.large									{ box-shadow:inset 0 0 0 1px white, 0 0 18px rgba(0,0,0,0.4); font-size:16px; }
+div.popover.large			div.popover-arrow		{ width:18px; height:18px; }
+div.popover.large.below		div.popover-arrow		{ top:-11px; }
+div.popover.large.above		div.popover-arrow		{ bottom:-11px; }
+
+div.popover.small									{ box-shadow:inset 0 0 0 1px white, 0 0 10px rgba(0,0,0,0.3); font-size:11px; }
+div.popover.small			div.popover-arrow 		{ width:11px; height:11px; }
+div.popover.small.below		div.popover-arrow		{ top:-7px; }
+div.popover.small.above		div.popover-arrow		{ bottom:-7px; }
+
+div.popover.mini									{ box-shadow:inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.2); font-size:11px; }
+div.popover.mini 			div.popover-arrow 		{ width:7px; height:7px; }
+div.popover.mini.below 		div.popover-arrow 		{ top:-5px; }
+div.popover.mini.above	 	div.popover-arrow 		{ bottom:-5px; }
+
+div.popover.selectable {
+    max-height:300px;
+    border-radius:0;
+    overflow:scroll;
+}
+div.popover.selectable ul, div.tabbed aside ul {
+	margin:0; padding:2px 1px 1px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	list-style-type:none;
+}
+div.popover.selectable ul li {
+	.border(transparent, 1px 0);
+    .transition(.2s, background-image);
+    margin:-1px 0 0 0; padding:3px 15px;
+	text-align:left;
+}
+div.popover.selectable ul li.active {
+	.linear-gradient(top, #319be7, #1b78d9);
+	color:#fafafa;
+}
+div.popover ul li a {
+    -webkit-transition:none !important;
+    -moz-transition:none !important;
+    -ms-transition:none !important;
+    -o-transition:none !important;
+    transition:none !important;
+}
+
+div.tabbed {
+    .flex-parent;
+}
+div.tabbed section, div.tabbed aside {
+    .flex;
+    display:inline-block;
+    vertical-align:top;
+}
+div.tabbed section {
+    
+}
+div.tabbed aside {
+    width:auto;
+    min-height:80px;
+    padding:0;
+    border-right:1px solid rgba(190,190,190,1);
+    box-shadow:1px 0 0 white;
+    overflow-y:scroll;
+}
+div.tabbed aside ul {
+    padding:15px 0;
+    overflow-y:scroll;
+}
+div.tabbed aside ul li {
+    .border(transparent, 1px 0);
+    .transition(.2s, border);
+    margin:-1px -1px 0 -1px;
+    padding:7px 15px 7px 30px;
+    font-family:Courier;
+	font-size:14px;
+    text-align:right;
+    position:relative;
+    z-index:5;
+}
+div.tabbed aside ul li:hover {
+    .border(rgba(169,169,169,1), 1px 0);
+    .shadow(e("inset 0 1px 0 white, inset 0 -1px 0 white, 0 0 8px rgba(0,0,0,0.15)"));
+    z-index:6;
+}
+div.tabbed aside ul li:active, div.tabbed aside ul li.active {
+    .border(rgba(169,169,169,1), 1px 0);
+    .shadow(e("inset 0 1px 0 white, inset 0 -1px 0 white, 0 0 12px rgba(0,0,0,0.3)"));
+    font-weight:bold;
+    font-style:italic;
+    z-index:7;
+}
+div.tabbed section footer {
+    margin:0 -14px 0;
+    position:relative; top:10px;
+}
+
+/* ######################### */
+/* ## ## ## UIAlert ## ## ## */
+
+div.alert {
+	display:-webkit-box;
+	margin:0;
+	text-align:center;
+	-webkit-box-orient:horizontal;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+	position:fixed; top:0; right:0; bottom:0; left:0; z-index:100;
+}
+div.alert-fog {
+	display:inline-block;
+	background-image:-webkit-radial-gradient(transparent, #000);
+	margin:0; padding:0;
+	position:absolute; top:0; right:0; bottom:-1px; left:0;
+	z-index:100;
+	overflow:hidden;
+}
+div.alert-border {
+	display:inline-block;
+	background-color:rgba(255,255,255,1);
+	min-width:300px;
+	padding:8px;
+	border:1px solid rgba(28,28,28,0.6);
+	border-radius:20px;
+	box-shadow:inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.5);
+	position:relative; top:-50px;
+	z-index:101;
+	overflow:hidden;
+}
+div.alert-body {
+	background-image:-webkit-linear-gradient(top, rgba(255,255,255,1), rgba(230,230,230,1));
+	padding:15px 20px;
+	border:1px solid rgb(169,169,169);
+	border-radius:13px;
+	box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1);
+	z-index:100;
+	position:relative;
+}
+
+div.alert-body > header {
+	color:rgb(49,49,49);
+	font-size:23px;
+}
+
+div.alert-body > section {
+	min-height:20px;
+	color:rgb(71,71,71);
+	font-size:15px;
+}
+
+div.alert-body > footer {
+	margin:15px -20px -15px; padding:10px;
+	border-top:1px solid rgb(190,190,190);
+	box-shadow:inset 0 1px 0 white;
+	text-align:center;
+}
+div.alert-body > footer button {
+	margin-right:10px; margin-left:10px;
+	padding-right:25px; padding-left:25px;
+}
+
+/* ######################## */
+/* ## ## ## UIHint ## ## ## */
+
+div.hint {
+    .linear-gradient(top, rgba(255,241,195,1), rgba(255,227,131,1));
+    .border(rgba(180,158,34,1));
+    .round-corner(2px);
+	.inset-shadow(white);
+    margin:0;
+    padding:4px 10px;
+	font-size:11px;
+	color:#424242;
+	position:absolute; top:50%; left:50%;
+	z-index:100;
+	opacity:0;
+	pointer-events:none;
+}
+
+/* ########################## */
+/* ## ## ## UISwitch ## ## ## */
+
+.switch {
+    .linear-gradient(top, white, #eaeaea);
+    .border(rgba(129,129,129,1), 1px);
+	.round-corner(13px);
+    display:inline-block;
+	width:65px;
+    height:20px;
+	margin:5px 7px;
+	position:relative;
+	z-index:3;
+	overflow:hidden;
+    vertical-align:top;
+    text-align:left !important;
+	-webkit-user-select:none;
+}
+.switch-container {
+	height:20px;
+	margin:0;
+	position:relative;
+	z-index:2;
+}
+.switch-container > * {
+	display:inline-block;
+	vertical-align:top;
+}
+.switch-container > input, .switch-container > input:checked, .switch.checked input, .switch input:active {
+	.square(22px);
+    .border(rgba(129,129,129,1), 1px);
+    .round-corner(20px !important);
+    .shadow(e("inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.4)"));
+	margin:-1px -11px !important;
+	position:relative;
+	z-index:3;
+	-moz-appearance:radio;
+	-webkit-appearance:none;
+}
+.switch-container > .slider {
+    .linear-gradient(bottom, rgb(255,255,255), rgb(230,230,230));
+    .shadow(inset 0 0 7px #bababa);
+	width:55px;
+    height:20px;
+	margin:0 0 0 -45px;
+	position:relative;
+	z-index:1;
+}
+
+.switch-container > input::before, .switch-container > input:checked::before,
+.switch-container > input::after, .switch-container > input:checked::after {
+	display:block !important;
+	color:#555;
+	font:bold 12px Verdana, Arial, sans-serif;
+	position:relative;
+	opacity:1 !important;
+	pointer-events:none;
+}
+.switch-container > input::before, .switch-container > input:checked::before {
+	content:"ON";
+	top:3px; left:-30px;
+}
+.switch-container > input::after, .switch-container > input:checked::after {
+	content:"OFF" !important;
+	top:-12px; left:28px;
+}
+
+/* ############################## */
+/* ## ## ## UIFilePicker ## ## ## */
+
+.filepicker {
+	display:block;
+	background-color:white;
+	border:1px solid rgba(175,175,175,1);
+	border-radius:5px;
+	box-shadow:inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
+	overflow:hidden;
+	-webkit-user-select:none;
+}
+.filepicker div.item {
+	display:block;
+	padding:5px 30px 7px 25px;
+	font-size:11px;
+	color:rgba(115,115,115,1);
+	text-align:left;
+}
+.filepicker div.item.active {
+	background-image:-webkit-linear-gradient(top, #319be7, #1b78d9);
+	color:#fafafa;
+}
+
+/* ######################### */
+/* ## ## ## UITable ## ## ## */
+
+table {
+	width:100%;
+	margin:0 auto;
+	border-collapse:collapse;
+	font-size:13px;
+}
+
+table thead th, table tfoot td {
+    .linear-gradient(top, white, #d0d0d0);
+}
+table thead th {
+	padding:11px 10px 4px;
+	text-align:center;
+}
+table td, table th {
+	padding:4px 10px;
+	border:1px solid #cacaca;
+    white-space:nowrap;
+}
+table tr {
+	background:white;
+	-webkit-transition:background .2s ease-in-out;
+	-moz-transition:background .2s ease-in-out;
+	transition:background .2s ease-in-out;
+}
+table tr:nth-child(even) {
+	background:#f6f6f6;
+}
+table tr:hover {
+	background:#eee;
+}
+
+/* ######################### */
+/* ## ## ## UIForms ## ## ## */
+
+fieldset {
+    .border(rgba(169,169,169,1));
+    .round-corner(5px);
+    .inset-shadow(white);
+    padding:20px 13px;
+    margin:10px;
+    border:none;
+    text-align:left;
+    
+    legend {
+        .background(#fafafa);
+        .border(rgba(169,169,169,1));
+        .shadow(e('inset 0 0 0 1px white, 0 0 15px rgba(0,0,0,0.2)'));
+        padding:3px 7px;
+        margin:-20px 0 0 15px;
+        text-align:left;
+    }
+    footer {
+        .border(rgba(169,169,169,1), 1px 0 0 0);
+        .shadow(inset 0 1px 0 white);
+        padding:5px 7px;
+        margin:10px -13px -20px;
+        text-align:center;
+    }
+}
+
+label {
+    display:inline-block;
+    width:40%;
+    padding:2px 10px;
+    margin:8px 0;
+    text-align:left;
+}
+
+/* ######################## */
