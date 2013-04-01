@@ -1,0 +1,3 @@
+[submodule "DOM-Library"]
+	path = DOM-Library
+	url = git://github.com/tsapeta/DOM-Library.git
