@@ -1,4 +1,4 @@
-/* JavaScript DOM Selecting Library */
+/* Swordfish - JavaScript DOM Selecting Library */
 
 (function(window) {
 	"use strict";
@@ -1073,6 +1073,8 @@
 		};
 	});
 	
+    $.version = '0.1.0';
+    $.codename = 'Airbreathing Catfish';
 	$.document = $(document);
 	$.window = $(window);
 	$.browser.init();

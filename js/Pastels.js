@@ -1,13 +1,13 @@
-/* JavaScript User Interface */
+/* Pastels - JavaScript User Interface Library */
 
 "use strict";
 
 (function(window) {
-	var UserInterface = function() {
+	var Pastels = function() {
 		this.observers = {};
 	};
 	
-	UserInterface.prototype = {
+	Pastels.prototype = {
 		
 		setOptions: function(o) {
 			this.options = this.options.extend(o);
@@ -36,9 +36,12 @@
 			this.object.emit('destroy');
 			delete this;
 		}
-	}
+	};
+    
+    Pastels.version = '0.1.0';
+    Pastels.codename = 'Nacarat';
 	
-	window.UserInterface = UserInterface;
+	window.Pastels = Pastels;
 })(window);
 
 (function(window) {
@@ -112,7 +115,7 @@
 		return this;
 	};
 	
-	Notification.prototype = {}.extend(UserInterface.prototype, {
+	Notification.prototype = {}.extend(Pastels.prototype, {
 		timeout: undefined,
 		expired: false,
 		defaults: {
@@ -293,7 +296,7 @@
 		return this;
 	};
 	
-	PopOver.prototype = {}.extend(UserInterface.prototype, {
+	PopOver.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			align: false,
 			effect: 'scale',
@@ -579,7 +582,7 @@
 		return this;
 	};
 	
-	Hint.prototype = {}.extend(UserInterface.prototype, {
+	Hint.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			catch:'data-hint',
 			direction:'right',
@@ -670,7 +673,7 @@
 		return this;
 	};
 	
-	Alert.prototype = {}.extend(UserInterface.prototype, {
+	Alert.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			fogOpacity: 0.85,
 			duration: 500,
@@ -777,7 +780,7 @@
 		return this;
 	};
 	
-	Switch.prototype = {}.extend(UserInterface.prototype, {
+	Switch.prototype = {}.extend(Pastels.prototype, {
 		status: false,
 		defaults: {
             duration: 400,
@@ -884,7 +887,7 @@
 		return this;
 	};
 	
-	Typeahead.prototype = {}.extend(UserInterface.prototype, {
+	Typeahead.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			align: 'left',
 			inheritWidth: false,
@@ -1016,7 +1019,7 @@
 		return this;
 	};
 	
-	Scroller.prototype = {}.extend(UserInterface.prototype, {
+	Scroller.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			
 		},
