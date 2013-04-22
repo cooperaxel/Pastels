@@ -38,8 +38,8 @@
 		}
 	};
     
-    Pastels.version = '0.1.0';
-    Pastels.codename = 'Nacarat';
+    Pastels.version = '0.1.1';
+    Pastels.codename = 'Smaragdine';
 	
 	window.Pastels = Pastels;
 })(window);
