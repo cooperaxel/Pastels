@@ -104,6 +104,20 @@ a:hover {
   color: #444;
   text-decoration: underline;
 }
+::input-placeholder,
+::-webkit-input-placeholder,
+::-moz-placeholder {
+  padding-left: 4px;
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.8;
+}
+:-moz-placeholder,
+:-ms-input-placeholder {
+  padding-left: 4px;
+  font-style: italic;
+  opacity: 0.8;
+}
 /* ########################## */
 /* ## ## ## UINavBar ## ## ## */
 nav.bar {
@@ -328,91 +342,146 @@ select option {
 input[type=text],
 input[type=number],
 textarea {
-  border-radius: 7px;
+  width: 120px;
+  height: 20px;
+  background-color: #ffffff;
+  margin: 7px 5px;
+  padding: 3px 9px;
+  border-color: #afafaf;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   display: inline-block;
-  width: 120px;
-  height: 20px;
-  margin: 2px 5px;
-  padding: 3px 9px;
-  background-color: white;
-  border: 1px solid #afafaf;
-  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.1), 0 0 0 1px #ffffff;
   font-size: 13px;
   color: #666;
+  overflow: visible;
 }
 textarea {
   border-radius: 3px;
+  padding: 5px 9px;
 }
 input[type=text]:hover,
 input[type=number]:hover,
 textarea:hover {
   border-color: #959595;
-  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+  border-width: 1px;
+  border-style: solid;
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2);
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2);
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2);
   color: #444;
 }
 input[type=text]:focus,
 input[type=number]:focus,
 textarea:focus,
 select:focus {
-  border-color: #818181;
+  border-color: rgba(82, 168, 236, 0.8);
   border-width: 1px;
   border-style: solid;
-  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
-  -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
-  -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
-  -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
   color: #222;
 }
-input.wrong,
-input.wrong:hover,
-input.wrong:focus,
-input:invalid {
-  border-color: #e9322d;
-  border-width: 1px;
-  border-style: solid;
-  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 12px rgb(248,185,183);
-  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 12px rgb(248,185,183);
-  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 12px rgb(248,185,183);
-  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 12px rgb(248,185,183);
-  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 12px rgb(248,185,183);
-  color: #b94a48;
-}
-input.wrong:hover,
-input.wrong:focus,
+input.invalid,
+input.invalid:hover,
+input.invalid:focus,
+input:invalid,
 input:invalid:hover,
 input:invalid:focus {
-  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183);
-  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183);
-  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183);
-  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183);
-  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183);
+  border-color: rgba(233, 50, 45, 0.8);
+  border-width: 1px;
+  border-style: solid;
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183);
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183);
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183);
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183);
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183);
+  color: #b94a48;
 }
-input:disabled {
-  background-color: #f0f0f0;
-  color: #555555;
+input.invalid:hover,
+input.invalid:focus,
+input:invalid:hover,
+input:invalid:focus {
+  border-color: #df2823;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
+}
+.invalid::-moz-placeholder,
+.invalid:-moz-placeholder,
+.invalid:-ms-input-placeholder,
+:invalid::-moz-placeholder,
+:invalid:-moz-placeholder,
+:invalid:-ms-input-placeholder {
+  color: #b94a48 !important;
+}
+.invalid::input-placeholder,
+.invalid::-webkit-input-placeholder,
+:invalid::input-placeholder,
+:invalid::-webkit-input-placeholder {
+  color: #b94a48 !important;
+}
+:disabled {
+  background-color: #f0f0f0 !important;
+  color: #161616;
   cursor: not-allowed;
   opacity: 0.5;
 }
-input:disabled:hover {
+:disabled:hover {
+  border-color: #afafaf !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
   opacity: 0.7;
+}
+.disabled::input-placeholder,
+.disabled::-webkit-input-placeholder,
+:disabled::input-placeholder,
+:disabled::-webkit-input-placeholder {
+  color: #000000 !important;
+}
+.disabled::-moz-placeholder,
+.disabled:-moz-placeholder,
+.disabled:-ms-input-placeholder,
+:disabled::-moz-placeholder,
+:disabled:-moz-placeholder,
+:disabled:-ms-input-placeholder {
+  color: #000000 !important;
 }
 .no-rounded {
   border-radius: 0;
 }
 .mini-rounded {
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .small-rounded {
-  border-radius: 5px;
+  border-radius: 4px;
 }
 .medium-rounded {
-  border-radius: 10px;
+  border-radius: 8px;
 }
 .large-rounded {
   border-radius: 15px;
@@ -429,6 +498,8 @@ input[type=checkbox],
 input[type=radio] {
   width: 16px;
   height: 16px;
+  margin: 7px 5px;
+  padding: 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e2e2e2));
   background-image: -webkit-linear-gradient(top, #ffffff, #e2e2e2);
   background-image: -moz-linear-gradient(top, #ffffff, #e2e2e2);
@@ -444,14 +515,15 @@ input[type=radio] {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearange: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
   display: inline-block;
   vertical-align: top;
-  margin: 2px;
-  padding: 0;
   color: #444;
   position: relative;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 input[type=checkbox] {
   border-radius: 2px;
@@ -522,11 +594,15 @@ input[type=checkbox]::after {
 input[type=radio]::after {
   width: 6px;
   height: 6px;
+  background-color: #555555;
   border-radius: 12px;
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
   content: "";
   display: block;
-  background: #555;
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
   position: relative;
   top: 4px;
   left: 4px;
@@ -556,19 +632,20 @@ input[type=radio].mini::after {
 /* #################################### */
 /* ## ## ## UISegmentedControl ## ## ## */
 div.segmentedcontrol {
-  border-radius: 5px;
   margin: 2px 10px;
+  padding: 0;
+  border-radius: 5px;
   display: inline-block;
   vertical-align: top;
   font-size: 13px;
   list-style-type: none;
 }
 div.segmentedcontrol button {
+  margin: 0 0 0 -5px;
+  padding: 4px 18px 4px;
   border-radius: 0;
   display: inline-block;
   vertical-align: middle;
-  margin: 0 0 0 -5px;
-  padding: 4px 18px 4px;
 }
 div.segmentedcontrol button:first-child {
   border-top-left-radius: 5px;
@@ -593,13 +670,24 @@ div.segmentedcontrol.mini button {
 /* ################################ */
 /* ## ## ## UINotification ## ## ## */
 .notification {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.9)), to(rgba(230, 230, 230, 0.9)));
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  border-color: #a9a9a9;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -ms-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -o-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
   min-width: 10%;
   max-width: 25%;
   margin: 0;
-  border: 1px solid #a9a9a9;
-  border-radius: 5px;
-  box-shadow: inset 0 0 0 1px #ffffff, inset 0 0 10px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.2);
   color: #444;
   position: fixed;
   top: 30px;
@@ -630,11 +718,15 @@ div.segmentedcontrol.mini button {
   font-style: italic;
 }
 .notification > footer {
-  display: -webkit-box;
   margin: 0;
   padding: 0 5px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+  -moz-box-shadow: inset 0 1px 0 #ffffff;
+  -ms-box-shadow: inset 0 1px 0 #ffffff;
+  -o-box-shadow: inset 0 1px 0 #ffffff;
+  box-shadow: inset 0 1px 0 #ffffff;
+  display: -webkit-box;
   border-top: 1px solid #bebebe;
-  box-shadow: inset 0 1px 0 white;
 }
 .notification > footer button {
   display: -webkit-box;
@@ -645,13 +737,24 @@ div.segmentedcontrol.mini button {
 /* ########################### */
 /* ## ## ## UIPopOver ## ## ## */
 div.popover {
-  background: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  border: 1px solid #a9a9a9;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  border-color: #a9a9a9;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -ms-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  -o-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
   min-height: 40px;
   min-width: 60px;
   padding: 0;
-  box-shadow: inset 0 0 0 1px #ffffff, inset 0 0 10px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.2);
   font: 12px Tahoma,Arial;
   color: #555;
   text-align: center;
@@ -710,17 +813,28 @@ div.popover.below div.popover-arrow {
 }
 div.popover.above div.popover-arrow {
   background-color: #dedede;
-  bottom: -13px;
   -webkit-transform: rotate(-135deg);
   -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  bottom: -13px;
 }
 div.popover.right div.popover-arrow {
   background-color: #e9e9e9;
   -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 div.popover.left div.popover-arrow {
   background-color: #e9e9e9;
   -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
 }
 div.popover {
   font-size: 13px;
@@ -813,11 +927,11 @@ div.popover.selectable ul li.active {
   color: #fafafa;
 }
 div.popover ul li a {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
+  -webkit-transition: all none ease-in-out !important;
+  -moz-transition: all none ease-in-out !important;
+  -ms-transition: all none ease-in-out !important;
+  -o-transition: all none ease-in-out !important;
+  transition: all none ease-in-out !important;
 }
 div.tabbed {
   display: -webkit-box;
