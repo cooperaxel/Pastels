@@ -91,3 +91,7 @@
 		}
 	};
 })(window);
+
+$(function() {
+    $().removeClass('preload');
+});
