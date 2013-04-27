@@ -316,6 +316,24 @@ input.wrong:hover, input.wrong:focus, input:invalid:hover, input:invalid:focus {
     .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 16px rgb(248,185,183)"));
 }
 
+input:disabled {
+    .background(rgb(240,240,240));
+    color:rgb(85,85,85);
+    cursor:not-allowed;
+    opacity:0.5;
+}
+input:disabled:hover {
+    opacity:0.7;
+}
+
+.no-rounded { .round-corner(0); }
+.mini-rounded { .round-corner(3px); }
+.small-rounded { .round-corner(5px); }
+.medium-rounded { .round-corner(10px); }
+.large-rounded { .round-corner(15px); }
+.xl-rounded { .round-corner(20px); }
+.xxl-rounded { .round-corner(30px); }
+
 /* ###################################### */
 /* ## ## ## UICheckbox & UIRadio ## ## ## */
 
