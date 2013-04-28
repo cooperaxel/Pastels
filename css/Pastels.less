@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document */
-/*  version:     0.1.3       */
-/*  codename:    Fuscous    */
+/*  version:     0.1.4      */
+/*  codename:    Malachite  */
 
 @dark-shadow:rgba(0,0,0,0.1);
 @bright-shadow:rgba(255,255,255,0.3);
@@ -93,7 +93,7 @@
 }
 .appearance (@apr: none) {
     -webkit-appearance:@apr;
-    -moz-appearange:@apr;
+    -moz-appearance:@apr;
     -ms-appearance:@apr;
     -o-appearance:@apr;
     appearance:@apr;
@@ -104,7 +104,7 @@
 /* ## ## ## UIElements ## ## ## */
 
 * { 
-	margin:0; padding:0;
+    .margins(0, 0);
 	color:inherit;
 	font-size:inherit;
 	font-weight:inherit;
@@ -115,10 +115,12 @@
 }
 
 html, body { height:100%; padding:0; margin:0; }
-html { -webkit-user-select:none; }
+html { 
+    font-size:0;
+    -webkit-user-select:none;
+}
 body {
-    width:100%;
-    height:100%;
+    .size(100%, 100%);
 	position:absolute; top:0; right:0; bottom:0; left:0;
 }
 body.dark {
@@ -172,16 +174,29 @@ a:hover {
     color:#444;
     text-decoration:underline;
 }
-::input-placeholder, ::-webkit-input-placeholder, ::-moz-placeholder {
+::-webkit-input-placeholder {
+    .transition(.3s);
+    padding-top:1px;
     padding-left:4px;
     font-size:12px;
     font-style:italic;
-    opacity:0.8;
+    opacity:0.7;
 }
-:-moz-placeholder, :-ms-input-placeholder {
+::placeholder, ::input-placeholder, ::-moz-placeholder, :-moz-placeholder, :-ms-input-placeholder {
+    .transition(.3s);
+    padding-top:1px;
     padding-left:4px;
+    font-size:12px;
     font-style:italic;
-    opacity:0.8;
+    opacity:0.7;
+}
+:focus {
+    &::-webkit-input-placeholder {
+        opacity:0;
+    }
+    &::placeholder, ::input-placeholder, ::-moz-placeholder, :-moz-placeholder, :-ms-input-placeholder {
+        opacity:0;
+    }
 }
 
 /* ########################## */
@@ -236,58 +251,6 @@ button:active, select:active, input[type=submit]:active, input[type=reset]:activ
     border-color:rgba(129,129,129,1);
 	color:#333;
 }
-.blue, .red, .yellow, .green, .orange, .cyan, .pink, .brown, .gray, .black {
-	.linear-gradient(top, fade(white, 25%), fade(black, 20%)) !important;
-	.border(rgba(0,0,0,0.4));
-	.inset-shadow() !important;
-	.transition(.2s);
-    .text-shadow(0 -1px 0 rgba(0,0,0,0.25));
-	border-bottom-color:fade(black, 55%);
-	color:#fff;
-}
-.blue:hover, .red:hover, .yellow:hover, .green:hover, .orange:hover, .cyan:hover, .pink:hover, .brown:hover, .gray:hover, .black:hover {
-	.border(rgba(0,0,0,0.5));
-    .inset-shadow();
-	color:white;
-}
-.blue.active, .red.active, .yellow.active, .green.active, .orange.active, .cyan.active, .pink.active, .brown.active, .gray.active, .black.active, 
-.blue:active, .red:active, .yellow:active, .green:active, .orange:active, .cyan:active, .pink:active, .brown:active, .gray:active, .black:active,
-.blue:focus, .red:focus, .yellow:focus, .green:focus, .orange:focus, .cyan:focus, .pink:focus, .brown:focus, .gray:focus, .black:focus {
-	.linear-gradient(top, fade(black, 20%), fade(white, 12%)) !important;
-	.border(rgba(0,0,0,0.6));
-	.inset-shadow();
-	color:white;
-}
-
-.blue 						        { background-color:#1a9cff; }
-.blue:hover, .blue.active           { background-color:darken(#1a9cff, 10%); }
-
-.red 							    { background-color:#ee666f; }
-.red:hover, .red.active             { background-color:darken(#ee666f, 10%); }
-
-.yellow 							{ background-color:#faa937; }
-.yellow:hover, .yellow.active		{ background-color:darken(#faa937, 10%); }
-
-.green 					            { background-color:#62c462; }
-.green:hover, .green.active         { background-color:darken(#62c462, 10%); }
-
-.orange                             { background-color:#F87531; }
-.orange:hover, .orange.active       { background-color:darken(#F87531, 10%); }
-
-.cyan 								{ background-color:#5bc0de; }
-.cyan:hover, .cyan.active			{ background-color:darken(#5bc0de, 10%); }
-
-.pink                               { background-color:#ee7ae9; }
-.pink:hover, .pink.active           { background-color:darken(#ee7ae9, 10%); }
-
-.brown                              { background-color:#964514; }
-.brown:hover, .brown.active         { background-color:darken(#964514, 10%); }
-
-.gray                               { background-color:#e0e0e0; color:#333; .text-shadow(none); }
-.gray:hover, .gray.active           { background-color:darken(#e0e0e0, 10%); color:#111; }
-
-.black 					            { background-color:#666666; }
-.black:hover, .black.active	        { background-color:darken(#666666, 10%); }
 
 button.large 		{ padding:7px 18px 6px; font-size:17px; }
 button.small 		{ padding:4px 8px 3px; font-size:11px; }
@@ -317,9 +280,10 @@ select {
 select option {
     font-size:11px;
 }
+
 input[type=text], input[type=number], textarea {
     .size(120px, 20px);
-    .background(white);
+    .background(#fff);
     .margins(7px 5px, 3px 9px);
     .border(rgb(175,175,175));
     .round-corner(5px);
@@ -329,55 +293,59 @@ input[type=text], input[type=number], textarea {
 	font-size:13px;
 	color:#666;
     overflow:visible;
+    vertical-align:top;
+    
+    &:hover {
+        .border(rgba(149,149,149,1));
+	   .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2)"));
+	   color:#444;
+    }
+    &:active, &:focus {
+        .border(rgba(82, 168, 236, 0.8));
+        .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6)"));
+	   color:#222;
+    }
 }
 textarea {
-    .round-corner(3px);
+    .size(120px, 16px);
     padding:5px 9px;
 }
-input[type=text]:hover, input[type=number]:hover, textarea:hover {
-	.border(rgba(149,149,149,1));
-	.shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 7px rgba(0,0,0,0.2)"));
-	color:#444;
-}
-input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus {
-    .border(rgba(82, 168, 236, 0.8));
-    .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6)"));
-	color:#222;
-}
-input.invalid, input.invalid:hover, input.invalid:focus, input:invalid, input:invalid:hover, input:invalid:focus {
+
+input.invalid, input:invalid, .invalid, :invalid {
     .border(rgba(233, 50, 45, 0.8));
     .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 8px rgb(248,185,183)"));
     color:rgb(185,74,72);
-}
-input.invalid:hover, input.invalid:focus, input:invalid:hover, input:invalid:focus {
-    .border(rgba(223, 40, 35, 1));
-    .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183)"));
+    
+    &:hover, &:active, &:focus {
+        .border(rgba(223, 40, 35, 1));
+        .shadow(e("inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183)"));
+    }
+    
+    &::-webkit-input-placeholder {
+        color:rgb(185,74,72) !important;
+    }
+    &::placeholder, &::input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
+        color:rgb(185,74,72) !important;
+    }
 }
 
-.invalid::-moz-placeholder, .invalid:-moz-placeholder, .invalid:-ms-input-placeholder,
-:invalid::-moz-placeholder, :invalid:-moz-placeholder, :invalid:-ms-input-placeholder {
-    color:rgb(185,74,72) !important;
-}
-.invalid::input-placeholder, .invalid::-webkit-input-placeholder, :invalid::input-placeholder, :invalid::-webkit-input-placeholder {
-    color:rgb(185,74,72) !important;
-}
-
-:disabled {
+.disabled, :disabled {
     .background(rgb(240,240,240)) !important;
     color:rgb(22,22,22);
     cursor:not-allowed;
     opacity:0.5;
-}
-:disabled:hover {
-    .border(rgb(175,175,175)) !important;
-    .shadow(none) !important;
-    opacity:0.7;
-}
-.disabled::input-placeholder, .disabled::-webkit-input-placeholder, :disabled::input-placeholder, :disabled::-webkit-input-placeholder {
-    color:rgb(0,0,0) !important;
-}
-.disabled::-moz-placeholder, .disabled:-moz-placeholder, .disabled:-ms-input-placeholder, :disabled::-moz-placeholder, :disabled:-moz-placeholder, :disabled:-ms-input-placeholder {
-    color:rgb(0,0,0) !important;
+    
+    &:hover {
+        .border(rgb(175,175,175)) !important;
+        .shadow(none) !important;
+        opacity:0.7;
+    }
+    &::-webkit-input-placeholder {
+        color:rgb(0,0,0) !important;
+    }
+    &::placeholder, &::input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
+        color:rgb(0,0,0) !important;
+    }
 }
 
 .no-rounded { .round-corner(0); }
@@ -392,30 +360,30 @@ input.invalid:hover, input.invalid:focus, input:invalid:hover, input:invalid:foc
 /* ## ## ## UICheckbox & UIRadio ## ## ## */
 
 input[type=checkbox], input[type=radio] { 
-	.square(16px);
+	.square(18px);
     .margins(7px 5px, 0);
 	.linear-gradient(top, white, #e2e2e2);
 	.border(#afafaf);
 	.inset-shadow();
 	.transition(0.3s);
-	.appearance(none);
 	display:inline-block;
 	vertical-align:top;
-	color:#444;
+	color:#333;
 	position:relative;
+    -webkit-appearance:none;
 }
 
 input[type=checkbox] 		{ .round-corner(2px); }
 input[type=radio]			{ .round-corner(10px); }
 
-input[type=checkbox].large,			input[type=radio].large 	{ .square(18px); }
-input[type=checkbox].large::after								{ font-size:15px; top:-1px; left:2px; }
+input[type=checkbox].large,			input[type=radio].large 	{ .square(20px); }
+input[type=checkbox].large::after								{ font-size:15px; top:1px; left:3px; }
 
 input[type=checkbox].small,			input[type=radio].small 	{ .square(14px); }
-input[type=checkbox].small::after								{ font-size:12px; top:-2px; left:1px; }
+input[type=checkbox].small::after								{ font-size:12px; top:-1px; left:1px; }
 
 input[type=checkbox].mini,			input[type=radio].mini 		{ .square(12px); }
-input[type=checkbox].mini::after								{ font-size:10px; }
+input[type=checkbox].mini::after								{ font-size:10px; top:-1px; left:1px; }
 
 
 input[type=checkbox]:active, input[type=radio]:active {
@@ -426,23 +394,23 @@ input[type=checkbox]:checked, input[type=radio]:checked {
 	.linear-gradient(top, #eaeaea, white);
 	.border(#888);
 }
-input[type=checkbox]::after 			{ opacity:0; font-size:14px; position:relative; top:-2px; left:1px; }
+input[type=checkbox]::after 			{ opacity:0; font-size:13px; position:relative; top:0; left:3px; }
 input[type=checkbox]:checked::after 	{ opacity:1; }
 input[type=checkbox]::after 			{ content:"✔"; }
 
 input[type=radio]::after { 
 	.square(6px);
-    .background(#555);
+    .background(#333);
 	.round-corner(12px);
-    .shadow(0 0 2px rgba(255,255,255,0.2));
+    .shadow(0 0 2px rgba(255,255,255,0.7));
 	content:"";
 	display:block;
-	position:relative; top:4px; left:4px;
+	position:relative; top:5px; left:5px;
 	opacity:0;
 }
 
 input[type=radio]:checked::after 		{ opacity:1; }
-input[type=radio].large::after			{ .square(8px); top:4px; left:4px; }
+input[type=radio].large::after			{ .square(8px); top:5px; left:5px; }
 input[type=radio].small::after			{ .square(6px); top:3px; left:3px; }
 input[type=radio].mini::after			{ .square(4px); top:3px; left:3px; }
 
@@ -931,4 +899,131 @@ label {
     text-align:left;
 }
 
-/* ######################## */
+/* ########################### */
+/* ## ## ## UIPastels ## ## ## */
+
+.blue, .cyan, .green, .red, .pink, .violet, .yellow, .orange, .brown, .white, .gray, .black {	
+    .linear-gradient(top, fade(white, 25%), fade(black, 20%)) !important;
+	.border(rgba(0,0,0,0.4)) !important;
+	.inset-shadow() !important;
+	.transition(.2s);
+    .text-shadow(0 -1px 0 rgba(0,0,0,0.25));
+	border-bottom-color:fade(black, 55%);
+	color:#fff;
+    
+    &:hover {
+        .border(rgba(0,0,0,0.5));
+        .inset-shadow();
+        color:#fff;
+    }
+    &.active, &:active, &:focus {
+        .linear-gradient(top, fade(black, 20%), fade(white, 12%)) !important;
+        .border(rgba(0,0,0,0.6));
+        .inset-shadow();
+        color:#fff;
+    }
+    &::-webkit-input-placeholder {
+        color:#fff;
+    }
+    &::placeholder, &::input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
+        color:#fff;
+    }
+    &[type=checkbox]::after {
+        .text-shadow(0 0 2px rgba(0,0,0,0.5));
+        color:#fff;
+    }
+    &[type=radio]::after {
+        .background(#fff);
+        .shadow(0 0 2px rgba(0,0,0,0.5));
+    }
+}
+
+.white, .gray {
+    &[type=checkbox]::after {
+        color:#333;
+    }
+    &[type=radio]::after {
+        .background(#333);
+        .shadow(0 0 2px rgba(255,255,255,0.7));
+    }
+}
+
+.blue { 
+    background-color:#1a9cff !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#1a9cff, 10%) !important;
+    }
+}
+.cyan {
+    background-color:#5bc0de !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#5bc0de, 10%) !important;
+    }
+}
+.green {
+    background-color:#62c462 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#62c462, 10%) !important;
+    }
+}
+.red {
+    background-color:#ee666f !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#ee666f, 10%) !important;
+    }
+}
+.pink {
+    background-color:#ee7ae9 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#ee7ae9, 10%) !important;
+    }
+}
+.violet {
+    background-color:#912cee !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#912cee, 10%) !important;
+    }
+}
+.yellow {
+    background-color:#faa937 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#faa937, 10%) !important;
+    }
+}
+.orange {
+    background-color:#f87531 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#f87531, 10%) !important;
+    }
+}
+.brown {
+    background-color:#964514 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#964514, 10%) !important;
+    }
+}
+.white {
+    background-color:#ffffff !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#ffffff, 10%) !important;
+    }
+}
+.gray {
+    background-color:#d0d0d0 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#d0d0d0, 10%) !important;
+    }
+}
+.black {
+    background-color:#666666 !important;
+    &:hover, &.active, &:active, &:focus {
+        background-color:darken(#666666, 10%) !important;
+    }
+}
+.white, .gray {
+    .text-shadow(none);
+    color:#333;
+    &:hover, &.active, &:active, &:focus {
+        color:#111;
+    }
+}
