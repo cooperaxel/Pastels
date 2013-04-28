@@ -14,6 +14,9 @@
 		return this.init.apply(this, arguments);
 	};
 	
+    $.version = '0.1.2';
+    $.codename = 'Striped Bass';
+    
 	$.extend = function() {
 		for(var i = 1; i < arguments.length; i++) {
 			for(var j in arguments[i]) {
@@ -396,6 +399,16 @@
         is: function(s) {
             s = $.parseSelector(s);
             return $.checkElement(this.active(), s);
+        },
+        hasState: function(s) {
+            if (s) {
+                var args = arguments;
+                return $.each(this, function() {
+                    if (! this.hasState.apply(this, args))
+                        return false;
+                }) ? true : false;
+            }
+            return false;
         },
         tag: function() {
             return this.active().tagName.toLowerCase();
@@ -802,11 +815,16 @@
 				y = s.indexOf('.'),
 				a = s.indexOf('['),
                 d = s.indexOf(':'),
-				tag = '', id = '', cl = '', attr = {}, not = '';
+				tag = '', id = '', cl = '', attr = {}, sts = [], not = '';
             
             if (d !== -1) {
-                s = s.replace(/\:(\w*)/g, "[$1=]");
-                return $.parseSelector(s);
+                var h = /\:(\w+)/g.exec(s);
+                for (var i = 1; i < h.length; ++i) {
+                    if (! h[i].empty()) {
+                        sts.push(h[i]);
+                    }
+                }
+                s = s.replace(/\:(\w*)/g, '');
             }
             
 			while(a !== -1) {
@@ -847,7 +865,7 @@
 					}
 				}
 			}
-			return { clss: cl, id: id, tag: tag, attr: attr, not: not };
+			return { clss: cl, id: id, tag: tag, attr: attr, state: sts, not: not };
 		},
 		checkElement: function(el, p) {
 			if(!el) return false;
@@ -858,6 +876,7 @@
 				&& (!p.id || el.id === p.id) 
 				&& (!p.clss || el.hasClass(p.clss)) 
 				&& (el.hasAttr(p.attr)) 
+                && (!p.empty() || el.hasState.apply(el, p.state))
 				&& (!p.not || !$.checkElement(el, p.not)));
 		},
 		invoke: function(w, x, a) {
@@ -1078,13 +1097,11 @@
 		};
 	});
 	
-    $.version = '0.1.1';
-    $.codename = 'Eagle Ray';
 	$.document = $(document);
 	$.window = $(window);
 	$.browser.init();
 	window.$ = $;
-	window.DOM = $;
+	window.Swordfish = $;
 	
 	
 	String.prototype.trim = function() {
@@ -1194,6 +1211,34 @@
 		}
 		return true;
 	};
+    HTMLElement.prototype.hasState = function(s) {
+        var args = (s instanceof Array) ? s : (s != null) ? arguments : [];
+        for (var i = 0; i < args.length; ++i) {
+            if (typeof args[i] === 'string' && args[i].length > 0) {
+                switch (args[i]) {
+                    case 'focus':
+                        if (this != document.activeElement) return false;
+                        break;
+                    case 'checked':
+                        if (this.checked != true) return false;
+                        break;
+                    case 'unchecked':
+                        if (this.checked == true) return false;
+                        break;
+                    case 'valid':
+                        if (this.validity != true) return false;
+                        break;
+                    case 'invalid':
+                        if (this.validity == true) return false;
+                        break;
+                    case 'empty':
+                        if (this.innerHTML.length > 0) return false;
+                        break;
+                }
+            }
+        }
+        return true;
+    };
 	HTMLElement.prototype.wrapAll = function(elms) {
 	    var el = elms.length ? elms[0] : elms,
 	    	parent  = el.parentNode,
@@ -1345,6 +1390,9 @@
 	Object.prototype.last = function() {
 		return this[this.length-1];
 	};
+    Object.prototype.empty = function() {
+        return (this == null || this.length == null || this.length == 0);
+    };
 	Object.prototype.hideProperties = function(a,x) {
 		if (!a) { return null; }
 		if (!x) { x = { enumerable: false }.extend(x); }
