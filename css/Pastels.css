@@ -1,7 +1,6 @@
 /* LESS(CSS) User Interface document */
 /*  version:     0.1.4      */
 /*  codename:    Malachite  */
-/* */
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
 * {
@@ -201,11 +200,12 @@ input[type=button] {
   -o-text-shadow: 1px -1px 0 #ffffff;
   text-shadow: 1px -1px 0 #ffffff;
   display: inline-block;
+  vertical-align: top;
+  text-align: center;
   border: 1px solid #afafaf;
   border-bottom-color: #8f8f8f;
   color: #777;
   font-size: 15px;
-  text-align: center;
 }
 button:hover,
 select:hover,
@@ -235,15 +235,39 @@ input[type=button]:active {
   border-color: #818181;
   color: #333;
 }
-button.large {
+button.large,
+select.large,
+input[type=submit].large,
+input[type=reset].large,
+input[type=cancel].large,
+input[type=button].large {
+  width: auto;
+  height: 40px;
+  border-radius: 6px;
   padding: 7px 18px 6px;
-  font-size: 17px;
+  font-size: 18px;
 }
-button.small {
+button.small,
+select.small,
+input[type=submit].small,
+input[type=reset].small,
+input[type=cancel].small,
+input[type=button].small {
+  width: auto;
+  height: 25px;
+  border-radius: 4px;
   padding: 4px 8px 3px;
   font-size: 11px;
 }
-button.mini {
+button.mini,
+select.mini,
+input[type=submit].mini,
+input[type=reset].mini,
+input[type=cancel].mini,
+input[type=button].mini {
+  width: auto;
+  height: 20px;
+  border-radius: 3px;
   padding: 1px 6px 0;
   font-size: 11px;
 }
@@ -408,8 +432,8 @@ input:invalid:-ms-input-placeholder,
 .disabled,
 :disabled {
   background-color: #f0f0f0 !important;
-  color: #161616;
   cursor: not-allowed;
+  color: #161616;
   opacity: 0.5;
 }
 .disabled:hover,
@@ -439,27 +463,6 @@ input:invalid:-ms-input-placeholder,
 .disabled:-ms-input-placeholder,
 :disabled:-ms-input-placeholder {
   color: #000000 !important;
-}
-.no-rounded {
-  border-radius: 0;
-}
-.mini-rounded {
-  border-radius: 2px;
-}
-.small-rounded {
-  border-radius: 4px;
-}
-.medium-rounded {
-  border-radius: 8px;
-}
-.large-rounded {
-  border-radius: 15px;
-}
-.xl-rounded {
-  border-radius: 20px;
-}
-.xxl-rounded {
-  border-radius: 30px;
 }
 /* ###################################### */
 /* ## ## ## UICheckbox & UIRadio ## ## ## */
@@ -1559,13 +1562,13 @@ label {
   background-color: #e84de2 !important;
 }
 .violet {
-  background-color: #912cee !important;
+  background-color: #b452cd !important;
 }
 .violet:hover,
 .violet.active,
 .violet:active,
 .violet:focus {
-  background-color: #7811d6 !important;
+  background-color: #9d35b7 !important;
 }
 .yellow {
   background-color: #faa937 !important;
@@ -1639,4 +1642,64 @@ label {
 .white:focus,
 .gray:focus {
   color: #111;
+}
+.inline-block {
+  display: inline-block;
+}
+.vertical-top {
+  vertical-align: top;
+}
+.vertical-middle {
+  vertical-align: middle;
+}
+.vertical-bottom {
+  vertical-align: bottom;
+}
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.text-muted {
+  color: #999999;
+}
+.text-warning {
+  color: #c09853;
+}
+.text-error {
+  color: #b94a48;
+}
+.text-info {
+  color: #3a87ad;
+}
+.text-success {
+  color: #468847;
+}
+.no-rounded {
+  border-radius: 0;
+}
+.mini-rounded {
+  border-radius: 2px;
+}
+.small-rounded {
+  border-radius: 4px;
+}
+.medium-rounded {
+  border-radius: 8px;
+}
+.large-rounded {
+  border-radius: 15px;
+}
+.xl-rounded {
+  border-radius: 20px;
+}
+.xxl-rounded {
+  border-radius: 30px;
+}
+.not-allowed {
+  cursor: not-allowed;
 }
