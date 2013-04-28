@@ -83,7 +83,7 @@
 			return this;
 		},
 		delete: function(n,c) {
-			if(!n && n != 0) var n = this.g;
+			if(!n && n != 0) n = this.g;
 			if(!c) c = 1;
 			if(n >= 0) {
 				this.splice(n, c);
@@ -609,7 +609,7 @@
 		},
 		
 		on: function(n, f) {
-			if(!f) return this.active().emit(n);
+			if(!(f instanceof Function)) return this.active().emit(n);
 			$.each(this, function() {
 				this.on(n,f);
 			});
@@ -805,7 +805,7 @@
 				tag = '', id = '', cl = '', attr = {}, not = '';
             
             if (d !== -1) {
-                s = s.replace(/\:(\w*)/g, "[$1=$1]");
+                s = s.replace(/\:(\w*)/g, "[$1=]");
                 return $.parseSelector(s);
             }
             
@@ -871,7 +871,12 @@
 		},
 		browser: {
 			userAgent: navigator.userAgent,
-			mobile: false,
+			webkit: false,
+            chrome: false,
+            firefox: false,
+            opera: false,
+            ie: false,
+            mobile: false,
 			
 			init: function() {
 				var u = this.userAgent.toLowerCase(), d;
@@ -1073,8 +1078,8 @@
 		};
 	});
 	
-    $.version = '0.1.0';
-    $.codename = 'Airbreathing Catfish';
+    $.version = '0.1.1';
+    $.codename = 'Eagle Ray';
 	$.document = $(document);
 	$.window = $(window);
 	$.browser.init();

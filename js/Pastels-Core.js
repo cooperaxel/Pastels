@@ -34,12 +34,11 @@
 		},
 		destroy: function() {
 			this.object.emit('destroy');
-			delete this;
 		}
 	};
     
-    Pastels.version = '0.1.4';
-    Pastels.codename = 'Malachite';
+    Pastels.version = '0.1.5';
+    Pastels.codename = 'Cinnamon';
 	
 	window.Pastels = Pastels;
 })(window);
@@ -94,4 +93,17 @@
 
 $(function() {
     $().removeClass('preload');
+    
+    if ($.browser.webkit !== true) {
+        $('input[type=checkbox]', 'input[type=radio]').each(function() {
+            var $this = $(this),
+                type = this.type,
+                span = $.create('span.'+type);
+            
+            span.addClass($this.item(0).className);
+            $this.hide().after(span);
+            
+            span.mouseup($.invoke($this.click, $this));
+        });
+    }
 });
