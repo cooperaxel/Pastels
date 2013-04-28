@@ -83,7 +83,7 @@
 			return this;
 		},
 		delete: function(n,c) {
-			if(!n && n != 0) var n = this.g;
+			if(!n && n != 0) n = this.g;
 			if(!c) c = 1;
 			if(n >= 0) {
 				this.splice(n, c);
@@ -871,7 +871,12 @@
 		},
 		browser: {
 			userAgent: navigator.userAgent,
-			mobile: false,
+			webkit: false,
+            chrome: false,
+            firefox: false,
+            opera: false,
+            ie: false,
+            mobile: false,
 			
 			init: function() {
 				var u = this.userAgent.toLowerCase(), d;
