@@ -37,8 +37,8 @@
 		}
 	};
     
-    Pastels.version = '0.1.4';
-    Pastels.codename = 'Malachite';
+    Pastels.version = '0.1.5';
+    Pastels.codename = 'Cinnamon';
 	
 	window.Pastels = Pastels;
 })(window);
