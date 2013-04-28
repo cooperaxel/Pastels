@@ -38,8 +38,8 @@
 		}
 	};
     
-    Pastels.version = '0.1.3';
-    Pastels.codename = 'Fuscous';
+    Pastels.version = '0.1.4';
+    Pastels.codename = 'Malachite';
 	
 	window.Pastels = Pastels;
 })(window);
