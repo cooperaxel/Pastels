@@ -1089,6 +1089,8 @@ div.alert-body > footer button {
 /* ######################## */
 /* ## ## ## UIHint ## ## ## */
 div.hint {
+  margin: 0;
+  padding: 4px 10px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#fff1c3), to(#ffe383));
   background-image: -webkit-linear-gradient(top, #fff1c3, #ffe383);
   background-image: -moz-linear-gradient(top, #fff1c3, #ffe383);
@@ -1100,8 +1102,7 @@ div.hint {
   border-style: solid;
   border-radius: 2px;
   box-shadow: inset 0 0 0 1px #ffffff;
-  margin: 0;
-  padding: 4px 10px;
+  pointer-events: none;
   font-size: 11px;
   color: #424242;
   position: absolute;
@@ -1109,11 +1110,14 @@ div.hint {
   left: 50%;
   z-index: 100;
   opacity: 0;
-  pointer-events: none;
 }
 /* ########################## */
 /* ## ## ## UISwitch ## ## ## */
 .switch {
+  width: 65px;
+  height: 20px;
+  margin: 5px 7px;
+  padding: 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eaeaea));
   background-image: -webkit-linear-gradient(top, #ffffff, #eaeaea);
   background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
@@ -1125,14 +1129,11 @@ div.hint {
   border-style: solid;
   border-radius: 13px;
   display: inline-block;
-  width: 65px;
-  height: 20px;
-  margin: 5px 7px;
+  vertical-align: top;
+  text-align: left;
   position: relative;
   z-index: 3;
   overflow: hidden;
-  vertical-align: top;
-  text-align: left !important;
   -webkit-user-select: none;
 }
 .switch-container {
@@ -1167,6 +1168,8 @@ div.hint {
   -webkit-appearance: none;
 }
 .switch-container > .slider {
+  width: 55px;
+  height: 20px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e6e6e6));
   background-image: -webkit-linear-gradient(bottom, #ffffff, #e6e6e6);
   background-image: -moz-linear-gradient(bottom, #ffffff, #e6e6e6);
@@ -1178,8 +1181,6 @@ div.hint {
   -ms-box-shadow: inset 0 0 7px #bababa;
   -o-box-shadow: inset 0 0 7px #bababa;
   box-shadow: inset 0 0 7px #bababa;
-  width: 55px;
-  height: 20px;
   margin: 0 0 0 -45px;
   position: relative;
   z-index: 1;
@@ -1188,12 +1189,12 @@ div.hint {
 .switch-container > input:checked::before,
 .switch-container > input::after,
 .switch-container > input:checked::after {
-  display: block !important;
+  display: block;
+  pointer-events: none;
   color: #555;
   font: bold 12px Verdana, Arial, sans-serif;
   position: relative;
   opacity: 1 !important;
-  pointer-events: none;
 }
 .switch-container > input::before,
 .switch-container > input:checked::before {
@@ -1211,22 +1212,38 @@ div.hint {
 /* ## ## ## UIFilePicker ## ## ## */
 .filepicker {
   display: block;
-  background-color: white;
-  border: 1px solid #afafaf;
+  background-color: #ffffff;
+  border-color: #afafaf;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 5px;
-  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.1), 0 1px 0 #ffffff;
-  overflow: hidden;
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
+  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
+  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
+  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
+  box-shadow: inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  overflow: hidden;
 }
 .filepicker div.item {
   display: block;
+  margin: 0;
   padding: 5px 30px 7px 25px;
+  text-align: left;
   font-size: 11px;
   color: #737373;
-  text-align: left;
 }
 .filepicker div.item.active {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#319be7), to(#1b78d9));
   background-image: -webkit-linear-gradient(top, #319be7, #1b78d9);
+  background-image: -moz-linear-gradient(top, #319be7, #1b78d9);
+  background-image: -ms-linear-gradient(top, #319be7, #1b78d9);
+  background-image: -o-linear-gradient(top, #319be7, #1b78d9);
+  background-image: linear-gradient(top, #319be7, #1b78d9);
   color: #fafafa;
 }
 /* ######################### */
@@ -1257,31 +1274,34 @@ table th {
   white-space: nowrap;
 }
 table tr {
-  background: white;
-  -webkit-transition: background 0.2s ease-in-out;
-  -moz-transition: background 0.2s ease-in-out;
-  transition: background 0.2s ease-in-out;
+  background-color: #ffffff;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 table tr:nth-child(even) {
-  background: #f6f6f6;
+  background-color: #f6f6f6;
 }
 table tr:hover {
-  background: #eee;
+  background-color: #eeeeee;
 }
 /* ######################### */
 /* ## ## ## UIForms ## ## ## */
 fieldset {
+  margin: 10px;
+  padding: 20px 13px;
   border-color: #a9a9a9;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
   box-shadow: inset 0 0 0 1px #ffffff;
-  padding: 20px 13px;
-  margin: 10px;
-  border: none;
   text-align: left;
 }
 fieldset legend {
+  margin: -20px 0 0 15px;
+  padding: 3px 7px;
   background-color: #fafafa;
   border-color: #a9a9a9;
   border-width: 1px;
@@ -1291,11 +1311,11 @@ fieldset legend {
   -ms-box-shadow: inset 0 0 0 1px white, 0 0 15px rgba(0,0,0,0.2);
   -o-box-shadow: inset 0 0 0 1px white, 0 0 15px rgba(0,0,0,0.2);
   box-shadow: inset 0 0 0 1px white, 0 0 15px rgba(0,0,0,0.2);
-  padding: 3px 7px;
-  margin: -20px 0 0 15px;
   text-align: left;
 }
 fieldset footer {
+  margin: 10px -13px -20px;
+  padding: 5px 7px;
   border-color: #a9a9a9;
   border-width: 1px 0 0 0;
   border-style: solid;
@@ -1304,15 +1324,14 @@ fieldset footer {
   -ms-box-shadow: inset 0 1px 0 #ffffff;
   -o-box-shadow: inset 0 1px 0 #ffffff;
   box-shadow: inset 0 1px 0 #ffffff;
-  padding: 5px 7px;
-  margin: 10px -13px -20px;
   text-align: center;
 }
 label {
   display: inline-block;
   width: 40%;
-  padding: 2px 10px;
+  height: auto;
   margin: 8px 0;
+  padding: 2px 10px;
   text-align: left;
 }
 /* ########################### */
@@ -1700,8 +1719,14 @@ label {
 .gray:focus {
   color: #111;
 }
+.block {
+  display: block;
+}
 .inline-block {
   display: inline-block;
+}
+.hidden {
+  display: none;
 }
 .vertical-top {
   vertical-align: top;
@@ -1759,4 +1784,7 @@ label {
 }
 .not-allowed {
   cursor: not-allowed;
+}
+.non-events {
+  pointer-events: none;
 }

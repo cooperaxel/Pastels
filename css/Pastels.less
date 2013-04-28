@@ -105,6 +105,13 @@
     -o-appearance:@apr;
     appearance:@apr;
 }
+.user-select (@s: none) {
+    -webkit-user-select:@s;
+    -moz-user-select:@s;
+    -ms-user-select:@s;
+    -o-user-select:@s;
+    user-select:@s;
+}
 
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
@@ -433,25 +440,26 @@ div.segmentedcontrol {
 	vertical-align:top;
 	font-size:13px;
 	list-style-type:none;
+    
+    button {
+        .margins(0 0 0 -5px, 4px 18px 4px);
+        .round-corner(0);
+        display:inline-block;
+        vertical-align:middle;
+    }
+    button:first-child {
+        border-top-left-radius:5px;
+        border-bottom-left-radius:5px;
+    }
+    button:last-child {
+        border-top-right-radius:5px;
+        border-bottom-right-radius:5px;
+    }
+    
+    &.large button { padding:6px 24px 5px; font-size:17px; }
+    &.small button { padding:4px 16px 3px; font-size:11px; }
+    &.mini button { padding:1px 13px 0; font-size:11px; }
 }
-div.segmentedcontrol button {
-	.margins(0 0 0 -5px, 4px 18px 4px);
-    .round-corner(0);
-	display:inline-block;
-	vertical-align:middle;
-}
-div.segmentedcontrol button:first-child {
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
-}
-div.segmentedcontrol button:last-child {
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
-}
-div.segmentedcontrol.large button { padding:6px 24px 5px; font-size:17px; }
-div.segmentedcontrol.small button { padding:4px 16px 3px; font-size:11px; }
-div.segmentedcontrol.mini button { padding:1px 13px 0; font-size:11px; }
-
 /* ################################ */
 /* ## ## ## UINotification ## ## ## */
 
@@ -467,29 +475,35 @@ div.segmentedcontrol.mini button { padding:1px 13px 0; font-size:11px; }
 	position:fixed; top:30px; right:15px;
 	z-index:70;
 	cursor:default;
-}
-.notification > header *, .notification > section * { .margins(0, 0); overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
-.notification h1 { font-size:13px; }
-.notification p { font-size:11px; }
-.notification > header {
-	padding:15px 25px 0;
-	font-weight:bold;
-}
-.notification > section {
-	padding:0 25px 15px;
-	font-style:italic;
-}
-.notification > footer {
-    .margins(0, 0 5px);
-    .shadow(inset 0 1px 0 white);
-	display:-webkit-box;
-	border-top:1px solid rgb(190,190,190);
-}
-.notification > footer button {
-	display:-webkit-box;
-	margin:5px;
-	font-size:10px;
-	-webkit-box-flex:1;
+    
+    > header *, > section * {
+        .margins(0, 0);
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+    h1  { font-size:13px; }
+    p   { font-size:11px; }
+    > header {
+        padding:15px 25px 0;
+        font-weight:bold;
+    }
+    > section {
+        padding:0 25px 15px;
+        font-style:italic;
+    }
+    > footer {
+        .margins(0, 0 5px);
+        .shadow(inset 0 1px 0 white);
+        display:-webkit-box;
+        border-top:1px solid rgb(190,190,190);
+    }
+    > footer button {
+        display:-webkit-box;
+        margin:5px;
+        font-size:10px;
+        -webkit-box-flex:1;
+    }
 }
 
 /* ########################### */
@@ -731,36 +745,34 @@ div.alert-body > footer button {
 /* ## ## ## UIHint ## ## ## */
 
 div.hint {
+    .margins(0, 4px 10px);
     .linear-gradient(top, rgba(255,241,195,1), rgba(255,227,131,1));
     .border(rgba(180,158,34,1));
     .round-corner(2px);
 	.inset-shadow(white);
-    margin:0;
-    padding:4px 10px;
+    .non-events;
 	font-size:11px;
 	color:#424242;
 	position:absolute; top:50%; left:50%;
 	z-index:100;
 	opacity:0;
-	pointer-events:none;
 }
 
 /* ########################## */
 /* ## ## ## UISwitch ## ## ## */
 
 .switch {
+    .size(65px, 20px);
+    .margins(5px 7px, 0);
     .linear-gradient(top, white, #eaeaea);
     .border(rgba(129,129,129,1), 1px);
 	.round-corner(13px);
-    display:inline-block;
-	width:65px;
-    height:20px;
-	margin:5px 7px;
+    .inline-block;
+    .vertical-top;
+    .align-left !important;
 	position:relative;
 	z-index:3;
 	overflow:hidden;
-    vertical-align:top;
-    text-align:left !important;
 	-webkit-user-select:none;
 }
 .switch-container {
@@ -770,8 +782,8 @@ div.hint {
 	z-index:2;
 }
 .switch-container > * {
-	display:inline-block;
-	vertical-align:top;
+	.inline-block;
+    .vertical-top;
 }
 .switch-container > input, .switch-container > input:checked, .switch.checked input, .switch input:active {
 	.square(22px);
@@ -785,10 +797,9 @@ div.hint {
 	-webkit-appearance:none;
 }
 .switch-container > .slider {
+    .size(55px, 20px);
     .linear-gradient(bottom, rgb(255,255,255), rgb(230,230,230));
     .shadow(inset 0 0 7px #bababa);
-	width:55px;
-    height:20px;
 	margin:0 0 0 -45px;
 	position:relative;
 	z-index:1;
@@ -796,12 +807,12 @@ div.hint {
 
 .switch-container > input::before, .switch-container > input:checked::before,
 .switch-container > input::after, .switch-container > input:checked::after {
-	display:block !important;
+	.block !important;
+    .non-events;
 	color:#555;
 	font:bold 12px Verdana, Arial, sans-serif;
 	position:relative;
 	opacity:1 !important;
-	pointer-events:none;
 }
 .switch-container > input::before, .switch-container > input:checked::before {
 	content:"ON";
@@ -816,24 +827,25 @@ div.hint {
 /* ## ## ## UIFilePicker ## ## ## */
 
 .filepicker {
-	display:block;
-	background-color:white;
-	border:1px solid rgba(175,175,175,1);
-	border-radius:5px;
-	box-shadow:inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white;
-	overflow:hidden;
-	-webkit-user-select:none;
-}
-.filepicker div.item {
-	display:block;
-	padding:5px 30px 7px 25px;
-	font-size:11px;
-	color:rgba(115,115,115,1);
-	text-align:left;
-}
-.filepicker div.item.active {
-	background-image:-webkit-linear-gradient(top, #319be7, #1b78d9);
-	color:#fafafa;
+	.block;
+	.background(#fff);
+    .border(rgb(175,175,175));
+    .round-corner(5px);
+    .shadow(e("inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white"));
+	.user-select(none);
+    overflow:hidden;
+    
+    div.item {
+        .block;
+        .margins(0, 5px 30px 7px 25px);
+        .align-left;
+        font-size:11px;
+        color:rgba(115,115,115,1);
+    }
+    div.item.active {
+        .linear-gradient(top, #319be7, #1b78d9);
+        color:#fafafa;
+    }
 }
 
 /* ######################### */
@@ -844,68 +856,61 @@ table {
 	margin:0 auto;
 	border-collapse:collapse;
 	font-size:13px;
-}
-
-table thead th, table tfoot td {
-    .linear-gradient(top, white, #d0d0d0);
-}
-table thead th {
-	padding:11px 10px 4px;
-	text-align:center;
-}
-table td, table th {
-	padding:4px 10px;
-	border:1px solid #cacaca;
-    white-space:nowrap;
-}
-table tr {
-	background:white;
-	-webkit-transition:background .2s ease-in-out;
-	-moz-transition:background .2s ease-in-out;
-	transition:background .2s ease-in-out;
-}
-table tr:nth-child(even) {
-	background:#f6f6f6;
-}
-table tr:hover {
-	background:#eee;
+    
+    thead th, tfoot td {
+        .linear-gradient(top, white, #d0d0d0);
+    }
+    thead th {
+        padding:11px 10px 4px;
+        text-align:center;
+    }
+    td, th {
+        padding:4px 10px;
+        border:1px solid #cacaca;
+        white-space:nowrap;
+    }
+    tr {
+        .background(#fff);
+        .transition(.2s);
+    }
+    tr:nth-child(even) {
+        .background(#f6f6f6);
+    }
+    tr:hover {
+        .background(#eee);
+    }
 }
 
 /* ######################### */
 /* ## ## ## UIForms ## ## ## */
 
 fieldset {
+    .margins(10px, 20px 13px);
     .border(rgba(169,169,169,1));
     .round-corner(5px);
     .inset-shadow(white);
-    padding:20px 13px;
-    margin:10px;
-    border:none;
-    text-align:left;
+    .align-left;
     
     legend {
+        .margins(-20px 0 0 15px, 3px 7px);
         .background(#fafafa);
         .border(rgba(169,169,169,1));
         .shadow(e('inset 0 0 0 1px white, 0 0 15px rgba(0,0,0,0.2)'));
-        padding:3px 7px;
-        margin:-20px 0 0 15px;
-        text-align:left;
+        .align-left;
     }
     footer {
+        .margins(10px -13px -20px, 5px 7px);
         .border(rgba(169,169,169,1), 1px 0 0 0);
         .shadow(inset 0 1px 0 white);
-        padding:5px 7px;
-        margin:10px -13px -20px;
-        text-align:center;
+        .align-center;
     }
 }
 
 label {
-    display:inline-block;
-    width:40%;
-    padding:2px 10px;
-    margin:8px 0;
-    text-align:left;
+    .inline-block;
+    .size(40%, auto);
+    .margins(8px 0, 2px 10px);
+    .align-left;
 }
 
 /* ########################### */
@@ -1037,27 +1042,26 @@ label {
     }
 }
 
-.inline-block { display:inline-block; }
-.vertical-top { vertical-align:top; }
-.vertical-middle { vertical-align:middle; }
-.vertical-bottom { vertical-align:bottom; }
-
-.align-left { text-align:left; }
-.align-center { text-align:center; }
-.align-right { text-align:right; }
-
-.text-muted { color:rgb(153, 153, 153); }
-.text-warning { color:rgb(192, 152, 83); }
-.text-error { color:rgb(185, 74, 72); }
-.text-info { color:rgb(58, 135, 173); }
-.text-success { color:rgb(70, 136, 71); }
-
-.no-rounded { .round-corner(0); }
-.mini-rounded { .round-corner(2px); }
-.small-rounded { .round-corner(4px); }
-.medium-rounded { .round-corner(8px); }
-.large-rounded { .round-corner(15px); }
-.xl-rounded { .round-corner(20px); }
-.xxl-rounded { .round-corner(30px); }
-
-.not-allowed { cursor:not-allowed; }
+.block              { display:block;            }
+.inline-block       { display:inline-block;     }
+.hidden             { display:none;             }
+.vertical-top       { vertical-align:top;       }
+.vertical-middle    { vertical-align:middle;    }
+.vertical-bottom    { vertical-align:bottom;    }
+.align-left         { text-align:left;          }
+.align-center       { text-align:center;        }
+.align-right        { text-align:right;         }
+.text-muted         { color:rgb(153, 153, 153); }
+.text-warning       { color:rgb(192, 152, 83);  }
+.text-error         { color:rgb(185, 74, 72);   }
+.text-info          { color:rgb(58, 135, 173);  }
+.text-success       { color:rgb(70, 136, 71);   }
+.no-rounded         { .round-corner(0);         }
+.mini-rounded       { .round-corner(2px);       }
+.small-rounded      { .round-corner(4px);       }
+.medium-rounded     { .round-corner(8px);       }
+.large-rounded      { .round-corner(15px);      }
+.xl-rounded         { .round-corner(20px);      }
+.xxl-rounded        { .round-corner(30px);      }
+.not-allowed        { cursor:not-allowed;       }
+.non-events         { pointer-events:none;      }
