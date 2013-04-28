@@ -22,6 +22,7 @@ body {
   margin: 0;
 }
 html {
+  font-size: 0;
   -webkit-user-select: none;
 }
 body {
@@ -105,17 +106,20 @@ a:hover {
   color: #444;
   text-decoration: underline;
 }
-::input-placeholder,
-::-webkit-input-placeholder,
-::-moz-placeholder {
+::-webkit-input-placeholder {
+  padding-top: 1px;
   padding-left: 4px;
   font-size: 12px;
   font-style: italic;
   opacity: 0.8;
 }
+::placeholder,
+::input-placeholder,
+::-moz-placeholder,
 :-moz-placeholder,
 :-ms-input-placeholder {
   padding-left: 4px;
+  font-size: 12px;
   font-style: italic;
   opacity: 0.8;
 }
@@ -281,10 +285,10 @@ textarea {
   font-size: 13px;
   color: #666;
   overflow: visible;
+  vertical-align: top;
 }
 textarea {
   border-radius: 3px;
-  padding: 5px 9px;
 }
 input[type=text]:hover,
 input[type=number]:hover,
@@ -342,26 +346,30 @@ input:invalid:focus {
   -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
   box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 14px rgb(248,185,183);
 }
-.invalid::-moz-placeholder,
-.invalid:-moz-placeholder,
-.invalid:-ms-input-placeholder,
-:invalid::-moz-placeholder,
-:invalid:-moz-placeholder,
-:invalid:-ms-input-placeholder {
-  color: #b94a48 !important;
-}
-.invalid::input-placeholder,
 .invalid::-webkit-input-placeholder,
-:invalid::input-placeholder,
 :invalid::-webkit-input-placeholder {
   color: #b94a48 !important;
 }
+.invalid::placeholder,
+:invalid::placeholder,
+.invalid::input-placeholder,
+:invalid::input-placeholder,
+.invalid::-moz-placeholder,
+:invalid::-moz-placeholder,
+.invalid:-moz-placeholder,
+:invalid:-moz-placeholder,
+.invalid:-ms-input-placeholder,
+:invalid:-ms-input-placeholder {
+  color: #b94a48 !important;
+}
+.disabled,
 :disabled {
   background-color: #f0f0f0 !important;
   color: #161616;
   cursor: not-allowed;
   opacity: 0.5;
 }
+.disabled:hover,
 :disabled:hover {
   border-color: #afafaf !important;
   border-width: 1px !important;
@@ -373,17 +381,19 @@ input:invalid:focus {
   box-shadow: none !important;
   opacity: 0.7;
 }
-.disabled::input-placeholder,
 .disabled::-webkit-input-placeholder,
-:disabled::input-placeholder,
 :disabled::-webkit-input-placeholder {
   color: #000000 !important;
 }
+.disabled::placeholder,
+:disabled::placeholder,
+.disabled::input-placeholder,
+:disabled::input-placeholder,
 .disabled::-moz-placeholder,
-.disabled:-moz-placeholder,
-.disabled:-ms-input-placeholder,
 :disabled::-moz-placeholder,
+.disabled:-moz-placeholder,
 :disabled:-moz-placeholder,
+.disabled:-ms-input-placeholder,
 :disabled:-ms-input-placeholder {
   color: #000000 !important;
 }
@@ -433,7 +443,7 @@ input[type=radio] {
   transition: all 0.3s ease-in-out;
   display: inline-block;
   vertical-align: top;
-  color: #444;
+  color: #333;
   position: relative;
   -webkit-appearance: none;
 }
@@ -450,7 +460,7 @@ input[type=radio].large {
 }
 input[type=checkbox].large::after {
   font-size: 15px;
-  top: -1px;
+  top: 1px;
   left: 3px;
 }
 input[type=checkbox].small,
@@ -460,7 +470,7 @@ input[type=radio].small {
 }
 input[type=checkbox].small::after {
   font-size: 12px;
-  top: -2px;
+  top: -1px;
   left: 1px;
 }
 input[type=checkbox].mini,
@@ -470,6 +480,8 @@ input[type=radio].mini {
 }
 input[type=checkbox].mini::after {
   font-size: 10px;
+  top: -1px;
+  left: 1px;
 }
 input[type=checkbox]:active,
 input[type=radio]:active {
@@ -494,7 +506,7 @@ input[type=checkbox]::after {
   opacity: 0;
   font-size: 13px;
   position: relative;
-  top: -2px;
+  top: 0;
   left: 3px;
 }
 input[type=checkbox]:checked::after {
@@ -506,13 +518,13 @@ input[type=checkbox]::after {
 input[type=radio]::after {
   width: 6px;
   height: 6px;
-  background-color: #555555;
+  background-color: #333333;
   border-radius: 12px;
-  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
-  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
-  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
-  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
   content: "";
   display: block;
   position: relative;
@@ -1331,6 +1343,82 @@ label {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
   color: #fff;
 }
+.blue::-webkit-input-placeholder,
+.cyan::-webkit-input-placeholder,
+.green::-webkit-input-placeholder,
+.red::-webkit-input-placeholder,
+.pink::-webkit-input-placeholder,
+.violet::-webkit-input-placeholder,
+.yellow::-webkit-input-placeholder,
+.orange::-webkit-input-placeholder,
+.brown::-webkit-input-placeholder,
+.white::-webkit-input-placeholder,
+.gray::-webkit-input-placeholder,
+.black::-webkit-input-placeholder {
+  color: #fff;
+}
+.blue::placeholder,
+.cyan::placeholder,
+.green::placeholder,
+.red::placeholder,
+.pink::placeholder,
+.violet::placeholder,
+.yellow::placeholder,
+.orange::placeholder,
+.brown::placeholder,
+.white::placeholder,
+.gray::placeholder,
+.black::placeholder,
+.blue::input-placeholder,
+.cyan::input-placeholder,
+.green::input-placeholder,
+.red::input-placeholder,
+.pink::input-placeholder,
+.violet::input-placeholder,
+.yellow::input-placeholder,
+.orange::input-placeholder,
+.brown::input-placeholder,
+.white::input-placeholder,
+.gray::input-placeholder,
+.black::input-placeholder,
+.blue::-moz-placeholder,
+.cyan::-moz-placeholder,
+.green::-moz-placeholder,
+.red::-moz-placeholder,
+.pink::-moz-placeholder,
+.violet::-moz-placeholder,
+.yellow::-moz-placeholder,
+.orange::-moz-placeholder,
+.brown::-moz-placeholder,
+.white::-moz-placeholder,
+.gray::-moz-placeholder,
+.black::-moz-placeholder,
+.blue:-moz-placeholder,
+.cyan:-moz-placeholder,
+.green:-moz-placeholder,
+.red:-moz-placeholder,
+.pink:-moz-placeholder,
+.violet:-moz-placeholder,
+.yellow:-moz-placeholder,
+.orange:-moz-placeholder,
+.brown:-moz-placeholder,
+.white:-moz-placeholder,
+.gray:-moz-placeholder,
+.black:-moz-placeholder,
+.blue:-ms-input-placeholder,
+.cyan:-ms-input-placeholder,
+.green:-ms-input-placeholder,
+.red:-ms-input-placeholder,
+.pink:-ms-input-placeholder,
+.violet:-ms-input-placeholder,
+.yellow:-ms-input-placeholder,
+.orange:-ms-input-placeholder,
+.brown:-ms-input-placeholder,
+.white:-ms-input-placeholder,
+.gray:-ms-input-placeholder,
+.black:-ms-input-placeholder {
+  color: #fff;
+}
 .blue[type=checkbox]::after,
 .cyan[type=checkbox]::after,
 .green[type=checkbox]::after,
@@ -1376,13 +1464,19 @@ label {
 .white[type=radio]::after,
 .gray[type=radio]::after {
   background-color: #333333;
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
 }
 .blue {
   background-color: #1a9cff !important;
 }
 .blue:hover,
 .blue.active,
-.blue:active {
+.blue:active,
+.blue:focus {
   background-color: #0083e6 !important;
 }
 .cyan {
@@ -1390,7 +1484,8 @@ label {
 }
 .cyan:hover,
 .cyan.active,
-.cyan:active {
+.cyan:active,
+.cyan:focus {
   background-color: #31b0d5 !important;
 }
 .green {
@@ -1398,7 +1493,8 @@ label {
 }
 .green:hover,
 .green.active,
-.green:active {
+.green:active,
+.green:focus {
   background-color: #42b142 !important;
 }
 .red {
@@ -1406,7 +1502,8 @@ label {
 }
 .red:hover,
 .red.active,
-.red:active {
+.red:active,
+.red:focus {
   background-color: #e93844 !important;
 }
 .pink {
@@ -1414,7 +1511,8 @@ label {
 }
 .pink:hover,
 .pink.active,
-.pink:active {
+.pink:active,
+.pink:focus {
   background-color: #e84de2 !important;
 }
 .violet {
@@ -1422,7 +1520,8 @@ label {
 }
 .violet:hover,
 .violet.active,
-.violet:active {
+.violet:active,
+.violet:focus {
   background-color: #7811d6 !important;
 }
 .yellow {
@@ -1430,7 +1529,8 @@ label {
 }
 .yellow:hover,
 .yellow.active,
-.yellow:active {
+.yellow:active,
+.yellow:focus {
   background-color: #f89306 !important;
 }
 .orange {
@@ -1438,7 +1538,8 @@ label {
 }
 .orange:hover,
 .orange.active,
-.orange:active {
+.orange:active,
+.orange:focus {
   background-color: #ee5708 !important;
 }
 .brown {
@@ -1446,7 +1547,8 @@ label {
 }
 .brown:hover,
 .brown.active,
-.brown:active {
+.brown:active,
+.brown:focus {
   background-color: #69300e !important;
 }
 .white {
@@ -1454,7 +1556,8 @@ label {
 }
 .white:hover,
 .white.active,
-.white:active {
+.white:active,
+.white:focus {
   background-color: #e6e6e6 !important;
 }
 .gray {
@@ -1462,7 +1565,8 @@ label {
 }
 .gray:hover,
 .gray.active,
-.gray:active {
+.gray:active,
+.gray:focus {
   background-color: #b7b7b7 !important;
 }
 .black {
@@ -1470,23 +1574,26 @@ label {
 }
 .black:hover,
 .black.active,
-.black:active {
+.black:active,
+.black:focus {
   background-color: #4d4d4d !important;
 }
 .white,
 .gray {
-  color: #333;
   -webkit-text-shadow: none;
   -moz-text-shadow: none;
   -ms-text-shadow: none;
   -o-text-shadow: none;
   text-shadow: none;
+  color: #333;
 }
 .white:hover,
-.white.active,
-.white:active,
 .gray:hover,
+.white.active,
 .gray.active,
-.gray:active {
+.white:active,
+.gray:active,
+.white:focus,
+.gray:focus {
   color: #111;
 }
