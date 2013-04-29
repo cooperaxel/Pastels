@@ -91,19 +91,16 @@ a {
   transition: all 0.3s ease-in-out;
   color: #666;
   font-family: inherit;
-  font-size: 14px;
+  font-size: inherit;
   font-weight: normal;
   text-decoration: none;
   cursor: default;
 }
 a:hover {
-  -webkit-text-shadow: 0 0 12px #777777;
-  -moz-text-shadow: 0 0 12px #777777;
-  -ms-text-shadow: 0 0 12px #777777;
-  -o-text-shadow: 0 0 12px #777777;
-  text-shadow: 0 0 12px #777777;
   color: #444;
-  text-decoration: underline;
+}
+a:active {
+  color: #222;
 }
 ::-webkit-input-placeholder {
   -webkit-transition: all 0.3s ease-in-out;
@@ -145,25 +142,193 @@ a:hover {
 }
 /* ########################## */
 /* ## ## ## UINavBar ## ## ## */
+.navbar,
 nav.bar {
-  height: 36px;
   margin: -1px auto 1px;
-  background: -webkit-linear-gradient(top, #ffffff, #dcdcdc);
-  border: 1px solid #848a9b;
-  border-width: 1px 0;
-  box-shadow: inset 0 0 0 1px #ffffff, inset 0 0 10px rgba(0, 0, 0, 0), 0 0 10px rgba(150, 150, 150, 0.9);
-  color: #666;
+  padding: 0 30px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dcdcdc));
+  background-image: -webkit-linear-gradient(top, #ffffff, #dcdcdc);
+  background-image: -moz-linear-gradient(top, #ffffff, #dcdcdc);
+  background-image: -ms-linear-gradient(top, #ffffff, #dcdcdc);
+  background-image: -o-linear-gradient(top, #ffffff, #dcdcdc);
+  background-image: linear-gradient(top, #ffffff, #dcdcdc);
+  border-color: #848a9b;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff , inset 0 0 10px rgba(0, 0, 0, 0) , 0 0 10px rgba(150, 150, 150, 0.9);
+  -moz-box-shadow: inset 0 0 0 1px #ffffff , inset 0 0 10px rgba(0, 0, 0, 0) , 0 0 10px rgba(150, 150, 150, 0.9);
+  -ms-box-shadow: inset 0 0 0 1px #ffffff , inset 0 0 10px rgba(0, 0, 0, 0) , 0 0 10px rgba(150, 150, 150, 0.9);
+  -o-box-shadow: inset 0 0 0 1px #ffffff , inset 0 0 10px rgba(0, 0, 0, 0) , 0 0 10px rgba(150, 150, 150, 0.9);
+  box-shadow: inset 0 0 0 1px #ffffff , inset 0 0 10px rgba(0, 0, 0, 0) , 0 0 10px rgba(150, 150, 150, 0.9);
   vertical-align: top;
+  border-width: 1px 0 !important;
+  color: #666;
   position: relative;
   z-index: 3;
 }
+.navbar.dark,
 nav.bar.dark {
-  background: -webkit-linear-gradient(top, #4f5053, #292a2b);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4f5053), to(#292a2b));
+  background-image: -webkit-linear-gradient(top, #4f5053, #292a2b);
+  background-image: -moz-linear-gradient(top, #4f5053, #292a2b);
+  background-image: -ms-linear-gradient(top, #4f5053, #292a2b);
+  background-image: -o-linear-gradient(top, #4f5053, #292a2b);
+  background-image: linear-gradient(top, #4f5053, #292a2b);
   border-bottom: 1px solid #131415;
   box-shadow: inset 0 1px 0 #696a6d, inset 0 -1px 0 #49494b, 0 0 10px rgba(0, 0, 0, 0.9);
 }
+.navbar.fixed-top,
+nav.bar.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.navbar.fixed-bottom,
+nav.bar.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.navbar > *,
 nav.bar > * {
   vertical-align: middle;
+}
+.navbar ul,
+nav.bar ul,
+.navbar ol,
+nav.bar ol {
+  width: auto;
+  height: 100%;
+  display: inline-block;
+  list-style-type: none;
+}
+.navbar ul li,
+nav.bar ul li,
+.navbar ol li,
+nav.bar ol li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border-color: transparent;
+  border-width: 0 1px;
+  border-style: solid;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  vertical-align: top;
+  font-size: 13px;
+  position: relative;
+  overflow: hidden;
+}
+.navbar ul li span,
+nav.bar ul li span,
+.navbar ol li span,
+nav.bar ol li span,
+.navbar ul li a,
+nav.bar ul li a,
+.navbar ol li a,
+nav.bar ol li a {
+  display: block;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  height: 20px;
+  line-height: 20px;
+  padding: 10px 15px;
+}
+.navbar ul li span:hover,
+nav.bar ul li span:hover,
+.navbar ol li span:hover,
+nav.bar ol li span:hover,
+.navbar ul li a:hover,
+nav.bar ul li a:hover,
+.navbar ol li a:hover,
+nav.bar ol li a:hover {
+  text-decoration: none;
+}
+.navbar ul li.active,
+nav.bar ul li.active,
+.navbar ol li.active,
+nav.bar ol li.active,
+.navbar ul li:active,
+nav.bar ul li:active,
+.navbar ol li:active,
+nav.bar ol li:active {
+  background-color: #e6e6e6;
+  border-color: #a9a9a9;
+  border-width: 0 1px;
+  border-style: solid;
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+  -moz-box-shadow: inset 0 0 0 1px #ffffff;
+  -ms-box-shadow: inset 0 0 0 1px #ffffff;
+  -o-box-shadow: inset 0 0 0 1px #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+.navbar,
+nav.bar,
+.navbar li,
+nav.bar li {
+  height: 40px;
+}
+.navbar.mini,
+nav.bar.mini,
+.navbar.mini li,
+nav.bar.mini li {
+  height: 20px;
+}
+.navbar.small,
+nav.bar.small,
+.navbar.small li,
+nav.bar.small li {
+  height: 30px;
+}
+.navbar.large,
+nav.bar.large,
+.navbar.large li,
+nav.bar.large li {
+  height: 50px;
+}
+.navbar.mini li,
+nav.bar.mini li {
+  font-size: 10px;
+}
+.navbar.mini li span,
+nav.bar.mini li span,
+.navbar.mini li a,
+nav.bar.mini li a {
+  height: 10px;
+  line-height: 10px;
+  padding: 5px 10px 5px;
+}
+.navbar.small li,
+nav.bar.small li {
+  font-size: 12px;
+}
+.navbar.small li span,
+nav.bar.small li span,
+.navbar.small li a,
+nav.bar.small li a {
+  height: 15px;
+  line-height: 15px;
+  padding: 8px 12px 7px;
+}
+.navbar.large li,
+nav.bar.large li {
+  font-size: 16px;
+}
+.navbar.large li span,
+nav.bar.large li span,
+.navbar.large li a,
+nav.bar.large li a {
+  height: 25px;
+  line-height: 25px;
+  padding: 13px 20px 12px;
 }
 /* ################################### */
 /* ## ## ## UIButton, UIInput ## ## ## */
@@ -297,8 +462,9 @@ button[data-badge-value]::after {
   right: -9px;
 }
 select {
-  border-radius: 15px;
+  border-radius: 30px;
   text-align: left;
+  min-width: 75px;
   -webkit-appearance: none;
 }
 select option {
@@ -351,14 +517,14 @@ textarea:active,
 input[type=text]:focus,
 input[type=number]:focus,
 textarea:focus {
-  border-color: rgba(82, 168, 236, 0.8);
+  border-color: #818181;
   border-width: 1px;
   border-style: solid;
-  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
-  -ms-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
-  -o-box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
-  box-shadow: inset 0 0 7px rgba(0,0,0,0.15), 0 0 10px rgba(82, 168, 236, 0.6);
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
+  -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
+  -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
+  -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3);
   color: #222;
 }
 textarea {
@@ -1334,8 +1500,8 @@ label {
   padding: 2px 10px;
   text-align: left;
 }
-/* ########################### */
-/* ## ## ## UIPastels ## ## ## */
+/* ######################### */
+/* ## ## ## Pastels ## ## ## */
 .blue,
 .cyan,
 .green,
@@ -1371,6 +1537,18 @@ label {
   border-bottom-color: rgba(0, 0, 0, 0.55);
   color: #fff;
 }
+.blue.hover,
+.cyan.hover,
+.green.hover,
+.red.hover,
+.pink.hover,
+.violet.hover,
+.yellow.hover,
+.orange.hover,
+.brown.hover,
+.white.hover,
+.gray.hover,
+.black.hover,
 .blue:hover,
 .cyan:hover,
 .green:hover,
@@ -1382,7 +1560,19 @@ label {
 .brown:hover,
 .white:hover,
 .gray:hover,
-.black:hover {
+.black:hover,
+.blue:checked,
+.cyan:checked,
+.green:checked,
+.red:checked,
+.pink:checked,
+.violet:checked,
+.yellow:checked,
+.orange:checked,
+.brown:checked,
+.white:checked,
+.gray:checked,
+.black:checked {
   border-color: rgba(0, 0, 0, 0.5);
   border-width: 1px;
   border-style: solid;
@@ -1575,26 +1765,10 @@ label {
   -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
-.white[type=checkbox]::after,
-.gray[type=checkbox]::after,
-.white[type=checkbox] + span.checkbox::after,
-.gray[type=checkbox] + span.checkbox::after {
-  color: #333;
-}
-.white[type=radio]::after,
-.gray[type=radio]::after,
-.white[type=radio] + span.radio::after,
-.gray[type=radio] + span.radio::after {
-  background-color: #333333;
-  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-}
 .blue {
   background-color: #1a9cff !important;
 }
+.blue.hover,
 .blue:hover,
 .blue.active,
 .blue:active,
@@ -1604,6 +1778,7 @@ label {
 .cyan {
   background-color: #5bc0de !important;
 }
+.cyan.hover,
 .cyan:hover,
 .cyan.active,
 .cyan:active,
@@ -1613,6 +1788,7 @@ label {
 .green {
   background-color: #62c462 !important;
 }
+.green.hover,
 .green:hover,
 .green.active,
 .green:active,
@@ -1622,6 +1798,7 @@ label {
 .red {
   background-color: #ee666f !important;
 }
+.red.hover,
 .red:hover,
 .red.active,
 .red:active,
@@ -1631,6 +1808,7 @@ label {
 .pink {
   background-color: #ee7ae9 !important;
 }
+.pink.hover,
 .pink:hover,
 .pink.active,
 .pink:active,
@@ -1640,6 +1818,7 @@ label {
 .violet {
   background-color: #b452cd !important;
 }
+.violet.hover,
 .violet:hover,
 .violet.active,
 .violet:active,
@@ -1649,6 +1828,7 @@ label {
 .yellow {
   background-color: #faa937 !important;
 }
+.yellow.hover,
 .yellow:hover,
 .yellow.active,
 .yellow:active,
@@ -1658,6 +1838,7 @@ label {
 .orange {
   background-color: #f87531 !important;
 }
+.orange.hover,
 .orange:hover,
 .orange.active,
 .orange:active,
@@ -1667,6 +1848,7 @@ label {
 .brown {
   background-color: #964514 !important;
 }
+.brown.hover,
 .brown:hover,
 .brown.active,
 .brown:active,
@@ -1676,6 +1858,7 @@ label {
 .white {
   background-color: #ffffff !important;
 }
+.white.hover,
 .white:hover,
 .white.active,
 .white:active,
@@ -1685,6 +1868,7 @@ label {
 .gray {
   background-color: #d0d0d0 !important;
 }
+.gray.hover,
 .gray:hover,
 .gray.active,
 .gray:active,
@@ -1694,6 +1878,7 @@ label {
 .black {
   background-color: #666666 !important;
 }
+.black.hover,
 .black:hover,
 .black.active,
 .black:active,
@@ -1719,6 +1904,279 @@ label {
 .gray:focus {
   color: #111;
 }
+.white[type=checkbox]::after,
+.gray[type=checkbox]::after,
+.white[type=checkbox] + span.checkbox::after,
+.gray[type=checkbox] + span.checkbox::after {
+  color: #333;
+}
+.white[type=radio]::after,
+.gray[type=radio]::after,
+.white[type=radio] + span.radio::after,
+.gray[type=radio] + span.radio::after {
+  background-color: #333333;
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+}
+/* ####################### */
+/* ## ## ## Glows ## ## ## */
+.blue-glow:hover {
+  border-color: rgba(26, 156, 255, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
+}
+.blue-glow:active,
+.blue-glow:focus {
+  border-color: #1a9cff !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
+}
+.cyan-glow:hover {
+  border-color: rgba(91, 192, 222, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
+}
+.cyan-glow:active,
+.cyan-glow:focus {
+  border-color: #5bc0de !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
+}
+.green-glow:hover {
+  border-color: rgba(98, 196, 98, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
+}
+.green-glow:active,
+.green-glow:focus {
+  border-color: #62c462 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
+}
+.red-glow:hover {
+  border-color: rgba(238, 102, 111, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
+}
+.red-glow:active,
+.red-glow:focus {
+  border-color: #ee666f !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
+}
+.pink-glow:hover {
+  border-color: rgba(238, 122, 233, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
+}
+.pink-glow:active,
+.pink-glow:focus {
+  border-color: #ee7ae9 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
+}
+.violet-glow:hover {
+  border-color: rgba(180, 82, 205, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
+}
+.violet-glow:active,
+.violet-glow:focus {
+  border-color: #b452cd !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
+}
+.yellow-glow:hover {
+  border-color: rgba(250, 169, 55, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
+}
+.yellow-glow:active,
+.yellow-glow:focus {
+  border-color: #faa937 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
+}
+.orange-glow:hover {
+  border-color: rgba(248, 117, 49, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
+}
+.orange-glow:active,
+.orange-glow:focus {
+  border-color: #f87531 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
+}
+.brown-glow:hover {
+  border-color: rgba(150, 69, 20, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
+}
+.brown-glow:active,
+.brown-glow:focus {
+  border-color: #964514 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
+}
+.white-glow:hover {
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
+}
+.white-glow:active,
+.white-glow:focus {
+  border-color: #ffffff !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
+}
+.gray-glow:hover {
+  border-color: rgba(208, 208, 208, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
+}
+.gray-glow:active,
+.gray-glow:focus {
+  border-color: #d0d0d0 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
+}
+.black-glow:hover {
+  border-color: rgba(102, 102, 102, 0.7) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
+  -moz-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
+  -ms-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
+  -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
+}
+.black-glow:active,
+.black-glow:focus {
+  border-color: #666666 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(102, 102, 102, 0.7) !important;
+  -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(102, 102, 102, 0.7) !important;
+  -ms-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(102, 102, 102, 0.7) !important;
+  -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(102, 102, 102, 0.7) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(102, 102, 102, 0.7) !important;
+}
+/* ############################### */
+/* ## ## ## Quick-Classes ## ## ## */
 .block {
   display: block;
 }
