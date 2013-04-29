@@ -37,8 +37,8 @@
 		}
 	};
     
-    Pastels.version = '0.1.5';
-    Pastels.codename = 'Cinnamon';
+    Pastels.version = '0.1.6';
+    Pastels.codename = 'Leucochroic';
 	
 	window.Pastels = Pastels;
 })(window);
