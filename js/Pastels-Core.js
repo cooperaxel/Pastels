@@ -7,6 +7,9 @@
 		this.observers = {};
 	};
 	
+    Pastels.version = '0.1.7';
+    Pastels.codename = 'Porraceous';
+    
 	Pastels.prototype = {
 		
 		setOptions: function(o) {
@@ -36,15 +39,9 @@
 			this.object.emit('destroy');
 		}
 	};
-    
-    Pastels.version = '0.1.6';
-    Pastels.codename = 'Leucochroic';
 	
 	window.Pastels = Pastels;
-})(window);
-
-(function(window) {
-	
+    
 	$.prototype.dragNdrop = function() {
 		var self = this;
 		
