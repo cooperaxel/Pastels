@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document */
-/*  version:     0.1.6          */
-/*  codename:    Leucochroic    */
+/*  version:     0.1.7        */
+/*  codename:    Porraceous   */
 
 @blue:#1a9cff;
 @cyan:#5bc0de;
@@ -128,76 +128,30 @@
 
 * { 
     .margins(0, 0);
+    .user-select(none);
 	color:inherit;
 	font-size:inherit;
 	font-weight:inherit;
 	font-style:inherit;
 	font-family:'Helvetica Neue', 'Helvetica', sans-serif;
+    line-height:inherit;
 	outline:none;
 	-webkit-font-smoothing: antialiased;
 }
 
 html, body { height:100%; padding:0; margin:0; }
-html { 
-    font-size:0;
-    -webkit-user-select:none;
-}
+html { font-size:0; }
 body {
     .size(100%, 100%);
-	position:absolute; top:0; right:0; bottom:0; left:0;
-}
-body.dark {
-	-webkit-filter:invert(100%);
+    .selection(#aaa);
+    line-height:20px;
+	position:relative;
 }
 
 body.preload * {
     .transition(none) !important;
 }
 
-h1, h2, h3, h4 {
-    font-family:Helvetica Neue, Helvetica, sans-serif;
-}
-h1.bold, h2.bold, h3.bold, h4.bold, p.bold, span.bold {
-    font-weight:bold;
-}
-h2.italic, h2.italic, h3.italic, h4.italic, p.italic, span.italic {
-    font-style:italic;
-}
-
-h1 {
-    font-size:21px;
-}
-h2 {
-    font-size:18px;
-}
-h3 {
-    font-size:16px;
-}
-h4 {
-    font-size:14px;
-}
-p {
-    font-size:14px;
-}
-span {
-    font-size:12px;
-}
-
-a { 
-    .transition(.3s);
-    color:#666;
-	font-family:inherit;
-	font-size:inherit;
-	font-weight:normal;
-	text-decoration:none;
-	cursor:default;
-    &:hover {
-        color:#444;
-    }
-    &:active {
-        color:#222;
-    }
-}
 ::-webkit-input-placeholder {
     .transition(.3s);
     padding-top:1px;
@@ -223,8 +177,66 @@ a {
     }
 }
 
-/* ########################## */
-/* ## ## ## UINavBar ## ## ## */
+/* ###################### */
+/* ## ## ## Text ## ## ## */
+
+h1, h2, h3, h4, h5, h6, p, span { 
+    .user-select(text);
+    font-family:Helvetica Neue, Helvetica, sans-serif;
+}
+h1      { font-size:21px; }
+h2      { font-size:18px; }
+h3      { font-size:16px; }
+h4      { font-size:14px; }
+h5      { font-size:12px; }
+h6      { font-size:10px; }
+p       { font-size:14px; }
+span    { font-size:12px; }
+
+/* ######################## */
+/* ## ## ## Anchor ## ## ## */
+
+a {
+    .transition(.3s);
+    .sizing(border-box);
+    color:#666;
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:normal;
+	text-decoration:underline;
+	cursor:default;
+    
+    &:hover {
+        .text-shadow(0 0 5px rgba(0,0,0,0.4));
+        color:#333;
+    }
+    &:active {
+        .text-shadow(0 0 10px rgba(0,0,0,0.5));
+        color:#111;
+    }
+    &:not(.button) {
+        .pastel (@color) {
+            & { color:@color; }
+            &:hover { color:darken(@color, 10%); }
+            &:active { color:darken(@color, 20%); }
+        }
+        &.blue   { .pastel(@blue);   }
+        &.cyan   { .pastel(@cyan);   }
+        &.green  { .pastel(@green);  }
+        &.red    { .pastel(@red);    }
+        &.pink   { .pastel(@pink);   }
+        &.violet { .pastel(@violet); }
+        &.yellow { .pastel(@yellow); }
+        &.orange { .pastel(@orange); }
+        &.brown  { .pastel(@brown);  }
+        &.white  { .pastel(@white);  }
+        &.gray   { .pastel(@gray);   }
+        &.black  { .pastel(@black);  }
+    }
+}
+
+/* ######################## */
+/* ## ## ## NavBar ## ## ## */
 
 .navbar, nav.bar {
     .margins(-1px auto 1px, 0 30px);
@@ -243,8 +255,8 @@ a {
         box-shadow:inset 0 1px 0 rgba(105,106,109,1), inset 0 -1px 0 rgba(73,73,75,1), 0 0 10px rgba(0,0,0,0.9);
     }
     
-    &.fixed-top     { position:fixed;   top:0;      right:0;    left:0; }
-    &.fixed-bottom  { position:fixed;   bottom:0;   right:0;    left:0; }
+    &.fixed         { position:fixed;   top:0;      right:0;    left:0; }
+    &.fixed.bottom  { position:fixed;   bottom:0;   right:0;    left:0; }
     
     > * {
         .vertical-middle;
@@ -256,7 +268,7 @@ a {
         
         li {
             .inline-block;
-            .margins(0, 0);
+            .margins(0 -1px 0 0, 0);
             .border(transparent, 0 1px);
             .transition(.3s);
             .vertical-top;
@@ -269,11 +281,9 @@ a {
                 .transition(.3s);
                 height:20px;
                 line-height:20px;
+                margin:0;
                 padding:10px 15px;
-                
-                &:hover {
-                    text-decoration:none;
-                }
+                text-decoration:none;
             }
             
             &.active, &:active {
@@ -296,10 +306,12 @@ a {
     &.large li  { font-size:16px;       span, a { height:25px;  line-height:25px;   padding:13px 20px 12px;   }}
 }
 
-/* ################################### */
-/* ## ## ## UIButton, UIInput ## ## ## */
+/* ############################### */
+/* ## ## ## Button, Input ## ## ## */
 
-button, select, input[type=submit], input[type=reset], input[type=cancel], input[type=button] {
+button, select, input[type=submit], input[type=reset], input[type=cancel], input[type=button], a.button {
+    .button;
+    
     .size(auto, 30px);
     .margins(5px, 3px 15px 4px);
     .linear-gradient(top, rgb(255,255,255), rgb(240,240,240));
@@ -310,6 +322,7 @@ button, select, input[type=submit], input[type=reset], input[type=cancel], input
     .inline-block;
     .vertical-top;
     .align-center;
+    .user-select(none);
     border:1px solid rgb(175,175,175);
     border-bottom-color:rgb(143,143,143);
 	color:#777;
@@ -427,13 +440,15 @@ input.invalid, input:invalid, .invalid, :invalid {
 /* ## ## ## UICheckbox & UIRadio ## ## ## */
 
 input[type=checkbox], input[type=radio], input[type=checkbox] + span.checkbox, input[type=radio] + span.radio { 
+    .button;
+    
 	.square(18px);
     .margins(7px 5px, 0);
 	.linear-gradient(top, white, #e2e2e2);
 	.border(#afafaf);
 	.inset-shadow();
 	.transition(0.3s);
-    .sizing(border-box);
+    .sizing(content-box);
 	.inline-block;
     .vertical-top;
 	color:#333;
@@ -442,7 +457,7 @@ input[type=checkbox], input[type=radio], input[type=checkbox] + span.checkbox, i
     
     &.mini  { .square(12px); }
     &.small { .square(14px); }
-    &.large { .square(20px); }
+    &.large { .square(22px); }
     
     &:active {
         .border(#999);
@@ -452,28 +467,28 @@ input[type=checkbox], input[type=radio], input[type=checkbox] + span.checkbox, i
 input[type=checkbox], input[type=checkbox] + span.checkbox {
     .round-corner(2px);
     
-    &.mini::after   { font-size:10px;   top:-1px;   left:1px; }
-    &.small::after  { font-size:12px;   top:-1px;   left:1px; }
-    &.large::after  { font-size:15px;   top:1px;    left:3px; }
+    &.mini::after   { font-size:10px;   top:-4px;   left:2px; }
+    &.small::after  { font-size:12px;   top:-2px;   left:2px; }
+    &.large::after  { font-size:18px;   top:1px;    left:3px; }
     
     &::after {
         opacity:0;
-        font-size:13px;
+        font-size:15px;
         position:relative; top:0; left:3px;
         content:"✔";
     }
 }
 input[type=radio], input[type=radio] + span.radio {
-    .round-corner(10px);
+    .round-corner(20px);
     
-    &.mini::after   { .square(4px);     top:3px;    left:3px; }
-    &.small::after  { .square(6px);     top:3px;    left:3px; }
-    &.large::after  { .square(8px);     top:5px;    left:5px; }
+    &.mini::after   { .square(4px);     top:4px;    left:4px; }
+    &.small::after  { .square(6px);     top:4px;    left:4px; }
+    &.large::after  { .square(10px);    top:6px;    left:6px; }
     
     &::after {
-        .square(6px);
+        .square(8px);
         .background(#333);
-        .round-corner(12px);
+        .round-corner(20px);
         .shadow(0 0 2px rgba(255,255,255,0.7));
         content:"";
         display:block;
@@ -490,6 +505,39 @@ input[type=checkbox]:checked, input[type=checkbox]:checked + span.checkbox, inpu
     }
 }
 
+/* ######################## */
+/* ## ## ## UICode ## ## ## */
+
+code {
+    .inline;
+    .margins(0 2px, 2px 6px);
+    .background(rgb(247, 247, 249));
+    .border(rgb(211, 210, 220));
+    .round-corner(4px);
+    .user-select(text);
+    color:rgb(221, 17, 68);
+    font-family:Monaco, Menlo, Consolas, 'Courier New';
+    font-size:12px;
+    white-space:nowrap;
+    
+    &::selection, &::-webkit-selection, &::-moz-selection {
+        background-color:#e13300 !important;
+        color:#fff !important;
+    }
+    
+    &.blue      { color:darken(@blue, 20%);     }
+    &.cyan      { color:darken(@cyan, 20%);     }
+    &.green     { color:darken(@green, 20%);    }
+    &.red       { color:darken(@red, 20%);      }
+    &.pink      { color:darken(@pink, 20%);     }
+    &.violet    { color:darken(@violet, 20%);   }
+    &.yellow    { color:darken(@yellow, 20%);   }
+    &.orange    { color:darken(@orange, 20%);   }
+    &.brown     { color:@brown;                 }
+    &.white     { color:darken(@white, 30%);    }
+    &.gray      { color:darken(@gray, 20%);     }
+    &.black     { color:darken(@black, 20%);    }
+}
 
 /* #################################### */
 /* ## ## ## UISegmentedControl ## ## ## */
@@ -974,78 +1022,108 @@ label {
     .align-left;
 }
 
+/* ########################### */
+/* ## ## ## Selection ## ## ## */
+
+.selection (@color) {
+    &, & * {    
+        &::selection, &::-webkit-selection, &::-moz-selection {
+            .background(fade(@color, 40%));
+        }
+    }
+}
+
+.blue-selection    { .selection(@blue);    }
+.cyan-selection    { .selection(@cyan);    }
+.green-selection   { .selection(@green);   }
+.red-selection     { .selection(@red);     }
+.pink-selection    { .selection(@pink);    }
+.violet-selection  { .selection(@violet);  }
+.yellow-selection  { .selection(@yellow);  }
+.orange-selection  { .selection(@orange);  }
+.brown-selection   { .selection(@brown);   }
+.white-selection   { .selection(@white);   }
+.gray-selection    { .selection(@gray);    }
+.black-selection   { .selection(@black);   }
+
 /* ######################### */
 /* ## ## ## Pastels ## ## ## */
 
-.blue, .cyan, .green, .red, .pink, .violet, .yellow, .orange, .brown, .white, .gray, .black {	
-    .linear-gradient(top, fade(white, 25%), fade(black, 20%)) !important;
-	.border(rgba(0,0,0,0.4)) !important;
-	.inset-shadow() !important;
-	.transition(.2s);
-    .text-shadow(0 -1px 0 rgba(0,0,0,0.25));
-	border-bottom-color:fade(black, 55%);
-	color:#fff;
+.button {
+    &.blue, &.cyan, &.green, &.red, &.pink, &.violet, &.yellow, &.orange, &.brown, &.white, &.gray, &.black {	
+        .linear-gradient(top, fade(white, 25%), fade(black, 20%)) !important;
+        .border(rgba(0,0,0,0.4)) !important;
+        .inset-shadow() !important;
+        .transition(.2s);
+        .text-shadow(0 -1px 0 rgba(0,0,0,0.25));
+        border-bottom-color:fade(black, 55%);
+        color:#fff;
+        
+        &:not(.active) {
+            &.hover, &:hover, &:checked, {
+                .border(rgba(0,0,0,0.5));
+                .inset-shadow();
+                color:#fff;
+            }
+        }
+        &:not(.hover) {
+            &.active, &:active, &:focus, {
+                .linear-gradient(top, fade(black, 20%), fade(white, 12%)) !important;
+                .border(rgba(0,0,0,0.6));
+                .inset-shadow();
+                color:#fff;
+            }
+        }
+        &::-webkit-input-placeholder {
+            color:#fff;
+        }
+        &::placeholder, &::input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
+            color:#fff;
+        }
+        &[type=checkbox]::after, &[type=checkbox] + span.checkbox::after {
+            .text-shadow(0 0 2px rgba(0,0,0,0.5));
+            color:#fff;
+        }
+        &[type=radio]::after, &[type=radio] + span.radio::after {
+            .background(#fff);
+            .shadow(0 0 2px rgba(0,0,0,0.5));
+        }
+    }
     
-    &.hover, &:hover, &:checked {
-        .border(rgba(0,0,0,0.5));
-        .inset-shadow();
-        color:#fff;
+    .pastel (@color) {
+        background-color:@color !important;
+        &.hover, &:hover, &.active, &:active, &:focus {
+            background-color:darken(@color, 10%) !important;
+        }
     }
-    &.active, &:active, &:focus {
-        .linear-gradient(top, fade(black, 20%), fade(white, 12%)) !important;
-        .border(rgba(0,0,0,0.6));
-        .inset-shadow();
-        color:#fff;
-    }
-    &::-webkit-input-placeholder {
-        color:#fff;
-    }
-    &::placeholder, &::input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
-        color:#fff;
-    }
-    &[type=checkbox]::after, &[type=checkbox] + span.checkbox::after {
-        .text-shadow(0 0 2px rgba(0,0,0,0.5));
-        color:#fff;
-    }
-    &[type=radio]::after, &[type=radio] + span.radio::after {
-        .background(#fff);
-        .shadow(0 0 2px rgba(0,0,0,0.5));
-    }
-}
-
-.pastel (@color) {
-    background-color:@color !important;
-    &.hover, &:hover, &.active, &:active, &:focus {
-        background-color:darken(@color, 10%) !important;
-    }
-}
-
-.blue   { .pastel(@blue);   }
-.cyan   { .pastel(@cyan);   }
-.green  { .pastel(@green);  }
-.red    { .pastel(@red);    }
-.pink   { .pastel(@pink);   }
-.violet { .pastel(@violet); }
-.yellow { .pastel(@yellow); }
-.orange { .pastel(@orange); }
-.brown  { .pastel(@brown);  }
-.white  { .pastel(@white);  }
-.gray   { .pastel(@gray);   }
-.black  { .pastel(@black);  }
-
-.white, .gray {
-    .text-shadow(none);
-    color:#333;
     
-    &:hover, &.active, &:active, &:focus {
-        color:#111;
-    }
-    &[type=checkbox]::after, &[type=checkbox] + span.checkbox::after {
+    &.blue   { .pastel(@blue);   }
+    &.cyan   { .pastel(@cyan);   }
+    &.green  { .pastel(@green);  }
+    &.red    { .pastel(@red);    }
+    &.pink   { .pastel(@pink);   }
+    &.violet { .pastel(@violet); }
+    &.yellow { .pastel(@yellow); }
+    &.orange { .pastel(@orange); }
+    &.brown  { .pastel(@brown);  }
+    &.white  { .pastel(@white);  }
+    &.gray   { .pastel(@gray);   }
+    &.black  { .pastel(@black);  }
+    
+    &.white, &.gray {
+        .text-shadow(none);
         color:#333;
-    }
-    &[type=radio]::after, &[type=radio] + span.radio::after {
-        .background(#333);
-        .shadow(0 0 2px rgba(255,255,255,0.7));
+        
+        &:hover, &.active, &:active, &:focus {
+            color:#111 !important;
+        }
+        &[type=checkbox]::after, &[type=checkbox] + span.checkbox::after {
+            color:#333;
+        }
+        &[type=radio]::after, &[type=radio] + span.radio::after {
+            .background(#333);
+            .shadow(0 0 2px rgba(255,255,255,0.7));
+        }
     }
 }
 
@@ -1080,6 +1158,7 @@ label {
 /* ## ## ## Quick-Classes ## ## ## */
 
 .block              { display:block;            }
+.inline             { display:inline;           }
 .inline-block       { display:inline-block;     }
 .hidden             { display:none;             }
 .vertical-top       { vertical-align:top;       }
@@ -1088,6 +1167,8 @@ label {
 .align-left         { text-align:left;          }
 .align-center       { text-align:center;        }
 .align-right        { text-align:right;         }
+.bold               { font-weight:bold;         }
+.italic             { font-style:italic;        }
 .text-muted         { color:rgb(153, 153, 153); }
 .text-warning       { color:rgb(192, 152, 83);  }
 .text-error         { color:rgb(185, 74, 72);   }
