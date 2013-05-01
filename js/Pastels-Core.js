@@ -7,8 +7,8 @@
 		this.observers = {};
 	};
 	
-    Pastels.version = '0.1.7';
-    Pastels.codename = 'Porraceous';
+    Pastels.version = '0.1.8';
+    Pastels.codename = 'Inchworm';
     
 	Pastels.prototype = {
 		
