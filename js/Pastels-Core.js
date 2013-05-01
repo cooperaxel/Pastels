@@ -7,8 +7,8 @@
 		this.observers = {};
 	};
 	
-    Pastels.version = '0.1.7';
-    Pastels.codename = 'Porraceous';
+    Pastels.version = '0.1.8';
+    Pastels.codename = 'Inchworm';
     
 	Pastels.prototype = {
 		
@@ -39,8 +39,18 @@
 			this.object.emit('destroy');
 		}
 	};
-	
 	window.Pastels = Pastels;
+    
+    $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
+        window[k] = function() {
+            var $this = this, args = arguments;
+            $.require('js/Pastels-'+k+'.js', function() {
+                if (window[k] !== $this) {
+                    return window[k].apply(window, args);
+                }
+            });
+        }
+    });
     
 	$.prototype.dragNdrop = function() {
 		var self = this;

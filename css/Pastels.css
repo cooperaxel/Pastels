@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document */
-/*  version:     0.1.7        */
-/*  codename:    Porraceous   */
+/*  version:     0.1.8       */
+/*  codename:    Inchworm    */
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
 * {
@@ -27,7 +27,7 @@ body {
   margin: 0;
 }
 html {
-  font-size: 0;
+  font-size: 0px;
 }
 body {
   width: 100%;
@@ -142,11 +142,10 @@ a {
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-  color: #666;
   font-family: inherit;
   font-size: inherit;
   font-weight: normal;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: default;
 }
 a:hover {
@@ -156,6 +155,7 @@ a:hover {
   -o-text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   color: #333;
+  text-decoration: underline;
 }
 a:active {
   -webkit-text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -165,17 +165,27 @@ a:active {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: #111;
 }
+a:not(.button),
 a:not(.button).blue {
   color: #1a9cff;
 }
+a:not(.button):visited,
+a:not(.button).blue:visited {
+  color: #4db2ff;
+}
+a:not(.button):hover,
 a:not(.button).blue:hover {
   color: #0083e6;
 }
+a:not(.button):active,
 a:not(.button).blue:active {
   color: #0066b3;
 }
 a:not(.button).cyan {
   color: #5bc0de;
+}
+a:not(.button).cyan:visited {
+  color: #85d0e7;
 }
 a:not(.button).cyan:hover {
   color: #31b0d5;
@@ -186,6 +196,9 @@ a:not(.button).cyan:active {
 a:not(.button).green {
   color: #62c462;
 }
+a:not(.button).green:visited {
+  color: #87d287;
+}
 a:not(.button).green:hover {
   color: #42b142;
 }
@@ -194,6 +207,9 @@ a:not(.button).green:active {
 }
 a:not(.button).red {
   color: #ee666f;
+}
+a:not(.button).red:visited {
+  color: #f3949a;
 }
 a:not(.button).red:hover {
   color: #e93844;
@@ -204,6 +220,9 @@ a:not(.button).red:active {
 a:not(.button).pink {
   color: #ee7ae9;
 }
+a:not(.button).pink:visited {
+  color: #f4a7f0;
+}
 a:not(.button).pink:hover {
   color: #e84de2;
 }
@@ -212,6 +231,9 @@ a:not(.button).pink:active {
 }
 a:not(.button).violet {
   color: #b452cd;
+}
+a:not(.button).violet:visited {
+  color: #c57ad8;
 }
 a:not(.button).violet:hover {
   color: #9d35b7;
@@ -222,6 +244,9 @@ a:not(.button).violet:active {
 a:not(.button).yellow {
   color: #faa937;
 }
+a:not(.button).yellow:visited {
+  color: #fbbe69;
+}
 a:not(.button).yellow:hover {
   color: #f89306;
 }
@@ -230,6 +255,9 @@ a:not(.button).yellow:active {
 }
 a:not(.button).orange {
   color: #f87531;
+}
+a:not(.button).orange:visited {
+  color: #fa9662;
 }
 a:not(.button).orange:hover {
   color: #ee5708;
@@ -240,6 +268,9 @@ a:not(.button).orange:active {
 a:not(.button).brown {
   color: #964514;
 }
+a:not(.button).brown:visited {
+  color: #c35a1a;
+}
 a:not(.button).brown:hover {
   color: #69300e;
 }
@@ -247,6 +278,9 @@ a:not(.button).brown:active {
   color: #3c1c08;
 }
 a:not(.button).white {
+  color: #ffffff;
+}
+a:not(.button).white:visited {
   color: #ffffff;
 }
 a:not(.button).white:hover {
@@ -258,6 +292,9 @@ a:not(.button).white:active {
 a:not(.button).gray {
   color: #d0d0d0;
 }
+a:not(.button).gray:visited {
+  color: #eaeaea;
+}
 a:not(.button).gray:hover {
   color: #b7b7b7;
 }
@@ -266,6 +303,9 @@ a:not(.button).gray:active {
 }
 a:not(.button).black {
   color: #666666;
+}
+a:not(.button).black:visited {
+  color: #808080;
 }
 a:not(.button).black:hover {
   color: #4d4d4d;
@@ -375,7 +415,38 @@ nav.bar ol li a {
   line-height: 20px;
   margin: 0;
   padding: 10px 15px;
+  color: #666;
   text-decoration: none;
+}
+.navbar ul li span:visited,
+nav.bar ul li span:visited,
+.navbar ol li span:visited,
+nav.bar ol li span:visited,
+.navbar ul li a:visited,
+nav.bar ul li a:visited,
+.navbar ol li a:visited,
+nav.bar ol li a:visited {
+  color: #666;
+}
+.navbar ul li span:hover,
+nav.bar ul li span:hover,
+.navbar ol li span:hover,
+nav.bar ol li span:hover,
+.navbar ul li a:hover,
+nav.bar ul li a:hover,
+.navbar ol li a:hover,
+nav.bar ol li a:hover {
+  color: #444;
+}
+.navbar ul li span:active,
+nav.bar ul li span:active,
+.navbar ol li span:active,
+nav.bar ol li span:active,
+.navbar ul li a:active,
+nav.bar ul li a:active,
+.navbar ol li a:active,
+nav.bar ol li a:active {
+  color: #222;
 }
 .navbar ul li.active,
 nav.bar ul li.active,
@@ -457,17 +528,24 @@ nav.bar.large li a {
 }
 /* ############################### */
 /* ## ## ## Button, Input ## ## ## */
+input {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
 button,
 select,
 input[type=submit],
 input[type=reset],
 input[type=cancel],
 input[type=button],
-a.button {
+.button {
   width: auto;
   height: 30px;
   margin: 5px;
-  padding: 3px 15px 4px;
+  padding: 4px 15px 4px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f0f0f0));
   background-image: -webkit-linear-gradient(top, #ffffff, #f0f0f0);
   background-image: -moz-linear-gradient(top, #ffffff, #f0f0f0);
@@ -498,2193 +576,16 @@ a.button {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   border: 1px solid #afafaf;
   border-bottom-color: #8f8f8f;
   color: #777;
   font-size: 15px;
-}
-button.blue,
-select.blue,
-input[type=submit].blue,
-input[type=reset].blue,
-input[type=cancel].blue,
-input[type=button].blue,
-a.button.blue,
-button.cyan,
-select.cyan,
-input[type=submit].cyan,
-input[type=reset].cyan,
-input[type=cancel].cyan,
-input[type=button].cyan,
-a.button.cyan,
-button.green,
-select.green,
-input[type=submit].green,
-input[type=reset].green,
-input[type=cancel].green,
-input[type=button].green,
-a.button.green,
-button.red,
-select.red,
-input[type=submit].red,
-input[type=reset].red,
-input[type=cancel].red,
-input[type=button].red,
-a.button.red,
-button.pink,
-select.pink,
-input[type=submit].pink,
-input[type=reset].pink,
-input[type=cancel].pink,
-input[type=button].pink,
-a.button.pink,
-button.violet,
-select.violet,
-input[type=submit].violet,
-input[type=reset].violet,
-input[type=cancel].violet,
-input[type=button].violet,
-a.button.violet,
-button.yellow,
-select.yellow,
-input[type=submit].yellow,
-input[type=reset].yellow,
-input[type=cancel].yellow,
-input[type=button].yellow,
-a.button.yellow,
-button.orange,
-select.orange,
-input[type=submit].orange,
-input[type=reset].orange,
-input[type=cancel].orange,
-input[type=button].orange,
-a.button.orange,
-button.brown,
-select.brown,
-input[type=submit].brown,
-input[type=reset].brown,
-input[type=cancel].brown,
-input[type=button].brown,
-a.button.brown,
-button.white,
-select.white,
-input[type=submit].white,
-input[type=reset].white,
-input[type=cancel].white,
-input[type=button].white,
-a.button.white,
-button.gray,
-select.gray,
-input[type=submit].gray,
-input[type=reset].gray,
-input[type=cancel].gray,
-input[type=button].gray,
-a.button.gray,
-button.black,
-select.black,
-input[type=submit].black,
-input[type=reset].black,
-input[type=cancel].black,
-input[type=button].black,
-a.button.black {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.25)), to(rgba(0, 0, 0, 0.2))) !important;
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  border-color: rgba(0, 0, 0, 0.4) !important;
-  border-width: 1px !important;
-  border-style: solid !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3) !important;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -ms-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -o-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-bottom-color: rgba(0, 0, 0, 0.55);
-  color: #fff;
-}
-button.blue:not(.active).hover,
-select.blue:not(.active).hover,
-input[type=submit].blue:not(.active).hover,
-input[type=reset].blue:not(.active).hover,
-input[type=cancel].blue:not(.active).hover,
-input[type=button].blue:not(.active).hover,
-a.button.blue:not(.active).hover,
-button.cyan:not(.active).hover,
-select.cyan:not(.active).hover,
-input[type=submit].cyan:not(.active).hover,
-input[type=reset].cyan:not(.active).hover,
-input[type=cancel].cyan:not(.active).hover,
-input[type=button].cyan:not(.active).hover,
-a.button.cyan:not(.active).hover,
-button.green:not(.active).hover,
-select.green:not(.active).hover,
-input[type=submit].green:not(.active).hover,
-input[type=reset].green:not(.active).hover,
-input[type=cancel].green:not(.active).hover,
-input[type=button].green:not(.active).hover,
-a.button.green:not(.active).hover,
-button.red:not(.active).hover,
-select.red:not(.active).hover,
-input[type=submit].red:not(.active).hover,
-input[type=reset].red:not(.active).hover,
-input[type=cancel].red:not(.active).hover,
-input[type=button].red:not(.active).hover,
-a.button.red:not(.active).hover,
-button.pink:not(.active).hover,
-select.pink:not(.active).hover,
-input[type=submit].pink:not(.active).hover,
-input[type=reset].pink:not(.active).hover,
-input[type=cancel].pink:not(.active).hover,
-input[type=button].pink:not(.active).hover,
-a.button.pink:not(.active).hover,
-button.violet:not(.active).hover,
-select.violet:not(.active).hover,
-input[type=submit].violet:not(.active).hover,
-input[type=reset].violet:not(.active).hover,
-input[type=cancel].violet:not(.active).hover,
-input[type=button].violet:not(.active).hover,
-a.button.violet:not(.active).hover,
-button.yellow:not(.active).hover,
-select.yellow:not(.active).hover,
-input[type=submit].yellow:not(.active).hover,
-input[type=reset].yellow:not(.active).hover,
-input[type=cancel].yellow:not(.active).hover,
-input[type=button].yellow:not(.active).hover,
-a.button.yellow:not(.active).hover,
-button.orange:not(.active).hover,
-select.orange:not(.active).hover,
-input[type=submit].orange:not(.active).hover,
-input[type=reset].orange:not(.active).hover,
-input[type=cancel].orange:not(.active).hover,
-input[type=button].orange:not(.active).hover,
-a.button.orange:not(.active).hover,
-button.brown:not(.active).hover,
-select.brown:not(.active).hover,
-input[type=submit].brown:not(.active).hover,
-input[type=reset].brown:not(.active).hover,
-input[type=cancel].brown:not(.active).hover,
-input[type=button].brown:not(.active).hover,
-a.button.brown:not(.active).hover,
-button.white:not(.active).hover,
-select.white:not(.active).hover,
-input[type=submit].white:not(.active).hover,
-input[type=reset].white:not(.active).hover,
-input[type=cancel].white:not(.active).hover,
-input[type=button].white:not(.active).hover,
-a.button.white:not(.active).hover,
-button.gray:not(.active).hover,
-select.gray:not(.active).hover,
-input[type=submit].gray:not(.active).hover,
-input[type=reset].gray:not(.active).hover,
-input[type=cancel].gray:not(.active).hover,
-input[type=button].gray:not(.active).hover,
-a.button.gray:not(.active).hover,
-button.black:not(.active).hover,
-select.black:not(.active).hover,
-input[type=submit].black:not(.active).hover,
-input[type=reset].black:not(.active).hover,
-input[type=cancel].black:not(.active).hover,
-input[type=button].black:not(.active).hover,
-a.button.black:not(.active).hover,
-button.blue:not(.active):hover,
-select.blue:not(.active):hover,
-input[type=submit].blue:not(.active):hover,
-input[type=reset].blue:not(.active):hover,
-input[type=cancel].blue:not(.active):hover,
-input[type=button].blue:not(.active):hover,
-a.button.blue:not(.active):hover,
-button.cyan:not(.active):hover,
-select.cyan:not(.active):hover,
-input[type=submit].cyan:not(.active):hover,
-input[type=reset].cyan:not(.active):hover,
-input[type=cancel].cyan:not(.active):hover,
-input[type=button].cyan:not(.active):hover,
-a.button.cyan:not(.active):hover,
-button.green:not(.active):hover,
-select.green:not(.active):hover,
-input[type=submit].green:not(.active):hover,
-input[type=reset].green:not(.active):hover,
-input[type=cancel].green:not(.active):hover,
-input[type=button].green:not(.active):hover,
-a.button.green:not(.active):hover,
-button.red:not(.active):hover,
-select.red:not(.active):hover,
-input[type=submit].red:not(.active):hover,
-input[type=reset].red:not(.active):hover,
-input[type=cancel].red:not(.active):hover,
-input[type=button].red:not(.active):hover,
-a.button.red:not(.active):hover,
-button.pink:not(.active):hover,
-select.pink:not(.active):hover,
-input[type=submit].pink:not(.active):hover,
-input[type=reset].pink:not(.active):hover,
-input[type=cancel].pink:not(.active):hover,
-input[type=button].pink:not(.active):hover,
-a.button.pink:not(.active):hover,
-button.violet:not(.active):hover,
-select.violet:not(.active):hover,
-input[type=submit].violet:not(.active):hover,
-input[type=reset].violet:not(.active):hover,
-input[type=cancel].violet:not(.active):hover,
-input[type=button].violet:not(.active):hover,
-a.button.violet:not(.active):hover,
-button.yellow:not(.active):hover,
-select.yellow:not(.active):hover,
-input[type=submit].yellow:not(.active):hover,
-input[type=reset].yellow:not(.active):hover,
-input[type=cancel].yellow:not(.active):hover,
-input[type=button].yellow:not(.active):hover,
-a.button.yellow:not(.active):hover,
-button.orange:not(.active):hover,
-select.orange:not(.active):hover,
-input[type=submit].orange:not(.active):hover,
-input[type=reset].orange:not(.active):hover,
-input[type=cancel].orange:not(.active):hover,
-input[type=button].orange:not(.active):hover,
-a.button.orange:not(.active):hover,
-button.brown:not(.active):hover,
-select.brown:not(.active):hover,
-input[type=submit].brown:not(.active):hover,
-input[type=reset].brown:not(.active):hover,
-input[type=cancel].brown:not(.active):hover,
-input[type=button].brown:not(.active):hover,
-a.button.brown:not(.active):hover,
-button.white:not(.active):hover,
-select.white:not(.active):hover,
-input[type=submit].white:not(.active):hover,
-input[type=reset].white:not(.active):hover,
-input[type=cancel].white:not(.active):hover,
-input[type=button].white:not(.active):hover,
-a.button.white:not(.active):hover,
-button.gray:not(.active):hover,
-select.gray:not(.active):hover,
-input[type=submit].gray:not(.active):hover,
-input[type=reset].gray:not(.active):hover,
-input[type=cancel].gray:not(.active):hover,
-input[type=button].gray:not(.active):hover,
-a.button.gray:not(.active):hover,
-button.black:not(.active):hover,
-select.black:not(.active):hover,
-input[type=submit].black:not(.active):hover,
-input[type=reset].black:not(.active):hover,
-input[type=cancel].black:not(.active):hover,
-input[type=button].black:not(.active):hover,
-a.button.black:not(.active):hover,
-button.blue:not(.active):checked,
-select.blue:not(.active):checked,
-input[type=submit].blue:not(.active):checked,
-input[type=reset].blue:not(.active):checked,
-input[type=cancel].blue:not(.active):checked,
-input[type=button].blue:not(.active):checked,
-a.button.blue:not(.active):checked,
-button.cyan:not(.active):checked,
-select.cyan:not(.active):checked,
-input[type=submit].cyan:not(.active):checked,
-input[type=reset].cyan:not(.active):checked,
-input[type=cancel].cyan:not(.active):checked,
-input[type=button].cyan:not(.active):checked,
-a.button.cyan:not(.active):checked,
-button.green:not(.active):checked,
-select.green:not(.active):checked,
-input[type=submit].green:not(.active):checked,
-input[type=reset].green:not(.active):checked,
-input[type=cancel].green:not(.active):checked,
-input[type=button].green:not(.active):checked,
-a.button.green:not(.active):checked,
-button.red:not(.active):checked,
-select.red:not(.active):checked,
-input[type=submit].red:not(.active):checked,
-input[type=reset].red:not(.active):checked,
-input[type=cancel].red:not(.active):checked,
-input[type=button].red:not(.active):checked,
-a.button.red:not(.active):checked,
-button.pink:not(.active):checked,
-select.pink:not(.active):checked,
-input[type=submit].pink:not(.active):checked,
-input[type=reset].pink:not(.active):checked,
-input[type=cancel].pink:not(.active):checked,
-input[type=button].pink:not(.active):checked,
-a.button.pink:not(.active):checked,
-button.violet:not(.active):checked,
-select.violet:not(.active):checked,
-input[type=submit].violet:not(.active):checked,
-input[type=reset].violet:not(.active):checked,
-input[type=cancel].violet:not(.active):checked,
-input[type=button].violet:not(.active):checked,
-a.button.violet:not(.active):checked,
-button.yellow:not(.active):checked,
-select.yellow:not(.active):checked,
-input[type=submit].yellow:not(.active):checked,
-input[type=reset].yellow:not(.active):checked,
-input[type=cancel].yellow:not(.active):checked,
-input[type=button].yellow:not(.active):checked,
-a.button.yellow:not(.active):checked,
-button.orange:not(.active):checked,
-select.orange:not(.active):checked,
-input[type=submit].orange:not(.active):checked,
-input[type=reset].orange:not(.active):checked,
-input[type=cancel].orange:not(.active):checked,
-input[type=button].orange:not(.active):checked,
-a.button.orange:not(.active):checked,
-button.brown:not(.active):checked,
-select.brown:not(.active):checked,
-input[type=submit].brown:not(.active):checked,
-input[type=reset].brown:not(.active):checked,
-input[type=cancel].brown:not(.active):checked,
-input[type=button].brown:not(.active):checked,
-a.button.brown:not(.active):checked,
-button.white:not(.active):checked,
-select.white:not(.active):checked,
-input[type=submit].white:not(.active):checked,
-input[type=reset].white:not(.active):checked,
-input[type=cancel].white:not(.active):checked,
-input[type=button].white:not(.active):checked,
-a.button.white:not(.active):checked,
-button.gray:not(.active):checked,
-select.gray:not(.active):checked,
-input[type=submit].gray:not(.active):checked,
-input[type=reset].gray:not(.active):checked,
-input[type=cancel].gray:not(.active):checked,
-input[type=button].gray:not(.active):checked,
-a.button.gray:not(.active):checked,
-button.black:not(.active):checked,
-select.black:not(.active):checked,
-input[type=submit].black:not(.active):checked,
-input[type=reset].black:not(.active):checked,
-input[type=cancel].black:not(.active):checked,
-input[type=button].black:not(.active):checked,
-a.button.black:not(.active):checked {
-  border-color: rgba(0, 0, 0, 0.5);
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  color: #fff;
-}
-button.blue:not(.hover).active,
-select.blue:not(.hover).active,
-input[type=submit].blue:not(.hover).active,
-input[type=reset].blue:not(.hover).active,
-input[type=cancel].blue:not(.hover).active,
-input[type=button].blue:not(.hover).active,
-a.button.blue:not(.hover).active,
-button.cyan:not(.hover).active,
-select.cyan:not(.hover).active,
-input[type=submit].cyan:not(.hover).active,
-input[type=reset].cyan:not(.hover).active,
-input[type=cancel].cyan:not(.hover).active,
-input[type=button].cyan:not(.hover).active,
-a.button.cyan:not(.hover).active,
-button.green:not(.hover).active,
-select.green:not(.hover).active,
-input[type=submit].green:not(.hover).active,
-input[type=reset].green:not(.hover).active,
-input[type=cancel].green:not(.hover).active,
-input[type=button].green:not(.hover).active,
-a.button.green:not(.hover).active,
-button.red:not(.hover).active,
-select.red:not(.hover).active,
-input[type=submit].red:not(.hover).active,
-input[type=reset].red:not(.hover).active,
-input[type=cancel].red:not(.hover).active,
-input[type=button].red:not(.hover).active,
-a.button.red:not(.hover).active,
-button.pink:not(.hover).active,
-select.pink:not(.hover).active,
-input[type=submit].pink:not(.hover).active,
-input[type=reset].pink:not(.hover).active,
-input[type=cancel].pink:not(.hover).active,
-input[type=button].pink:not(.hover).active,
-a.button.pink:not(.hover).active,
-button.violet:not(.hover).active,
-select.violet:not(.hover).active,
-input[type=submit].violet:not(.hover).active,
-input[type=reset].violet:not(.hover).active,
-input[type=cancel].violet:not(.hover).active,
-input[type=button].violet:not(.hover).active,
-a.button.violet:not(.hover).active,
-button.yellow:not(.hover).active,
-select.yellow:not(.hover).active,
-input[type=submit].yellow:not(.hover).active,
-input[type=reset].yellow:not(.hover).active,
-input[type=cancel].yellow:not(.hover).active,
-input[type=button].yellow:not(.hover).active,
-a.button.yellow:not(.hover).active,
-button.orange:not(.hover).active,
-select.orange:not(.hover).active,
-input[type=submit].orange:not(.hover).active,
-input[type=reset].orange:not(.hover).active,
-input[type=cancel].orange:not(.hover).active,
-input[type=button].orange:not(.hover).active,
-a.button.orange:not(.hover).active,
-button.brown:not(.hover).active,
-select.brown:not(.hover).active,
-input[type=submit].brown:not(.hover).active,
-input[type=reset].brown:not(.hover).active,
-input[type=cancel].brown:not(.hover).active,
-input[type=button].brown:not(.hover).active,
-a.button.brown:not(.hover).active,
-button.white:not(.hover).active,
-select.white:not(.hover).active,
-input[type=submit].white:not(.hover).active,
-input[type=reset].white:not(.hover).active,
-input[type=cancel].white:not(.hover).active,
-input[type=button].white:not(.hover).active,
-a.button.white:not(.hover).active,
-button.gray:not(.hover).active,
-select.gray:not(.hover).active,
-input[type=submit].gray:not(.hover).active,
-input[type=reset].gray:not(.hover).active,
-input[type=cancel].gray:not(.hover).active,
-input[type=button].gray:not(.hover).active,
-a.button.gray:not(.hover).active,
-button.black:not(.hover).active,
-select.black:not(.hover).active,
-input[type=submit].black:not(.hover).active,
-input[type=reset].black:not(.hover).active,
-input[type=cancel].black:not(.hover).active,
-input[type=button].black:not(.hover).active,
-a.button.black:not(.hover).active,
-button.blue:not(.hover):active,
-select.blue:not(.hover):active,
-input[type=submit].blue:not(.hover):active,
-input[type=reset].blue:not(.hover):active,
-input[type=cancel].blue:not(.hover):active,
-input[type=button].blue:not(.hover):active,
-a.button.blue:not(.hover):active,
-button.cyan:not(.hover):active,
-select.cyan:not(.hover):active,
-input[type=submit].cyan:not(.hover):active,
-input[type=reset].cyan:not(.hover):active,
-input[type=cancel].cyan:not(.hover):active,
-input[type=button].cyan:not(.hover):active,
-a.button.cyan:not(.hover):active,
-button.green:not(.hover):active,
-select.green:not(.hover):active,
-input[type=submit].green:not(.hover):active,
-input[type=reset].green:not(.hover):active,
-input[type=cancel].green:not(.hover):active,
-input[type=button].green:not(.hover):active,
-a.button.green:not(.hover):active,
-button.red:not(.hover):active,
-select.red:not(.hover):active,
-input[type=submit].red:not(.hover):active,
-input[type=reset].red:not(.hover):active,
-input[type=cancel].red:not(.hover):active,
-input[type=button].red:not(.hover):active,
-a.button.red:not(.hover):active,
-button.pink:not(.hover):active,
-select.pink:not(.hover):active,
-input[type=submit].pink:not(.hover):active,
-input[type=reset].pink:not(.hover):active,
-input[type=cancel].pink:not(.hover):active,
-input[type=button].pink:not(.hover):active,
-a.button.pink:not(.hover):active,
-button.violet:not(.hover):active,
-select.violet:not(.hover):active,
-input[type=submit].violet:not(.hover):active,
-input[type=reset].violet:not(.hover):active,
-input[type=cancel].violet:not(.hover):active,
-input[type=button].violet:not(.hover):active,
-a.button.violet:not(.hover):active,
-button.yellow:not(.hover):active,
-select.yellow:not(.hover):active,
-input[type=submit].yellow:not(.hover):active,
-input[type=reset].yellow:not(.hover):active,
-input[type=cancel].yellow:not(.hover):active,
-input[type=button].yellow:not(.hover):active,
-a.button.yellow:not(.hover):active,
-button.orange:not(.hover):active,
-select.orange:not(.hover):active,
-input[type=submit].orange:not(.hover):active,
-input[type=reset].orange:not(.hover):active,
-input[type=cancel].orange:not(.hover):active,
-input[type=button].orange:not(.hover):active,
-a.button.orange:not(.hover):active,
-button.brown:not(.hover):active,
-select.brown:not(.hover):active,
-input[type=submit].brown:not(.hover):active,
-input[type=reset].brown:not(.hover):active,
-input[type=cancel].brown:not(.hover):active,
-input[type=button].brown:not(.hover):active,
-a.button.brown:not(.hover):active,
-button.white:not(.hover):active,
-select.white:not(.hover):active,
-input[type=submit].white:not(.hover):active,
-input[type=reset].white:not(.hover):active,
-input[type=cancel].white:not(.hover):active,
-input[type=button].white:not(.hover):active,
-a.button.white:not(.hover):active,
-button.gray:not(.hover):active,
-select.gray:not(.hover):active,
-input[type=submit].gray:not(.hover):active,
-input[type=reset].gray:not(.hover):active,
-input[type=cancel].gray:not(.hover):active,
-input[type=button].gray:not(.hover):active,
-a.button.gray:not(.hover):active,
-button.black:not(.hover):active,
-select.black:not(.hover):active,
-input[type=submit].black:not(.hover):active,
-input[type=reset].black:not(.hover):active,
-input[type=cancel].black:not(.hover):active,
-input[type=button].black:not(.hover):active,
-a.button.black:not(.hover):active,
-button.blue:not(.hover):focus,
-select.blue:not(.hover):focus,
-input[type=submit].blue:not(.hover):focus,
-input[type=reset].blue:not(.hover):focus,
-input[type=cancel].blue:not(.hover):focus,
-input[type=button].blue:not(.hover):focus,
-a.button.blue:not(.hover):focus,
-button.cyan:not(.hover):focus,
-select.cyan:not(.hover):focus,
-input[type=submit].cyan:not(.hover):focus,
-input[type=reset].cyan:not(.hover):focus,
-input[type=cancel].cyan:not(.hover):focus,
-input[type=button].cyan:not(.hover):focus,
-a.button.cyan:not(.hover):focus,
-button.green:not(.hover):focus,
-select.green:not(.hover):focus,
-input[type=submit].green:not(.hover):focus,
-input[type=reset].green:not(.hover):focus,
-input[type=cancel].green:not(.hover):focus,
-input[type=button].green:not(.hover):focus,
-a.button.green:not(.hover):focus,
-button.red:not(.hover):focus,
-select.red:not(.hover):focus,
-input[type=submit].red:not(.hover):focus,
-input[type=reset].red:not(.hover):focus,
-input[type=cancel].red:not(.hover):focus,
-input[type=button].red:not(.hover):focus,
-a.button.red:not(.hover):focus,
-button.pink:not(.hover):focus,
-select.pink:not(.hover):focus,
-input[type=submit].pink:not(.hover):focus,
-input[type=reset].pink:not(.hover):focus,
-input[type=cancel].pink:not(.hover):focus,
-input[type=button].pink:not(.hover):focus,
-a.button.pink:not(.hover):focus,
-button.violet:not(.hover):focus,
-select.violet:not(.hover):focus,
-input[type=submit].violet:not(.hover):focus,
-input[type=reset].violet:not(.hover):focus,
-input[type=cancel].violet:not(.hover):focus,
-input[type=button].violet:not(.hover):focus,
-a.button.violet:not(.hover):focus,
-button.yellow:not(.hover):focus,
-select.yellow:not(.hover):focus,
-input[type=submit].yellow:not(.hover):focus,
-input[type=reset].yellow:not(.hover):focus,
-input[type=cancel].yellow:not(.hover):focus,
-input[type=button].yellow:not(.hover):focus,
-a.button.yellow:not(.hover):focus,
-button.orange:not(.hover):focus,
-select.orange:not(.hover):focus,
-input[type=submit].orange:not(.hover):focus,
-input[type=reset].orange:not(.hover):focus,
-input[type=cancel].orange:not(.hover):focus,
-input[type=button].orange:not(.hover):focus,
-a.button.orange:not(.hover):focus,
-button.brown:not(.hover):focus,
-select.brown:not(.hover):focus,
-input[type=submit].brown:not(.hover):focus,
-input[type=reset].brown:not(.hover):focus,
-input[type=cancel].brown:not(.hover):focus,
-input[type=button].brown:not(.hover):focus,
-a.button.brown:not(.hover):focus,
-button.white:not(.hover):focus,
-select.white:not(.hover):focus,
-input[type=submit].white:not(.hover):focus,
-input[type=reset].white:not(.hover):focus,
-input[type=cancel].white:not(.hover):focus,
-input[type=button].white:not(.hover):focus,
-a.button.white:not(.hover):focus,
-button.gray:not(.hover):focus,
-select.gray:not(.hover):focus,
-input[type=submit].gray:not(.hover):focus,
-input[type=reset].gray:not(.hover):focus,
-input[type=cancel].gray:not(.hover):focus,
-input[type=button].gray:not(.hover):focus,
-a.button.gray:not(.hover):focus,
-button.black:not(.hover):focus,
-select.black:not(.hover):focus,
-input[type=submit].black:not(.hover):focus,
-input[type=reset].black:not(.hover):focus,
-input[type=cancel].black:not(.hover):focus,
-input[type=button].black:not(.hover):focus,
-a.button.black:not(.hover):focus {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(255, 255, 255, 0.12))) !important;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  border-color: rgba(0, 0, 0, 0.6);
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  color: #fff;
-}
-button.blue::-webkit-input-placeholder,
-select.blue::-webkit-input-placeholder,
-input[type=submit].blue::-webkit-input-placeholder,
-input[type=reset].blue::-webkit-input-placeholder,
-input[type=cancel].blue::-webkit-input-placeholder,
-input[type=button].blue::-webkit-input-placeholder,
-a.button.blue::-webkit-input-placeholder,
-button.cyan::-webkit-input-placeholder,
-select.cyan::-webkit-input-placeholder,
-input[type=submit].cyan::-webkit-input-placeholder,
-input[type=reset].cyan::-webkit-input-placeholder,
-input[type=cancel].cyan::-webkit-input-placeholder,
-input[type=button].cyan::-webkit-input-placeholder,
-a.button.cyan::-webkit-input-placeholder,
-button.green::-webkit-input-placeholder,
-select.green::-webkit-input-placeholder,
-input[type=submit].green::-webkit-input-placeholder,
-input[type=reset].green::-webkit-input-placeholder,
-input[type=cancel].green::-webkit-input-placeholder,
-input[type=button].green::-webkit-input-placeholder,
-a.button.green::-webkit-input-placeholder,
-button.red::-webkit-input-placeholder,
-select.red::-webkit-input-placeholder,
-input[type=submit].red::-webkit-input-placeholder,
-input[type=reset].red::-webkit-input-placeholder,
-input[type=cancel].red::-webkit-input-placeholder,
-input[type=button].red::-webkit-input-placeholder,
-a.button.red::-webkit-input-placeholder,
-button.pink::-webkit-input-placeholder,
-select.pink::-webkit-input-placeholder,
-input[type=submit].pink::-webkit-input-placeholder,
-input[type=reset].pink::-webkit-input-placeholder,
-input[type=cancel].pink::-webkit-input-placeholder,
-input[type=button].pink::-webkit-input-placeholder,
-a.button.pink::-webkit-input-placeholder,
-button.violet::-webkit-input-placeholder,
-select.violet::-webkit-input-placeholder,
-input[type=submit].violet::-webkit-input-placeholder,
-input[type=reset].violet::-webkit-input-placeholder,
-input[type=cancel].violet::-webkit-input-placeholder,
-input[type=button].violet::-webkit-input-placeholder,
-a.button.violet::-webkit-input-placeholder,
-button.yellow::-webkit-input-placeholder,
-select.yellow::-webkit-input-placeholder,
-input[type=submit].yellow::-webkit-input-placeholder,
-input[type=reset].yellow::-webkit-input-placeholder,
-input[type=cancel].yellow::-webkit-input-placeholder,
-input[type=button].yellow::-webkit-input-placeholder,
-a.button.yellow::-webkit-input-placeholder,
-button.orange::-webkit-input-placeholder,
-select.orange::-webkit-input-placeholder,
-input[type=submit].orange::-webkit-input-placeholder,
-input[type=reset].orange::-webkit-input-placeholder,
-input[type=cancel].orange::-webkit-input-placeholder,
-input[type=button].orange::-webkit-input-placeholder,
-a.button.orange::-webkit-input-placeholder,
-button.brown::-webkit-input-placeholder,
-select.brown::-webkit-input-placeholder,
-input[type=submit].brown::-webkit-input-placeholder,
-input[type=reset].brown::-webkit-input-placeholder,
-input[type=cancel].brown::-webkit-input-placeholder,
-input[type=button].brown::-webkit-input-placeholder,
-a.button.brown::-webkit-input-placeholder,
-button.white::-webkit-input-placeholder,
-select.white::-webkit-input-placeholder,
-input[type=submit].white::-webkit-input-placeholder,
-input[type=reset].white::-webkit-input-placeholder,
-input[type=cancel].white::-webkit-input-placeholder,
-input[type=button].white::-webkit-input-placeholder,
-a.button.white::-webkit-input-placeholder,
-button.gray::-webkit-input-placeholder,
-select.gray::-webkit-input-placeholder,
-input[type=submit].gray::-webkit-input-placeholder,
-input[type=reset].gray::-webkit-input-placeholder,
-input[type=cancel].gray::-webkit-input-placeholder,
-input[type=button].gray::-webkit-input-placeholder,
-a.button.gray::-webkit-input-placeholder,
-button.black::-webkit-input-placeholder,
-select.black::-webkit-input-placeholder,
-input[type=submit].black::-webkit-input-placeholder,
-input[type=reset].black::-webkit-input-placeholder,
-input[type=cancel].black::-webkit-input-placeholder,
-input[type=button].black::-webkit-input-placeholder,
-a.button.black::-webkit-input-placeholder {
-  color: #fff;
-}
-button.blue::placeholder,
-select.blue::placeholder,
-input[type=submit].blue::placeholder,
-input[type=reset].blue::placeholder,
-input[type=cancel].blue::placeholder,
-input[type=button].blue::placeholder,
-a.button.blue::placeholder,
-button.cyan::placeholder,
-select.cyan::placeholder,
-input[type=submit].cyan::placeholder,
-input[type=reset].cyan::placeholder,
-input[type=cancel].cyan::placeholder,
-input[type=button].cyan::placeholder,
-a.button.cyan::placeholder,
-button.green::placeholder,
-select.green::placeholder,
-input[type=submit].green::placeholder,
-input[type=reset].green::placeholder,
-input[type=cancel].green::placeholder,
-input[type=button].green::placeholder,
-a.button.green::placeholder,
-button.red::placeholder,
-select.red::placeholder,
-input[type=submit].red::placeholder,
-input[type=reset].red::placeholder,
-input[type=cancel].red::placeholder,
-input[type=button].red::placeholder,
-a.button.red::placeholder,
-button.pink::placeholder,
-select.pink::placeholder,
-input[type=submit].pink::placeholder,
-input[type=reset].pink::placeholder,
-input[type=cancel].pink::placeholder,
-input[type=button].pink::placeholder,
-a.button.pink::placeholder,
-button.violet::placeholder,
-select.violet::placeholder,
-input[type=submit].violet::placeholder,
-input[type=reset].violet::placeholder,
-input[type=cancel].violet::placeholder,
-input[type=button].violet::placeholder,
-a.button.violet::placeholder,
-button.yellow::placeholder,
-select.yellow::placeholder,
-input[type=submit].yellow::placeholder,
-input[type=reset].yellow::placeholder,
-input[type=cancel].yellow::placeholder,
-input[type=button].yellow::placeholder,
-a.button.yellow::placeholder,
-button.orange::placeholder,
-select.orange::placeholder,
-input[type=submit].orange::placeholder,
-input[type=reset].orange::placeholder,
-input[type=cancel].orange::placeholder,
-input[type=button].orange::placeholder,
-a.button.orange::placeholder,
-button.brown::placeholder,
-select.brown::placeholder,
-input[type=submit].brown::placeholder,
-input[type=reset].brown::placeholder,
-input[type=cancel].brown::placeholder,
-input[type=button].brown::placeholder,
-a.button.brown::placeholder,
-button.white::placeholder,
-select.white::placeholder,
-input[type=submit].white::placeholder,
-input[type=reset].white::placeholder,
-input[type=cancel].white::placeholder,
-input[type=button].white::placeholder,
-a.button.white::placeholder,
-button.gray::placeholder,
-select.gray::placeholder,
-input[type=submit].gray::placeholder,
-input[type=reset].gray::placeholder,
-input[type=cancel].gray::placeholder,
-input[type=button].gray::placeholder,
-a.button.gray::placeholder,
-button.black::placeholder,
-select.black::placeholder,
-input[type=submit].black::placeholder,
-input[type=reset].black::placeholder,
-input[type=cancel].black::placeholder,
-input[type=button].black::placeholder,
-a.button.black::placeholder,
-button.blue::input-placeholder,
-select.blue::input-placeholder,
-input[type=submit].blue::input-placeholder,
-input[type=reset].blue::input-placeholder,
-input[type=cancel].blue::input-placeholder,
-input[type=button].blue::input-placeholder,
-a.button.blue::input-placeholder,
-button.cyan::input-placeholder,
-select.cyan::input-placeholder,
-input[type=submit].cyan::input-placeholder,
-input[type=reset].cyan::input-placeholder,
-input[type=cancel].cyan::input-placeholder,
-input[type=button].cyan::input-placeholder,
-a.button.cyan::input-placeholder,
-button.green::input-placeholder,
-select.green::input-placeholder,
-input[type=submit].green::input-placeholder,
-input[type=reset].green::input-placeholder,
-input[type=cancel].green::input-placeholder,
-input[type=button].green::input-placeholder,
-a.button.green::input-placeholder,
-button.red::input-placeholder,
-select.red::input-placeholder,
-input[type=submit].red::input-placeholder,
-input[type=reset].red::input-placeholder,
-input[type=cancel].red::input-placeholder,
-input[type=button].red::input-placeholder,
-a.button.red::input-placeholder,
-button.pink::input-placeholder,
-select.pink::input-placeholder,
-input[type=submit].pink::input-placeholder,
-input[type=reset].pink::input-placeholder,
-input[type=cancel].pink::input-placeholder,
-input[type=button].pink::input-placeholder,
-a.button.pink::input-placeholder,
-button.violet::input-placeholder,
-select.violet::input-placeholder,
-input[type=submit].violet::input-placeholder,
-input[type=reset].violet::input-placeholder,
-input[type=cancel].violet::input-placeholder,
-input[type=button].violet::input-placeholder,
-a.button.violet::input-placeholder,
-button.yellow::input-placeholder,
-select.yellow::input-placeholder,
-input[type=submit].yellow::input-placeholder,
-input[type=reset].yellow::input-placeholder,
-input[type=cancel].yellow::input-placeholder,
-input[type=button].yellow::input-placeholder,
-a.button.yellow::input-placeholder,
-button.orange::input-placeholder,
-select.orange::input-placeholder,
-input[type=submit].orange::input-placeholder,
-input[type=reset].orange::input-placeholder,
-input[type=cancel].orange::input-placeholder,
-input[type=button].orange::input-placeholder,
-a.button.orange::input-placeholder,
-button.brown::input-placeholder,
-select.brown::input-placeholder,
-input[type=submit].brown::input-placeholder,
-input[type=reset].brown::input-placeholder,
-input[type=cancel].brown::input-placeholder,
-input[type=button].brown::input-placeholder,
-a.button.brown::input-placeholder,
-button.white::input-placeholder,
-select.white::input-placeholder,
-input[type=submit].white::input-placeholder,
-input[type=reset].white::input-placeholder,
-input[type=cancel].white::input-placeholder,
-input[type=button].white::input-placeholder,
-a.button.white::input-placeholder,
-button.gray::input-placeholder,
-select.gray::input-placeholder,
-input[type=submit].gray::input-placeholder,
-input[type=reset].gray::input-placeholder,
-input[type=cancel].gray::input-placeholder,
-input[type=button].gray::input-placeholder,
-a.button.gray::input-placeholder,
-button.black::input-placeholder,
-select.black::input-placeholder,
-input[type=submit].black::input-placeholder,
-input[type=reset].black::input-placeholder,
-input[type=cancel].black::input-placeholder,
-input[type=button].black::input-placeholder,
-a.button.black::input-placeholder,
-button.blue::-moz-placeholder,
-select.blue::-moz-placeholder,
-input[type=submit].blue::-moz-placeholder,
-input[type=reset].blue::-moz-placeholder,
-input[type=cancel].blue::-moz-placeholder,
-input[type=button].blue::-moz-placeholder,
-a.button.blue::-moz-placeholder,
-button.cyan::-moz-placeholder,
-select.cyan::-moz-placeholder,
-input[type=submit].cyan::-moz-placeholder,
-input[type=reset].cyan::-moz-placeholder,
-input[type=cancel].cyan::-moz-placeholder,
-input[type=button].cyan::-moz-placeholder,
-a.button.cyan::-moz-placeholder,
-button.green::-moz-placeholder,
-select.green::-moz-placeholder,
-input[type=submit].green::-moz-placeholder,
-input[type=reset].green::-moz-placeholder,
-input[type=cancel].green::-moz-placeholder,
-input[type=button].green::-moz-placeholder,
-a.button.green::-moz-placeholder,
-button.red::-moz-placeholder,
-select.red::-moz-placeholder,
-input[type=submit].red::-moz-placeholder,
-input[type=reset].red::-moz-placeholder,
-input[type=cancel].red::-moz-placeholder,
-input[type=button].red::-moz-placeholder,
-a.button.red::-moz-placeholder,
-button.pink::-moz-placeholder,
-select.pink::-moz-placeholder,
-input[type=submit].pink::-moz-placeholder,
-input[type=reset].pink::-moz-placeholder,
-input[type=cancel].pink::-moz-placeholder,
-input[type=button].pink::-moz-placeholder,
-a.button.pink::-moz-placeholder,
-button.violet::-moz-placeholder,
-select.violet::-moz-placeholder,
-input[type=submit].violet::-moz-placeholder,
-input[type=reset].violet::-moz-placeholder,
-input[type=cancel].violet::-moz-placeholder,
-input[type=button].violet::-moz-placeholder,
-a.button.violet::-moz-placeholder,
-button.yellow::-moz-placeholder,
-select.yellow::-moz-placeholder,
-input[type=submit].yellow::-moz-placeholder,
-input[type=reset].yellow::-moz-placeholder,
-input[type=cancel].yellow::-moz-placeholder,
-input[type=button].yellow::-moz-placeholder,
-a.button.yellow::-moz-placeholder,
-button.orange::-moz-placeholder,
-select.orange::-moz-placeholder,
-input[type=submit].orange::-moz-placeholder,
-input[type=reset].orange::-moz-placeholder,
-input[type=cancel].orange::-moz-placeholder,
-input[type=button].orange::-moz-placeholder,
-a.button.orange::-moz-placeholder,
-button.brown::-moz-placeholder,
-select.brown::-moz-placeholder,
-input[type=submit].brown::-moz-placeholder,
-input[type=reset].brown::-moz-placeholder,
-input[type=cancel].brown::-moz-placeholder,
-input[type=button].brown::-moz-placeholder,
-a.button.brown::-moz-placeholder,
-button.white::-moz-placeholder,
-select.white::-moz-placeholder,
-input[type=submit].white::-moz-placeholder,
-input[type=reset].white::-moz-placeholder,
-input[type=cancel].white::-moz-placeholder,
-input[type=button].white::-moz-placeholder,
-a.button.white::-moz-placeholder,
-button.gray::-moz-placeholder,
-select.gray::-moz-placeholder,
-input[type=submit].gray::-moz-placeholder,
-input[type=reset].gray::-moz-placeholder,
-input[type=cancel].gray::-moz-placeholder,
-input[type=button].gray::-moz-placeholder,
-a.button.gray::-moz-placeholder,
-button.black::-moz-placeholder,
-select.black::-moz-placeholder,
-input[type=submit].black::-moz-placeholder,
-input[type=reset].black::-moz-placeholder,
-input[type=cancel].black::-moz-placeholder,
-input[type=button].black::-moz-placeholder,
-a.button.black::-moz-placeholder,
-button.blue:-moz-placeholder,
-select.blue:-moz-placeholder,
-input[type=submit].blue:-moz-placeholder,
-input[type=reset].blue:-moz-placeholder,
-input[type=cancel].blue:-moz-placeholder,
-input[type=button].blue:-moz-placeholder,
-a.button.blue:-moz-placeholder,
-button.cyan:-moz-placeholder,
-select.cyan:-moz-placeholder,
-input[type=submit].cyan:-moz-placeholder,
-input[type=reset].cyan:-moz-placeholder,
-input[type=cancel].cyan:-moz-placeholder,
-input[type=button].cyan:-moz-placeholder,
-a.button.cyan:-moz-placeholder,
-button.green:-moz-placeholder,
-select.green:-moz-placeholder,
-input[type=submit].green:-moz-placeholder,
-input[type=reset].green:-moz-placeholder,
-input[type=cancel].green:-moz-placeholder,
-input[type=button].green:-moz-placeholder,
-a.button.green:-moz-placeholder,
-button.red:-moz-placeholder,
-select.red:-moz-placeholder,
-input[type=submit].red:-moz-placeholder,
-input[type=reset].red:-moz-placeholder,
-input[type=cancel].red:-moz-placeholder,
-input[type=button].red:-moz-placeholder,
-a.button.red:-moz-placeholder,
-button.pink:-moz-placeholder,
-select.pink:-moz-placeholder,
-input[type=submit].pink:-moz-placeholder,
-input[type=reset].pink:-moz-placeholder,
-input[type=cancel].pink:-moz-placeholder,
-input[type=button].pink:-moz-placeholder,
-a.button.pink:-moz-placeholder,
-button.violet:-moz-placeholder,
-select.violet:-moz-placeholder,
-input[type=submit].violet:-moz-placeholder,
-input[type=reset].violet:-moz-placeholder,
-input[type=cancel].violet:-moz-placeholder,
-input[type=button].violet:-moz-placeholder,
-a.button.violet:-moz-placeholder,
-button.yellow:-moz-placeholder,
-select.yellow:-moz-placeholder,
-input[type=submit].yellow:-moz-placeholder,
-input[type=reset].yellow:-moz-placeholder,
-input[type=cancel].yellow:-moz-placeholder,
-input[type=button].yellow:-moz-placeholder,
-a.button.yellow:-moz-placeholder,
-button.orange:-moz-placeholder,
-select.orange:-moz-placeholder,
-input[type=submit].orange:-moz-placeholder,
-input[type=reset].orange:-moz-placeholder,
-input[type=cancel].orange:-moz-placeholder,
-input[type=button].orange:-moz-placeholder,
-a.button.orange:-moz-placeholder,
-button.brown:-moz-placeholder,
-select.brown:-moz-placeholder,
-input[type=submit].brown:-moz-placeholder,
-input[type=reset].brown:-moz-placeholder,
-input[type=cancel].brown:-moz-placeholder,
-input[type=button].brown:-moz-placeholder,
-a.button.brown:-moz-placeholder,
-button.white:-moz-placeholder,
-select.white:-moz-placeholder,
-input[type=submit].white:-moz-placeholder,
-input[type=reset].white:-moz-placeholder,
-input[type=cancel].white:-moz-placeholder,
-input[type=button].white:-moz-placeholder,
-a.button.white:-moz-placeholder,
-button.gray:-moz-placeholder,
-select.gray:-moz-placeholder,
-input[type=submit].gray:-moz-placeholder,
-input[type=reset].gray:-moz-placeholder,
-input[type=cancel].gray:-moz-placeholder,
-input[type=button].gray:-moz-placeholder,
-a.button.gray:-moz-placeholder,
-button.black:-moz-placeholder,
-select.black:-moz-placeholder,
-input[type=submit].black:-moz-placeholder,
-input[type=reset].black:-moz-placeholder,
-input[type=cancel].black:-moz-placeholder,
-input[type=button].black:-moz-placeholder,
-a.button.black:-moz-placeholder,
-button.blue:-ms-input-placeholder,
-select.blue:-ms-input-placeholder,
-input[type=submit].blue:-ms-input-placeholder,
-input[type=reset].blue:-ms-input-placeholder,
-input[type=cancel].blue:-ms-input-placeholder,
-input[type=button].blue:-ms-input-placeholder,
-a.button.blue:-ms-input-placeholder,
-button.cyan:-ms-input-placeholder,
-select.cyan:-ms-input-placeholder,
-input[type=submit].cyan:-ms-input-placeholder,
-input[type=reset].cyan:-ms-input-placeholder,
-input[type=cancel].cyan:-ms-input-placeholder,
-input[type=button].cyan:-ms-input-placeholder,
-a.button.cyan:-ms-input-placeholder,
-button.green:-ms-input-placeholder,
-select.green:-ms-input-placeholder,
-input[type=submit].green:-ms-input-placeholder,
-input[type=reset].green:-ms-input-placeholder,
-input[type=cancel].green:-ms-input-placeholder,
-input[type=button].green:-ms-input-placeholder,
-a.button.green:-ms-input-placeholder,
-button.red:-ms-input-placeholder,
-select.red:-ms-input-placeholder,
-input[type=submit].red:-ms-input-placeholder,
-input[type=reset].red:-ms-input-placeholder,
-input[type=cancel].red:-ms-input-placeholder,
-input[type=button].red:-ms-input-placeholder,
-a.button.red:-ms-input-placeholder,
-button.pink:-ms-input-placeholder,
-select.pink:-ms-input-placeholder,
-input[type=submit].pink:-ms-input-placeholder,
-input[type=reset].pink:-ms-input-placeholder,
-input[type=cancel].pink:-ms-input-placeholder,
-input[type=button].pink:-ms-input-placeholder,
-a.button.pink:-ms-input-placeholder,
-button.violet:-ms-input-placeholder,
-select.violet:-ms-input-placeholder,
-input[type=submit].violet:-ms-input-placeholder,
-input[type=reset].violet:-ms-input-placeholder,
-input[type=cancel].violet:-ms-input-placeholder,
-input[type=button].violet:-ms-input-placeholder,
-a.button.violet:-ms-input-placeholder,
-button.yellow:-ms-input-placeholder,
-select.yellow:-ms-input-placeholder,
-input[type=submit].yellow:-ms-input-placeholder,
-input[type=reset].yellow:-ms-input-placeholder,
-input[type=cancel].yellow:-ms-input-placeholder,
-input[type=button].yellow:-ms-input-placeholder,
-a.button.yellow:-ms-input-placeholder,
-button.orange:-ms-input-placeholder,
-select.orange:-ms-input-placeholder,
-input[type=submit].orange:-ms-input-placeholder,
-input[type=reset].orange:-ms-input-placeholder,
-input[type=cancel].orange:-ms-input-placeholder,
-input[type=button].orange:-ms-input-placeholder,
-a.button.orange:-ms-input-placeholder,
-button.brown:-ms-input-placeholder,
-select.brown:-ms-input-placeholder,
-input[type=submit].brown:-ms-input-placeholder,
-input[type=reset].brown:-ms-input-placeholder,
-input[type=cancel].brown:-ms-input-placeholder,
-input[type=button].brown:-ms-input-placeholder,
-a.button.brown:-ms-input-placeholder,
-button.white:-ms-input-placeholder,
-select.white:-ms-input-placeholder,
-input[type=submit].white:-ms-input-placeholder,
-input[type=reset].white:-ms-input-placeholder,
-input[type=cancel].white:-ms-input-placeholder,
-input[type=button].white:-ms-input-placeholder,
-a.button.white:-ms-input-placeholder,
-button.gray:-ms-input-placeholder,
-select.gray:-ms-input-placeholder,
-input[type=submit].gray:-ms-input-placeholder,
-input[type=reset].gray:-ms-input-placeholder,
-input[type=cancel].gray:-ms-input-placeholder,
-input[type=button].gray:-ms-input-placeholder,
-a.button.gray:-ms-input-placeholder,
-button.black:-ms-input-placeholder,
-select.black:-ms-input-placeholder,
-input[type=submit].black:-ms-input-placeholder,
-input[type=reset].black:-ms-input-placeholder,
-input[type=cancel].black:-ms-input-placeholder,
-input[type=button].black:-ms-input-placeholder,
-a.button.black:-ms-input-placeholder {
-  color: #fff;
-}
-button.blue[type=checkbox]::after,
-select.blue[type=checkbox]::after,
-input[type=submit].blue[type=checkbox]::after,
-input[type=reset].blue[type=checkbox]::after,
-input[type=cancel].blue[type=checkbox]::after,
-input[type=button].blue[type=checkbox]::after,
-a.button.blue[type=checkbox]::after,
-button.cyan[type=checkbox]::after,
-select.cyan[type=checkbox]::after,
-input[type=submit].cyan[type=checkbox]::after,
-input[type=reset].cyan[type=checkbox]::after,
-input[type=cancel].cyan[type=checkbox]::after,
-input[type=button].cyan[type=checkbox]::after,
-a.button.cyan[type=checkbox]::after,
-button.green[type=checkbox]::after,
-select.green[type=checkbox]::after,
-input[type=submit].green[type=checkbox]::after,
-input[type=reset].green[type=checkbox]::after,
-input[type=cancel].green[type=checkbox]::after,
-input[type=button].green[type=checkbox]::after,
-a.button.green[type=checkbox]::after,
-button.red[type=checkbox]::after,
-select.red[type=checkbox]::after,
-input[type=submit].red[type=checkbox]::after,
-input[type=reset].red[type=checkbox]::after,
-input[type=cancel].red[type=checkbox]::after,
-input[type=button].red[type=checkbox]::after,
-a.button.red[type=checkbox]::after,
-button.pink[type=checkbox]::after,
-select.pink[type=checkbox]::after,
-input[type=submit].pink[type=checkbox]::after,
-input[type=reset].pink[type=checkbox]::after,
-input[type=cancel].pink[type=checkbox]::after,
-input[type=button].pink[type=checkbox]::after,
-a.button.pink[type=checkbox]::after,
-button.violet[type=checkbox]::after,
-select.violet[type=checkbox]::after,
-input[type=submit].violet[type=checkbox]::after,
-input[type=reset].violet[type=checkbox]::after,
-input[type=cancel].violet[type=checkbox]::after,
-input[type=button].violet[type=checkbox]::after,
-a.button.violet[type=checkbox]::after,
-button.yellow[type=checkbox]::after,
-select.yellow[type=checkbox]::after,
-input[type=submit].yellow[type=checkbox]::after,
-input[type=reset].yellow[type=checkbox]::after,
-input[type=cancel].yellow[type=checkbox]::after,
-input[type=button].yellow[type=checkbox]::after,
-a.button.yellow[type=checkbox]::after,
-button.orange[type=checkbox]::after,
-select.orange[type=checkbox]::after,
-input[type=submit].orange[type=checkbox]::after,
-input[type=reset].orange[type=checkbox]::after,
-input[type=cancel].orange[type=checkbox]::after,
-input[type=button].orange[type=checkbox]::after,
-a.button.orange[type=checkbox]::after,
-button.brown[type=checkbox]::after,
-select.brown[type=checkbox]::after,
-input[type=submit].brown[type=checkbox]::after,
-input[type=reset].brown[type=checkbox]::after,
-input[type=cancel].brown[type=checkbox]::after,
-input[type=button].brown[type=checkbox]::after,
-a.button.brown[type=checkbox]::after,
-button.white[type=checkbox]::after,
-select.white[type=checkbox]::after,
-input[type=submit].white[type=checkbox]::after,
-input[type=reset].white[type=checkbox]::after,
-input[type=cancel].white[type=checkbox]::after,
-input[type=button].white[type=checkbox]::after,
-a.button.white[type=checkbox]::after,
-button.gray[type=checkbox]::after,
-select.gray[type=checkbox]::after,
-input[type=submit].gray[type=checkbox]::after,
-input[type=reset].gray[type=checkbox]::after,
-input[type=cancel].gray[type=checkbox]::after,
-input[type=button].gray[type=checkbox]::after,
-a.button.gray[type=checkbox]::after,
-button.black[type=checkbox]::after,
-select.black[type=checkbox]::after,
-input[type=submit].black[type=checkbox]::after,
-input[type=reset].black[type=checkbox]::after,
-input[type=cancel].black[type=checkbox]::after,
-input[type=button].black[type=checkbox]::after,
-a.button.black[type=checkbox]::after,
-button.blue[type=checkbox] + span.checkbox::after,
-select.blue[type=checkbox] + span.checkbox::after,
-input[type=submit].blue[type=checkbox] + span.checkbox::after,
-input[type=reset].blue[type=checkbox] + span.checkbox::after,
-input[type=cancel].blue[type=checkbox] + span.checkbox::after,
-input[type=button].blue[type=checkbox] + span.checkbox::after,
-a.button.blue[type=checkbox] + span.checkbox::after,
-button.cyan[type=checkbox] + span.checkbox::after,
-select.cyan[type=checkbox] + span.checkbox::after,
-input[type=submit].cyan[type=checkbox] + span.checkbox::after,
-input[type=reset].cyan[type=checkbox] + span.checkbox::after,
-input[type=cancel].cyan[type=checkbox] + span.checkbox::after,
-input[type=button].cyan[type=checkbox] + span.checkbox::after,
-a.button.cyan[type=checkbox] + span.checkbox::after,
-button.green[type=checkbox] + span.checkbox::after,
-select.green[type=checkbox] + span.checkbox::after,
-input[type=submit].green[type=checkbox] + span.checkbox::after,
-input[type=reset].green[type=checkbox] + span.checkbox::after,
-input[type=cancel].green[type=checkbox] + span.checkbox::after,
-input[type=button].green[type=checkbox] + span.checkbox::after,
-a.button.green[type=checkbox] + span.checkbox::after,
-button.red[type=checkbox] + span.checkbox::after,
-select.red[type=checkbox] + span.checkbox::after,
-input[type=submit].red[type=checkbox] + span.checkbox::after,
-input[type=reset].red[type=checkbox] + span.checkbox::after,
-input[type=cancel].red[type=checkbox] + span.checkbox::after,
-input[type=button].red[type=checkbox] + span.checkbox::after,
-a.button.red[type=checkbox] + span.checkbox::after,
-button.pink[type=checkbox] + span.checkbox::after,
-select.pink[type=checkbox] + span.checkbox::after,
-input[type=submit].pink[type=checkbox] + span.checkbox::after,
-input[type=reset].pink[type=checkbox] + span.checkbox::after,
-input[type=cancel].pink[type=checkbox] + span.checkbox::after,
-input[type=button].pink[type=checkbox] + span.checkbox::after,
-a.button.pink[type=checkbox] + span.checkbox::after,
-button.violet[type=checkbox] + span.checkbox::after,
-select.violet[type=checkbox] + span.checkbox::after,
-input[type=submit].violet[type=checkbox] + span.checkbox::after,
-input[type=reset].violet[type=checkbox] + span.checkbox::after,
-input[type=cancel].violet[type=checkbox] + span.checkbox::after,
-input[type=button].violet[type=checkbox] + span.checkbox::after,
-a.button.violet[type=checkbox] + span.checkbox::after,
-button.yellow[type=checkbox] + span.checkbox::after,
-select.yellow[type=checkbox] + span.checkbox::after,
-input[type=submit].yellow[type=checkbox] + span.checkbox::after,
-input[type=reset].yellow[type=checkbox] + span.checkbox::after,
-input[type=cancel].yellow[type=checkbox] + span.checkbox::after,
-input[type=button].yellow[type=checkbox] + span.checkbox::after,
-a.button.yellow[type=checkbox] + span.checkbox::after,
-button.orange[type=checkbox] + span.checkbox::after,
-select.orange[type=checkbox] + span.checkbox::after,
-input[type=submit].orange[type=checkbox] + span.checkbox::after,
-input[type=reset].orange[type=checkbox] + span.checkbox::after,
-input[type=cancel].orange[type=checkbox] + span.checkbox::after,
-input[type=button].orange[type=checkbox] + span.checkbox::after,
-a.button.orange[type=checkbox] + span.checkbox::after,
-button.brown[type=checkbox] + span.checkbox::after,
-select.brown[type=checkbox] + span.checkbox::after,
-input[type=submit].brown[type=checkbox] + span.checkbox::after,
-input[type=reset].brown[type=checkbox] + span.checkbox::after,
-input[type=cancel].brown[type=checkbox] + span.checkbox::after,
-input[type=button].brown[type=checkbox] + span.checkbox::after,
-a.button.brown[type=checkbox] + span.checkbox::after,
-button.white[type=checkbox] + span.checkbox::after,
-select.white[type=checkbox] + span.checkbox::after,
-input[type=submit].white[type=checkbox] + span.checkbox::after,
-input[type=reset].white[type=checkbox] + span.checkbox::after,
-input[type=cancel].white[type=checkbox] + span.checkbox::after,
-input[type=button].white[type=checkbox] + span.checkbox::after,
-a.button.white[type=checkbox] + span.checkbox::after,
-button.gray[type=checkbox] + span.checkbox::after,
-select.gray[type=checkbox] + span.checkbox::after,
-input[type=submit].gray[type=checkbox] + span.checkbox::after,
-input[type=reset].gray[type=checkbox] + span.checkbox::after,
-input[type=cancel].gray[type=checkbox] + span.checkbox::after,
-input[type=button].gray[type=checkbox] + span.checkbox::after,
-a.button.gray[type=checkbox] + span.checkbox::after,
-button.black[type=checkbox] + span.checkbox::after,
-select.black[type=checkbox] + span.checkbox::after,
-input[type=submit].black[type=checkbox] + span.checkbox::after,
-input[type=reset].black[type=checkbox] + span.checkbox::after,
-input[type=cancel].black[type=checkbox] + span.checkbox::after,
-input[type=button].black[type=checkbox] + span.checkbox::after,
-a.button.black[type=checkbox] + span.checkbox::after {
-  -webkit-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -moz-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -ms-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -o-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-button.blue[type=radio]::after,
-select.blue[type=radio]::after,
-input[type=submit].blue[type=radio]::after,
-input[type=reset].blue[type=radio]::after,
-input[type=cancel].blue[type=radio]::after,
-input[type=button].blue[type=radio]::after,
-a.button.blue[type=radio]::after,
-button.cyan[type=radio]::after,
-select.cyan[type=radio]::after,
-input[type=submit].cyan[type=radio]::after,
-input[type=reset].cyan[type=radio]::after,
-input[type=cancel].cyan[type=radio]::after,
-input[type=button].cyan[type=radio]::after,
-a.button.cyan[type=radio]::after,
-button.green[type=radio]::after,
-select.green[type=radio]::after,
-input[type=submit].green[type=radio]::after,
-input[type=reset].green[type=radio]::after,
-input[type=cancel].green[type=radio]::after,
-input[type=button].green[type=radio]::after,
-a.button.green[type=radio]::after,
-button.red[type=radio]::after,
-select.red[type=radio]::after,
-input[type=submit].red[type=radio]::after,
-input[type=reset].red[type=radio]::after,
-input[type=cancel].red[type=radio]::after,
-input[type=button].red[type=radio]::after,
-a.button.red[type=radio]::after,
-button.pink[type=radio]::after,
-select.pink[type=radio]::after,
-input[type=submit].pink[type=radio]::after,
-input[type=reset].pink[type=radio]::after,
-input[type=cancel].pink[type=radio]::after,
-input[type=button].pink[type=radio]::after,
-a.button.pink[type=radio]::after,
-button.violet[type=radio]::after,
-select.violet[type=radio]::after,
-input[type=submit].violet[type=radio]::after,
-input[type=reset].violet[type=radio]::after,
-input[type=cancel].violet[type=radio]::after,
-input[type=button].violet[type=radio]::after,
-a.button.violet[type=radio]::after,
-button.yellow[type=radio]::after,
-select.yellow[type=radio]::after,
-input[type=submit].yellow[type=radio]::after,
-input[type=reset].yellow[type=radio]::after,
-input[type=cancel].yellow[type=radio]::after,
-input[type=button].yellow[type=radio]::after,
-a.button.yellow[type=radio]::after,
-button.orange[type=radio]::after,
-select.orange[type=radio]::after,
-input[type=submit].orange[type=radio]::after,
-input[type=reset].orange[type=radio]::after,
-input[type=cancel].orange[type=radio]::after,
-input[type=button].orange[type=radio]::after,
-a.button.orange[type=radio]::after,
-button.brown[type=radio]::after,
-select.brown[type=radio]::after,
-input[type=submit].brown[type=radio]::after,
-input[type=reset].brown[type=radio]::after,
-input[type=cancel].brown[type=radio]::after,
-input[type=button].brown[type=radio]::after,
-a.button.brown[type=radio]::after,
-button.white[type=radio]::after,
-select.white[type=radio]::after,
-input[type=submit].white[type=radio]::after,
-input[type=reset].white[type=radio]::after,
-input[type=cancel].white[type=radio]::after,
-input[type=button].white[type=radio]::after,
-a.button.white[type=radio]::after,
-button.gray[type=radio]::after,
-select.gray[type=radio]::after,
-input[type=submit].gray[type=radio]::after,
-input[type=reset].gray[type=radio]::after,
-input[type=cancel].gray[type=radio]::after,
-input[type=button].gray[type=radio]::after,
-a.button.gray[type=radio]::after,
-button.black[type=radio]::after,
-select.black[type=radio]::after,
-input[type=submit].black[type=radio]::after,
-input[type=reset].black[type=radio]::after,
-input[type=cancel].black[type=radio]::after,
-input[type=button].black[type=radio]::after,
-a.button.black[type=radio]::after,
-button.blue[type=radio] + span.radio::after,
-select.blue[type=radio] + span.radio::after,
-input[type=submit].blue[type=radio] + span.radio::after,
-input[type=reset].blue[type=radio] + span.radio::after,
-input[type=cancel].blue[type=radio] + span.radio::after,
-input[type=button].blue[type=radio] + span.radio::after,
-a.button.blue[type=radio] + span.radio::after,
-button.cyan[type=radio] + span.radio::after,
-select.cyan[type=radio] + span.radio::after,
-input[type=submit].cyan[type=radio] + span.radio::after,
-input[type=reset].cyan[type=radio] + span.radio::after,
-input[type=cancel].cyan[type=radio] + span.radio::after,
-input[type=button].cyan[type=radio] + span.radio::after,
-a.button.cyan[type=radio] + span.radio::after,
-button.green[type=radio] + span.radio::after,
-select.green[type=radio] + span.radio::after,
-input[type=submit].green[type=radio] + span.radio::after,
-input[type=reset].green[type=radio] + span.radio::after,
-input[type=cancel].green[type=radio] + span.radio::after,
-input[type=button].green[type=radio] + span.radio::after,
-a.button.green[type=radio] + span.radio::after,
-button.red[type=radio] + span.radio::after,
-select.red[type=radio] + span.radio::after,
-input[type=submit].red[type=radio] + span.radio::after,
-input[type=reset].red[type=radio] + span.radio::after,
-input[type=cancel].red[type=radio] + span.radio::after,
-input[type=button].red[type=radio] + span.radio::after,
-a.button.red[type=radio] + span.radio::after,
-button.pink[type=radio] + span.radio::after,
-select.pink[type=radio] + span.radio::after,
-input[type=submit].pink[type=radio] + span.radio::after,
-input[type=reset].pink[type=radio] + span.radio::after,
-input[type=cancel].pink[type=radio] + span.radio::after,
-input[type=button].pink[type=radio] + span.radio::after,
-a.button.pink[type=radio] + span.radio::after,
-button.violet[type=radio] + span.radio::after,
-select.violet[type=radio] + span.radio::after,
-input[type=submit].violet[type=radio] + span.radio::after,
-input[type=reset].violet[type=radio] + span.radio::after,
-input[type=cancel].violet[type=radio] + span.radio::after,
-input[type=button].violet[type=radio] + span.radio::after,
-a.button.violet[type=radio] + span.radio::after,
-button.yellow[type=radio] + span.radio::after,
-select.yellow[type=radio] + span.radio::after,
-input[type=submit].yellow[type=radio] + span.radio::after,
-input[type=reset].yellow[type=radio] + span.radio::after,
-input[type=cancel].yellow[type=radio] + span.radio::after,
-input[type=button].yellow[type=radio] + span.radio::after,
-a.button.yellow[type=radio] + span.radio::after,
-button.orange[type=radio] + span.radio::after,
-select.orange[type=radio] + span.radio::after,
-input[type=submit].orange[type=radio] + span.radio::after,
-input[type=reset].orange[type=radio] + span.radio::after,
-input[type=cancel].orange[type=radio] + span.radio::after,
-input[type=button].orange[type=radio] + span.radio::after,
-a.button.orange[type=radio] + span.radio::after,
-button.brown[type=radio] + span.radio::after,
-select.brown[type=radio] + span.radio::after,
-input[type=submit].brown[type=radio] + span.radio::after,
-input[type=reset].brown[type=radio] + span.radio::after,
-input[type=cancel].brown[type=radio] + span.radio::after,
-input[type=button].brown[type=radio] + span.radio::after,
-a.button.brown[type=radio] + span.radio::after,
-button.white[type=radio] + span.radio::after,
-select.white[type=radio] + span.radio::after,
-input[type=submit].white[type=radio] + span.radio::after,
-input[type=reset].white[type=radio] + span.radio::after,
-input[type=cancel].white[type=radio] + span.radio::after,
-input[type=button].white[type=radio] + span.radio::after,
-a.button.white[type=radio] + span.radio::after,
-button.gray[type=radio] + span.radio::after,
-select.gray[type=radio] + span.radio::after,
-input[type=submit].gray[type=radio] + span.radio::after,
-input[type=reset].gray[type=radio] + span.radio::after,
-input[type=cancel].gray[type=radio] + span.radio::after,
-input[type=button].gray[type=radio] + span.radio::after,
-a.button.gray[type=radio] + span.radio::after,
-button.black[type=radio] + span.radio::after,
-select.black[type=radio] + span.radio::after,
-input[type=submit].black[type=radio] + span.radio::after,
-input[type=reset].black[type=radio] + span.radio::after,
-input[type=cancel].black[type=radio] + span.radio::after,
-input[type=button].black[type=radio] + span.radio::after,
-a.button.black[type=radio] + span.radio::after {
-  background-color: #ffffff;
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-button.blue,
-select.blue,
-input[type=submit].blue,
-input[type=reset].blue,
-input[type=cancel].blue,
-input[type=button].blue,
-a.button.blue {
-  background-color: #1a9cff !important;
-}
-button.blue.hover,
-select.blue.hover,
-input[type=submit].blue.hover,
-input[type=reset].blue.hover,
-input[type=cancel].blue.hover,
-input[type=button].blue.hover,
-a.button.blue.hover,
-button.blue:hover,
-select.blue:hover,
-input[type=submit].blue:hover,
-input[type=reset].blue:hover,
-input[type=cancel].blue:hover,
-input[type=button].blue:hover,
-a.button.blue:hover,
-button.blue.active,
-select.blue.active,
-input[type=submit].blue.active,
-input[type=reset].blue.active,
-input[type=cancel].blue.active,
-input[type=button].blue.active,
-a.button.blue.active,
-button.blue:active,
-select.blue:active,
-input[type=submit].blue:active,
-input[type=reset].blue:active,
-input[type=cancel].blue:active,
-input[type=button].blue:active,
-a.button.blue:active,
-button.blue:focus,
-select.blue:focus,
-input[type=submit].blue:focus,
-input[type=reset].blue:focus,
-input[type=cancel].blue:focus,
-input[type=button].blue:focus,
-a.button.blue:focus {
-  background-color: #0083e6 !important;
-}
-button.cyan,
-select.cyan,
-input[type=submit].cyan,
-input[type=reset].cyan,
-input[type=cancel].cyan,
-input[type=button].cyan,
-a.button.cyan {
-  background-color: #5bc0de !important;
-}
-button.cyan.hover,
-select.cyan.hover,
-input[type=submit].cyan.hover,
-input[type=reset].cyan.hover,
-input[type=cancel].cyan.hover,
-input[type=button].cyan.hover,
-a.button.cyan.hover,
-button.cyan:hover,
-select.cyan:hover,
-input[type=submit].cyan:hover,
-input[type=reset].cyan:hover,
-input[type=cancel].cyan:hover,
-input[type=button].cyan:hover,
-a.button.cyan:hover,
-button.cyan.active,
-select.cyan.active,
-input[type=submit].cyan.active,
-input[type=reset].cyan.active,
-input[type=cancel].cyan.active,
-input[type=button].cyan.active,
-a.button.cyan.active,
-button.cyan:active,
-select.cyan:active,
-input[type=submit].cyan:active,
-input[type=reset].cyan:active,
-input[type=cancel].cyan:active,
-input[type=button].cyan:active,
-a.button.cyan:active,
-button.cyan:focus,
-select.cyan:focus,
-input[type=submit].cyan:focus,
-input[type=reset].cyan:focus,
-input[type=cancel].cyan:focus,
-input[type=button].cyan:focus,
-a.button.cyan:focus {
-  background-color: #31b0d5 !important;
-}
-button.green,
-select.green,
-input[type=submit].green,
-input[type=reset].green,
-input[type=cancel].green,
-input[type=button].green,
-a.button.green {
-  background-color: #62c462 !important;
-}
-button.green.hover,
-select.green.hover,
-input[type=submit].green.hover,
-input[type=reset].green.hover,
-input[type=cancel].green.hover,
-input[type=button].green.hover,
-a.button.green.hover,
-button.green:hover,
-select.green:hover,
-input[type=submit].green:hover,
-input[type=reset].green:hover,
-input[type=cancel].green:hover,
-input[type=button].green:hover,
-a.button.green:hover,
-button.green.active,
-select.green.active,
-input[type=submit].green.active,
-input[type=reset].green.active,
-input[type=cancel].green.active,
-input[type=button].green.active,
-a.button.green.active,
-button.green:active,
-select.green:active,
-input[type=submit].green:active,
-input[type=reset].green:active,
-input[type=cancel].green:active,
-input[type=button].green:active,
-a.button.green:active,
-button.green:focus,
-select.green:focus,
-input[type=submit].green:focus,
-input[type=reset].green:focus,
-input[type=cancel].green:focus,
-input[type=button].green:focus,
-a.button.green:focus {
-  background-color: #42b142 !important;
-}
-button.red,
-select.red,
-input[type=submit].red,
-input[type=reset].red,
-input[type=cancel].red,
-input[type=button].red,
-a.button.red {
-  background-color: #ee666f !important;
-}
-button.red.hover,
-select.red.hover,
-input[type=submit].red.hover,
-input[type=reset].red.hover,
-input[type=cancel].red.hover,
-input[type=button].red.hover,
-a.button.red.hover,
-button.red:hover,
-select.red:hover,
-input[type=submit].red:hover,
-input[type=reset].red:hover,
-input[type=cancel].red:hover,
-input[type=button].red:hover,
-a.button.red:hover,
-button.red.active,
-select.red.active,
-input[type=submit].red.active,
-input[type=reset].red.active,
-input[type=cancel].red.active,
-input[type=button].red.active,
-a.button.red.active,
-button.red:active,
-select.red:active,
-input[type=submit].red:active,
-input[type=reset].red:active,
-input[type=cancel].red:active,
-input[type=button].red:active,
-a.button.red:active,
-button.red:focus,
-select.red:focus,
-input[type=submit].red:focus,
-input[type=reset].red:focus,
-input[type=cancel].red:focus,
-input[type=button].red:focus,
-a.button.red:focus {
-  background-color: #e93844 !important;
-}
-button.pink,
-select.pink,
-input[type=submit].pink,
-input[type=reset].pink,
-input[type=cancel].pink,
-input[type=button].pink,
-a.button.pink {
-  background-color: #ee7ae9 !important;
-}
-button.pink.hover,
-select.pink.hover,
-input[type=submit].pink.hover,
-input[type=reset].pink.hover,
-input[type=cancel].pink.hover,
-input[type=button].pink.hover,
-a.button.pink.hover,
-button.pink:hover,
-select.pink:hover,
-input[type=submit].pink:hover,
-input[type=reset].pink:hover,
-input[type=cancel].pink:hover,
-input[type=button].pink:hover,
-a.button.pink:hover,
-button.pink.active,
-select.pink.active,
-input[type=submit].pink.active,
-input[type=reset].pink.active,
-input[type=cancel].pink.active,
-input[type=button].pink.active,
-a.button.pink.active,
-button.pink:active,
-select.pink:active,
-input[type=submit].pink:active,
-input[type=reset].pink:active,
-input[type=cancel].pink:active,
-input[type=button].pink:active,
-a.button.pink:active,
-button.pink:focus,
-select.pink:focus,
-input[type=submit].pink:focus,
-input[type=reset].pink:focus,
-input[type=cancel].pink:focus,
-input[type=button].pink:focus,
-a.button.pink:focus {
-  background-color: #e84de2 !important;
-}
-button.violet,
-select.violet,
-input[type=submit].violet,
-input[type=reset].violet,
-input[type=cancel].violet,
-input[type=button].violet,
-a.button.violet {
-  background-color: #b452cd !important;
-}
-button.violet.hover,
-select.violet.hover,
-input[type=submit].violet.hover,
-input[type=reset].violet.hover,
-input[type=cancel].violet.hover,
-input[type=button].violet.hover,
-a.button.violet.hover,
-button.violet:hover,
-select.violet:hover,
-input[type=submit].violet:hover,
-input[type=reset].violet:hover,
-input[type=cancel].violet:hover,
-input[type=button].violet:hover,
-a.button.violet:hover,
-button.violet.active,
-select.violet.active,
-input[type=submit].violet.active,
-input[type=reset].violet.active,
-input[type=cancel].violet.active,
-input[type=button].violet.active,
-a.button.violet.active,
-button.violet:active,
-select.violet:active,
-input[type=submit].violet:active,
-input[type=reset].violet:active,
-input[type=cancel].violet:active,
-input[type=button].violet:active,
-a.button.violet:active,
-button.violet:focus,
-select.violet:focus,
-input[type=submit].violet:focus,
-input[type=reset].violet:focus,
-input[type=cancel].violet:focus,
-input[type=button].violet:focus,
-a.button.violet:focus {
-  background-color: #9d35b7 !important;
-}
-button.yellow,
-select.yellow,
-input[type=submit].yellow,
-input[type=reset].yellow,
-input[type=cancel].yellow,
-input[type=button].yellow,
-a.button.yellow {
-  background-color: #faa937 !important;
-}
-button.yellow.hover,
-select.yellow.hover,
-input[type=submit].yellow.hover,
-input[type=reset].yellow.hover,
-input[type=cancel].yellow.hover,
-input[type=button].yellow.hover,
-a.button.yellow.hover,
-button.yellow:hover,
-select.yellow:hover,
-input[type=submit].yellow:hover,
-input[type=reset].yellow:hover,
-input[type=cancel].yellow:hover,
-input[type=button].yellow:hover,
-a.button.yellow:hover,
-button.yellow.active,
-select.yellow.active,
-input[type=submit].yellow.active,
-input[type=reset].yellow.active,
-input[type=cancel].yellow.active,
-input[type=button].yellow.active,
-a.button.yellow.active,
-button.yellow:active,
-select.yellow:active,
-input[type=submit].yellow:active,
-input[type=reset].yellow:active,
-input[type=cancel].yellow:active,
-input[type=button].yellow:active,
-a.button.yellow:active,
-button.yellow:focus,
-select.yellow:focus,
-input[type=submit].yellow:focus,
-input[type=reset].yellow:focus,
-input[type=cancel].yellow:focus,
-input[type=button].yellow:focus,
-a.button.yellow:focus {
-  background-color: #f89306 !important;
-}
-button.orange,
-select.orange,
-input[type=submit].orange,
-input[type=reset].orange,
-input[type=cancel].orange,
-input[type=button].orange,
-a.button.orange {
-  background-color: #f87531 !important;
-}
-button.orange.hover,
-select.orange.hover,
-input[type=submit].orange.hover,
-input[type=reset].orange.hover,
-input[type=cancel].orange.hover,
-input[type=button].orange.hover,
-a.button.orange.hover,
-button.orange:hover,
-select.orange:hover,
-input[type=submit].orange:hover,
-input[type=reset].orange:hover,
-input[type=cancel].orange:hover,
-input[type=button].orange:hover,
-a.button.orange:hover,
-button.orange.active,
-select.orange.active,
-input[type=submit].orange.active,
-input[type=reset].orange.active,
-input[type=cancel].orange.active,
-input[type=button].orange.active,
-a.button.orange.active,
-button.orange:active,
-select.orange:active,
-input[type=submit].orange:active,
-input[type=reset].orange:active,
-input[type=cancel].orange:active,
-input[type=button].orange:active,
-a.button.orange:active,
-button.orange:focus,
-select.orange:focus,
-input[type=submit].orange:focus,
-input[type=reset].orange:focus,
-input[type=cancel].orange:focus,
-input[type=button].orange:focus,
-a.button.orange:focus {
-  background-color: #ee5708 !important;
-}
-button.brown,
-select.brown,
-input[type=submit].brown,
-input[type=reset].brown,
-input[type=cancel].brown,
-input[type=button].brown,
-a.button.brown {
-  background-color: #964514 !important;
-}
-button.brown.hover,
-select.brown.hover,
-input[type=submit].brown.hover,
-input[type=reset].brown.hover,
-input[type=cancel].brown.hover,
-input[type=button].brown.hover,
-a.button.brown.hover,
-button.brown:hover,
-select.brown:hover,
-input[type=submit].brown:hover,
-input[type=reset].brown:hover,
-input[type=cancel].brown:hover,
-input[type=button].brown:hover,
-a.button.brown:hover,
-button.brown.active,
-select.brown.active,
-input[type=submit].brown.active,
-input[type=reset].brown.active,
-input[type=cancel].brown.active,
-input[type=button].brown.active,
-a.button.brown.active,
-button.brown:active,
-select.brown:active,
-input[type=submit].brown:active,
-input[type=reset].brown:active,
-input[type=cancel].brown:active,
-input[type=button].brown:active,
-a.button.brown:active,
-button.brown:focus,
-select.brown:focus,
-input[type=submit].brown:focus,
-input[type=reset].brown:focus,
-input[type=cancel].brown:focus,
-input[type=button].brown:focus,
-a.button.brown:focus {
-  background-color: #69300e !important;
-}
-button.white,
-select.white,
-input[type=submit].white,
-input[type=reset].white,
-input[type=cancel].white,
-input[type=button].white,
-a.button.white {
-  background-color: #ffffff !important;
-}
-button.white.hover,
-select.white.hover,
-input[type=submit].white.hover,
-input[type=reset].white.hover,
-input[type=cancel].white.hover,
-input[type=button].white.hover,
-a.button.white.hover,
-button.white:hover,
-select.white:hover,
-input[type=submit].white:hover,
-input[type=reset].white:hover,
-input[type=cancel].white:hover,
-input[type=button].white:hover,
-a.button.white:hover,
-button.white.active,
-select.white.active,
-input[type=submit].white.active,
-input[type=reset].white.active,
-input[type=cancel].white.active,
-input[type=button].white.active,
-a.button.white.active,
-button.white:active,
-select.white:active,
-input[type=submit].white:active,
-input[type=reset].white:active,
-input[type=cancel].white:active,
-input[type=button].white:active,
-a.button.white:active,
-button.white:focus,
-select.white:focus,
-input[type=submit].white:focus,
-input[type=reset].white:focus,
-input[type=cancel].white:focus,
-input[type=button].white:focus,
-a.button.white:focus {
-  background-color: #e6e6e6 !important;
-}
-button.gray,
-select.gray,
-input[type=submit].gray,
-input[type=reset].gray,
-input[type=cancel].gray,
-input[type=button].gray,
-a.button.gray {
-  background-color: #d0d0d0 !important;
-}
-button.gray.hover,
-select.gray.hover,
-input[type=submit].gray.hover,
-input[type=reset].gray.hover,
-input[type=cancel].gray.hover,
-input[type=button].gray.hover,
-a.button.gray.hover,
-button.gray:hover,
-select.gray:hover,
-input[type=submit].gray:hover,
-input[type=reset].gray:hover,
-input[type=cancel].gray:hover,
-input[type=button].gray:hover,
-a.button.gray:hover,
-button.gray.active,
-select.gray.active,
-input[type=submit].gray.active,
-input[type=reset].gray.active,
-input[type=cancel].gray.active,
-input[type=button].gray.active,
-a.button.gray.active,
-button.gray:active,
-select.gray:active,
-input[type=submit].gray:active,
-input[type=reset].gray:active,
-input[type=cancel].gray:active,
-input[type=button].gray:active,
-a.button.gray:active,
-button.gray:focus,
-select.gray:focus,
-input[type=submit].gray:focus,
-input[type=reset].gray:focus,
-input[type=cancel].gray:focus,
-input[type=button].gray:focus,
-a.button.gray:focus {
-  background-color: #b7b7b7 !important;
-}
-button.black,
-select.black,
-input[type=submit].black,
-input[type=reset].black,
-input[type=cancel].black,
-input[type=button].black,
-a.button.black {
-  background-color: #666666 !important;
-}
-button.black.hover,
-select.black.hover,
-input[type=submit].black.hover,
-input[type=reset].black.hover,
-input[type=cancel].black.hover,
-input[type=button].black.hover,
-a.button.black.hover,
-button.black:hover,
-select.black:hover,
-input[type=submit].black:hover,
-input[type=reset].black:hover,
-input[type=cancel].black:hover,
-input[type=button].black:hover,
-a.button.black:hover,
-button.black.active,
-select.black.active,
-input[type=submit].black.active,
-input[type=reset].black.active,
-input[type=cancel].black.active,
-input[type=button].black.active,
-a.button.black.active,
-button.black:active,
-select.black:active,
-input[type=submit].black:active,
-input[type=reset].black:active,
-input[type=cancel].black:active,
-input[type=button].black:active,
-a.button.black:active,
-button.black:focus,
-select.black:focus,
-input[type=submit].black:focus,
-input[type=reset].black:focus,
-input[type=cancel].black:focus,
-input[type=button].black:focus,
-a.button.black:focus {
-  background-color: #4d4d4d !important;
-}
-button.white,
-select.white,
-input[type=submit].white,
-input[type=reset].white,
-input[type=cancel].white,
-input[type=button].white,
-a.button.white,
-button.gray,
-select.gray,
-input[type=submit].gray,
-input[type=reset].gray,
-input[type=cancel].gray,
-input[type=button].gray,
-a.button.gray {
-  -webkit-text-shadow: none;
-  -moz-text-shadow: none;
-  -ms-text-shadow: none;
-  -o-text-shadow: none;
-  text-shadow: none;
-  color: #333;
-}
-button.white:hover,
-select.white:hover,
-input[type=submit].white:hover,
-input[type=reset].white:hover,
-input[type=cancel].white:hover,
-input[type=button].white:hover,
-a.button.white:hover,
-button.gray:hover,
-select.gray:hover,
-input[type=submit].gray:hover,
-input[type=reset].gray:hover,
-input[type=cancel].gray:hover,
-input[type=button].gray:hover,
-a.button.gray:hover,
-button.white.active,
-select.white.active,
-input[type=submit].white.active,
-input[type=reset].white.active,
-input[type=cancel].white.active,
-input[type=button].white.active,
-a.button.white.active,
-button.gray.active,
-select.gray.active,
-input[type=submit].gray.active,
-input[type=reset].gray.active,
-input[type=cancel].gray.active,
-input[type=button].gray.active,
-a.button.gray.active,
-button.white:active,
-select.white:active,
-input[type=submit].white:active,
-input[type=reset].white:active,
-input[type=cancel].white:active,
-input[type=button].white:active,
-a.button.white:active,
-button.gray:active,
-select.gray:active,
-input[type=submit].gray:active,
-input[type=reset].gray:active,
-input[type=cancel].gray:active,
-input[type=button].gray:active,
-a.button.gray:active,
-button.white:focus,
-select.white:focus,
-input[type=submit].white:focus,
-input[type=reset].white:focus,
-input[type=cancel].white:focus,
-input[type=button].white:focus,
-a.button.white:focus,
-button.gray:focus,
-select.gray:focus,
-input[type=submit].gray:focus,
-input[type=reset].gray:focus,
-input[type=cancel].gray:focus,
-input[type=button].gray:focus,
-a.button.gray:focus {
-  color: #111 !important;
-}
-button.white[type=checkbox]::after,
-select.white[type=checkbox]::after,
-input[type=submit].white[type=checkbox]::after,
-input[type=reset].white[type=checkbox]::after,
-input[type=cancel].white[type=checkbox]::after,
-input[type=button].white[type=checkbox]::after,
-a.button.white[type=checkbox]::after,
-button.gray[type=checkbox]::after,
-select.gray[type=checkbox]::after,
-input[type=submit].gray[type=checkbox]::after,
-input[type=reset].gray[type=checkbox]::after,
-input[type=cancel].gray[type=checkbox]::after,
-input[type=button].gray[type=checkbox]::after,
-a.button.gray[type=checkbox]::after,
-button.white[type=checkbox] + span.checkbox::after,
-select.white[type=checkbox] + span.checkbox::after,
-input[type=submit].white[type=checkbox] + span.checkbox::after,
-input[type=reset].white[type=checkbox] + span.checkbox::after,
-input[type=cancel].white[type=checkbox] + span.checkbox::after,
-input[type=button].white[type=checkbox] + span.checkbox::after,
-a.button.white[type=checkbox] + span.checkbox::after,
-button.gray[type=checkbox] + span.checkbox::after,
-select.gray[type=checkbox] + span.checkbox::after,
-input[type=submit].gray[type=checkbox] + span.checkbox::after,
-input[type=reset].gray[type=checkbox] + span.checkbox::after,
-input[type=cancel].gray[type=checkbox] + span.checkbox::after,
-input[type=button].gray[type=checkbox] + span.checkbox::after,
-a.button.gray[type=checkbox] + span.checkbox::after {
-  color: #333;
-}
-button.white[type=radio]::after,
-select.white[type=radio]::after,
-input[type=submit].white[type=radio]::after,
-input[type=reset].white[type=radio]::after,
-input[type=cancel].white[type=radio]::after,
-input[type=button].white[type=radio]::after,
-a.button.white[type=radio]::after,
-button.gray[type=radio]::after,
-select.gray[type=radio]::after,
-input[type=submit].gray[type=radio]::after,
-input[type=reset].gray[type=radio]::after,
-input[type=cancel].gray[type=radio]::after,
-input[type=button].gray[type=radio]::after,
-a.button.gray[type=radio]::after,
-button.white[type=radio] + span.radio::after,
-select.white[type=radio] + span.radio::after,
-input[type=submit].white[type=radio] + span.radio::after,
-input[type=reset].white[type=radio] + span.radio::after,
-input[type=cancel].white[type=radio] + span.radio::after,
-input[type=button].white[type=radio] + span.radio::after,
-a.button.white[type=radio] + span.radio::after,
-button.gray[type=radio] + span.radio::after,
-select.gray[type=radio] + span.radio::after,
-input[type=submit].gray[type=radio] + span.radio::after,
-input[type=reset].gray[type=radio] + span.radio::after,
-input[type=cancel].gray[type=radio] + span.radio::after,
-input[type=button].gray[type=radio] + span.radio::after,
-a.button.gray[type=radio] + span.radio::after {
-  background-color: #333333;
-  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  line-height: 20px;
 }
 button:hover,
 select:hover,
@@ -2692,12 +593,12 @@ input[type=submit]:hover,
 input[type=reset]:hover,
 input[type=cancel]:hover,
 input[type=button]:hover,
-a.button:hover {
-  -webkit-box-shadow: inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.2);
-  -moz-box-shadow: inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.2);
-  -ms-box-shadow: inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.2);
-  -o-box-shadow: inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.2);
-  box-shadow: inset 0 0 0 1px white, inset 0 1px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0,0,0,0.2);
+.button:hover {
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
   border-color: #959595;
   color: #555;
 }
@@ -2707,14 +608,27 @@ input[type=submit]:active,
 input[type=reset]:active,
 input[type=cancel]:active,
 input[type=button]:active,
-a.button:active {
-  -webkit-box-shadow: inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 15px rgba(0,0,0,0.2);
-  -moz-box-shadow: inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 15px rgba(0,0,0,0.2);
-  -ms-box-shadow: inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 15px rgba(0,0,0,0.2);
-  -o-box-shadow: inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 15px rgba(0,0,0,0.2);
-  box-shadow: inset 0 0 0 1px white, inset 1px 5px 10px rgba(0,0,0,0.15), 0 0 15px rgba(0,0,0,0.2);
+.button:active {
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff , inset 1px 5px 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 0 1px #ffffff , inset 1px 5px 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: inset 0 0 0 1px #ffffff , inset 1px 5px 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: inset 0 0 0 1px #ffffff , inset 1px 5px 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 0 1px #ffffff , inset 1px 5px 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(0, 0, 0, 0.3);
   border-color: #818181;
   color: #333;
+}
+button.xl,
+select.xl,
+input[type=submit].xl,
+input[type=reset].xl,
+input[type=cancel].xl,
+input[type=button].xl,
+.button.xl {
+  width: auto;
+  height: 50px;
+  border-radius: 8px;
+  padding: 11px 25px;
+  font-size: 18px;
 }
 button.large,
 select.large,
@@ -2722,11 +636,11 @@ input[type=submit].large,
 input[type=reset].large,
 input[type=cancel].large,
 input[type=button].large,
-a.button.large {
+.button.large {
   width: auto;
   height: 40px;
   border-radius: 6px;
-  padding: 7px 18px 6px;
+  padding: 7px 18px;
   font-size: 18px;
 }
 button.small,
@@ -2735,12 +649,12 @@ input[type=submit].small,
 input[type=reset].small,
 input[type=cancel].small,
 input[type=button].small,
-a.button.small {
+.button.small {
   width: auto;
-  height: 25px;
+  height: 26px;
   border-radius: 4px;
-  padding: 4px 8px 3px;
-  font-size: 11px;
+  padding: 2px 8px;
+  font-size: 12px;
 }
 button.mini,
 select.mini,
@@ -2748,11 +662,11 @@ input[type=submit].mini,
 input[type=reset].mini,
 input[type=cancel].mini,
 input[type=button].mini,
-a.button.mini {
+.button.mini {
   width: auto;
-  height: 20px;
+  height: 22px;
   border-radius: 3px;
-  padding: 1px 6px 0;
+  padding: 0 6px;
   font-size: 11px;
 }
 button[data-badge-value]::after {
@@ -2949,8 +863,8 @@ input:invalid:-ms-input-placeholder,
 :disabled:-ms-input-placeholder {
   color: #000000 !important;
 }
-/* ###################################### */
-/* ## ## ## UICheckbox & UIRadio ## ## ## */
+/* ################################## */
+/* ## ## ## Checkbox & Radio ## ## ## */
 input[type=checkbox],
 input[type=radio],
 input[type=checkbox] + span.checkbox,
@@ -2968,7 +882,11 @@ input[type=radio] + span.radio {
   border-color: #afafaf;
   border-width: 1px;
   border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+  -moz-box-shadow: inset 0 0 0 1px #ffffff;
+  -ms-box-shadow: inset 0 0 0 1px #ffffff;
+  -o-box-shadow: inset 0 0 0 1px #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -2984,1307 +902,6 @@ input[type=radio] + span.radio {
   color: #333;
   position: relative;
   -webkit-appearance: none;
-}
-input[type=checkbox].blue,
-input[type=radio].blue,
-input[type=checkbox] + span.checkbox.blue,
-input[type=radio] + span.radio.blue,
-input[type=checkbox].cyan,
-input[type=radio].cyan,
-input[type=checkbox] + span.checkbox.cyan,
-input[type=radio] + span.radio.cyan,
-input[type=checkbox].green,
-input[type=radio].green,
-input[type=checkbox] + span.checkbox.green,
-input[type=radio] + span.radio.green,
-input[type=checkbox].red,
-input[type=radio].red,
-input[type=checkbox] + span.checkbox.red,
-input[type=radio] + span.radio.red,
-input[type=checkbox].pink,
-input[type=radio].pink,
-input[type=checkbox] + span.checkbox.pink,
-input[type=radio] + span.radio.pink,
-input[type=checkbox].violet,
-input[type=radio].violet,
-input[type=checkbox] + span.checkbox.violet,
-input[type=radio] + span.radio.violet,
-input[type=checkbox].yellow,
-input[type=radio].yellow,
-input[type=checkbox] + span.checkbox.yellow,
-input[type=radio] + span.radio.yellow,
-input[type=checkbox].orange,
-input[type=radio].orange,
-input[type=checkbox] + span.checkbox.orange,
-input[type=radio] + span.radio.orange,
-input[type=checkbox].brown,
-input[type=radio].brown,
-input[type=checkbox] + span.checkbox.brown,
-input[type=radio] + span.radio.brown,
-input[type=checkbox].white,
-input[type=radio].white,
-input[type=checkbox] + span.checkbox.white,
-input[type=radio] + span.radio.white,
-input[type=checkbox].gray,
-input[type=radio].gray,
-input[type=checkbox] + span.checkbox.gray,
-input[type=radio] + span.radio.gray,
-input[type=checkbox].black,
-input[type=radio].black,
-input[type=checkbox] + span.checkbox.black,
-input[type=radio] + span.radio.black {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.25)), to(rgba(0, 0, 0, 0.2))) !important;
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
-  border-color: rgba(0, 0, 0, 0.4) !important;
-  border-width: 1px !important;
-  border-style: solid !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3) !important;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -ms-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -o-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-bottom-color: rgba(0, 0, 0, 0.55);
-  color: #fff;
-}
-input[type=checkbox].blue:not(.active).hover,
-input[type=radio].blue:not(.active).hover,
-input[type=checkbox] + span.checkbox.blue:not(.active).hover,
-input[type=radio] + span.radio.blue:not(.active).hover,
-input[type=checkbox].cyan:not(.active).hover,
-input[type=radio].cyan:not(.active).hover,
-input[type=checkbox] + span.checkbox.cyan:not(.active).hover,
-input[type=radio] + span.radio.cyan:not(.active).hover,
-input[type=checkbox].green:not(.active).hover,
-input[type=radio].green:not(.active).hover,
-input[type=checkbox] + span.checkbox.green:not(.active).hover,
-input[type=radio] + span.radio.green:not(.active).hover,
-input[type=checkbox].red:not(.active).hover,
-input[type=radio].red:not(.active).hover,
-input[type=checkbox] + span.checkbox.red:not(.active).hover,
-input[type=radio] + span.radio.red:not(.active).hover,
-input[type=checkbox].pink:not(.active).hover,
-input[type=radio].pink:not(.active).hover,
-input[type=checkbox] + span.checkbox.pink:not(.active).hover,
-input[type=radio] + span.radio.pink:not(.active).hover,
-input[type=checkbox].violet:not(.active).hover,
-input[type=radio].violet:not(.active).hover,
-input[type=checkbox] + span.checkbox.violet:not(.active).hover,
-input[type=radio] + span.radio.violet:not(.active).hover,
-input[type=checkbox].yellow:not(.active).hover,
-input[type=radio].yellow:not(.active).hover,
-input[type=checkbox] + span.checkbox.yellow:not(.active).hover,
-input[type=radio] + span.radio.yellow:not(.active).hover,
-input[type=checkbox].orange:not(.active).hover,
-input[type=radio].orange:not(.active).hover,
-input[type=checkbox] + span.checkbox.orange:not(.active).hover,
-input[type=radio] + span.radio.orange:not(.active).hover,
-input[type=checkbox].brown:not(.active).hover,
-input[type=radio].brown:not(.active).hover,
-input[type=checkbox] + span.checkbox.brown:not(.active).hover,
-input[type=radio] + span.radio.brown:not(.active).hover,
-input[type=checkbox].white:not(.active).hover,
-input[type=radio].white:not(.active).hover,
-input[type=checkbox] + span.checkbox.white:not(.active).hover,
-input[type=radio] + span.radio.white:not(.active).hover,
-input[type=checkbox].gray:not(.active).hover,
-input[type=radio].gray:not(.active).hover,
-input[type=checkbox] + span.checkbox.gray:not(.active).hover,
-input[type=radio] + span.radio.gray:not(.active).hover,
-input[type=checkbox].black:not(.active).hover,
-input[type=radio].black:not(.active).hover,
-input[type=checkbox] + span.checkbox.black:not(.active).hover,
-input[type=radio] + span.radio.black:not(.active).hover,
-input[type=checkbox].blue:not(.active):hover,
-input[type=radio].blue:not(.active):hover,
-input[type=checkbox] + span.checkbox.blue:not(.active):hover,
-input[type=radio] + span.radio.blue:not(.active):hover,
-input[type=checkbox].cyan:not(.active):hover,
-input[type=radio].cyan:not(.active):hover,
-input[type=checkbox] + span.checkbox.cyan:not(.active):hover,
-input[type=radio] + span.radio.cyan:not(.active):hover,
-input[type=checkbox].green:not(.active):hover,
-input[type=radio].green:not(.active):hover,
-input[type=checkbox] + span.checkbox.green:not(.active):hover,
-input[type=radio] + span.radio.green:not(.active):hover,
-input[type=checkbox].red:not(.active):hover,
-input[type=radio].red:not(.active):hover,
-input[type=checkbox] + span.checkbox.red:not(.active):hover,
-input[type=radio] + span.radio.red:not(.active):hover,
-input[type=checkbox].pink:not(.active):hover,
-input[type=radio].pink:not(.active):hover,
-input[type=checkbox] + span.checkbox.pink:not(.active):hover,
-input[type=radio] + span.radio.pink:not(.active):hover,
-input[type=checkbox].violet:not(.active):hover,
-input[type=radio].violet:not(.active):hover,
-input[type=checkbox] + span.checkbox.violet:not(.active):hover,
-input[type=radio] + span.radio.violet:not(.active):hover,
-input[type=checkbox].yellow:not(.active):hover,
-input[type=radio].yellow:not(.active):hover,
-input[type=checkbox] + span.checkbox.yellow:not(.active):hover,
-input[type=radio] + span.radio.yellow:not(.active):hover,
-input[type=checkbox].orange:not(.active):hover,
-input[type=radio].orange:not(.active):hover,
-input[type=checkbox] + span.checkbox.orange:not(.active):hover,
-input[type=radio] + span.radio.orange:not(.active):hover,
-input[type=checkbox].brown:not(.active):hover,
-input[type=radio].brown:not(.active):hover,
-input[type=checkbox] + span.checkbox.brown:not(.active):hover,
-input[type=radio] + span.radio.brown:not(.active):hover,
-input[type=checkbox].white:not(.active):hover,
-input[type=radio].white:not(.active):hover,
-input[type=checkbox] + span.checkbox.white:not(.active):hover,
-input[type=radio] + span.radio.white:not(.active):hover,
-input[type=checkbox].gray:not(.active):hover,
-input[type=radio].gray:not(.active):hover,
-input[type=checkbox] + span.checkbox.gray:not(.active):hover,
-input[type=radio] + span.radio.gray:not(.active):hover,
-input[type=checkbox].black:not(.active):hover,
-input[type=radio].black:not(.active):hover,
-input[type=checkbox] + span.checkbox.black:not(.active):hover,
-input[type=radio] + span.radio.black:not(.active):hover,
-input[type=checkbox].blue:not(.active):checked,
-input[type=radio].blue:not(.active):checked,
-input[type=checkbox] + span.checkbox.blue:not(.active):checked,
-input[type=radio] + span.radio.blue:not(.active):checked,
-input[type=checkbox].cyan:not(.active):checked,
-input[type=radio].cyan:not(.active):checked,
-input[type=checkbox] + span.checkbox.cyan:not(.active):checked,
-input[type=radio] + span.radio.cyan:not(.active):checked,
-input[type=checkbox].green:not(.active):checked,
-input[type=radio].green:not(.active):checked,
-input[type=checkbox] + span.checkbox.green:not(.active):checked,
-input[type=radio] + span.radio.green:not(.active):checked,
-input[type=checkbox].red:not(.active):checked,
-input[type=radio].red:not(.active):checked,
-input[type=checkbox] + span.checkbox.red:not(.active):checked,
-input[type=radio] + span.radio.red:not(.active):checked,
-input[type=checkbox].pink:not(.active):checked,
-input[type=radio].pink:not(.active):checked,
-input[type=checkbox] + span.checkbox.pink:not(.active):checked,
-input[type=radio] + span.radio.pink:not(.active):checked,
-input[type=checkbox].violet:not(.active):checked,
-input[type=radio].violet:not(.active):checked,
-input[type=checkbox] + span.checkbox.violet:not(.active):checked,
-input[type=radio] + span.radio.violet:not(.active):checked,
-input[type=checkbox].yellow:not(.active):checked,
-input[type=radio].yellow:not(.active):checked,
-input[type=checkbox] + span.checkbox.yellow:not(.active):checked,
-input[type=radio] + span.radio.yellow:not(.active):checked,
-input[type=checkbox].orange:not(.active):checked,
-input[type=radio].orange:not(.active):checked,
-input[type=checkbox] + span.checkbox.orange:not(.active):checked,
-input[type=radio] + span.radio.orange:not(.active):checked,
-input[type=checkbox].brown:not(.active):checked,
-input[type=radio].brown:not(.active):checked,
-input[type=checkbox] + span.checkbox.brown:not(.active):checked,
-input[type=radio] + span.radio.brown:not(.active):checked,
-input[type=checkbox].white:not(.active):checked,
-input[type=radio].white:not(.active):checked,
-input[type=checkbox] + span.checkbox.white:not(.active):checked,
-input[type=radio] + span.radio.white:not(.active):checked,
-input[type=checkbox].gray:not(.active):checked,
-input[type=radio].gray:not(.active):checked,
-input[type=checkbox] + span.checkbox.gray:not(.active):checked,
-input[type=radio] + span.radio.gray:not(.active):checked,
-input[type=checkbox].black:not(.active):checked,
-input[type=radio].black:not(.active):checked,
-input[type=checkbox] + span.checkbox.black:not(.active):checked,
-input[type=radio] + span.radio.black:not(.active):checked {
-  border-color: rgba(0, 0, 0, 0.5);
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  color: #fff;
-}
-input[type=checkbox].blue:not(.hover).active,
-input[type=radio].blue:not(.hover).active,
-input[type=checkbox] + span.checkbox.blue:not(.hover).active,
-input[type=radio] + span.radio.blue:not(.hover).active,
-input[type=checkbox].cyan:not(.hover).active,
-input[type=radio].cyan:not(.hover).active,
-input[type=checkbox] + span.checkbox.cyan:not(.hover).active,
-input[type=radio] + span.radio.cyan:not(.hover).active,
-input[type=checkbox].green:not(.hover).active,
-input[type=radio].green:not(.hover).active,
-input[type=checkbox] + span.checkbox.green:not(.hover).active,
-input[type=radio] + span.radio.green:not(.hover).active,
-input[type=checkbox].red:not(.hover).active,
-input[type=radio].red:not(.hover).active,
-input[type=checkbox] + span.checkbox.red:not(.hover).active,
-input[type=radio] + span.radio.red:not(.hover).active,
-input[type=checkbox].pink:not(.hover).active,
-input[type=radio].pink:not(.hover).active,
-input[type=checkbox] + span.checkbox.pink:not(.hover).active,
-input[type=radio] + span.radio.pink:not(.hover).active,
-input[type=checkbox].violet:not(.hover).active,
-input[type=radio].violet:not(.hover).active,
-input[type=checkbox] + span.checkbox.violet:not(.hover).active,
-input[type=radio] + span.radio.violet:not(.hover).active,
-input[type=checkbox].yellow:not(.hover).active,
-input[type=radio].yellow:not(.hover).active,
-input[type=checkbox] + span.checkbox.yellow:not(.hover).active,
-input[type=radio] + span.radio.yellow:not(.hover).active,
-input[type=checkbox].orange:not(.hover).active,
-input[type=radio].orange:not(.hover).active,
-input[type=checkbox] + span.checkbox.orange:not(.hover).active,
-input[type=radio] + span.radio.orange:not(.hover).active,
-input[type=checkbox].brown:not(.hover).active,
-input[type=radio].brown:not(.hover).active,
-input[type=checkbox] + span.checkbox.brown:not(.hover).active,
-input[type=radio] + span.radio.brown:not(.hover).active,
-input[type=checkbox].white:not(.hover).active,
-input[type=radio].white:not(.hover).active,
-input[type=checkbox] + span.checkbox.white:not(.hover).active,
-input[type=radio] + span.radio.white:not(.hover).active,
-input[type=checkbox].gray:not(.hover).active,
-input[type=radio].gray:not(.hover).active,
-input[type=checkbox] + span.checkbox.gray:not(.hover).active,
-input[type=radio] + span.radio.gray:not(.hover).active,
-input[type=checkbox].black:not(.hover).active,
-input[type=radio].black:not(.hover).active,
-input[type=checkbox] + span.checkbox.black:not(.hover).active,
-input[type=radio] + span.radio.black:not(.hover).active,
-input[type=checkbox].blue:not(.hover):active,
-input[type=radio].blue:not(.hover):active,
-input[type=checkbox] + span.checkbox.blue:not(.hover):active,
-input[type=radio] + span.radio.blue:not(.hover):active,
-input[type=checkbox].cyan:not(.hover):active,
-input[type=radio].cyan:not(.hover):active,
-input[type=checkbox] + span.checkbox.cyan:not(.hover):active,
-input[type=radio] + span.radio.cyan:not(.hover):active,
-input[type=checkbox].green:not(.hover):active,
-input[type=radio].green:not(.hover):active,
-input[type=checkbox] + span.checkbox.green:not(.hover):active,
-input[type=radio] + span.radio.green:not(.hover):active,
-input[type=checkbox].red:not(.hover):active,
-input[type=radio].red:not(.hover):active,
-input[type=checkbox] + span.checkbox.red:not(.hover):active,
-input[type=radio] + span.radio.red:not(.hover):active,
-input[type=checkbox].pink:not(.hover):active,
-input[type=radio].pink:not(.hover):active,
-input[type=checkbox] + span.checkbox.pink:not(.hover):active,
-input[type=radio] + span.radio.pink:not(.hover):active,
-input[type=checkbox].violet:not(.hover):active,
-input[type=radio].violet:not(.hover):active,
-input[type=checkbox] + span.checkbox.violet:not(.hover):active,
-input[type=radio] + span.radio.violet:not(.hover):active,
-input[type=checkbox].yellow:not(.hover):active,
-input[type=radio].yellow:not(.hover):active,
-input[type=checkbox] + span.checkbox.yellow:not(.hover):active,
-input[type=radio] + span.radio.yellow:not(.hover):active,
-input[type=checkbox].orange:not(.hover):active,
-input[type=radio].orange:not(.hover):active,
-input[type=checkbox] + span.checkbox.orange:not(.hover):active,
-input[type=radio] + span.radio.orange:not(.hover):active,
-input[type=checkbox].brown:not(.hover):active,
-input[type=radio].brown:not(.hover):active,
-input[type=checkbox] + span.checkbox.brown:not(.hover):active,
-input[type=radio] + span.radio.brown:not(.hover):active,
-input[type=checkbox].white:not(.hover):active,
-input[type=radio].white:not(.hover):active,
-input[type=checkbox] + span.checkbox.white:not(.hover):active,
-input[type=radio] + span.radio.white:not(.hover):active,
-input[type=checkbox].gray:not(.hover):active,
-input[type=radio].gray:not(.hover):active,
-input[type=checkbox] + span.checkbox.gray:not(.hover):active,
-input[type=radio] + span.radio.gray:not(.hover):active,
-input[type=checkbox].black:not(.hover):active,
-input[type=radio].black:not(.hover):active,
-input[type=checkbox] + span.checkbox.black:not(.hover):active,
-input[type=radio] + span.radio.black:not(.hover):active,
-input[type=checkbox].blue:not(.hover):focus,
-input[type=radio].blue:not(.hover):focus,
-input[type=checkbox] + span.checkbox.blue:not(.hover):focus,
-input[type=radio] + span.radio.blue:not(.hover):focus,
-input[type=checkbox].cyan:not(.hover):focus,
-input[type=radio].cyan:not(.hover):focus,
-input[type=checkbox] + span.checkbox.cyan:not(.hover):focus,
-input[type=radio] + span.radio.cyan:not(.hover):focus,
-input[type=checkbox].green:not(.hover):focus,
-input[type=radio].green:not(.hover):focus,
-input[type=checkbox] + span.checkbox.green:not(.hover):focus,
-input[type=radio] + span.radio.green:not(.hover):focus,
-input[type=checkbox].red:not(.hover):focus,
-input[type=radio].red:not(.hover):focus,
-input[type=checkbox] + span.checkbox.red:not(.hover):focus,
-input[type=radio] + span.radio.red:not(.hover):focus,
-input[type=checkbox].pink:not(.hover):focus,
-input[type=radio].pink:not(.hover):focus,
-input[type=checkbox] + span.checkbox.pink:not(.hover):focus,
-input[type=radio] + span.radio.pink:not(.hover):focus,
-input[type=checkbox].violet:not(.hover):focus,
-input[type=radio].violet:not(.hover):focus,
-input[type=checkbox] + span.checkbox.violet:not(.hover):focus,
-input[type=radio] + span.radio.violet:not(.hover):focus,
-input[type=checkbox].yellow:not(.hover):focus,
-input[type=radio].yellow:not(.hover):focus,
-input[type=checkbox] + span.checkbox.yellow:not(.hover):focus,
-input[type=radio] + span.radio.yellow:not(.hover):focus,
-input[type=checkbox].orange:not(.hover):focus,
-input[type=radio].orange:not(.hover):focus,
-input[type=checkbox] + span.checkbox.orange:not(.hover):focus,
-input[type=radio] + span.radio.orange:not(.hover):focus,
-input[type=checkbox].brown:not(.hover):focus,
-input[type=radio].brown:not(.hover):focus,
-input[type=checkbox] + span.checkbox.brown:not(.hover):focus,
-input[type=radio] + span.radio.brown:not(.hover):focus,
-input[type=checkbox].white:not(.hover):focus,
-input[type=radio].white:not(.hover):focus,
-input[type=checkbox] + span.checkbox.white:not(.hover):focus,
-input[type=radio] + span.radio.white:not(.hover):focus,
-input[type=checkbox].gray:not(.hover):focus,
-input[type=radio].gray:not(.hover):focus,
-input[type=checkbox] + span.checkbox.gray:not(.hover):focus,
-input[type=radio] + span.radio.gray:not(.hover):focus,
-input[type=checkbox].black:not(.hover):focus,
-input[type=radio].black:not(.hover):focus,
-input[type=checkbox] + span.checkbox.black:not(.hover):focus,
-input[type=radio] + span.radio.black:not(.hover):focus {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(255, 255, 255, 0.12))) !important;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  background-image: linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
-  border-color: rgba(0, 0, 0, 0.6);
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  color: #fff;
-}
-input[type=checkbox].blue::-webkit-input-placeholder,
-input[type=radio].blue::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.blue::-webkit-input-placeholder,
-input[type=radio] + span.radio.blue::-webkit-input-placeholder,
-input[type=checkbox].cyan::-webkit-input-placeholder,
-input[type=radio].cyan::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.cyan::-webkit-input-placeholder,
-input[type=radio] + span.radio.cyan::-webkit-input-placeholder,
-input[type=checkbox].green::-webkit-input-placeholder,
-input[type=radio].green::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.green::-webkit-input-placeholder,
-input[type=radio] + span.radio.green::-webkit-input-placeholder,
-input[type=checkbox].red::-webkit-input-placeholder,
-input[type=radio].red::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.red::-webkit-input-placeholder,
-input[type=radio] + span.radio.red::-webkit-input-placeholder,
-input[type=checkbox].pink::-webkit-input-placeholder,
-input[type=radio].pink::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.pink::-webkit-input-placeholder,
-input[type=radio] + span.radio.pink::-webkit-input-placeholder,
-input[type=checkbox].violet::-webkit-input-placeholder,
-input[type=radio].violet::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.violet::-webkit-input-placeholder,
-input[type=radio] + span.radio.violet::-webkit-input-placeholder,
-input[type=checkbox].yellow::-webkit-input-placeholder,
-input[type=radio].yellow::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.yellow::-webkit-input-placeholder,
-input[type=radio] + span.radio.yellow::-webkit-input-placeholder,
-input[type=checkbox].orange::-webkit-input-placeholder,
-input[type=radio].orange::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.orange::-webkit-input-placeholder,
-input[type=radio] + span.radio.orange::-webkit-input-placeholder,
-input[type=checkbox].brown::-webkit-input-placeholder,
-input[type=radio].brown::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.brown::-webkit-input-placeholder,
-input[type=radio] + span.radio.brown::-webkit-input-placeholder,
-input[type=checkbox].white::-webkit-input-placeholder,
-input[type=radio].white::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.white::-webkit-input-placeholder,
-input[type=radio] + span.radio.white::-webkit-input-placeholder,
-input[type=checkbox].gray::-webkit-input-placeholder,
-input[type=radio].gray::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.gray::-webkit-input-placeholder,
-input[type=radio] + span.radio.gray::-webkit-input-placeholder,
-input[type=checkbox].black::-webkit-input-placeholder,
-input[type=radio].black::-webkit-input-placeholder,
-input[type=checkbox] + span.checkbox.black::-webkit-input-placeholder,
-input[type=radio] + span.radio.black::-webkit-input-placeholder {
-  color: #fff;
-}
-input[type=checkbox].blue::placeholder,
-input[type=radio].blue::placeholder,
-input[type=checkbox] + span.checkbox.blue::placeholder,
-input[type=radio] + span.radio.blue::placeholder,
-input[type=checkbox].cyan::placeholder,
-input[type=radio].cyan::placeholder,
-input[type=checkbox] + span.checkbox.cyan::placeholder,
-input[type=radio] + span.radio.cyan::placeholder,
-input[type=checkbox].green::placeholder,
-input[type=radio].green::placeholder,
-input[type=checkbox] + span.checkbox.green::placeholder,
-input[type=radio] + span.radio.green::placeholder,
-input[type=checkbox].red::placeholder,
-input[type=radio].red::placeholder,
-input[type=checkbox] + span.checkbox.red::placeholder,
-input[type=radio] + span.radio.red::placeholder,
-input[type=checkbox].pink::placeholder,
-input[type=radio].pink::placeholder,
-input[type=checkbox] + span.checkbox.pink::placeholder,
-input[type=radio] + span.radio.pink::placeholder,
-input[type=checkbox].violet::placeholder,
-input[type=radio].violet::placeholder,
-input[type=checkbox] + span.checkbox.violet::placeholder,
-input[type=radio] + span.radio.violet::placeholder,
-input[type=checkbox].yellow::placeholder,
-input[type=radio].yellow::placeholder,
-input[type=checkbox] + span.checkbox.yellow::placeholder,
-input[type=radio] + span.radio.yellow::placeholder,
-input[type=checkbox].orange::placeholder,
-input[type=radio].orange::placeholder,
-input[type=checkbox] + span.checkbox.orange::placeholder,
-input[type=radio] + span.radio.orange::placeholder,
-input[type=checkbox].brown::placeholder,
-input[type=radio].brown::placeholder,
-input[type=checkbox] + span.checkbox.brown::placeholder,
-input[type=radio] + span.radio.brown::placeholder,
-input[type=checkbox].white::placeholder,
-input[type=radio].white::placeholder,
-input[type=checkbox] + span.checkbox.white::placeholder,
-input[type=radio] + span.radio.white::placeholder,
-input[type=checkbox].gray::placeholder,
-input[type=radio].gray::placeholder,
-input[type=checkbox] + span.checkbox.gray::placeholder,
-input[type=radio] + span.radio.gray::placeholder,
-input[type=checkbox].black::placeholder,
-input[type=radio].black::placeholder,
-input[type=checkbox] + span.checkbox.black::placeholder,
-input[type=radio] + span.radio.black::placeholder,
-input[type=checkbox].blue::input-placeholder,
-input[type=radio].blue::input-placeholder,
-input[type=checkbox] + span.checkbox.blue::input-placeholder,
-input[type=radio] + span.radio.blue::input-placeholder,
-input[type=checkbox].cyan::input-placeholder,
-input[type=radio].cyan::input-placeholder,
-input[type=checkbox] + span.checkbox.cyan::input-placeholder,
-input[type=radio] + span.radio.cyan::input-placeholder,
-input[type=checkbox].green::input-placeholder,
-input[type=radio].green::input-placeholder,
-input[type=checkbox] + span.checkbox.green::input-placeholder,
-input[type=radio] + span.radio.green::input-placeholder,
-input[type=checkbox].red::input-placeholder,
-input[type=radio].red::input-placeholder,
-input[type=checkbox] + span.checkbox.red::input-placeholder,
-input[type=radio] + span.radio.red::input-placeholder,
-input[type=checkbox].pink::input-placeholder,
-input[type=radio].pink::input-placeholder,
-input[type=checkbox] + span.checkbox.pink::input-placeholder,
-input[type=radio] + span.radio.pink::input-placeholder,
-input[type=checkbox].violet::input-placeholder,
-input[type=radio].violet::input-placeholder,
-input[type=checkbox] + span.checkbox.violet::input-placeholder,
-input[type=radio] + span.radio.violet::input-placeholder,
-input[type=checkbox].yellow::input-placeholder,
-input[type=radio].yellow::input-placeholder,
-input[type=checkbox] + span.checkbox.yellow::input-placeholder,
-input[type=radio] + span.radio.yellow::input-placeholder,
-input[type=checkbox].orange::input-placeholder,
-input[type=radio].orange::input-placeholder,
-input[type=checkbox] + span.checkbox.orange::input-placeholder,
-input[type=radio] + span.radio.orange::input-placeholder,
-input[type=checkbox].brown::input-placeholder,
-input[type=radio].brown::input-placeholder,
-input[type=checkbox] + span.checkbox.brown::input-placeholder,
-input[type=radio] + span.radio.brown::input-placeholder,
-input[type=checkbox].white::input-placeholder,
-input[type=radio].white::input-placeholder,
-input[type=checkbox] + span.checkbox.white::input-placeholder,
-input[type=radio] + span.radio.white::input-placeholder,
-input[type=checkbox].gray::input-placeholder,
-input[type=radio].gray::input-placeholder,
-input[type=checkbox] + span.checkbox.gray::input-placeholder,
-input[type=radio] + span.radio.gray::input-placeholder,
-input[type=checkbox].black::input-placeholder,
-input[type=radio].black::input-placeholder,
-input[type=checkbox] + span.checkbox.black::input-placeholder,
-input[type=radio] + span.radio.black::input-placeholder,
-input[type=checkbox].blue::-moz-placeholder,
-input[type=radio].blue::-moz-placeholder,
-input[type=checkbox] + span.checkbox.blue::-moz-placeholder,
-input[type=radio] + span.radio.blue::-moz-placeholder,
-input[type=checkbox].cyan::-moz-placeholder,
-input[type=radio].cyan::-moz-placeholder,
-input[type=checkbox] + span.checkbox.cyan::-moz-placeholder,
-input[type=radio] + span.radio.cyan::-moz-placeholder,
-input[type=checkbox].green::-moz-placeholder,
-input[type=radio].green::-moz-placeholder,
-input[type=checkbox] + span.checkbox.green::-moz-placeholder,
-input[type=radio] + span.radio.green::-moz-placeholder,
-input[type=checkbox].red::-moz-placeholder,
-input[type=radio].red::-moz-placeholder,
-input[type=checkbox] + span.checkbox.red::-moz-placeholder,
-input[type=radio] + span.radio.red::-moz-placeholder,
-input[type=checkbox].pink::-moz-placeholder,
-input[type=radio].pink::-moz-placeholder,
-input[type=checkbox] + span.checkbox.pink::-moz-placeholder,
-input[type=radio] + span.radio.pink::-moz-placeholder,
-input[type=checkbox].violet::-moz-placeholder,
-input[type=radio].violet::-moz-placeholder,
-input[type=checkbox] + span.checkbox.violet::-moz-placeholder,
-input[type=radio] + span.radio.violet::-moz-placeholder,
-input[type=checkbox].yellow::-moz-placeholder,
-input[type=radio].yellow::-moz-placeholder,
-input[type=checkbox] + span.checkbox.yellow::-moz-placeholder,
-input[type=radio] + span.radio.yellow::-moz-placeholder,
-input[type=checkbox].orange::-moz-placeholder,
-input[type=radio].orange::-moz-placeholder,
-input[type=checkbox] + span.checkbox.orange::-moz-placeholder,
-input[type=radio] + span.radio.orange::-moz-placeholder,
-input[type=checkbox].brown::-moz-placeholder,
-input[type=radio].brown::-moz-placeholder,
-input[type=checkbox] + span.checkbox.brown::-moz-placeholder,
-input[type=radio] + span.radio.brown::-moz-placeholder,
-input[type=checkbox].white::-moz-placeholder,
-input[type=radio].white::-moz-placeholder,
-input[type=checkbox] + span.checkbox.white::-moz-placeholder,
-input[type=radio] + span.radio.white::-moz-placeholder,
-input[type=checkbox].gray::-moz-placeholder,
-input[type=radio].gray::-moz-placeholder,
-input[type=checkbox] + span.checkbox.gray::-moz-placeholder,
-input[type=radio] + span.radio.gray::-moz-placeholder,
-input[type=checkbox].black::-moz-placeholder,
-input[type=radio].black::-moz-placeholder,
-input[type=checkbox] + span.checkbox.black::-moz-placeholder,
-input[type=radio] + span.radio.black::-moz-placeholder,
-input[type=checkbox].blue:-moz-placeholder,
-input[type=radio].blue:-moz-placeholder,
-input[type=checkbox] + span.checkbox.blue:-moz-placeholder,
-input[type=radio] + span.radio.blue:-moz-placeholder,
-input[type=checkbox].cyan:-moz-placeholder,
-input[type=radio].cyan:-moz-placeholder,
-input[type=checkbox] + span.checkbox.cyan:-moz-placeholder,
-input[type=radio] + span.radio.cyan:-moz-placeholder,
-input[type=checkbox].green:-moz-placeholder,
-input[type=radio].green:-moz-placeholder,
-input[type=checkbox] + span.checkbox.green:-moz-placeholder,
-input[type=radio] + span.radio.green:-moz-placeholder,
-input[type=checkbox].red:-moz-placeholder,
-input[type=radio].red:-moz-placeholder,
-input[type=checkbox] + span.checkbox.red:-moz-placeholder,
-input[type=radio] + span.radio.red:-moz-placeholder,
-input[type=checkbox].pink:-moz-placeholder,
-input[type=radio].pink:-moz-placeholder,
-input[type=checkbox] + span.checkbox.pink:-moz-placeholder,
-input[type=radio] + span.radio.pink:-moz-placeholder,
-input[type=checkbox].violet:-moz-placeholder,
-input[type=radio].violet:-moz-placeholder,
-input[type=checkbox] + span.checkbox.violet:-moz-placeholder,
-input[type=radio] + span.radio.violet:-moz-placeholder,
-input[type=checkbox].yellow:-moz-placeholder,
-input[type=radio].yellow:-moz-placeholder,
-input[type=checkbox] + span.checkbox.yellow:-moz-placeholder,
-input[type=radio] + span.radio.yellow:-moz-placeholder,
-input[type=checkbox].orange:-moz-placeholder,
-input[type=radio].orange:-moz-placeholder,
-input[type=checkbox] + span.checkbox.orange:-moz-placeholder,
-input[type=radio] + span.radio.orange:-moz-placeholder,
-input[type=checkbox].brown:-moz-placeholder,
-input[type=radio].brown:-moz-placeholder,
-input[type=checkbox] + span.checkbox.brown:-moz-placeholder,
-input[type=radio] + span.radio.brown:-moz-placeholder,
-input[type=checkbox].white:-moz-placeholder,
-input[type=radio].white:-moz-placeholder,
-input[type=checkbox] + span.checkbox.white:-moz-placeholder,
-input[type=radio] + span.radio.white:-moz-placeholder,
-input[type=checkbox].gray:-moz-placeholder,
-input[type=radio].gray:-moz-placeholder,
-input[type=checkbox] + span.checkbox.gray:-moz-placeholder,
-input[type=radio] + span.radio.gray:-moz-placeholder,
-input[type=checkbox].black:-moz-placeholder,
-input[type=radio].black:-moz-placeholder,
-input[type=checkbox] + span.checkbox.black:-moz-placeholder,
-input[type=radio] + span.radio.black:-moz-placeholder,
-input[type=checkbox].blue:-ms-input-placeholder,
-input[type=radio].blue:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.blue:-ms-input-placeholder,
-input[type=radio] + span.radio.blue:-ms-input-placeholder,
-input[type=checkbox].cyan:-ms-input-placeholder,
-input[type=radio].cyan:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.cyan:-ms-input-placeholder,
-input[type=radio] + span.radio.cyan:-ms-input-placeholder,
-input[type=checkbox].green:-ms-input-placeholder,
-input[type=radio].green:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.green:-ms-input-placeholder,
-input[type=radio] + span.radio.green:-ms-input-placeholder,
-input[type=checkbox].red:-ms-input-placeholder,
-input[type=radio].red:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.red:-ms-input-placeholder,
-input[type=radio] + span.radio.red:-ms-input-placeholder,
-input[type=checkbox].pink:-ms-input-placeholder,
-input[type=radio].pink:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.pink:-ms-input-placeholder,
-input[type=radio] + span.radio.pink:-ms-input-placeholder,
-input[type=checkbox].violet:-ms-input-placeholder,
-input[type=radio].violet:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.violet:-ms-input-placeholder,
-input[type=radio] + span.radio.violet:-ms-input-placeholder,
-input[type=checkbox].yellow:-ms-input-placeholder,
-input[type=radio].yellow:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.yellow:-ms-input-placeholder,
-input[type=radio] + span.radio.yellow:-ms-input-placeholder,
-input[type=checkbox].orange:-ms-input-placeholder,
-input[type=radio].orange:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.orange:-ms-input-placeholder,
-input[type=radio] + span.radio.orange:-ms-input-placeholder,
-input[type=checkbox].brown:-ms-input-placeholder,
-input[type=radio].brown:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.brown:-ms-input-placeholder,
-input[type=radio] + span.radio.brown:-ms-input-placeholder,
-input[type=checkbox].white:-ms-input-placeholder,
-input[type=radio].white:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.white:-ms-input-placeholder,
-input[type=radio] + span.radio.white:-ms-input-placeholder,
-input[type=checkbox].gray:-ms-input-placeholder,
-input[type=radio].gray:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.gray:-ms-input-placeholder,
-input[type=radio] + span.radio.gray:-ms-input-placeholder,
-input[type=checkbox].black:-ms-input-placeholder,
-input[type=radio].black:-ms-input-placeholder,
-input[type=checkbox] + span.checkbox.black:-ms-input-placeholder,
-input[type=radio] + span.radio.black:-ms-input-placeholder {
-  color: #fff;
-}
-input[type=checkbox].blue[type=checkbox]::after,
-input[type=radio].blue[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.blue[type=checkbox]::after,
-input[type=radio] + span.radio.blue[type=checkbox]::after,
-input[type=checkbox].cyan[type=checkbox]::after,
-input[type=radio].cyan[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.cyan[type=checkbox]::after,
-input[type=radio] + span.radio.cyan[type=checkbox]::after,
-input[type=checkbox].green[type=checkbox]::after,
-input[type=radio].green[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.green[type=checkbox]::after,
-input[type=radio] + span.radio.green[type=checkbox]::after,
-input[type=checkbox].red[type=checkbox]::after,
-input[type=radio].red[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.red[type=checkbox]::after,
-input[type=radio] + span.radio.red[type=checkbox]::after,
-input[type=checkbox].pink[type=checkbox]::after,
-input[type=radio].pink[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.pink[type=checkbox]::after,
-input[type=radio] + span.radio.pink[type=checkbox]::after,
-input[type=checkbox].violet[type=checkbox]::after,
-input[type=radio].violet[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.violet[type=checkbox]::after,
-input[type=radio] + span.radio.violet[type=checkbox]::after,
-input[type=checkbox].yellow[type=checkbox]::after,
-input[type=radio].yellow[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.yellow[type=checkbox]::after,
-input[type=radio] + span.radio.yellow[type=checkbox]::after,
-input[type=checkbox].orange[type=checkbox]::after,
-input[type=radio].orange[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.orange[type=checkbox]::after,
-input[type=radio] + span.radio.orange[type=checkbox]::after,
-input[type=checkbox].brown[type=checkbox]::after,
-input[type=radio].brown[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.brown[type=checkbox]::after,
-input[type=radio] + span.radio.brown[type=checkbox]::after,
-input[type=checkbox].white[type=checkbox]::after,
-input[type=radio].white[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.white[type=checkbox]::after,
-input[type=radio] + span.radio.white[type=checkbox]::after,
-input[type=checkbox].gray[type=checkbox]::after,
-input[type=radio].gray[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.gray[type=checkbox]::after,
-input[type=radio] + span.radio.gray[type=checkbox]::after,
-input[type=checkbox].black[type=checkbox]::after,
-input[type=radio].black[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.black[type=checkbox]::after,
-input[type=radio] + span.radio.black[type=checkbox]::after,
-input[type=checkbox].blue[type=checkbox] + span.checkbox::after,
-input[type=radio].blue[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.blue[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.blue[type=checkbox] + span.checkbox::after,
-input[type=checkbox].cyan[type=checkbox] + span.checkbox::after,
-input[type=radio].cyan[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.cyan[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.cyan[type=checkbox] + span.checkbox::after,
-input[type=checkbox].green[type=checkbox] + span.checkbox::after,
-input[type=radio].green[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.green[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.green[type=checkbox] + span.checkbox::after,
-input[type=checkbox].red[type=checkbox] + span.checkbox::after,
-input[type=radio].red[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.red[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.red[type=checkbox] + span.checkbox::after,
-input[type=checkbox].pink[type=checkbox] + span.checkbox::after,
-input[type=radio].pink[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.pink[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.pink[type=checkbox] + span.checkbox::after,
-input[type=checkbox].violet[type=checkbox] + span.checkbox::after,
-input[type=radio].violet[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.violet[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.violet[type=checkbox] + span.checkbox::after,
-input[type=checkbox].yellow[type=checkbox] + span.checkbox::after,
-input[type=radio].yellow[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.yellow[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.yellow[type=checkbox] + span.checkbox::after,
-input[type=checkbox].orange[type=checkbox] + span.checkbox::after,
-input[type=radio].orange[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.orange[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.orange[type=checkbox] + span.checkbox::after,
-input[type=checkbox].brown[type=checkbox] + span.checkbox::after,
-input[type=radio].brown[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.brown[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.brown[type=checkbox] + span.checkbox::after,
-input[type=checkbox].white[type=checkbox] + span.checkbox::after,
-input[type=radio].white[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.white[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.white[type=checkbox] + span.checkbox::after,
-input[type=checkbox].gray[type=checkbox] + span.checkbox::after,
-input[type=radio].gray[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.gray[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.gray[type=checkbox] + span.checkbox::after,
-input[type=checkbox].black[type=checkbox] + span.checkbox::after,
-input[type=radio].black[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.black[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.black[type=checkbox] + span.checkbox::after {
-  -webkit-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -moz-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -ms-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -o-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-input[type=checkbox].blue[type=radio]::after,
-input[type=radio].blue[type=radio]::after,
-input[type=checkbox] + span.checkbox.blue[type=radio]::after,
-input[type=radio] + span.radio.blue[type=radio]::after,
-input[type=checkbox].cyan[type=radio]::after,
-input[type=radio].cyan[type=radio]::after,
-input[type=checkbox] + span.checkbox.cyan[type=radio]::after,
-input[type=radio] + span.radio.cyan[type=radio]::after,
-input[type=checkbox].green[type=radio]::after,
-input[type=radio].green[type=radio]::after,
-input[type=checkbox] + span.checkbox.green[type=radio]::after,
-input[type=radio] + span.radio.green[type=radio]::after,
-input[type=checkbox].red[type=radio]::after,
-input[type=radio].red[type=radio]::after,
-input[type=checkbox] + span.checkbox.red[type=radio]::after,
-input[type=radio] + span.radio.red[type=radio]::after,
-input[type=checkbox].pink[type=radio]::after,
-input[type=radio].pink[type=radio]::after,
-input[type=checkbox] + span.checkbox.pink[type=radio]::after,
-input[type=radio] + span.radio.pink[type=radio]::after,
-input[type=checkbox].violet[type=radio]::after,
-input[type=radio].violet[type=radio]::after,
-input[type=checkbox] + span.checkbox.violet[type=radio]::after,
-input[type=radio] + span.radio.violet[type=radio]::after,
-input[type=checkbox].yellow[type=radio]::after,
-input[type=radio].yellow[type=radio]::after,
-input[type=checkbox] + span.checkbox.yellow[type=radio]::after,
-input[type=radio] + span.radio.yellow[type=radio]::after,
-input[type=checkbox].orange[type=radio]::after,
-input[type=radio].orange[type=radio]::after,
-input[type=checkbox] + span.checkbox.orange[type=radio]::after,
-input[type=radio] + span.radio.orange[type=radio]::after,
-input[type=checkbox].brown[type=radio]::after,
-input[type=radio].brown[type=radio]::after,
-input[type=checkbox] + span.checkbox.brown[type=radio]::after,
-input[type=radio] + span.radio.brown[type=radio]::after,
-input[type=checkbox].white[type=radio]::after,
-input[type=radio].white[type=radio]::after,
-input[type=checkbox] + span.checkbox.white[type=radio]::after,
-input[type=radio] + span.radio.white[type=radio]::after,
-input[type=checkbox].gray[type=radio]::after,
-input[type=radio].gray[type=radio]::after,
-input[type=checkbox] + span.checkbox.gray[type=radio]::after,
-input[type=radio] + span.radio.gray[type=radio]::after,
-input[type=checkbox].black[type=radio]::after,
-input[type=radio].black[type=radio]::after,
-input[type=checkbox] + span.checkbox.black[type=radio]::after,
-input[type=radio] + span.radio.black[type=radio]::after,
-input[type=checkbox].blue[type=radio] + span.radio::after,
-input[type=radio].blue[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.blue[type=radio] + span.radio::after,
-input[type=radio] + span.radio.blue[type=radio] + span.radio::after,
-input[type=checkbox].cyan[type=radio] + span.radio::after,
-input[type=radio].cyan[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.cyan[type=radio] + span.radio::after,
-input[type=radio] + span.radio.cyan[type=radio] + span.radio::after,
-input[type=checkbox].green[type=radio] + span.radio::after,
-input[type=radio].green[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.green[type=radio] + span.radio::after,
-input[type=radio] + span.radio.green[type=radio] + span.radio::after,
-input[type=checkbox].red[type=radio] + span.radio::after,
-input[type=radio].red[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.red[type=radio] + span.radio::after,
-input[type=radio] + span.radio.red[type=radio] + span.radio::after,
-input[type=checkbox].pink[type=radio] + span.radio::after,
-input[type=radio].pink[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.pink[type=radio] + span.radio::after,
-input[type=radio] + span.radio.pink[type=radio] + span.radio::after,
-input[type=checkbox].violet[type=radio] + span.radio::after,
-input[type=radio].violet[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.violet[type=radio] + span.radio::after,
-input[type=radio] + span.radio.violet[type=radio] + span.radio::after,
-input[type=checkbox].yellow[type=radio] + span.radio::after,
-input[type=radio].yellow[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.yellow[type=radio] + span.radio::after,
-input[type=radio] + span.radio.yellow[type=radio] + span.radio::after,
-input[type=checkbox].orange[type=radio] + span.radio::after,
-input[type=radio].orange[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.orange[type=radio] + span.radio::after,
-input[type=radio] + span.radio.orange[type=radio] + span.radio::after,
-input[type=checkbox].brown[type=radio] + span.radio::after,
-input[type=radio].brown[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.brown[type=radio] + span.radio::after,
-input[type=radio] + span.radio.brown[type=radio] + span.radio::after,
-input[type=checkbox].white[type=radio] + span.radio::after,
-input[type=radio].white[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.white[type=radio] + span.radio::after,
-input[type=radio] + span.radio.white[type=radio] + span.radio::after,
-input[type=checkbox].gray[type=radio] + span.radio::after,
-input[type=radio].gray[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.gray[type=radio] + span.radio::after,
-input[type=radio] + span.radio.gray[type=radio] + span.radio::after,
-input[type=checkbox].black[type=radio] + span.radio::after,
-input[type=radio].black[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.black[type=radio] + span.radio::after,
-input[type=radio] + span.radio.black[type=radio] + span.radio::after {
-  background-color: #ffffff;
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-input[type=checkbox].blue,
-input[type=radio].blue,
-input[type=checkbox] + span.checkbox.blue,
-input[type=radio] + span.radio.blue {
-  background-color: #1a9cff !important;
-}
-input[type=checkbox].blue.hover,
-input[type=radio].blue.hover,
-input[type=checkbox] + span.checkbox.blue.hover,
-input[type=radio] + span.radio.blue.hover,
-input[type=checkbox].blue:hover,
-input[type=radio].blue:hover,
-input[type=checkbox] + span.checkbox.blue:hover,
-input[type=radio] + span.radio.blue:hover,
-input[type=checkbox].blue.active,
-input[type=radio].blue.active,
-input[type=checkbox] + span.checkbox.blue.active,
-input[type=radio] + span.radio.blue.active,
-input[type=checkbox].blue:active,
-input[type=radio].blue:active,
-input[type=checkbox] + span.checkbox.blue:active,
-input[type=radio] + span.radio.blue:active,
-input[type=checkbox].blue:focus,
-input[type=radio].blue:focus,
-input[type=checkbox] + span.checkbox.blue:focus,
-input[type=radio] + span.radio.blue:focus {
-  background-color: #0083e6 !important;
-}
-input[type=checkbox].cyan,
-input[type=radio].cyan,
-input[type=checkbox] + span.checkbox.cyan,
-input[type=radio] + span.radio.cyan {
-  background-color: #5bc0de !important;
-}
-input[type=checkbox].cyan.hover,
-input[type=radio].cyan.hover,
-input[type=checkbox] + span.checkbox.cyan.hover,
-input[type=radio] + span.radio.cyan.hover,
-input[type=checkbox].cyan:hover,
-input[type=radio].cyan:hover,
-input[type=checkbox] + span.checkbox.cyan:hover,
-input[type=radio] + span.radio.cyan:hover,
-input[type=checkbox].cyan.active,
-input[type=radio].cyan.active,
-input[type=checkbox] + span.checkbox.cyan.active,
-input[type=radio] + span.radio.cyan.active,
-input[type=checkbox].cyan:active,
-input[type=radio].cyan:active,
-input[type=checkbox] + span.checkbox.cyan:active,
-input[type=radio] + span.radio.cyan:active,
-input[type=checkbox].cyan:focus,
-input[type=radio].cyan:focus,
-input[type=checkbox] + span.checkbox.cyan:focus,
-input[type=radio] + span.radio.cyan:focus {
-  background-color: #31b0d5 !important;
-}
-input[type=checkbox].green,
-input[type=radio].green,
-input[type=checkbox] + span.checkbox.green,
-input[type=radio] + span.radio.green {
-  background-color: #62c462 !important;
-}
-input[type=checkbox].green.hover,
-input[type=radio].green.hover,
-input[type=checkbox] + span.checkbox.green.hover,
-input[type=radio] + span.radio.green.hover,
-input[type=checkbox].green:hover,
-input[type=radio].green:hover,
-input[type=checkbox] + span.checkbox.green:hover,
-input[type=radio] + span.radio.green:hover,
-input[type=checkbox].green.active,
-input[type=radio].green.active,
-input[type=checkbox] + span.checkbox.green.active,
-input[type=radio] + span.radio.green.active,
-input[type=checkbox].green:active,
-input[type=radio].green:active,
-input[type=checkbox] + span.checkbox.green:active,
-input[type=radio] + span.radio.green:active,
-input[type=checkbox].green:focus,
-input[type=radio].green:focus,
-input[type=checkbox] + span.checkbox.green:focus,
-input[type=radio] + span.radio.green:focus {
-  background-color: #42b142 !important;
-}
-input[type=checkbox].red,
-input[type=radio].red,
-input[type=checkbox] + span.checkbox.red,
-input[type=radio] + span.radio.red {
-  background-color: #ee666f !important;
-}
-input[type=checkbox].red.hover,
-input[type=radio].red.hover,
-input[type=checkbox] + span.checkbox.red.hover,
-input[type=radio] + span.radio.red.hover,
-input[type=checkbox].red:hover,
-input[type=radio].red:hover,
-input[type=checkbox] + span.checkbox.red:hover,
-input[type=radio] + span.radio.red:hover,
-input[type=checkbox].red.active,
-input[type=radio].red.active,
-input[type=checkbox] + span.checkbox.red.active,
-input[type=radio] + span.radio.red.active,
-input[type=checkbox].red:active,
-input[type=radio].red:active,
-input[type=checkbox] + span.checkbox.red:active,
-input[type=radio] + span.radio.red:active,
-input[type=checkbox].red:focus,
-input[type=radio].red:focus,
-input[type=checkbox] + span.checkbox.red:focus,
-input[type=radio] + span.radio.red:focus {
-  background-color: #e93844 !important;
-}
-input[type=checkbox].pink,
-input[type=radio].pink,
-input[type=checkbox] + span.checkbox.pink,
-input[type=radio] + span.radio.pink {
-  background-color: #ee7ae9 !important;
-}
-input[type=checkbox].pink.hover,
-input[type=radio].pink.hover,
-input[type=checkbox] + span.checkbox.pink.hover,
-input[type=radio] + span.radio.pink.hover,
-input[type=checkbox].pink:hover,
-input[type=radio].pink:hover,
-input[type=checkbox] + span.checkbox.pink:hover,
-input[type=radio] + span.radio.pink:hover,
-input[type=checkbox].pink.active,
-input[type=radio].pink.active,
-input[type=checkbox] + span.checkbox.pink.active,
-input[type=radio] + span.radio.pink.active,
-input[type=checkbox].pink:active,
-input[type=radio].pink:active,
-input[type=checkbox] + span.checkbox.pink:active,
-input[type=radio] + span.radio.pink:active,
-input[type=checkbox].pink:focus,
-input[type=radio].pink:focus,
-input[type=checkbox] + span.checkbox.pink:focus,
-input[type=radio] + span.radio.pink:focus {
-  background-color: #e84de2 !important;
-}
-input[type=checkbox].violet,
-input[type=radio].violet,
-input[type=checkbox] + span.checkbox.violet,
-input[type=radio] + span.radio.violet {
-  background-color: #b452cd !important;
-}
-input[type=checkbox].violet.hover,
-input[type=radio].violet.hover,
-input[type=checkbox] + span.checkbox.violet.hover,
-input[type=radio] + span.radio.violet.hover,
-input[type=checkbox].violet:hover,
-input[type=radio].violet:hover,
-input[type=checkbox] + span.checkbox.violet:hover,
-input[type=radio] + span.radio.violet:hover,
-input[type=checkbox].violet.active,
-input[type=radio].violet.active,
-input[type=checkbox] + span.checkbox.violet.active,
-input[type=radio] + span.radio.violet.active,
-input[type=checkbox].violet:active,
-input[type=radio].violet:active,
-input[type=checkbox] + span.checkbox.violet:active,
-input[type=radio] + span.radio.violet:active,
-input[type=checkbox].violet:focus,
-input[type=radio].violet:focus,
-input[type=checkbox] + span.checkbox.violet:focus,
-input[type=radio] + span.radio.violet:focus {
-  background-color: #9d35b7 !important;
-}
-input[type=checkbox].yellow,
-input[type=radio].yellow,
-input[type=checkbox] + span.checkbox.yellow,
-input[type=radio] + span.radio.yellow {
-  background-color: #faa937 !important;
-}
-input[type=checkbox].yellow.hover,
-input[type=radio].yellow.hover,
-input[type=checkbox] + span.checkbox.yellow.hover,
-input[type=radio] + span.radio.yellow.hover,
-input[type=checkbox].yellow:hover,
-input[type=radio].yellow:hover,
-input[type=checkbox] + span.checkbox.yellow:hover,
-input[type=radio] + span.radio.yellow:hover,
-input[type=checkbox].yellow.active,
-input[type=radio].yellow.active,
-input[type=checkbox] + span.checkbox.yellow.active,
-input[type=radio] + span.radio.yellow.active,
-input[type=checkbox].yellow:active,
-input[type=radio].yellow:active,
-input[type=checkbox] + span.checkbox.yellow:active,
-input[type=radio] + span.radio.yellow:active,
-input[type=checkbox].yellow:focus,
-input[type=radio].yellow:focus,
-input[type=checkbox] + span.checkbox.yellow:focus,
-input[type=radio] + span.radio.yellow:focus {
-  background-color: #f89306 !important;
-}
-input[type=checkbox].orange,
-input[type=radio].orange,
-input[type=checkbox] + span.checkbox.orange,
-input[type=radio] + span.radio.orange {
-  background-color: #f87531 !important;
-}
-input[type=checkbox].orange.hover,
-input[type=radio].orange.hover,
-input[type=checkbox] + span.checkbox.orange.hover,
-input[type=radio] + span.radio.orange.hover,
-input[type=checkbox].orange:hover,
-input[type=radio].orange:hover,
-input[type=checkbox] + span.checkbox.orange:hover,
-input[type=radio] + span.radio.orange:hover,
-input[type=checkbox].orange.active,
-input[type=radio].orange.active,
-input[type=checkbox] + span.checkbox.orange.active,
-input[type=radio] + span.radio.orange.active,
-input[type=checkbox].orange:active,
-input[type=radio].orange:active,
-input[type=checkbox] + span.checkbox.orange:active,
-input[type=radio] + span.radio.orange:active,
-input[type=checkbox].orange:focus,
-input[type=radio].orange:focus,
-input[type=checkbox] + span.checkbox.orange:focus,
-input[type=radio] + span.radio.orange:focus {
-  background-color: #ee5708 !important;
-}
-input[type=checkbox].brown,
-input[type=radio].brown,
-input[type=checkbox] + span.checkbox.brown,
-input[type=radio] + span.radio.brown {
-  background-color: #964514 !important;
-}
-input[type=checkbox].brown.hover,
-input[type=radio].brown.hover,
-input[type=checkbox] + span.checkbox.brown.hover,
-input[type=radio] + span.radio.brown.hover,
-input[type=checkbox].brown:hover,
-input[type=radio].brown:hover,
-input[type=checkbox] + span.checkbox.brown:hover,
-input[type=radio] + span.radio.brown:hover,
-input[type=checkbox].brown.active,
-input[type=radio].brown.active,
-input[type=checkbox] + span.checkbox.brown.active,
-input[type=radio] + span.radio.brown.active,
-input[type=checkbox].brown:active,
-input[type=radio].brown:active,
-input[type=checkbox] + span.checkbox.brown:active,
-input[type=radio] + span.radio.brown:active,
-input[type=checkbox].brown:focus,
-input[type=radio].brown:focus,
-input[type=checkbox] + span.checkbox.brown:focus,
-input[type=radio] + span.radio.brown:focus {
-  background-color: #69300e !important;
-}
-input[type=checkbox].white,
-input[type=radio].white,
-input[type=checkbox] + span.checkbox.white,
-input[type=radio] + span.radio.white {
-  background-color: #ffffff !important;
-}
-input[type=checkbox].white.hover,
-input[type=radio].white.hover,
-input[type=checkbox] + span.checkbox.white.hover,
-input[type=radio] + span.radio.white.hover,
-input[type=checkbox].white:hover,
-input[type=radio].white:hover,
-input[type=checkbox] + span.checkbox.white:hover,
-input[type=radio] + span.radio.white:hover,
-input[type=checkbox].white.active,
-input[type=radio].white.active,
-input[type=checkbox] + span.checkbox.white.active,
-input[type=radio] + span.radio.white.active,
-input[type=checkbox].white:active,
-input[type=radio].white:active,
-input[type=checkbox] + span.checkbox.white:active,
-input[type=radio] + span.radio.white:active,
-input[type=checkbox].white:focus,
-input[type=radio].white:focus,
-input[type=checkbox] + span.checkbox.white:focus,
-input[type=radio] + span.radio.white:focus {
-  background-color: #e6e6e6 !important;
-}
-input[type=checkbox].gray,
-input[type=radio].gray,
-input[type=checkbox] + span.checkbox.gray,
-input[type=radio] + span.radio.gray {
-  background-color: #d0d0d0 !important;
-}
-input[type=checkbox].gray.hover,
-input[type=radio].gray.hover,
-input[type=checkbox] + span.checkbox.gray.hover,
-input[type=radio] + span.radio.gray.hover,
-input[type=checkbox].gray:hover,
-input[type=radio].gray:hover,
-input[type=checkbox] + span.checkbox.gray:hover,
-input[type=radio] + span.radio.gray:hover,
-input[type=checkbox].gray.active,
-input[type=radio].gray.active,
-input[type=checkbox] + span.checkbox.gray.active,
-input[type=radio] + span.radio.gray.active,
-input[type=checkbox].gray:active,
-input[type=radio].gray:active,
-input[type=checkbox] + span.checkbox.gray:active,
-input[type=radio] + span.radio.gray:active,
-input[type=checkbox].gray:focus,
-input[type=radio].gray:focus,
-input[type=checkbox] + span.checkbox.gray:focus,
-input[type=radio] + span.radio.gray:focus {
-  background-color: #b7b7b7 !important;
-}
-input[type=checkbox].black,
-input[type=radio].black,
-input[type=checkbox] + span.checkbox.black,
-input[type=radio] + span.radio.black {
-  background-color: #666666 !important;
-}
-input[type=checkbox].black.hover,
-input[type=radio].black.hover,
-input[type=checkbox] + span.checkbox.black.hover,
-input[type=radio] + span.radio.black.hover,
-input[type=checkbox].black:hover,
-input[type=radio].black:hover,
-input[type=checkbox] + span.checkbox.black:hover,
-input[type=radio] + span.radio.black:hover,
-input[type=checkbox].black.active,
-input[type=radio].black.active,
-input[type=checkbox] + span.checkbox.black.active,
-input[type=radio] + span.radio.black.active,
-input[type=checkbox].black:active,
-input[type=radio].black:active,
-input[type=checkbox] + span.checkbox.black:active,
-input[type=radio] + span.radio.black:active,
-input[type=checkbox].black:focus,
-input[type=radio].black:focus,
-input[type=checkbox] + span.checkbox.black:focus,
-input[type=radio] + span.radio.black:focus {
-  background-color: #4d4d4d !important;
-}
-input[type=checkbox].white,
-input[type=radio].white,
-input[type=checkbox] + span.checkbox.white,
-input[type=radio] + span.radio.white,
-input[type=checkbox].gray,
-input[type=radio].gray,
-input[type=checkbox] + span.checkbox.gray,
-input[type=radio] + span.radio.gray {
-  -webkit-text-shadow: none;
-  -moz-text-shadow: none;
-  -ms-text-shadow: none;
-  -o-text-shadow: none;
-  text-shadow: none;
-  color: #333;
-}
-input[type=checkbox].white:hover,
-input[type=radio].white:hover,
-input[type=checkbox] + span.checkbox.white:hover,
-input[type=radio] + span.radio.white:hover,
-input[type=checkbox].gray:hover,
-input[type=radio].gray:hover,
-input[type=checkbox] + span.checkbox.gray:hover,
-input[type=radio] + span.radio.gray:hover,
-input[type=checkbox].white.active,
-input[type=radio].white.active,
-input[type=checkbox] + span.checkbox.white.active,
-input[type=radio] + span.radio.white.active,
-input[type=checkbox].gray.active,
-input[type=radio].gray.active,
-input[type=checkbox] + span.checkbox.gray.active,
-input[type=radio] + span.radio.gray.active,
-input[type=checkbox].white:active,
-input[type=radio].white:active,
-input[type=checkbox] + span.checkbox.white:active,
-input[type=radio] + span.radio.white:active,
-input[type=checkbox].gray:active,
-input[type=radio].gray:active,
-input[type=checkbox] + span.checkbox.gray:active,
-input[type=radio] + span.radio.gray:active,
-input[type=checkbox].white:focus,
-input[type=radio].white:focus,
-input[type=checkbox] + span.checkbox.white:focus,
-input[type=radio] + span.radio.white:focus,
-input[type=checkbox].gray:focus,
-input[type=radio].gray:focus,
-input[type=checkbox] + span.checkbox.gray:focus,
-input[type=radio] + span.radio.gray:focus {
-  color: #111 !important;
-}
-input[type=checkbox].white[type=checkbox]::after,
-input[type=radio].white[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.white[type=checkbox]::after,
-input[type=radio] + span.radio.white[type=checkbox]::after,
-input[type=checkbox].gray[type=checkbox]::after,
-input[type=radio].gray[type=checkbox]::after,
-input[type=checkbox] + span.checkbox.gray[type=checkbox]::after,
-input[type=radio] + span.radio.gray[type=checkbox]::after,
-input[type=checkbox].white[type=checkbox] + span.checkbox::after,
-input[type=radio].white[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.white[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.white[type=checkbox] + span.checkbox::after,
-input[type=checkbox].gray[type=checkbox] + span.checkbox::after,
-input[type=radio].gray[type=checkbox] + span.checkbox::after,
-input[type=checkbox] + span.checkbox.gray[type=checkbox] + span.checkbox::after,
-input[type=radio] + span.radio.gray[type=checkbox] + span.checkbox::after {
-  color: #333;
-}
-input[type=checkbox].white[type=radio]::after,
-input[type=radio].white[type=radio]::after,
-input[type=checkbox] + span.checkbox.white[type=radio]::after,
-input[type=radio] + span.radio.white[type=radio]::after,
-input[type=checkbox].gray[type=radio]::after,
-input[type=radio].gray[type=radio]::after,
-input[type=checkbox] + span.checkbox.gray[type=radio]::after,
-input[type=radio] + span.radio.gray[type=radio]::after,
-input[type=checkbox].white[type=radio] + span.radio::after,
-input[type=radio].white[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.white[type=radio] + span.radio::after,
-input[type=radio] + span.radio.white[type=radio] + span.radio::after,
-input[type=checkbox].gray[type=radio] + span.radio::after,
-input[type=radio].gray[type=radio] + span.radio::after,
-input[type=checkbox] + span.checkbox.gray[type=radio] + span.radio::after,
-input[type=radio] + span.radio.gray[type=radio] + span.radio::after {
-  background-color: #333333;
-  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
 }
 input[type=checkbox].mini,
 input[type=radio].mini,
@@ -4307,6 +924,16 @@ input[type=radio] + span.radio.large {
   width: 22px;
   height: 22px;
 }
+input[type=checkbox]:hover,
+input[type=radio]:hover,
+input[type=checkbox] + span.checkbox:hover,
+input[type=radio] + span.radio:hover {
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+}
 input[type=checkbox]:active,
 input[type=radio]:active,
 input[type=checkbox] + span.checkbox:active,
@@ -4314,11 +941,11 @@ input[type=radio] + span.radio:active {
   border-color: #999999;
   border-width: 1px;
   border-style: solid;
-  -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
-  -ms-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
-  -o-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1px #ffffff , inset 0 1px 5px rgba(0, 0, 0, 0.15) , 0 0 5px rgba(0, 0, 0, 0.2);
 }
 input[type=checkbox],
 input[type=checkbox] + span.checkbox {
@@ -4518,6 +1145,7 @@ div.segmentedcontrol.mini button {
 /* ################################ */
 /* ## ## ## UINotification ## ## ## */
 .notification {
+  padding: 0;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.9)), to(rgba(230, 230, 230, 0.9)));
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
@@ -5283,18 +1911,18 @@ label {
 }
 /* ######################### */
 /* ## ## ## Pastels ## ## ## */
-.button.blue,
-.button.cyan,
-.button.green,
-.button.red,
-.button.pink,
-.button.violet,
-.button.yellow,
-.button.orange,
-.button.brown,
-.button.white,
-.button.gray,
-.button.black {
+.btn-blue,
+.btn-cyan,
+.btn-green,
+.btn-red,
+.btn-pink,
+.btn-violet,
+.btn-yellow,
+.btn-orange,
+.btn-brown,
+.btn-white,
+.btn-gray,
+.btn-black {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.25)), to(rgba(0, 0, 0, 0.2))) !important;
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
   background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)) !important;
@@ -5318,84 +1946,83 @@ label {
   border-bottom-color: rgba(0, 0, 0, 0.55);
   color: #fff;
 }
-.button.blue:not(.active).hover,
-.button.cyan:not(.active).hover,
-.button.green:not(.active).hover,
-.button.red:not(.active).hover,
-.button.pink:not(.active).hover,
-.button.violet:not(.active).hover,
-.button.yellow:not(.active).hover,
-.button.orange:not(.active).hover,
-.button.brown:not(.active).hover,
-.button.white:not(.active).hover,
-.button.gray:not(.active).hover,
-.button.black:not(.active).hover,
-.button.blue:not(.active):hover,
-.button.cyan:not(.active):hover,
-.button.green:not(.active):hover,
-.button.red:not(.active):hover,
-.button.pink:not(.active):hover,
-.button.violet:not(.active):hover,
-.button.yellow:not(.active):hover,
-.button.orange:not(.active):hover,
-.button.brown:not(.active):hover,
-.button.white:not(.active):hover,
-.button.gray:not(.active):hover,
-.button.black:not(.active):hover,
-.button.blue:not(.active):checked,
-.button.cyan:not(.active):checked,
-.button.green:not(.active):checked,
-.button.red:not(.active):checked,
-.button.pink:not(.active):checked,
-.button.violet:not(.active):checked,
-.button.yellow:not(.active):checked,
-.button.orange:not(.active):checked,
-.button.brown:not(.active):checked,
-.button.white:not(.active):checked,
-.button.gray:not(.active):checked,
-.button.black:not(.active):checked {
+.btn-blue:not(.active).hover,
+.btn-cyan:not(.active).hover,
+.btn-green:not(.active).hover,
+.btn-red:not(.active).hover,
+.btn-pink:not(.active).hover,
+.btn-violet:not(.active).hover,
+.btn-yellow:not(.active).hover,
+.btn-orange:not(.active).hover,
+.btn-brown:not(.active).hover,
+.btn-white:not(.active).hover,
+.btn-gray:not(.active).hover,
+.btn-black:not(.active).hover,
+.btn-blue:not(.active):hover,
+.btn-cyan:not(.active):hover,
+.btn-green:not(.active):hover,
+.btn-red:not(.active):hover,
+.btn-pink:not(.active):hover,
+.btn-violet:not(.active):hover,
+.btn-yellow:not(.active):hover,
+.btn-orange:not(.active):hover,
+.btn-brown:not(.active):hover,
+.btn-white:not(.active):hover,
+.btn-gray:not(.active):hover,
+.btn-black:not(.active):hover,
+.btn-blue:not(.active):checked,
+.btn-cyan:not(.active):checked,
+.btn-green:not(.active):checked,
+.btn-red:not(.active):checked,
+.btn-pink:not(.active):checked,
+.btn-violet:not(.active):checked,
+.btn-yellow:not(.active):checked,
+.btn-orange:not(.active):checked,
+.btn-brown:not(.active):checked,
+.btn-white:not(.active):checked,
+.btn-gray:not(.active):checked,
+.btn-black:not(.active):checked {
   border-color: rgba(0, 0, 0, 0.5);
   border-width: 1px;
   border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
   color: #fff;
 }
-.button.blue:not(.hover).active,
-.button.cyan:not(.hover).active,
-.button.green:not(.hover).active,
-.button.red:not(.hover).active,
-.button.pink:not(.hover).active,
-.button.violet:not(.hover).active,
-.button.yellow:not(.hover).active,
-.button.orange:not(.hover).active,
-.button.brown:not(.hover).active,
-.button.white:not(.hover).active,
-.button.gray:not(.hover).active,
-.button.black:not(.hover).active,
-.button.blue:not(.hover):active,
-.button.cyan:not(.hover):active,
-.button.green:not(.hover):active,
-.button.red:not(.hover):active,
-.button.pink:not(.hover):active,
-.button.violet:not(.hover):active,
-.button.yellow:not(.hover):active,
-.button.orange:not(.hover):active,
-.button.brown:not(.hover):active,
-.button.white:not(.hover):active,
-.button.gray:not(.hover):active,
-.button.black:not(.hover):active,
-.button.blue:not(.hover):focus,
-.button.cyan:not(.hover):focus,
-.button.green:not(.hover):focus,
-.button.red:not(.hover):focus,
-.button.pink:not(.hover):focus,
-.button.violet:not(.hover):focus,
-.button.yellow:not(.hover):focus,
-.button.orange:not(.hover):focus,
-.button.brown:not(.hover):focus,
-.button.white:not(.hover):focus,
-.button.gray:not(.hover):focus,
-.button.black:not(.hover):focus {
+.btn-blue:not(.hover).active,
+.btn-cyan:not(.hover).active,
+.btn-green:not(.hover).active,
+.btn-red:not(.hover).active,
+.btn-pink:not(.hover).active,
+.btn-violet:not(.hover).active,
+.btn-yellow:not(.hover).active,
+.btn-orange:not(.hover).active,
+.btn-brown:not(.hover).active,
+.btn-white:not(.hover).active,
+.btn-gray:not(.hover).active,
+.btn-black:not(.hover).active,
+.btn-blue:not(.hover):active,
+.btn-cyan:not(.hover):active,
+.btn-green:not(.hover):active,
+.btn-red:not(.hover):active,
+.btn-pink:not(.hover):active,
+.btn-violet:not(.hover):active,
+.btn-yellow:not(.hover):active,
+.btn-orange:not(.hover):active,
+.btn-brown:not(.hover):active,
+.btn-white:not(.hover):active,
+.btn-gray:not(.hover):active,
+.btn-black:not(.hover):active,
+.btn-blue:not(.hover):focus,
+.btn-cyan:not(.hover):focus,
+.btn-green:not(.hover):focus,
+.btn-red:not(.hover):focus,
+.btn-pink:not(.hover):focus,
+.btn-violet:not(.hover):focus,
+.btn-yellow:not(.hover):focus,
+.btn-orange:not(.hover):focus,
+.btn-brown:not(.hover):focus,
+.btn-white:not(.hover):focus,
+.btn-gray:not(.hover):focus,
+.btn-black:not(.hover):focus {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), to(rgba(255, 255, 255, 0.12))) !important;
   background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
   background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.12)) !important;
@@ -5405,109 +2032,108 @@ label {
   border-color: rgba(0, 0, 0, 0.6);
   border-width: 1px;
   border-style: solid;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
   color: #fff;
 }
-.button.blue::-webkit-input-placeholder,
-.button.cyan::-webkit-input-placeholder,
-.button.green::-webkit-input-placeholder,
-.button.red::-webkit-input-placeholder,
-.button.pink::-webkit-input-placeholder,
-.button.violet::-webkit-input-placeholder,
-.button.yellow::-webkit-input-placeholder,
-.button.orange::-webkit-input-placeholder,
-.button.brown::-webkit-input-placeholder,
-.button.white::-webkit-input-placeholder,
-.button.gray::-webkit-input-placeholder,
-.button.black::-webkit-input-placeholder {
+.btn-blue::-webkit-input-placeholder,
+.btn-cyan::-webkit-input-placeholder,
+.btn-green::-webkit-input-placeholder,
+.btn-red::-webkit-input-placeholder,
+.btn-pink::-webkit-input-placeholder,
+.btn-violet::-webkit-input-placeholder,
+.btn-yellow::-webkit-input-placeholder,
+.btn-orange::-webkit-input-placeholder,
+.btn-brown::-webkit-input-placeholder,
+.btn-white::-webkit-input-placeholder,
+.btn-gray::-webkit-input-placeholder,
+.btn-black::-webkit-input-placeholder {
   color: #fff;
 }
-.button.blue::placeholder,
-.button.cyan::placeholder,
-.button.green::placeholder,
-.button.red::placeholder,
-.button.pink::placeholder,
-.button.violet::placeholder,
-.button.yellow::placeholder,
-.button.orange::placeholder,
-.button.brown::placeholder,
-.button.white::placeholder,
-.button.gray::placeholder,
-.button.black::placeholder,
-.button.blue::input-placeholder,
-.button.cyan::input-placeholder,
-.button.green::input-placeholder,
-.button.red::input-placeholder,
-.button.pink::input-placeholder,
-.button.violet::input-placeholder,
-.button.yellow::input-placeholder,
-.button.orange::input-placeholder,
-.button.brown::input-placeholder,
-.button.white::input-placeholder,
-.button.gray::input-placeholder,
-.button.black::input-placeholder,
-.button.blue::-moz-placeholder,
-.button.cyan::-moz-placeholder,
-.button.green::-moz-placeholder,
-.button.red::-moz-placeholder,
-.button.pink::-moz-placeholder,
-.button.violet::-moz-placeholder,
-.button.yellow::-moz-placeholder,
-.button.orange::-moz-placeholder,
-.button.brown::-moz-placeholder,
-.button.white::-moz-placeholder,
-.button.gray::-moz-placeholder,
-.button.black::-moz-placeholder,
-.button.blue:-moz-placeholder,
-.button.cyan:-moz-placeholder,
-.button.green:-moz-placeholder,
-.button.red:-moz-placeholder,
-.button.pink:-moz-placeholder,
-.button.violet:-moz-placeholder,
-.button.yellow:-moz-placeholder,
-.button.orange:-moz-placeholder,
-.button.brown:-moz-placeholder,
-.button.white:-moz-placeholder,
-.button.gray:-moz-placeholder,
-.button.black:-moz-placeholder,
-.button.blue:-ms-input-placeholder,
-.button.cyan:-ms-input-placeholder,
-.button.green:-ms-input-placeholder,
-.button.red:-ms-input-placeholder,
-.button.pink:-ms-input-placeholder,
-.button.violet:-ms-input-placeholder,
-.button.yellow:-ms-input-placeholder,
-.button.orange:-ms-input-placeholder,
-.button.brown:-ms-input-placeholder,
-.button.white:-ms-input-placeholder,
-.button.gray:-ms-input-placeholder,
-.button.black:-ms-input-placeholder {
+.btn-blue::placeholder,
+.btn-cyan::placeholder,
+.btn-green::placeholder,
+.btn-red::placeholder,
+.btn-pink::placeholder,
+.btn-violet::placeholder,
+.btn-yellow::placeholder,
+.btn-orange::placeholder,
+.btn-brown::placeholder,
+.btn-white::placeholder,
+.btn-gray::placeholder,
+.btn-black::placeholder,
+.btn-blue::input-placeholder,
+.btn-cyan::input-placeholder,
+.btn-green::input-placeholder,
+.btn-red::input-placeholder,
+.btn-pink::input-placeholder,
+.btn-violet::input-placeholder,
+.btn-yellow::input-placeholder,
+.btn-orange::input-placeholder,
+.btn-brown::input-placeholder,
+.btn-white::input-placeholder,
+.btn-gray::input-placeholder,
+.btn-black::input-placeholder,
+.btn-blue::-moz-placeholder,
+.btn-cyan::-moz-placeholder,
+.btn-green::-moz-placeholder,
+.btn-red::-moz-placeholder,
+.btn-pink::-moz-placeholder,
+.btn-violet::-moz-placeholder,
+.btn-yellow::-moz-placeholder,
+.btn-orange::-moz-placeholder,
+.btn-brown::-moz-placeholder,
+.btn-white::-moz-placeholder,
+.btn-gray::-moz-placeholder,
+.btn-black::-moz-placeholder,
+.btn-blue:-moz-placeholder,
+.btn-cyan:-moz-placeholder,
+.btn-green:-moz-placeholder,
+.btn-red:-moz-placeholder,
+.btn-pink:-moz-placeholder,
+.btn-violet:-moz-placeholder,
+.btn-yellow:-moz-placeholder,
+.btn-orange:-moz-placeholder,
+.btn-brown:-moz-placeholder,
+.btn-white:-moz-placeholder,
+.btn-gray:-moz-placeholder,
+.btn-black:-moz-placeholder,
+.btn-blue:-ms-input-placeholder,
+.btn-cyan:-ms-input-placeholder,
+.btn-green:-ms-input-placeholder,
+.btn-red:-ms-input-placeholder,
+.btn-pink:-ms-input-placeholder,
+.btn-violet:-ms-input-placeholder,
+.btn-yellow:-ms-input-placeholder,
+.btn-orange:-ms-input-placeholder,
+.btn-brown:-ms-input-placeholder,
+.btn-white:-ms-input-placeholder,
+.btn-gray:-ms-input-placeholder,
+.btn-black:-ms-input-placeholder {
   color: #fff;
 }
-.button.blue[type=checkbox]::after,
-.button.cyan[type=checkbox]::after,
-.button.green[type=checkbox]::after,
-.button.red[type=checkbox]::after,
-.button.pink[type=checkbox]::after,
-.button.violet[type=checkbox]::after,
-.button.yellow[type=checkbox]::after,
-.button.orange[type=checkbox]::after,
-.button.brown[type=checkbox]::after,
-.button.white[type=checkbox]::after,
-.button.gray[type=checkbox]::after,
-.button.black[type=checkbox]::after,
-.button.blue[type=checkbox] + span.checkbox::after,
-.button.cyan[type=checkbox] + span.checkbox::after,
-.button.green[type=checkbox] + span.checkbox::after,
-.button.red[type=checkbox] + span.checkbox::after,
-.button.pink[type=checkbox] + span.checkbox::after,
-.button.violet[type=checkbox] + span.checkbox::after,
-.button.yellow[type=checkbox] + span.checkbox::after,
-.button.orange[type=checkbox] + span.checkbox::after,
-.button.brown[type=checkbox] + span.checkbox::after,
-.button.white[type=checkbox] + span.checkbox::after,
-.button.gray[type=checkbox] + span.checkbox::after,
-.button.black[type=checkbox] + span.checkbox::after {
+.btn-blue[type=checkbox]::after,
+.btn-cyan[type=checkbox]::after,
+.btn-green[type=checkbox]::after,
+.btn-red[type=checkbox]::after,
+.btn-pink[type=checkbox]::after,
+.btn-violet[type=checkbox]::after,
+.btn-yellow[type=checkbox]::after,
+.btn-orange[type=checkbox]::after,
+.btn-brown[type=checkbox]::after,
+.btn-white[type=checkbox]::after,
+.btn-gray[type=checkbox]::after,
+.btn-black[type=checkbox]::after,
+.btn-blue[type=checkbox] + span.checkbox::after,
+.btn-cyan[type=checkbox] + span.checkbox::after,
+.btn-green[type=checkbox] + span.checkbox::after,
+.btn-red[type=checkbox] + span.checkbox::after,
+.btn-pink[type=checkbox] + span.checkbox::after,
+.btn-violet[type=checkbox] + span.checkbox::after,
+.btn-yellow[type=checkbox] + span.checkbox::after,
+.btn-orange[type=checkbox] + span.checkbox::after,
+.btn-brown[type=checkbox] + span.checkbox::after,
+.btn-white[type=checkbox] + span.checkbox::after,
+.btn-gray[type=checkbox] + span.checkbox::after,
+.btn-black[type=checkbox] + span.checkbox::after {
   -webkit-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   -moz-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   -ms-text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
@@ -5515,30 +2141,30 @@ label {
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   color: #fff;
 }
-.button.blue[type=radio]::after,
-.button.cyan[type=radio]::after,
-.button.green[type=radio]::after,
-.button.red[type=radio]::after,
-.button.pink[type=radio]::after,
-.button.violet[type=radio]::after,
-.button.yellow[type=radio]::after,
-.button.orange[type=radio]::after,
-.button.brown[type=radio]::after,
-.button.white[type=radio]::after,
-.button.gray[type=radio]::after,
-.button.black[type=radio]::after,
-.button.blue[type=radio] + span.radio::after,
-.button.cyan[type=radio] + span.radio::after,
-.button.green[type=radio] + span.radio::after,
-.button.red[type=radio] + span.radio::after,
-.button.pink[type=radio] + span.radio::after,
-.button.violet[type=radio] + span.radio::after,
-.button.yellow[type=radio] + span.radio::after,
-.button.orange[type=radio] + span.radio::after,
-.button.brown[type=radio] + span.radio::after,
-.button.white[type=radio] + span.radio::after,
-.button.gray[type=radio] + span.radio::after,
-.button.black[type=radio] + span.radio::after {
+.btn-blue[type=radio]::after,
+.btn-cyan[type=radio]::after,
+.btn-green[type=radio]::after,
+.btn-red[type=radio]::after,
+.btn-pink[type=radio]::after,
+.btn-violet[type=radio]::after,
+.btn-yellow[type=radio]::after,
+.btn-orange[type=radio]::after,
+.btn-brown[type=radio]::after,
+.btn-white[type=radio]::after,
+.btn-gray[type=radio]::after,
+.btn-black[type=radio]::after,
+.btn-blue[type=radio] + span.radio::after,
+.btn-cyan[type=radio] + span.radio::after,
+.btn-green[type=radio] + span.radio::after,
+.btn-red[type=radio] + span.radio::after,
+.btn-pink[type=radio] + span.radio::after,
+.btn-violet[type=radio] + span.radio::after,
+.btn-yellow[type=radio] + span.radio::after,
+.btn-orange[type=radio] + span.radio::after,
+.btn-brown[type=radio] + span.radio::after,
+.btn-white[type=radio] + span.radio::after,
+.btn-gray[type=radio] + span.radio::after,
+.btn-black[type=radio] + span.radio::after {
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
@@ -5546,128 +2172,188 @@ label {
   -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
-.button.blue {
+.btn-blue {
   background-color: #1a9cff !important;
 }
-.button.blue.hover,
-.button.blue:hover,
-.button.blue.active,
-.button.blue:active,
-.button.blue:focus {
+.btn-blue.hover,
+.btn-blue:hover,
+.btn-blue.active,
+.btn-blue:active,
+.btn-blue:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #1a9cff !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #1a9cff !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #1a9cff !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #1a9cff !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #1a9cff !important;
   background-color: #0083e6 !important;
 }
-.button.cyan {
+.btn-cyan {
   background-color: #5bc0de !important;
 }
-.button.cyan.hover,
-.button.cyan:hover,
-.button.cyan.active,
-.button.cyan:active,
-.button.cyan:focus {
+.btn-cyan.hover,
+.btn-cyan:hover,
+.btn-cyan.active,
+.btn-cyan:active,
+.btn-cyan:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #5bc0de !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #5bc0de !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #5bc0de !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #5bc0de !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #5bc0de !important;
   background-color: #31b0d5 !important;
 }
-.button.green {
+.btn-green {
   background-color: #62c462 !important;
 }
-.button.green.hover,
-.button.green:hover,
-.button.green.active,
-.button.green:active,
-.button.green:focus {
+.btn-green.hover,
+.btn-green:hover,
+.btn-green.active,
+.btn-green:active,
+.btn-green:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #62c462 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #62c462 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #62c462 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #62c462 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #62c462 !important;
   background-color: #42b142 !important;
 }
-.button.red {
+.btn-red {
   background-color: #ee666f !important;
 }
-.button.red.hover,
-.button.red:hover,
-.button.red.active,
-.button.red:active,
-.button.red:focus {
+.btn-red.hover,
+.btn-red:hover,
+.btn-red.active,
+.btn-red:active,
+.btn-red:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee666f !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee666f !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee666f !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee666f !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee666f !important;
   background-color: #e93844 !important;
 }
-.button.pink {
+.btn-pink {
   background-color: #ee7ae9 !important;
 }
-.button.pink.hover,
-.button.pink:hover,
-.button.pink.active,
-.button.pink:active,
-.button.pink:focus {
+.btn-pink.hover,
+.btn-pink:hover,
+.btn-pink.active,
+.btn-pink:active,
+.btn-pink:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee7ae9 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee7ae9 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee7ae9 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee7ae9 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ee7ae9 !important;
   background-color: #e84de2 !important;
 }
-.button.violet {
+.btn-violet {
   background-color: #b452cd !important;
 }
-.button.violet.hover,
-.button.violet:hover,
-.button.violet.active,
-.button.violet:active,
-.button.violet:focus {
+.btn-violet.hover,
+.btn-violet:hover,
+.btn-violet.active,
+.btn-violet:active,
+.btn-violet:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #b452cd !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #b452cd !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #b452cd !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #b452cd !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #b452cd !important;
   background-color: #9d35b7 !important;
 }
-.button.yellow {
+.btn-yellow {
   background-color: #faa937 !important;
 }
-.button.yellow.hover,
-.button.yellow:hover,
-.button.yellow.active,
-.button.yellow:active,
-.button.yellow:focus {
+.btn-yellow.hover,
+.btn-yellow:hover,
+.btn-yellow.active,
+.btn-yellow:active,
+.btn-yellow:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #faa937 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #faa937 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #faa937 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #faa937 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #faa937 !important;
   background-color: #f89306 !important;
 }
-.button.orange {
+.btn-orange {
   background-color: #f87531 !important;
 }
-.button.orange.hover,
-.button.orange:hover,
-.button.orange.active,
-.button.orange:active,
-.button.orange:focus {
+.btn-orange.hover,
+.btn-orange:hover,
+.btn-orange.active,
+.btn-orange:active,
+.btn-orange:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #f87531 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #f87531 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #f87531 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #f87531 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #f87531 !important;
   background-color: #ee5708 !important;
 }
-.button.brown {
+.btn-brown {
   background-color: #964514 !important;
 }
-.button.brown.hover,
-.button.brown:hover,
-.button.brown.active,
-.button.brown:active,
-.button.brown:focus {
+.btn-brown.hover,
+.btn-brown:hover,
+.btn-brown.active,
+.btn-brown:active,
+.btn-brown:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #964514 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #964514 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #964514 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #964514 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #964514 !important;
   background-color: #69300e !important;
 }
-.button.white {
+.btn-white {
   background-color: #ffffff !important;
 }
-.button.white.hover,
-.button.white:hover,
-.button.white.active,
-.button.white:active,
-.button.white:focus {
+.btn-white.hover,
+.btn-white:hover,
+.btn-white.active,
+.btn-white:active,
+.btn-white:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ffffff !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ffffff !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ffffff !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #ffffff !important;
   background-color: #e6e6e6 !important;
 }
-.button.gray {
+.btn-gray {
   background-color: #d0d0d0 !important;
 }
-.button.gray.hover,
-.button.gray:hover,
-.button.gray.active,
-.button.gray:active,
-.button.gray:focus {
+.btn-gray.hover,
+.btn-gray:hover,
+.btn-gray.active,
+.btn-gray:active,
+.btn-gray:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #d0d0d0 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #d0d0d0 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #d0d0d0 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #d0d0d0 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #d0d0d0 !important;
   background-color: #b7b7b7 !important;
 }
-.button.black {
+.btn-black {
   background-color: #666666 !important;
 }
-.button.black.hover,
-.button.black:hover,
-.button.black.active,
-.button.black:active,
-.button.black:focus {
+.btn-black.hover,
+.btn-black:hover,
+.btn-black.active,
+.btn-black:active,
+.btn-black:focus {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #666666 !important;
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #666666 !important;
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #666666 !important;
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #666666 !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35) , 0 0 5px #666666 !important;
   background-color: #4d4d4d !important;
 }
-.button.white,
-.button.gray {
+.btn-white,
+.btn-gray {
   -webkit-text-shadow: none;
   -moz-text-shadow: none;
   -ms-text-shadow: none;
@@ -5675,26 +2361,26 @@ label {
   text-shadow: none;
   color: #333;
 }
-.button.white:hover,
-.button.gray:hover,
-.button.white.active,
-.button.gray.active,
-.button.white:active,
-.button.gray:active,
-.button.white:focus,
-.button.gray:focus {
+.btn-white:hover,
+.btn-gray:hover,
+.btn-white.active,
+.btn-gray.active,
+.btn-white:active,
+.btn-gray:active,
+.btn-white:focus,
+.btn-gray:focus {
   color: #111 !important;
 }
-.button.white[type=checkbox]::after,
-.button.gray[type=checkbox]::after,
-.button.white[type=checkbox] + span.checkbox::after,
-.button.gray[type=checkbox] + span.checkbox::after {
+.btn-white[type=checkbox]::after,
+.btn-gray[type=checkbox]::after,
+.btn-white[type=checkbox] + span.checkbox::after,
+.btn-gray[type=checkbox] + span.checkbox::after {
   color: #333;
 }
-.button.white[type=radio]::after,
-.button.gray[type=radio]::after,
-.button.white[type=radio] + span.radio::after,
-.button.gray[type=radio] + span.radio::after {
+.btn-white[type=radio]::after,
+.btn-gray[type=radio]::after,
+.btn-white[type=radio] + span.radio::after,
+.btn-gray[type=radio] + span.radio::after {
   background-color: #333333;
   -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
   -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
@@ -5704,7 +2390,8 @@ label {
 }
 /* ####################### */
 /* ## ## ## Glows ## ## ## */
-.blue-glow:hover {
+.glow-blue.hover,
+.glow-blue:hover {
   border-color: rgba(26, 156, 255, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5714,8 +2401,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(26, 156, 255, 0.5) !important;
 }
-.blue-glow:active,
-.blue-glow:focus {
+.glow-blue.active,
+.glow-blue:active,
+.glow-blue:focus {
   border-color: #1a9cff !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5725,7 +2413,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(26, 156, 255, 0.7) !important;
 }
-.cyan-glow:hover {
+.glow-cyan.hover,
+.glow-cyan:hover {
   border-color: rgba(91, 192, 222, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5735,8 +2424,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(91, 192, 222, 0.5) !important;
 }
-.cyan-glow:active,
-.cyan-glow:focus {
+.glow-cyan.active,
+.glow-cyan:active,
+.glow-cyan:focus {
   border-color: #5bc0de !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5746,7 +2436,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(91, 192, 222, 0.7) !important;
 }
-.green-glow:hover {
+.glow-green.hover,
+.glow-green:hover {
   border-color: rgba(98, 196, 98, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5756,8 +2447,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(98, 196, 98, 0.5) !important;
 }
-.green-glow:active,
-.green-glow:focus {
+.glow-green.active,
+.glow-green:active,
+.glow-green:focus {
   border-color: #62c462 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5767,7 +2459,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(98, 196, 98, 0.7) !important;
 }
-.red-glow:hover {
+.glow-red.hover,
+.glow-red:hover {
   border-color: rgba(238, 102, 111, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5777,8 +2470,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 102, 111, 0.5) !important;
 }
-.red-glow:active,
-.red-glow:focus {
+.glow-red.active,
+.glow-red:active,
+.glow-red:focus {
   border-color: #ee666f !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5788,7 +2482,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 102, 111, 0.7) !important;
 }
-.pink-glow:hover {
+.glow-pink.hover,
+.glow-pink:hover {
   border-color: rgba(238, 122, 233, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5798,8 +2493,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(238, 122, 233, 0.5) !important;
 }
-.pink-glow:active,
-.pink-glow:focus {
+.glow-pink.active,
+.glow-pink:active,
+.glow-pink:focus {
   border-color: #ee7ae9 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5809,7 +2505,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(238, 122, 233, 0.7) !important;
 }
-.violet-glow:hover {
+.glow-violet.hover,
+.glow-violet:hover {
   border-color: rgba(180, 82, 205, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5819,8 +2516,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(180, 82, 205, 0.5) !important;
 }
-.violet-glow:active,
-.violet-glow:focus {
+.glow-violet.active,
+.glow-violet:active,
+.glow-violet:focus {
   border-color: #b452cd !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5830,7 +2528,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(180, 82, 205, 0.7) !important;
 }
-.yellow-glow:hover {
+.glow-yellow.hover,
+.glow-yellow:hover {
   border-color: rgba(250, 169, 55, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5840,8 +2539,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(250, 169, 55, 0.5) !important;
 }
-.yellow-glow:active,
-.yellow-glow:focus {
+.glow-yellow.active,
+.glow-yellow:active,
+.glow-yellow:focus {
   border-color: #faa937 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5851,7 +2551,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(250, 169, 55, 0.7) !important;
 }
-.orange-glow:hover {
+.glow-orange.hover,
+.glow-orange:hover {
   border-color: rgba(248, 117, 49, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5861,8 +2562,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(248, 117, 49, 0.5) !important;
 }
-.orange-glow:active,
-.orange-glow:focus {
+.glow-orange.active,
+.glow-orange:active,
+.glow-orange:focus {
   border-color: #f87531 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5872,7 +2574,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(248, 117, 49, 0.7) !important;
 }
-.brown-glow:hover {
+.glow-brown.hover,
+.glow-brown:hover {
   border-color: rgba(150, 69, 20, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5882,8 +2585,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(150, 69, 20, 0.5) !important;
 }
-.brown-glow:active,
-.brown-glow:focus {
+.glow-brown.active,
+.glow-brown:active,
+.glow-brown:focus {
   border-color: #964514 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5893,7 +2597,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(150, 69, 20, 0.7) !important;
 }
-.white-glow:hover {
+.glow-white.hover,
+.glow-white:hover {
   border-color: rgba(255, 255, 255, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5903,8 +2608,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(255, 255, 255, 0.5) !important;
 }
-.white-glow:active,
-.white-glow:focus {
+.glow-white.active,
+.glow-white:active,
+.glow-white:focus {
   border-color: #ffffff !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5914,7 +2620,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(255, 255, 255, 0.7) !important;
 }
-.gray-glow:hover {
+.glow-gray.hover,
+.glow-gray:hover {
   border-color: rgba(208, 208, 208, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5924,8 +2631,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(208, 208, 208, 0.5) !important;
 }
-.gray-glow:active,
-.gray-glow:focus {
+.glow-gray.active,
+.glow-gray:active,
+.glow-gray:focus {
   border-color: #d0d0d0 !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5935,7 +2643,8 @@ label {
   -o-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15) , 0 0 10px rgba(208, 208, 208, 0.7) !important;
 }
-.black-glow:hover {
+.glow-black.hover,
+.glow-black:hover {
   border-color: rgba(102, 102, 102, 0.7) !important;
   border-width: 1px !important;
   border-style: solid !important;
@@ -5945,8 +2654,9 @@ label {
   -o-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
   box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.15) , 0 0 7px rgba(102, 102, 102, 0.5) !important;
 }
-.black-glow:active,
-.black-glow:focus {
+.glow-black.active,
+.glow-black:active,
+.glow-black:focus {
   border-color: #666666 !important;
   border-width: 1px !important;
   border-style: solid !important;
