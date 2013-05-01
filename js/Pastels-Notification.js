@@ -56,7 +56,7 @@
 		
 	var Notification = function(header, content, opt) {
 		if(!(this instanceof Notification)) {
-			return new Notification(header,content, opt);;
+			return new Notification(header,content, opt);
 		}
 		var self = this;
 
