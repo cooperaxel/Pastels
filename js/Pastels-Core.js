@@ -39,18 +39,31 @@
 			this.object.emit('destroy');
 		}
 	};
-	window.Pastels = Pastels;
+    
+    Pastels.require = function(component, callback) {
+        $.require('js/Pastels-'+component+'.js', callback);
+    };
     
     $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
         window[k] = function() {
             var $this = this, args = arguments;
-            $.require('js/Pastels-'+k+'.js', function() {
+            Pastels.require(k, function() {
                 if (window[k] !== $this) {
                     return window[k].apply(window, args);
                 }
             });
         }
     });
+    
+    $.prototype.PopOver = function(opt) {
+        if (!(PopOver instanceof Pastels)) {
+            Pastels.require('PopOver');
+        }
+		$.each(this, function(n) {
+			n.PopOver = new PopOver(this, opt);
+		});
+		return this;
+    };
     
 	$.prototype.dragNdrop = function() {
 		var self = this;
@@ -96,6 +109,8 @@
 			});
 		}
 	};
+    
+    window.Pastels = Pastels;
 })(window);
 
 $(function() {
@@ -114,21 +129,21 @@ $(function() {
     }
     
     var navs = $('nav.bar, .navbar');
-    
-    if (! navs.empty()) {
-        navs.each(function() {
-            var $this = this,
-                li = $this.find('li'),
-                li_a = $this.find('li a');
-            
-            li_a.mousedown(function(e) {
-                e.stopPropagation();
-                li.removeClass('active');
-                $(this).parent().addClass('active');
-            });
-            li.mousedown(function() {
-                $(this).children('a').emit('mousedown');
-            });
+    navs.each(function() {
+        var $this = this,
+            li = $this.find('li'),
+            li_a = $this.find('li a');
+        
+        li_a.mousedown(function(e) {
+            li.removeClass('active');
+            $(this).parent().addClass('active');
         });
-    }
+        li.mousedown(function(e) {
+            var self = $(this);
+            if (e.target != self.children('a').item(0))
+                self.children('a').emit('mousedown');
+        });
+    });
+    
+    $('.popover-handler').PopOver();
 });
