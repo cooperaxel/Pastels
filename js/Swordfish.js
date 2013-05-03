@@ -142,8 +142,8 @@
         },
         parents: function(s) {
             var a = [], p = $.parseSelector(s);
-            $.each(this, function() {
-                var element = this;
+            $.each(this, function(n) {
+                var element = n;
                 while(element.parentNode && !$.checkElement(element.parentNode, p)) {
                     element = element.parentNode;
                 }
@@ -155,12 +155,12 @@
         },
         children: function(s) {
             var a = [], p = $.parseSelector(s);
-            $.each(this, function() {
-                for(var i = 0; i < this.childNodes.length; i++) {
-                    if(this.childNodes[i].nodeType === 1 || this.childNodes[i].nodeType === 11) {
-                        if(p && !$.checkElement(this.childNodes[i], p))
+            $.each(this, function(n) {
+                for(var i = 0; i < n.childNodes.length; i++) {
+                    if(n.childNodes[i].nodeType === 1 || n.childNodes[i].nodeType === 11) {
+                        if(p && !$.checkElement(n.childNodes[i], p))
                             continue;
-                        a.push(this.childNodes[i]);
+                        a.push(n.childNodes[i]);
                     }
                 }
             });
@@ -247,8 +247,8 @@
         },
         find: function(s) {
             var a = [];
-            $.each(this, function() {
-                var n = this.querySelectorAll(s);
+            $.each(this, function(n) {
+                n = n.querySelectorAll(s);
                 for(var i = 0; i < n.length; i++) {
                     a.push(n[i]);
                 }
@@ -259,29 +259,29 @@
             return $.each(this, c);
         },
         hasClass: function(c) {
-            return $.each(this, function() {
-                if(! this.hasClass(c))
+            return $.each(this, function(n) {
+                if(! n.hasClass(c))
                     return false;
             }) ? true : false;
         },
         addClass: function(c) {
             if(!c) return this;
-            $.each(this, function() {
-                this.addClass(c);
+            $.each(this, function(n) {
+                n.addClass(c);
             });
             return this;
         },
         removeClass: function(c) {
             if(!c) return this;
-            $.each(this, function() {
-                this.removeClass(c);
+            $.each(this, function(n) {
+                n.removeClass(c);
             });
             return this;
         },
         toggleClass: function(c) {
             if(!c) return this;
-            $.each(this, function() {
-                this.toggleClass(c);
+            $.each(this, function(n) {
+                n.toggleClass(c);
             });
             return this;
         },
@@ -294,8 +294,8 @@
                 if (this.g) {
                     this.active().innerHTML = h+'';
                 } else {
-                    $.each(this, function() {
-                        this.innerHTML = h+'';
+                    $.each(this, function(n) {
+                        n.innerHTML = h+'';
                     });
                 }
                 return this;
@@ -305,8 +305,8 @@
             if(!t) {
                 return this.active().outerText;
             } else {
-                $.each(this, function() {
-                    this.outerText = t;
+                $.each(this, function(n) {
+                    n.outerText = t;
                 });
                 return this;
             }
@@ -315,8 +315,8 @@
             if(!v) {
                 return this.active().value;
             } else {
-                $.each(this, function() {
-                    this.value = v;
+                $.each(this, function(n) {
+                    n.value = v;
                 });
                 return this;
             }
@@ -349,9 +349,9 @@
                 p[t] = v;
             }
             if (p instanceof Object) {
-                $.each(this, function() {
+                $.each(this, function(n) {
                     for (var s in p) {
-                        this[s] = p;
+                        n[s] = p;
                     }
                 });
             } else {
@@ -367,8 +367,8 @@
             }
             if(p instanceof Object) {
                 for (var s in p) {
-                    $.each(this, function() {
-                        this.setAttribute(s, p[s]);
+                    $.each(this, function(n) {
+                        n.setAttribute(s, p[s]);
                     });
                 }
             } else {
@@ -381,16 +381,16 @@
         },
         removeAttr: function(p) {
             if(typeof p === "string") {
-                $.each(this, function() {
-                    this.removeAttribute(p);
+                $.each(this, function(n) {
+                    n.removeAttribute(p);
                 });
             }
             return this;
         },
         hasAttr: function(o) {
             if(o instanceof Object) {
-                return $.each(this, function() {
-                    if(! this.hasAttr(o))
+                return $.each(this, function(n) {
+                    if(! n.hasAttr(o))
                         return false;
                 }) ? true : false;
             }
@@ -403,8 +403,8 @@
         hasState: function(s) {
             if (s) {
                 var args = arguments;
-                return $.each(this, function() {
-                    if (! this.hasState.apply(this, args))
+                return $.each(this, function(n) {
+                    if (! n.hasState.apply(n, args))
                         return false;
                 }) ? true : false;
             }
@@ -417,9 +417,9 @@
             if(p && v) {
                 p = p.removeChars('-');
                 if(!this.dataset || d)
-                    $.each(this, function() { this['data_'+p] = v; });
+                    $.each(this, function(n) { n['data_'+p] = v; });
                 else
-                    $.each(this, function() { this.dataset[p] = v; });
+                    $.each(this, function(n) { n.dataset[p] = v; });
             } else if(p) {
                 return this.active().dataset[p] || this.active()['data_'+p];
             }
@@ -488,14 +488,14 @@
                 }
                 
                 for(var s in p) {
-                    $.each(this, function() {
-                        this.style[s] = p[s];
+                    $.each(this, function(n) {
+                        n.style[s] = p[s];
                     });
                 }
             } else {
                 if(v !== undefined) {
-                    $.each(this, function() {
-                        this.style[p] = v;
+                    $.each(this, function(n) {
+                        n.style[p] = v;
                     });
                     return this;
                 } else {
@@ -579,8 +579,8 @@
             return this;
         },
         show: function(d) {
-            $.each(this, function(e) {
-                e.style.display = d || null;
+            $.each(this, function(n) {
+                n.style.display = d || null;
             });
             return this;
         },
@@ -621,24 +621,24 @@
             return this;
         },
         
-        on: function(n, f) {
-            if(!(f instanceof Function)) return this.active().emit(n);
-            $.each(this, function() {
-                this.on(n,f);
+        on: function(e, f) {
+            if(!(f instanceof Function)) return this.active().emit(e);
+            $.each(this, function(n) {
+                n.on(e,f);
             });
             return this;
         },
-        off: function(n, f) {
-            if(!n) return false;
-            $.each(this, function() {
-                this.off(n, f);
+        off: function(e, f) {
+            if(!e) return false;
+            $.each(this, function(n) {
+                n.off(e, f);
             });
             return this;
         },
-        emit: function(n, a) {
-            if(!n) return null;
-            $.each(this, function() {
-                this.emit(n, a);
+        emit: function(e, a) {
+            if(!e) return null;
+            $.each(this, function(n) {
+                n.emit(e, a);
             });
             return this;
         },
@@ -675,11 +675,11 @@
                 if (!method)
                     method = 'post';
                 
-                elms.each(function(e,i) {
-                    if (this.type !== 'checkbox' || this.checked != false) {
+                elms.each(function(n,i) {
+                    if (n.type !== 'checkbox' || n.checked != false) {
                         if (i !== 0)
                             uri += '&';
-                        uri += this.name + '=' + this.value;
+                        uri += n.name + '=' + n.value;
                     }
                 });
                 
@@ -695,10 +695,11 @@
                 frame.attr({ name: 'ajaxFrame', src: href }).css({ width: 0, height: 0, opacity: 0 }).hide();
                 form.attr({ target: 'ajaxFrame'}).submit();
                 
-                if (c instanceof Function)
+                if (c instanceof Function) {
                     frame.load(function(e) {
                         c.call(form, frame.active().contentWindow.document.body.innerHTML, e);
                     });
+                }
             }
             return this;
         },
@@ -788,7 +789,7 @@
                 var l = t.length;
                 for(var i = 0; i < t.length; i++) {
                     t.get(i);
-                    if(c.call(t[i], t[i], i, t) === false)
+                    if(c.call(t.eq(i), t[i], i, t) === false)
                         return false;
                     
                         if(l !== t.length) {
