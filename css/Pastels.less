@@ -240,7 +240,7 @@ a {
 /* ## ## ## NavBar ## ## ## */
 
 .navbar, nav.bar {
-    .margins(-1px auto 1px, 0 30px);
+    .margins(-1px auto 1px, 0 40px);
     .linear-gradient(top, rgba(255,255,255,1), rgba(220,220,220,1));
     .border(rgb(132,138,155));
     .shadow(inset 0 0 0 1px white ~"," inset 0 0 10px rgba(0,0,0,0) ~"," 0 0 10px rgba(150,150,150,0.9));
@@ -403,7 +403,9 @@ select option {
     font-size:11px;
 }
 
-input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], textarea {
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"],
+input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"],
+input[type="url"], input[type="search"], input[type="tel"], input[type="color"], textarea {
     .size(120px, 20px);
     .background(#fff);
     .margins(7px 5px, 3px 9px);
@@ -737,7 +739,7 @@ div.segmentedcontrol {
 /* ########################### */
 /* ## ## ## UIPopOver ## ## ## */
 
-div.popover { 
+.popover { 
     .linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
 	.border(rgba(169, 169, 169, 1));
 	.round-corner(4px);
@@ -752,106 +754,101 @@ div.popover {
 	opacity:0;
 	z-index:99;
 	cursor:default;
-}
 
-div.popover * 			{ pointer-events:none; }
-div.popover.active * 	{ pointer-events:all; }
-
-div.popover > header, div.popover > form > header {
-	padding:10px 15px 7px;
-	border-bottom:1px solid rgba(190,190,190,1);
-	box-shadow:0 1px 0 white;
-	font-size:13px;
-	font-weight:normal;
-	color:rgba(100,100,100,1);
-}
-div.popover > section, div.popover > form > section {
-	display:inline-block;
-    padding:10px 15px;
-}
-div.popover > section > div, div.popover > form > section > div {
-	margin:13px 0;
-}
-div.popover footer, div.popover > form > footer {
-    display:block;
-	padding:5px 10px;
-	border-top:1px solid rgba(190,190,190,1);
-	box-shadow:inset 0 1px 0 white;
-}
-
-div.popover div.popover-arrow { 
-	width:22px; height:22px;
-	background:rgb(246,246,246);
-	border:2px solid rgba(169,169,169,0.9);
-	border-width:2px 0 0 2px;
-	border-radius:1px 0 0 0;
-	box-shadow:inset 1px 0 0 rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,0.9);
-	position:absolute; left:45%; 
-	z-index:9;
-	-webkit-transform:rotate(45deg);
-	-webkit-mask:-webkit-gradient(linear, left top, right bottom, from(black), color-stop(0.56, black), color-stop(0.57, transparent), to(transparent));
-}
-
-div.popover.below div.popover-arrow {
-	top:-13px;
-}
-div.popover.above div.popover-arrow {
-	.background(rgb(222,222,222));
-	.transform(rotate(-135deg));
-    bottom:-13px;
-}
-div.popover.right div.popover-arrow {
-	.background(rgb(233,233,233));
-	.transform(rotate(-45deg));
-}
-div.popover.left div.popover-arrow {
-	.background(rgb(233,233,233));
-	.transform(rotate(135deg));
-}
-
-div.popover											{ font-size:13px; }
-div.popover					div.popover-arrow		{ width:15px; height:15px; }
-div.popover.below			div.popover-arrow		{ top:-9px; }
-div.popover.above			div.popover-arrow		{ bottom:-9px; }
-
-div.popover.large									{ box-shadow:inset 0 0 0 1px white, 0 0 18px rgba(0,0,0,0.4); font-size:16px; }
-div.popover.large			div.popover-arrow		{ width:18px; height:18px; }
-div.popover.large.below		div.popover-arrow		{ top:-11px; }
-div.popover.large.above		div.popover-arrow		{ bottom:-11px; }
-
-div.popover.small									{ box-shadow:inset 0 0 0 1px white, 0 0 10px rgba(0,0,0,0.3); font-size:11px; }
-div.popover.small			div.popover-arrow 		{ width:11px; height:11px; }
-div.popover.small.below		div.popover-arrow		{ top:-7px; }
-div.popover.small.above		div.popover-arrow		{ bottom:-7px; }
-
-div.popover.mini									{ box-shadow:inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.2); font-size:11px; }
-div.popover.mini 			div.popover-arrow 		{ width:7px; height:7px; }
-div.popover.mini.below 		div.popover-arrow 		{ top:-5px; }
-div.popover.mini.above	 	div.popover-arrow 		{ bottom:-5px; }
-
-div.popover.selectable {
-    max-height:300px;
-    border-radius:0;
-    overflow:scroll;
-}
-div.popover.selectable ul, div.tabbed aside ul {
-	margin:0; padding:2px 1px 1px;
-	overflow-x:hidden;
-	overflow-y:scroll;
-	list-style-type:none;
-}
-div.popover.selectable ul li {
-	.border(transparent, 1px 0);
-    .transition(.2s, background-image);
-    margin:-1px 0 0 0; padding:3px 15px;
-	text-align:left;
-}
-div.popover.selectable ul li.active {
-	.linear-gradient(top, #319be7, #1b78d9);
-	color:#fafafa;
-}
-div.popover ul li a {
-    .transition(none) !important;
+    & * 			{ pointer-events:none; }
+    &.active * 	{ pointer-events:all; }
+    
+    header {
+        padding:10px 15px 7px;
+        border-bottom:1px solid rgba(190,190,190,1);
+        box-shadow:0 1px 0 white;
+        font-size:13px;
+        font-weight:normal;
+        color:rgba(100,100,100,1);
+    }
+    section {
+        display:inline-block;
+        padding:10px 15px;
+    }
+    section > div {
+        margin:13px 0;
+    }
+    footer {
+        display:block;
+        padding:5px 10px;
+        border-top:1px solid rgba(190,190,190,1);
+        box-shadow:inset 0 1px 0 white;
+    }
+    
+    .popover-arrow { 
+        .square(15px);
+        .margins(0, 0);
+        .background(rgb(246,246,246));
+        .border(rgba(169,169,169,0.9), 2px 0 0 2px);
+        .round-corner(1px 0 0 0);
+        .shadow(inset 1px 0 0 rgba(255,255,255,0.9)~"," inset 0 1px 0 rgba(255,255,255,0.9));
+        .transform(rotate(45deg));
+        position:absolute; left:45%; 
+        z-index:9;
+        -webkit-mask:-webkit-gradient(linear, left top, right bottom, from(black), color-stop(0.56, black), color-stop(0.57, transparent), to(transparent));
+    }
+    
+    &.below .popover-arrow { top:-13px; }
+    &.above .popover-arrow {
+        .background(rgb(222,222,222));
+        .transform(rotate(-135deg));
+        bottom:-13px;
+    }
+    &.right .popover-arrow {
+        .background(rgb(233,233,233));
+        .transform(rotate(-45deg));
+    }
+    &.left .popover-arrow {
+        .background(rgb(233,233,233));
+        .transform(rotate(135deg));
+    }
+    
+    &                               { font-size:13px;   }
+    &.below		.popover-arrow		{ top:-9px;         }
+    &.above		.popover-arrow      { bottom:-9px;      }
+    
+    &.arrow-large                               { box-shadow:inset 0 0 0 1px white, 0 0 18px rgba(0,0,0,0.4); font-size:16px; }
+    &.arrow-large			.popover-arrow		{ width:18px; height:18px; }
+    &.arrow-large.below		.popover-arrow		{ top:-11px; }
+    &.arrow-large.above		.popover-arrow		{ bottom:-11px; }
+    &.arrow-small                               { box-shadow:inset 0 0 0 1px white, 0 0 10px rgba(0,0,0,0.3); font-size:11px; }
+    &.arrow-small			.popover-arrow 		{ width:11px; height:11px; }
+    &.arrow-small.below		.popover-arrow		{ top:-7px; }
+    &.arrow-small.above		.popover-arrow		{ bottom:-7px; }
+    &.arrow-mini								{ box-shadow:inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.2); font-size:11px; }
+    &.arrow-mini 			.popover-arrow 		{ width:7px; height:7px; }
+    &.arrow-mini.below 		.popover-arrow 		{ top:-5px; }
+    &.arrow-mini.above	 	.popover-arrow 		{ bottom:-5px; }
+    
+    &.selectable {
+        max-height:300px;
+        border-radius:0;
+        overflow:scroll;
+    }
+    &.selectable ul, div.tabbed aside ul {
+        margin:0; padding:2px 1px 1px;
+        overflow-x:hidden;
+        overflow-y:scroll;
+        list-style-type:none;
+    }
+    &.selectable ul li {
+        .border(transparent, 1px 0);
+        .transition(.2s, background-image);
+        margin:-1px 0 0 0; padding:3px 15px;
+        text-align:left;
+    }
+    &.selectable ul li.active {
+        .linear-gradient(top, #319be7, #1b78d9);
+        color:#fafafa;
+    }
+    ul li a {
+        .transition(none) !important;
+    }
 }
 
 div.tabbed {
