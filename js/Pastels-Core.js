@@ -102,15 +102,33 @@ $(function() {
     $().removeClass('preload');
     
     if ($.browser.webkit !== true) {
-        $('input[type=checkbox]', 'input[type=radio]').each(function() {
-            var $this = $(this),
-                type = this.type,
+        $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
+            var type = n.type,
                 span = $.create('span.'+type);
             
-            span.addClass($this.item(0).className);
-            $this.hide().after(span);
+            span.addClass(n.className);
+            this.hide().after(span);
             
-            span.mouseup($.invoke($this.click, $this));
+            span.mouseup($.invoke(this.click, this));
+        });
+    }
+    
+    var navs = $('nav.bar, .navbar');
+    
+    if (! navs.empty()) {
+        navs.each(function() {
+            var $this = this,
+                li = $this.find('li'),
+                li_a = $this.find('li a');
+            
+            li_a.mousedown(function(e) {
+                e.stopPropagation();
+                li.removeClass('active');
+                $(this).parent().addClass('active');
+            });
+            li.mousedown(function() {
+                $(this).children('a').emit('mousedown');
+            });
         });
     }
 });
