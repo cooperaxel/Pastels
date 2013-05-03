@@ -147,7 +147,7 @@
                 while(element.parentNode && !$.checkElement(element.parentNode, p)) {
                     element = element.parentNode;
                 }
-                if (element.parentNode) {
+                if (element.parentNode && element.parentNode !== document.body) {
                     a.push(element.parentNode);
                 }
             });
@@ -869,7 +869,7 @@
             return { clss: cl, id: id, tag: tag, attr: attr, state: sts, not: not };
         },
         checkElement: function(el, p) {
-            if(!el) return false;
+            if(!(el instanceof HTMLElement)) return false;
             if(!p) return true;
             if(typeof p === "string")
                 p = $.parseSelector(p);
@@ -1067,7 +1067,7 @@
                 if (!r && (!this.readyState || this.readyState == 'complete')) {
                     r = true;
                     if (c) {
-                        c.apply($.window);
+                        r = c.apply($.window);
                     }
                 }
             }
