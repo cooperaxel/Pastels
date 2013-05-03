@@ -250,12 +250,6 @@ a {
 	position:relative;
     z-index:3;
     
-    &.dark {
-        .linear-gradient(top, rgba(79,80,83,1), rgba(41,42,43,1));
-        border-bottom:1px solid #131415;
-        box-shadow:inset 0 1px 0 rgba(105,106,109,1), inset 0 -1px 0 rgba(73,73,75,1), 0 0 10px rgba(0,0,0,0.9);
-    }
-    
     &.fixed         { position:fixed;   top:0;      right:0;    left:0; }
     &.fixed.bottom  { position:fixed;   bottom:0;   right:0;    left:0; }
     
@@ -280,6 +274,7 @@ a {
             span, a {
                 .block;
                 .transition(.3s);
+                .text-shadow(none);
                 height:20px;
                 line-height:20px;
                 margin:0;
@@ -302,6 +297,35 @@ a {
         height:40px;
     }
     
+    &.black {
+        .linear-gradient(top, rgb(55,55,55), rgb(30,30,30));
+        border-bottom:1px solid #131415;
+        box-shadow:inset 0 1px 0 rgba(105,106,109,1), inset 0 -1px 0 rgba(73,73,75,1), 0 0 10px rgba(0,0,0,0.9);
+        
+        ul, ol {
+            li {
+                .border(transparent, 1px 0);
+                .sizing(border-box);
+                
+                span, a {
+                    color:#bbb;
+                    &:visited   { color:#bbb; }
+                    &:hover     { color:#ddd; }
+                    &:active    { color:#fff; }
+                }
+                
+                &.active, &:active {
+                    .background(#131313);
+                    .border(rgba(255,255,255,0.2), 1px 0);
+                    .shadow(0 0 1px rgba(255,255,255,0.4));
+                    span, a {
+                        color:#eee;
+                    }
+                }
+            }
+        }
+    }
+    
     &.mini,     &.mini li       { height:20px; }
     &.small,    &.small li      { height:30px; }
     &.large,    &.large li      { height:50px; }
@@ -314,7 +338,7 @@ a {
 /* ############################### */
 /* ## ## ## Button, Input ## ## ## */
 
-input {
+input, textarea {
     .user-select(text);
 }
 
@@ -379,7 +403,7 @@ select option {
     font-size:11px;
 }
 
-input[type=text], input[type=number], textarea {
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], textarea {
     .size(120px, 20px);
     .background(#fff);
     .margins(7px 5px, 3px 9px);
@@ -516,25 +540,16 @@ input[type=checkbox]:checked, input[type=checkbox]:checked + span.checkbox, inpu
     }
 }
 
-/* ######################## */
-/* ## ## ## UICode ## ## ## */
+/* ############################ */
+/* ## ## ## Pre & Code ## ## ## */
 
-code {
-    .inline;
-    .margins(0 2px, 2px 6px);
+code, .code {
     .background(rgb(247, 247, 249));
     .border(rgb(211, 210, 220));
     .round-corner(4px);
     .user-select(text);
-    color:rgb(221, 17, 68);
     font-family:Monaco, Menlo, Consolas, 'Courier New';
     font-size:12px;
-    white-space:nowrap;
-    
-    &::selection, &::-webkit-selection, &::-moz-selection {
-        background-color:#e13300 !important;
-        color:#fff !important;
-    }
     
     &.blue      { color:darken(@blue, 20%);     }
     &.cyan      { color:darken(@cyan, 20%);     }
@@ -548,6 +563,98 @@ code {
     &.white     { color:darken(@white, 30%);    }
     &.gray      { color:darken(@gray, 20%);     }
     &.black     { color:darken(@black, 20%);    }
+}
+pre {
+    .inline-block;
+    .margins(0, 0);
+    .user-select(text);
+    color:rgb(51, 51, 51);
+    font-family:Monaco, Menlo, Consolas, 'Courier New';
+    font-size:12px;
+    white-space:pre-wrap;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+code {
+    .inline;
+    .margins(0 2px, 2px 6px);
+    .nowrap;
+    color:rgb(221, 17, 68);
+}
+.code {
+    .inline-block;
+    .margins(0, 0);
+    .background(rgb(255,255,255));
+    .border(rgb(209,209,209));
+    min-width:100px;
+    position:relative;
+    overflow:visible;
+    
+    ol, ul {
+        .inline-block;
+        .vertical-top;
+        .margins(0, 4px 10px);
+        list-style-type:none;
+    }
+    li {
+        .block;
+        padding:0 5px;
+    }
+    li::before {
+        font-size:12px;
+    }
+    li, pre {
+        .user-select(text);
+        .nowrap;
+        font-family:Monaco, Menlo, Consolas, 'Courier New';
+        font-size:12px;
+        color:rgb(51,51,51);
+    }
+    
+    &.line-numbers {
+        counter-reset:counter;
+        ol, ul {
+            margin-left:34px;
+        }
+        &::before {
+            .inline-block;
+            .vertical-top;
+            .size(33px, 100%);
+            .background(rgb(247, 247, 249));
+            .border(rgb(189,189,189));
+            .round-corner(4px 0 0 4px);
+            .shadow(inset -1px 0 0 white);
+            font-size:13px;
+            content:"";
+            position:absolute; top:-1px; left:-1px; bottom:-1px;
+            z-index:1;
+        }
+        li::before {
+            .user-select(none);
+            width:33px;
+            color:#888;
+            text-align:right;
+            font-family:Monaco, Menlo, Consolas, 'Courier New';
+            font-size:12px;
+            counter-increment:counter;
+            content:counter(counter);
+            z-index:2;
+            position:absolute; left:-8px;
+        }
+        &.dotted li::before {
+            content:counter(counter)".";
+        }
+    }
+}
+code, .code li {
+    &::selection {
+        background-color:#e13300 !important;
+        color:#fff !important;
+    }
+    &::-webkit-selection, &::-moz-selection {
+        background-color:#e13300 !important;
+        color:#fff !important;
+    }
 }
 
 /* #################################### */
@@ -1038,8 +1145,11 @@ label {
 /* ## ## ## Selection ## ## ## */
 
 .selection (@color) {
-    &, & * {    
-        &::selection, &::-webkit-selection, &::-moz-selection {
+    &, & * {
+        &::selection {
+            .background(fade(@color, 40%));
+        }
+        &::-webkit-selection, &::-moz-selection {
             .background(fade(@color, 40%));
         }
     }
@@ -1192,3 +1302,4 @@ label {
 .xxl-rounded        { .round-corner(30px);      }
 .not-allowed        { cursor:not-allowed;       }
 .non-events         { pointer-events:none;      }
+.nowrap             { white-space:nowrap;       }
