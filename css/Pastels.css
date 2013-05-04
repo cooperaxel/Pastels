@@ -19,6 +19,7 @@
   line-height: inherit;
   outline: none;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 html,
 body {
@@ -320,7 +321,7 @@ a:not(.button).black:active {
 .navbar,
 nav.bar {
   margin: -1px auto 1px;
-  padding: 0 40px;
+  padding: 0 20px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#dcdcdc));
   background-image: -webkit-linear-gradient(top, #ffffff, #dcdcdc);
   background-image: -moz-linear-gradient(top, #ffffff, #dcdcdc);
@@ -366,6 +367,9 @@ nav.bar ol {
   width: auto;
   height: 100%;
   display: inline-block;
+  margin: 0;
+  padding: 0 30px;
+  white-space: nowrap;
   list-style-type: none;
 }
 .navbar ul li,
@@ -468,8 +472,8 @@ nav.bar,
 nav.bar li {
   height: 40px;
 }
-.navbar.black,
-nav.bar.black {
+.navbar.dark,
+nav.bar.dark {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#373737), to(#1e1e1e));
   background-image: -webkit-linear-gradient(top, #373737, #1e1e1e);
   background-image: -moz-linear-gradient(top, #373737, #1e1e1e);
@@ -479,10 +483,10 @@ nav.bar.black {
   border-bottom: 1px solid #131415;
   box-shadow: inset 0 1px 0 #696a6d, inset 0 -1px 0 #49494b, 0 0 10px rgba(0, 0, 0, 0.9);
 }
-.navbar.black ul li,
-nav.bar.black ul li,
-.navbar.black ol li,
-nav.bar.black ol li {
+.navbar.dark ul li,
+nav.bar.dark ul li,
+.navbar.dark ol li,
+nav.bar.dark ol li {
   border-color: transparent;
   border-width: 1px 0;
   border-style: solid;
@@ -492,54 +496,54 @@ nav.bar.black ol li {
   -o-box-sizing: border-box;
   box-sizing: border-box;
 }
-.navbar.black ul li span,
-nav.bar.black ul li span,
-.navbar.black ol li span,
-nav.bar.black ol li span,
-.navbar.black ul li a,
-nav.bar.black ul li a,
-.navbar.black ol li a,
-nav.bar.black ol li a {
+.navbar.dark ul li span,
+nav.bar.dark ul li span,
+.navbar.dark ol li span,
+nav.bar.dark ol li span,
+.navbar.dark ul li a,
+nav.bar.dark ul li a,
+.navbar.dark ol li a,
+nav.bar.dark ol li a {
   color: #bbb;
 }
-.navbar.black ul li span:visited,
-nav.bar.black ul li span:visited,
-.navbar.black ol li span:visited,
-nav.bar.black ol li span:visited,
-.navbar.black ul li a:visited,
-nav.bar.black ul li a:visited,
-.navbar.black ol li a:visited,
-nav.bar.black ol li a:visited {
+.navbar.dark ul li span:visited,
+nav.bar.dark ul li span:visited,
+.navbar.dark ol li span:visited,
+nav.bar.dark ol li span:visited,
+.navbar.dark ul li a:visited,
+nav.bar.dark ul li a:visited,
+.navbar.dark ol li a:visited,
+nav.bar.dark ol li a:visited {
   color: #bbb;
 }
-.navbar.black ul li span:hover,
-nav.bar.black ul li span:hover,
-.navbar.black ol li span:hover,
-nav.bar.black ol li span:hover,
-.navbar.black ul li a:hover,
-nav.bar.black ul li a:hover,
-.navbar.black ol li a:hover,
-nav.bar.black ol li a:hover {
+.navbar.dark ul li span:hover,
+nav.bar.dark ul li span:hover,
+.navbar.dark ol li span:hover,
+nav.bar.dark ol li span:hover,
+.navbar.dark ul li a:hover,
+nav.bar.dark ul li a:hover,
+.navbar.dark ol li a:hover,
+nav.bar.dark ol li a:hover {
   color: #ddd;
 }
-.navbar.black ul li span:active,
-nav.bar.black ul li span:active,
-.navbar.black ol li span:active,
-nav.bar.black ol li span:active,
-.navbar.black ul li a:active,
-nav.bar.black ul li a:active,
-.navbar.black ol li a:active,
-nav.bar.black ol li a:active {
+.navbar.dark ul li span:active,
+nav.bar.dark ul li span:active,
+.navbar.dark ol li span:active,
+nav.bar.dark ol li span:active,
+.navbar.dark ul li a:active,
+nav.bar.dark ul li a:active,
+.navbar.dark ol li a:active,
+nav.bar.dark ol li a:active {
   color: #fff;
 }
-.navbar.black ul li.active,
-nav.bar.black ul li.active,
-.navbar.black ol li.active,
-nav.bar.black ol li.active,
-.navbar.black ul li:active,
-nav.bar.black ul li:active,
-.navbar.black ol li:active,
-nav.bar.black ol li:active {
+.navbar.dark ul li.active,
+nav.bar.dark ul li.active,
+.navbar.dark ol li.active,
+nav.bar.dark ol li.active,
+.navbar.dark ul li:active,
+nav.bar.dark ul li:active,
+.navbar.dark ol li:active,
+nav.bar.dark ol li:active {
   background-color: #131313;
   border-color: rgba(255, 255, 255, 0.2);
   border-width: 1px 0;
@@ -550,22 +554,22 @@ nav.bar.black ol li:active {
   -o-box-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
   box-shadow: 0 0 1px rgba(255, 255, 255, 0.4);
 }
-.navbar.black ul li.active span,
-nav.bar.black ul li.active span,
-.navbar.black ol li.active span,
-nav.bar.black ol li.active span,
-.navbar.black ul li:active span,
-nav.bar.black ul li:active span,
-.navbar.black ol li:active span,
-nav.bar.black ol li:active span,
-.navbar.black ul li.active a,
-nav.bar.black ul li.active a,
-.navbar.black ol li.active a,
-nav.bar.black ol li.active a,
-.navbar.black ul li:active a,
-nav.bar.black ul li:active a,
-.navbar.black ol li:active a,
-nav.bar.black ol li:active a {
+.navbar.dark ul li.active span,
+nav.bar.dark ul li.active span,
+.navbar.dark ol li.active span,
+nav.bar.dark ol li.active span,
+.navbar.dark ul li:active span,
+nav.bar.dark ul li:active span,
+.navbar.dark ol li:active span,
+nav.bar.dark ol li:active span,
+.navbar.dark ul li.active a,
+nav.bar.dark ul li.active a,
+.navbar.dark ol li.active a,
+nav.bar.dark ol li.active a,
+.navbar.dark ul li:active a,
+nav.bar.dark ul li:active a,
+.navbar.dark ol li:active a,
+nav.bar.dark ol li:active a {
   color: #eee;
 }
 .navbar.mini,
@@ -1417,12 +1421,12 @@ div.segmentedcontrol.mini button {
 /* ## ## ## UINotification ## ## ## */
 .notification {
   padding: 0;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.9)), to(rgba(230, 230, 230, 0.9)));
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
-  background-image: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(230, 230, 230, 0.9));
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
   border-color: #a9a9a9;
   border-width: 1px;
   border-style: solid;
@@ -1480,6 +1484,22 @@ div.segmentedcontrol.mini button {
   margin: 5px;
   font-size: 10px;
   -webkit-box-flex: 1;
+}
+@media screen and (max-width:700px), screen and (max-device-width:700px) {
+  .notification {
+    border-radius: 0;
+    max-width: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+  .notification > header {
+    padding: 8px 25px 0;
+  }
+  .notification > section {
+    padding: 0 25px 8px;
+  }
 }
 /* ########################### */
 /* ## ## ## UIPopOver ## ## ## */
@@ -1642,19 +1662,27 @@ div.segmentedcontrol.mini button {
   bottom: -5px;
 }
 .popover.selectable {
-  max-height: 300px;
-  border-radius: 0;
-  overflow: scroll;
+  margin: 0;
+  padding: 7px 0;
+  min-width: 35px;
 }
 .popover.selectable ul,
 .popover div.tabbed aside ul {
+  display: block;
   margin: 0;
-  padding: 2px 1px 1px;
+  padding: 1px 1px;
+  max-height: 300px;
   overflow-x: hidden;
   overflow-y: scroll;
   list-style-type: none;
 }
-.popover.selectable ul li {
+.popover.selectable ul::-webkit-scrollbar,
+.popover div.tabbed aside ul::-webkit-scrollbar {
+  display: none;
+}
+.popover.selectable li {
+  margin: -1px 0 0 0;
+  padding: 3px 15px 3px 10px;
   border-color: transparent;
   border-width: 1px 0;
   border-style: solid;
@@ -1663,25 +1691,47 @@ div.segmentedcontrol.mini button {
   -ms-transition: background-image 0.2s ease-in-out;
   -o-transition: background-image 0.2s ease-in-out;
   transition: background-image 0.2s ease-in-out;
-  margin: -1px 0 0 0;
-  padding: 3px 15px;
   text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 .popover.selectable ul li.active {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#319be7), to(#1b78d9));
-  background-image: -webkit-linear-gradient(top, #319be7, #1b78d9);
-  background-image: -moz-linear-gradient(top, #319be7, #1b78d9);
-  background-image: -ms-linear-gradient(top, #319be7, #1b78d9);
-  background-image: -o-linear-gradient(top, #319be7, #1b78d9);
-  background-image: linear-gradient(top, #319be7, #1b78d9);
+  background-color: #454545;
   color: #fafafa;
 }
-.popover ul li a {
+.popover li a {
   -webkit-transition: all none ease-in-out !important;
   -moz-transition: all none ease-in-out !important;
   -ms-transition: all none ease-in-out !important;
   -o-transition: all none ease-in-out !important;
   transition: all none ease-in-out !important;
+}
+.popover.dark {
+  -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
+  -ms-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
+  border-width: 1px;
+  color: #d7d7d7;
+}
+.popover.dark .popover-arrow {
+  -webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2) , inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2) , inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -ms-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2) , inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -o-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2) , inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2) , inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-width: 1px 0 0 1px;
+}
+.popover.dark,
+.popover.dark .popover-arrow {
+  background-color: #363636;
+  border-color: #000000 !important;
+}
+.popover.dark.selectable ul li.active {
+  background-color: #e1e1e1;
+  background-image: none;
+  color: #000;
 }
 div.tabbed {
   display: -webkit-box;
