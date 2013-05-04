@@ -39,6 +39,9 @@
             if (data.indexOf('change-on-select') !== -1) {
                 this.options.changeValueOnSelect = true;
             }
+            if (data.indexOf('dark') !== -1) {
+                this.options.dark = true;
+            }
 		}
         
         if (name) {
@@ -96,6 +99,7 @@
 	PopOver.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			align: false,
+            dark: false,
 			effect: 'scale',
 			position: 'auto',
 			parentPositioning: true,
@@ -110,7 +114,7 @@
 			defaultsActions: true,
 			movementX: 0,
 			movementY: 0,
-			margin: 0,
+			margin: 1,
 			translateY: 0,
 			scale: 0.1
 		},
@@ -124,11 +128,15 @@
 					this.arrow = this.object.children('.popover-arrow');
 				}
 			}
-			if(! this.options.roundCorner)
+			if(! this.options.roundCorner) {
 				this.object.css({ borderRadius: 0, paddingTop: 0, paddingBottom: 0 });
-			if(this.options.inheritWidth) 
+            }
+            if(this.options.inheritWidth) {
 				this.object.css({ minWidth: this.handler.clientWidth() - (this.object.clientWidth() - this.object.width()) });
-				
+            }
+            if (this.options.dark) {
+                this.object.addClass('dark');
+            }
 			if(this.options.defaultsActions) {
 				this.handler.mousedown(function(e) {
                     e.stopPropagation();
