@@ -29,58 +29,58 @@
 .margins (@margin: 0, @padding: 0) { margin:@margin; padding:@padding; }
 .position (@position:'static', @top:auto, @right:auto, @bottom:auto, @left:auto) { position:@position; top:@top; right:@right; bottom:@bottom; left:@left; }
 .linear-gradient (@from: top, @start: white, @end: black) { 
-	background-image:-webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
-	background-image:-webkit-linear-gradient(@from, @start, @end);
-	background-image:-moz-linear-gradient(@from, @start, @end);
-	background-image:-ms-linear-gradient(@from, @start, @end);
-	background-image:-o-linear-gradient(@from, @start, @end);
-	background-image:linear-gradient(@from, @start, @end);
+    background-image:-webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
+    background-image:-webkit-linear-gradient(@from, @start, @end);
+    background-image:-moz-linear-gradient(@from, @start, @end);
+    background-image:-ms-linear-gradient(@from, @start, @end);
+    background-image:-o-linear-gradient(@from, @start, @end);
+    background-image:linear-gradient(@from, @start, @end);
 }
 .linear-3-gradient (@first: white, @second: transparent, @third: black, @from: top) {
-	background-image:-webkit-gradient(linear, left top, left bottom, from(@first), color-stop(@second, 0.5), to(@third));
-	background-image:-webkit-linear-gradient(@from, @first, @second, @third);
-	background-image:-moz-linear-gradient(@from, @first, @second, @third);
-	background-image:-ms-linear-gradient(@from, @first, @second, @third);
-	background-image:-o-linear-gradient(@from, @first, @second, @third);
-	background-image:linear-gradient(@from, @first, @second, @third);
+    background-image:-webkit-gradient(linear, left top, left bottom, from(@first), color-stop(@second, 0.5), to(@third));
+    background-image:-webkit-linear-gradient(@from, @first, @second, @third);
+    background-image:-moz-linear-gradient(@from, @first, @second, @third);
+    background-image:-ms-linear-gradient(@from, @first, @second, @third);
+    background-image:-o-linear-gradient(@from, @first, @second, @third);
+    background-image:linear-gradient(@from, @first, @second, @third);
 }
 .radial-gradient (@start: white, @end: black, @shape: circle cover, @pos: center center) {
-	background-image:-webkit-radial-gradient(@pos, @shape, @start, @end);
-	background-image:-moz-radial-gradient(@pos, @shape, @start, @end);
-	background-image:radial-gradient(@pos, @shape, @start, @end);
+    background-image:-webkit-radial-gradient(@pos, @shape, @start, @end);
+    background-image:-moz-radial-gradient(@pos, @shape, @start, @end);
+    background-image:radial-gradient(@pos, @shape, @start, @end);
 }
 .shadow (@str: none) {
-	-webkit-box-shadow:@str;
-	-moz-box-shadow:@str;
-	-ms-box-shadow:@str;
-	-o-box-shadow:@str;
-	box-shadow:@str;
+    -webkit-box-shadow:@str;
+    -moz-box-shadow:@str;
+    -ms-box-shadow:@str;
+    -o-box-shadow:@str;
+    box-shadow:@str;
 }
 .outset-shadow (@color: rgba(0,0,0,0.1), @blur: 15px) { box-shadow:1px 0 @blur @color, -1px 0 @blur @color, 0 1px @blur @color, 0 -1px @blur @color; }
 .inset-shadow (@color: rgba(255,255,255,0.3), @blur: 0) { box-shadow:inset 0 0 @blur 1px @color; }
 
 .round-corner (@radius: 5px) { border-radius:@radius; }
 .text-shadow (@str: none) {
-	-webkit-text-shadow:@str;
-	-moz-text-shadow:@str;
-	-ms-text-shadow:@str;
-	-o-text-shadow:@str;
-	text-shadow:@str;
+    -webkit-text-shadow:@str;
+    -moz-text-shadow:@str;
+    -ms-text-shadow:@str;
+    -o-text-shadow:@str;
+    text-shadow:@str;
 }
 .transition (@time: .2s, @delegate: all, @effect: ease-in-out) {
-	@str: @delegate @time @effect;
-	-webkit-transition:@str;
-	-moz-transition:@str;
-	-ms-transition:@str;
-	-o-transition:@str;
-	transition:@str;
+    @str: @delegate @time @effect;
+    -webkit-transition:@str;
+    -moz-transition:@str;
+    -ms-transition:@str;
+    -o-transition:@str;
+    transition:@str;
 }
 .transform (@f: none) {
-	-webkit-transform:@f;
-	-moz-transform:@f;
-	-ms-transform:@f;
-	-o-transform:@f;
-	transform:@f;
+    -webkit-transform:@f;
+    -moz-transform:@f;
+    -ms-transform:@f;
+    -o-transform:@f;
+    transform:@f;
 }
 .sizing (@s: content-box) {
     -webkit-box-sizing:@s;
@@ -90,31 +90,31 @@
     box-sizing:@s;
 }
 .flex-parent (@o: horizontal) {
-	display:-webkit-box;
-	display:-moz-box;
-	display:-ms-box;
-	display:-o-box;
-	display:box;
-	-webkit-box-orient:@o;
-	-moz-box-orient:@o;
-	-ms-box-orient:@o;
-	-o-box-orient:@o;
-	box-orient:@o;
+    display:-webkit-box;
+    display:-moz-box;
+    display:-ms-box;
+    display:-o-box;
+    display:box;
+    -webkit-box-orient:@o;
+    -moz-box-orient:@o;
+    -ms-box-orient:@o;
+    -o-box-orient:@o;
+    box-orient:@o;
 }
 .flex (@f: 1) {
-	-webkit-box-flex:@f;
-	-moz-box-flex:@f;
-	-ms-box-flex:@f;
-	-o-box-flex:@f;
-	box-flex:@f;
+    -webkit-box-flex:@f;
+    -moz-box-flex:@f;
+    -ms-box-flex:@f;
+    -o-box-flex:@f;
+    box-flex:@f;
 }
 .animation (@name, @time: .2s, @i: 1, @function: ease-in-out) {
-	@str: @name @time @i @function;
-	-webkit-animation:@str;
-	-moz-animation:@str;
+    @str: @name @time @i @function;
+    -webkit-animation:@str;
+    -moz-animation:@str;
     -ms-animation:@str;
-	-o-animation:@str;
-	animation:@str;
+    -o-animation:@str;
+    animation:@str;
 }
 .appearance (@apr: none) {
     -webkit-appearance:@apr;
@@ -137,14 +137,14 @@
 * { 
     .margins(0, 0);
     .user-select(none);
-	color:inherit;
-	font-size:inherit;
-	font-weight:inherit;
-	font-style:inherit;
-	font-family:'Helvetica Neue', 'Helvetica', sans-serif;
+    color:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+    font-style:inherit;
+    font-family:'Helvetica Neue', 'Helvetica', sans-serif;
     line-height:inherit;
-	outline:none;
-	-webkit-font-smoothing:antialiased;
+    outline:none;
+    -webkit-font-smoothing:antialiased;
     -webkit-tap-highlight-color:transparent;
 }
 
@@ -154,7 +154,7 @@ body {
     .size(100%, 100%);
     .selection(#aaa);
     line-height:20px;
-	position:relative;
+    position:relative;
 }
 
 body.preload * {
@@ -208,11 +208,11 @@ span    { font-size:12px; }
 a {
     .transition(.3s);
     .sizing(border-box);
-	font-family:inherit;
-	font-size:inherit;
-	font-weight:normal;
-	text-decoration:none;
-	cursor:default;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:normal;
+    text-decoration:none;
+    cursor:default;
     
     &:hover {
         .text-shadow(0 0 5px rgba(0,0,0,0.4));
@@ -255,9 +255,9 @@ a {
     .shadow(inset 0 0 0 1px white ~"," inset 0 0 10px rgba(0,0,0,0) ~"," 0 0 10px rgba(150,150,150,0.9));
     .vertical-top;
     .nowrap;
-	border-width:1px 0 !important;
+    border-width:1px 0 !important;
     color:#666;
-	position:relative;
+    position:relative;
     z-index:2;
     overflow:hidden;
     
@@ -377,8 +377,8 @@ button, select, input[type=submit], input[type=reset], input[type=cancel], input
     .sizing(border-box);
     border:1px solid rgb(175,175,175);
     border-bottom-color:rgb(143,143,143);
-	color:#777;
-	font-size:15px;
+    color:#777;
+    font-size:15px;
     line-height:20px;
     
     &:hover {
@@ -405,19 +405,19 @@ button, select, input[type=submit], input[type=reset], input[type=cancel], input
 }
 
 button[data-badge-value]::after {
-	.square(12px);
-	.linear-gradient(top, fade(white, 70%), red 70%);
-	.border(white, 2px);
-	.round-corner(10px);
-	.outset-shadow();
-	padding:1px 2px 4px 3px;
-	background-color:red;
-	content:attr(data-badge-value);
-	font-size:13px;
-	font-weight:bold;
-	color:white;
-	text-shadow:none;
-	position:absolute; top:-8px; right:-9px;
+    .square(12px);
+    .linear-gradient(top, fade(white, 70%), red 70%);
+    .border(white, 2px);
+    .round-corner(10px);
+    .outset-shadow();
+    padding:1px 2px 4px 3px;
+    background-color:red;
+    content:attr(data-badge-value);
+    font-size:13px;
+    font-weight:bold;
+    color:white;
+    text-shadow:none;
+    position:absolute; top:-8px; right:-9px;
 }
 
 select {
@@ -440,9 +440,9 @@ input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
     .round-corner(5px);
     .shadow(e("inset 0 0 7px rgba(0,0,0,0.1), 0 0 0 1px white"));
     .transition(.3s);
-	display:inline-block;
-	font-size:13px;
-	color:#666;
+    display:inline-block;
+    font-size:13px;
+    color:#666;
     overflow:visible;
     vertical-align:top;
     
@@ -509,17 +509,17 @@ input.invalid, input:invalid, .invalid, :invalid {
 /* ## ## ## Checkbox & Radio ## ## ## */
 
 input[type=checkbox], input[type=radio], input[type=checkbox] + span.checkbox, input[type=radio] + span.radio { 
-	.square(18px);
+    .square(18px);
     .margins(7px 5px, 0);
-	.linear-gradient(top, white, #e2e2e2);
-	.border(#afafaf);
+    .linear-gradient(top, white, #e2e2e2);
+    .border(#afafaf);
     .shadow(inset 0 0 0 1px white);
-	.transition(.3s);
+    .transition(.3s);
     .sizing(content-box);
-	.inline-block;
+    .inline-block;
     .vertical-top;
-	color:#333;
-	position:relative;
+    color:#333;
+    position:relative;
     -webkit-appearance:none;
     
     &.mini  { .square(12px); }
@@ -567,8 +567,8 @@ input[type=radio], input[type=radio] + span.radio {
     }
 }
 input[type=checkbox]:checked, input[type=checkbox]:checked + span.checkbox, input[type=radio]:checked, input[type=radio]:checked + span.radio {
-	.linear-gradient(top, #eaeaea, white);
-	.border(#888);
+    .linear-gradient(top, #eaeaea, white);
+    .border(#888);
     
     &::after {
         opacity:1;
@@ -697,11 +697,11 @@ code, .code li {
 
 div.segmentedcontrol {
     .margins(2px 10px);
-	.round-corner(5px);
-	display:inline-block;
-	vertical-align:top;
-	font-size:13px;
-	list-style-type:none;
+    .round-corner(5px);
+    display:inline-block;
+    vertical-align:top;
+    font-size:13px;
+    list-style-type:none;
     
     button {
         .margins(0 0 0 -5px, 4px 18px 4px);
@@ -728,16 +728,16 @@ div.segmentedcontrol {
 .notification {
     .margins(0, 0);
     .linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
-	.border(rgb(169,169,169));
+    .border(rgb(169,169,169));
     .round-corner(5px);
     .shadow(e("inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2)"));
     min-width:10%;
-	max-width:25%;
-	margin:0;
-	color:#444;
-	position:fixed; top:30px; right:15px;
-	z-index:70;
-	cursor:default;
+    max-width:25%;
+    margin:0;
+    color:#444;
+    position:fixed; top:30px; right:15px;
+    z-index:70;
+    cursor:default;
     
     > header *, > section * {
         .margins(0, 0);
@@ -787,22 +787,22 @@ div.segmentedcontrol {
 
 .popover { 
     .linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
-	.border(rgba(169, 169, 169, 1));
-	.round-corner(4px);
-	.shadow(e("inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2)"));
+    .border(rgba(169, 169, 169, 1));
+    .round-corner(4px);
+    .shadow(e("inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2)"));
     min-height:40px; 
-	min-width:60px; 
-	padding:0; 
-	font:12px Tahoma,Arial; 
-	color:#555;
-	text-align:center;
-	position:absolute; 
-	opacity:0;
-	z-index:99;
-	cursor:default;
+    min-width:60px; 
+    padding:0; 
+    font:12px Tahoma,Arial; 
+    color:#555;
+    text-align:center;
+    position:absolute; 
+    opacity:0;
+    z-index:99;
+    cursor:default;
 
-    & * 			{ pointer-events:none; }
-    &.active * 	{ pointer-events:all; }
+    & *             { pointer-events:none; }
+    &.active *  { pointer-events:all; }
     
     header {
         padding:10px 15px 7px;
@@ -855,21 +855,21 @@ div.segmentedcontrol {
     }
     
     &                               { font-size:13px;   }
-    &.below		.popover-arrow		{ top:-9px;         }
-    &.above		.popover-arrow      { bottom:-9px;      }
+    &.below     .popover-arrow      { top:-9px;         }
+    &.above     .popover-arrow      { bottom:-9px;      }
     
     &.arrow-large                               { box-shadow:inset 0 0 0 1px white, 0 0 18px rgba(0,0,0,0.4); font-size:16px; }
-    &.arrow-large			.popover-arrow		{ width:18px; height:18px; }
-    &.arrow-large.below		.popover-arrow		{ top:-11px; }
-    &.arrow-large.above		.popover-arrow		{ bottom:-11px; }
+    &.arrow-large           .popover-arrow      { width:18px; height:18px; }
+    &.arrow-large.below     .popover-arrow      { top:-11px; }
+    &.arrow-large.above     .popover-arrow      { bottom:-11px; }
     &.arrow-small                               { box-shadow:inset 0 0 0 1px white, 0 0 10px rgba(0,0,0,0.3); font-size:11px; }
-    &.arrow-small			.popover-arrow 		{ width:11px; height:11px; }
-    &.arrow-small.below		.popover-arrow		{ top:-7px; }
-    &.arrow-small.above		.popover-arrow		{ bottom:-7px; }
-    &.arrow-mini								{ box-shadow:inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.2); font-size:11px; }
-    &.arrow-mini 			.popover-arrow 		{ width:7px; height:7px; }
-    &.arrow-mini.below 		.popover-arrow 		{ top:-5px; }
-    &.arrow-mini.above	 	.popover-arrow 		{ bottom:-5px; }
+    &.arrow-small           .popover-arrow      { width:11px; height:11px; }
+    &.arrow-small.below     .popover-arrow      { top:-7px; }
+    &.arrow-small.above     .popover-arrow      { bottom:-7px; }
+    &.arrow-mini                                { box-shadow:inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.2); font-size:11px; }
+    &.arrow-mini            .popover-arrow      { width:7px; height:7px; }
+    &.arrow-mini.below      .popover-arrow      { top:-5px; }
+    &.arrow-mini.above      .popover-arrow      { bottom:-5px; }
     
     &.selectable {
         .margins(0, 7px 0);
@@ -954,7 +954,7 @@ div.tabbed aside ul li {
     margin:-1px -1px 0 -1px;
     padding:7px 15px 7px 30px;
     font-family:Courier;
-	font-size:14px;
+    font-size:14px;
     text-align:right;
     position:relative;
     z-index:5;
@@ -980,64 +980,64 @@ div.tabbed section footer {
 /* ## ## ## UIAlert ## ## ## */
 
 div.alert {
-	display:-webkit-box;
-	margin:0;
-	text-align:center;
-	-webkit-box-orient:horizontal;
-	-webkit-box-align:center;
-	-webkit-box-pack:center;
-	position:fixed; top:0; right:0; bottom:0; left:0; z-index:100;
+    display:-webkit-box;
+    margin:0;
+    text-align:center;
+    -webkit-box-orient:horizontal;
+    -webkit-box-align:center;
+    -webkit-box-pack:center;
+    position:fixed; top:0; right:0; bottom:0; left:0; z-index:100;
 }
 div.alert-fog {
-	display:inline-block;
-	background-image:-webkit-radial-gradient(transparent, #000);
-	margin:0; padding:0;
-	position:absolute; top:0; right:0; bottom:-1px; left:0;
-	z-index:100;
-	overflow:hidden;
+    display:inline-block;
+    background-image:-webkit-radial-gradient(transparent, #000);
+    margin:0; padding:0;
+    position:absolute; top:0; right:0; bottom:-1px; left:0;
+    z-index:100;
+    overflow:hidden;
 }
 div.alert-border {
-	display:inline-block;
-	background-color:rgba(255,255,255,1);
-	min-width:300px;
-	padding:8px;
-	border:1px solid rgba(28,28,28,0.6);
-	border-radius:20px;
-	box-shadow:inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.5);
-	position:relative; top:-50px;
-	z-index:101;
-	overflow:hidden;
+    display:inline-block;
+    background-color:rgba(255,255,255,1);
+    min-width:300px;
+    padding:8px;
+    border:1px solid rgba(28,28,28,0.6);
+    border-radius:20px;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.5);
+    position:relative; top:-50px;
+    z-index:101;
+    overflow:hidden;
 }
 div.alert-body {
-	background-image:-webkit-linear-gradient(top, rgba(255,255,255,1), rgba(230,230,230,1));
-	padding:15px 20px;
-	border:1px solid rgb(169,169,169);
-	border-radius:13px;
-	box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1);
-	z-index:100;
-	position:relative;
+    background-image:-webkit-linear-gradient(top, rgba(255,255,255,1), rgba(230,230,230,1));
+    padding:15px 20px;
+    border:1px solid rgb(169,169,169);
+    border-radius:13px;
+    box-shadow:inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1);
+    z-index:100;
+    position:relative;
 }
 
 div.alert-body > header {
-	color:rgb(49,49,49);
-	font-size:23px;
+    color:rgb(49,49,49);
+    font-size:23px;
 }
 
 div.alert-body > section {
-	min-height:20px;
-	color:rgb(71,71,71);
-	font-size:15px;
+    min-height:20px;
+    color:rgb(71,71,71);
+    font-size:15px;
 }
 
 div.alert-body > footer {
-	margin:15px -20px -15px; padding:10px;
-	border-top:1px solid rgb(190,190,190);
-	box-shadow:inset 0 1px 0 white;
-	text-align:center;
+    margin:15px -20px -15px; padding:10px;
+    border-top:1px solid rgb(190,190,190);
+    box-shadow:inset 0 1px 0 white;
+    text-align:center;
 }
 div.alert-body > footer button {
-	margin-right:10px; margin-left:10px;
-	padding-right:25px; padding-left:25px;
+    margin-right:10px; margin-left:10px;
+    padding-right:25px; padding-left:25px;
 }
 
 /* ######################## */
@@ -1048,13 +1048,13 @@ div.hint {
     .linear-gradient(top, rgba(255,241,195,1), rgba(255,227,131,1));
     .border(rgba(180,158,34,1));
     .round-corner(2px);
-	.inset-shadow(white);
+    .inset-shadow(white);
     .non-events;
-	font-size:11px;
-	color:#424242;
-	position:absolute; top:50%; left:50%;
-	z-index:100;
-	opacity:0;
+    font-size:11px;
+    color:#424242;
+    position:absolute; top:50%; left:50%;
+    z-index:100;
+    opacity:0;
 }
 
 /* ########################## */
@@ -1065,73 +1065,73 @@ div.hint {
     .margins(5px 7px, 0);
     .linear-gradient(top, white, #eaeaea);
     .border(rgba(129,129,129,1), 1px);
-	.round-corner(13px);
+    .round-corner(13px);
     .inline-block;
     .vertical-top;
     .align-left !important;
-	position:relative;
-	z-index:3;
-	overflow:hidden;
-	-webkit-user-select:none;
+    position:relative;
+    z-index:3;
+    overflow:hidden;
+    -webkit-user-select:none;
 }
 .switch-container {
-	height:20px;
-	margin:0;
-	position:relative;
-	z-index:2;
+    height:20px;
+    margin:0;
+    position:relative;
+    z-index:2;
 }
 .switch-container > * {
-	.inline-block;
+    .inline-block;
     .vertical-top;
 }
 .switch-container > input, .switch-container > input:checked, .switch.checked input, .switch input:active {
-	.square(22px);
+    .square(22px);
     .border(rgba(129,129,129,1), 1px);
     .round-corner(20px) !important;
     .shadow(e("inset 0 0 0 1px white, 0 0 7px rgba(0,0,0,0.4)"));
-	margin:-1px -11px !important;
-	position:relative;
-	z-index:3;
-	-moz-appearance:radio;
-	-webkit-appearance:none;
+    margin:-1px -11px !important;
+    position:relative;
+    z-index:3;
+    -moz-appearance:radio;
+    -webkit-appearance:none;
 }
 .switch-container > .slider {
     .size(55px, 20px);
     .linear-gradient(bottom, rgb(255,255,255), rgb(230,230,230));
     .shadow(inset 0 0 7px #bababa);
-	margin:0 0 0 -45px;
-	position:relative;
-	z-index:1;
+    margin:0 0 0 -45px;
+    position:relative;
+    z-index:1;
 }
 
 .switch-container > input::before, .switch-container > input:checked::before,
 .switch-container > input::after, .switch-container > input:checked::after {
-	.block !important;
+    .block !important;
     .non-events;
-	color:#555;
-	font:bold 12px Verdana, Arial, sans-serif;
-	position:relative;
-	opacity:1 !important;
+    color:#555;
+    font:bold 12px Verdana, Arial, sans-serif;
+    position:relative;
+    opacity:1 !important;
 }
 .switch-container > input::before, .switch-container > input:checked::before {
-	content:"ON";
-	top:3px; left:-30px;
+    content:"ON";
+    top:3px; left:-30px;
 }
 .switch-container > input::after, .switch-container > input:checked::after {
-	content:"OFF" !important;
-	top:-12px; left:28px;
+    content:"OFF" !important;
+    top:-12px; left:28px;
 }
 
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */
 
 .filepicker {
-	.block;
-	.background(#fff);
+    .block;
+    .background(#fff);
     .border(rgb(175,175,175));
     .round-corner(5px);
     .shadow(e("inset 0 0 7px rgba(0,0,0,0.1), 0 1px 0 white"));
-	.user-select(none);
+    .user-select(none);
     overflow:hidden;
     
     div.item {
@@ -1151,10 +1151,10 @@ div.hint {
 /* ## ## ## UITable ## ## ## */
 
 table {
-	width:100%;
-	margin:0 auto;
-	border-collapse:collapse;
-	font-size:13px;
+    width:100%;
+    margin:0 auto;
+    border-collapse:collapse;
+    font-size:13px;
     
     thead th, tfoot td {
         .linear-gradient(top, white, #d0d0d0);
