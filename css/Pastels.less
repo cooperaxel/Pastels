@@ -15,13 +15,19 @@
 @gray:#d0d0d0;
 @black:#666;
 
-@mobile: ~"screen and (max-width:700px), screen and (max-device-width:700px)";
+@max_320: ~"screen and (max-width:320px)";
+@max_480: ~"screen and (max-width:480px)";
+@max_640: ~"screen and (max-width:640px)";
+@max_960: ~"screen and (max-width:960px)";
+@max_1025: ~"screen and (max-width:1025px)";
+@max_1280: ~"screen and (max-width:1280px)";
 
 .size (@width: 100px, @height: 20px) { width:@width; height:@height; }
 .square (@size) { width:@size; height:@size; }
 .background (@str: none) { background-color:@str; }
 .border (@color: #afafaf, @width: 1px, @type: solid) { border-color:@color; border-width:@width; border-style:@type; }
 .margins (@margin: 0, @padding: 0) { margin:@margin; padding:@padding; }
+.position (@position:'static', @top:auto, @right:auto, @bottom:auto, @left:auto) { position:@position; top:@top; right:@right; bottom:@bottom; left:@left; }
 .linear-gradient (@from: top, @start: white, @end: black) { 
 	background-image:-webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
 	background-image:-webkit-linear-gradient(@from, @start, @end);
@@ -248,10 +254,12 @@ a {
     .border(rgb(132,138,155));
     .shadow(inset 0 0 0 1px white ~"," inset 0 0 10px rgba(0,0,0,0) ~"," 0 0 10px rgba(150,150,150,0.9));
     .vertical-top;
+    .nowrap;
 	border-width:1px 0 !important;
     color:#666;
 	position:relative;
-    z-index:3;
+    z-index:2;
+    overflow:hidden;
     
     &.fixed         { position:fixed;   top:0;      right:0;    left:0; }
     &.fixed.bottom  { position:fixed;   bottom:0;   right:0;    left:0; }
@@ -337,6 +345,14 @@ a {
     &.mini li   { font-size:10px;       span, a { height:10px;  line-height:10px;   padding:5px 10px 5px;     }}
     &.small li  { font-size:12px;       span, a { height:15px;  line-height:15px;   padding:8px 12px 7px;     }}
     &.large li  { font-size:16px;       span, a { height:25px;  line-height:25px;   padding:13px 20px 12px;   }}
+    
+    @media @max_960 {
+        .fixed;
+        
+        &, ul, ol {
+            padding:0 1px;
+        }
+    }
 }
 
 /* ############################### */
@@ -379,6 +395,13 @@ button, select, input[type=submit], input[type=reset], input[type=cancel], input
     &.large { .size(auto, 40px);    .round-corner(6px);     padding:7px 18px;   font-size:18px; }
     &.small { .size(auto, 26px);    .round-corner(4px);     padding:2px 8px;    font-size:12px; }
     &.mini  { .size(auto, 22px);    .round-corner(3px);     padding:0 6px;      font-size:11px; }
+    
+    @media @max_640 {
+        .size(auto, 25px);
+        .margins(2px, 1px 8px);
+        font-size:12px;
+        line-height:18px;
+    }
 }
 
 button[data-badge-value]::after {
@@ -432,6 +455,12 @@ input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
         .border(rgba(129,129,129,1));
         .shadow(e("inset 0 0 10px rgba(0,0,0,0.15), 0 0 13px rgba(0,0,0,0.3)"));
         color:#222;
+    }
+    
+    @media @max_640 {
+        .size(70px, 18px);
+        .margins(4px 2px, 2px 5px);
+        font-size:12px;
     }
 }
 textarea {
@@ -738,12 +767,11 @@ div.segmentedcontrol {
         font-size:10px;
         -webkit-box-flex:1;
     }
-}
-@media @mobile {
-    .notification {
+    
+    @media @max_640 {
         .round-corner(0);
+        .position(fixed, auto, 0, 0, 0) !important;
         max-width:none;
-        position:fixed; top:0; right:0; left:0;
         
         > header {
             padding:8px 25px 0;
