@@ -56,7 +56,7 @@
 		
 	var Notification = function(header, content, opt) {
 		if(!(this instanceof Notification)) {
-			return new Notification(header,content, opt);;
+			return new Notification(header,content, opt);
 		}
 		var self = this;
 
@@ -82,61 +82,76 @@
 			margin: 40,
             position: 'top-right',
 			autoexpire: true,
-			isAlert: false
+			isAlert: false,
+            miniScreen: false
 		},
 		
 		prepare: function(h, c) {
 			this.object.css({ opacity:0 });
 			this.object.append($.create('header').append($.create('h1').html(h))).append($.create('section').append($.create('p').html(c)));
-			
+			this.object.mousedown($.invoke(this.close, this));
+            
+            if ($.media('screen and (max-width:700px)') || $.media('screen and (max-device-width:700px)')) {
+                this.options.miniScreen = true;
+            }
+            
 			if(this.options.isAlert) {
 				var foo = $.create('footer');
 				foo.html('<button type="submit">Details</button><button type="cancel">Cancel</button>');
 				this.object.append(foo);
-			} else {
-				this.object.mousedown($.invoke(this.close, this))
-					.mouseover($.invoke(this.object.fadeTo, this.object, [0.6]))
+			} else if (this.options.miniScreen != true) {
+				this.object.mouseover($.invoke(this.object.fadeTo, this.object, [0.6]))
 					.mouseout($.invoke(this.object.fadeIn, this.object));
 			}
 		},
 		
 		setPosition: function() {
-			var posX = 0, posY = 0;
-			if(Stack.len() === Stack.length)
-				Stack.last().close();
-		
-			this.index = Stack.save(this);
+            if (this.options.miniScreen) {
+                this.object.css({ opacity:0, rotateX:90, origin:'0 0' });
+                
+            } else {
+                var posX = 0, posY = 0;
+                if(Stack.len() === Stack.length)
+                    Stack.last().close();
             
-            if (this.options.position === 'top-right') {
-                posX = this.options.margin;
-                posY = (this.object.clientHeight() + this.options.margin) * this.index + this.options.margin + 10;
+                this.index = Stack.save(this);
                 
-                if(posY + this.object.clientHeight() + this.options.margin*3 > $().clientHeight()) {
-                    posX = posX + this.object.clientWidth() + this.options.margin;
-                    posY = this.options.margin + 10;
+                if (this.options.position === 'top-right') {
+                    posX = this.options.margin;
+                    posY = (this.object.clientHeight() + this.options.margin) * this.index + this.options.margin + 10;
+                    
+                    if(posY + this.object.clientHeight() + this.options.margin*3 > $().clientHeight()) {
+                        posX = posX + this.object.clientWidth() + this.options.margin;
+                        posY = this.options.margin + 10;
+                    }
+                } else if (this.options.position === 'bottom-right') {
+                    posX = this.options.margin;
+                    posY = $().clientHeight() - (this.object.clientHeight() + this.options.margin) * (this.index+1);
+                    
+                } else if (this.options.position === 'top-left') {
+                    posX = $().clientWidth() - this.object.clientWidth() - this.options.margin;
+                    posY = (this.object.clientHeight() + this.options.margin) * this.index + this.options.margin + 10;
+                    
+                } else if (this.options.position === 'bottom-left') {
+                    posX = $().clientWidth() - this.object.clientWidth() - this.options.margin;
+                    posY = $().clientHeight() - (this.object.clientHeight() + this.options.margin) * (this.index+1);
                 }
-            } else if (this.options.position === 'bottom-right') {
-                posX = this.options.margin;
-                posY = $().clientHeight() - (this.object.clientHeight() + this.options.margin) * (this.index+1);
                 
-            } else if (this.options.position === 'top-left') {
-                posX = $().clientWidth() - this.object.clientWidth() - this.options.margin;
-                posY = (this.object.clientHeight() + this.options.margin) * this.index + this.options.margin + 10;
-                
-            } else if (this.options.position === 'bottom-left') {
-                posX = $().clientWidth() - this.object.clientWidth() - this.options.margin;
-                posY = $().clientHeight() - (this.object.clientHeight() + this.options.margin) * (this.index+1);
+                this.object.css({ position:'fixed', top: posY, right: posX, opacity:0, skewY:15, translateY: -this.object.clientHeight() });
             }
-			
-			this.object.css({ position:'fixed', top: posY, right: posX, opacity:0, skewY:15, translateY: -this.object.clientHeight() });
 		},
 		
 		show: function() {
 			var self = this;
-
-			self.object.animate({ opacity:1, skewY:0, translateY:0 }, self.options.duration, function() {
-				this.emit('disappear');
-			});
+            if (this.options.miniScreen) {
+                self.object.animate({ opacity:1, rotateX:0, origin:'0 0' }, self.options.duration, function() {
+                    this.emit('appear');
+                });
+            } else {
+                self.object.animate({ opacity:1, skewY:0, translateY:0 }, self.options.duration, function() {
+                    this.emit('appear');
+                });
+            }
 			
 			if(self.options.autoexpire)
 				self.timer();
@@ -144,18 +159,26 @@
 		close: function() {
 			var self = this;
 			
-			if(this.timeout)
+			if(this.timeout) {
 				clearTimeout(this.timeout);
-				
+            }
 			this.expired = true;
 			this.object.off('mouseup mouseover mouseout');			
 			Stack.delete(self.index);
-			
-			this.object.animate({ opacity:0, skewX:-40, translateX: (self.object.clientWidth() + this.options.margin*2) }, this.options.duration, function() {
-				this.emit('disappear');
-				self.removeFromDOM();
-				self.destroy();
-			});
+            
+            if (this.options.miniScreen) {
+                this.object.animate({ opacity:1, rotateX:-90, origin:'0 0' }, this.options.duration, function() {
+                    this.emit('disappear');
+                    self.removeFromDOM();
+                    self.destroy();
+                });
+            } else {
+                this.object.animate({ opacity:0, skewX:-40, translateX: (self.object.clientWidth() + this.options.margin*2) }, this.options.duration, function() {
+                    this.emit('disappear');
+                    self.removeFromDOM();
+                    self.destroy();
+                });
+            }
 		},
 		timer: function() {
 			var self = this;
