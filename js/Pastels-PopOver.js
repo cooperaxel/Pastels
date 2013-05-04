@@ -141,10 +141,6 @@
 				this.handler.mousedown(function(e) {
                     e.stopPropagation();
 					$.document.emit('mousedown');
-					if(self.options.refreshPosition)
-						self.setPosition();
-					
-					self.show();
                     
 					self.object.mousedown(function(e) {
 						e.stopPropagation();
@@ -156,6 +152,13 @@
 							$.document.off('mousedown mouseup');
 						});
 					});
+                    
+                    if(self.options.refreshPosition) {
+                        self.insertToDOM();
+                        self.setPosition();
+                    }
+					
+					self.show();
 				});
 				
 				self.object.find('button[type=cancel]').mouseup(function() {
@@ -223,7 +226,7 @@
 				self = this, 
 				posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
 				origin = this.handler.origin();
-				
+            
 			if(this.options.arrow) {
 				arrowLength = parseInt(this.arrow.height()/2)+1;
 				arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * this.arrow.clientHeight())/2))+1;
@@ -310,7 +313,7 @@
 		
 		show: function() {
 			var self = this;
-			this.insertToDOM();		
+            this.insertToDOM();
 			if(! this.object.hasClass('active')) {
                 this.object.show().animate({ opacity:1, translateY:0, scale:1 }, this.options.duration, function() {
                     self.object.find('input, textarea').focus();
