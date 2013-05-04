@@ -115,6 +115,7 @@
 
 $(function() {
     $().removeClass('preload');
+    window.scrollTo(0, 0);
     
     if ($.browser.webkit !== true) {
         $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
