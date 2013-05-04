@@ -4,11 +4,15 @@
 
 (function(window) {
     
-    var PopOver = function(obj, handler, opt) {
+    var PopOver = function(handler, opt) {
 		if(!(this instanceof PopOver)) {
-			return new PopOver(obj, handler, opt);
+			return new PopOver(handler, opt);
 		}
-		var self = this, data = handler.data('popover'), values = handler.data('values');
+		var self = this,
+            data = handler.data('popover'),
+            name = handler.data('popover-name'),
+            values = handler.data('values'),
+            obj;
 		
 		this.options = {}.extend(PopOver.prototype.defaults, opt);
 		this.handler = handler;
@@ -29,12 +33,25 @@
 			if(data.indexOf('refresh') !== -1) {
 				this.options.refreshPosition = true;
 			}
+            if (data.indexOf('no-animation') !== -1) {
+                this.options.duration = 0;
+            }
             if (data.indexOf('change-on-select') !== -1) {
                 this.options.changeValueOnSelect = true;
             }
+            if (data.indexOf('dark') !== -1) {
+                this.options.dark = true;
+            }
 		}
+        
+        if (name) {
+            obj = $('#'+name);
+        } else if (handler.hasAttr('id')) {
+            obj = $('#popover-'+handler.attr('id'));
+        }
 		
 		if(obj && obj.length > 0) {
+            obj.addClass('popover');
 			if(obj.item(0).tagName.toLowerCase() == 'ul') {
 				this.object = $.create('div.popover.selectable');
 				this.selectList = obj;
@@ -64,7 +81,7 @@
 			}
 		}
 		
-		if(values) {
+        if (values) {
 			var arr = values.split(','), li = $.create('li');
 			for(var i = 0; i < arr.length; i++) {
 				this.selectList.append(li.clone().html(arr[i]));
@@ -74,29 +91,19 @@
 		this.insertToDOM();
 		this.prepare();
 		this.setPosition();
-		this.removeFromDOM();
+        this.removeFromDOM();
 		
-		return this;
-	};
-	
-	$.prototype.PopOver = function(opt) {
-		$.each(this, function() {
-			var $this = $(this),
-				id = this.getAttribute('id'),
-				obj = id ? $('div#popover-'+id) : null;
-            
-			this.popover = new PopOver(obj, $this, opt);
-		});
 		return this;
 	};
 	
 	PopOver.prototype = {}.extend(Pastels.prototype, {
 		defaults: {
 			align: false,
+            dark: false,
 			effect: 'scale',
 			position: 'auto',
 			parentPositioning: true,
-			duration: 500,
+			duration: 300,
 			refreshPosition: false,
 			arrow: true,
 			roundCorner: true,
@@ -107,7 +114,7 @@
 			defaultsActions: true,
 			movementX: 0,
 			movementY: 0,
-			margin: 0,
+			margin: 1,
 			translateY: 0,
 			scale: 0.1
 		},
@@ -121,11 +128,15 @@
 					this.arrow = this.object.children('.popover-arrow');
 				}
 			}
-			if(! this.options.roundCorner)
+			if(! this.options.roundCorner) {
 				this.object.css({ borderRadius: 0, paddingTop: 0, paddingBottom: 0 });
-			if(this.options.inheritWidth) 
+            }
+            if(this.options.inheritWidth) {
 				this.object.css({ minWidth: this.handler.clientWidth() - (this.object.clientWidth() - this.object.width()) });
-				
+            }
+            if (this.options.dark) {
+                this.object.addClass('dark');
+            }
 			if(this.options.defaultsActions) {
 				this.handler.mousedown(function(e) {
                     e.stopPropagation();
@@ -227,8 +238,7 @@
 					this.options.position = 'below';
 				} else {
 					this.options.position = 'above';
-				}		
-				
+				}
 			}
 			
 			if(self.options.position === 'below') {
@@ -283,8 +293,12 @@
             
 			this.options.translateY = this.options.translateY * this.radio;
 			this.object.removeClass('below above right left').addClass(self.options.position);
-			if(this.object.css('position') !== 'absolute')
-				this.object.css({ position:'absolute' });
+			
+            if (this.handler.parents('.fixed').length > 0) {
+                this.object.css({ position:'fixed' });
+            } else {
+                this.object.css({ position:'absolute' });
+            }
 			this.object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
 			
 			if(['below','above'].indexOf(this.options.position) !== -1) {
@@ -298,11 +312,11 @@
 			var self = this;
 			this.insertToDOM();		
 			if(! this.object.hasClass('active')) {
-				this.object.show().animate({ opacity:1, translateY:0, scale:1 }, this.options.duration, function() {
-					self.object.find('input, textarea').focus();
+                this.object.show().animate({ opacity:1, translateY:0, scale:1 }, this.options.duration, function() {
+                    self.object.find('input, textarea').focus();
                     self.object.addClass('active');
-					self.object.emit('appear');
-				});
+                    self.object.emit('appear');
+                });
 			}
 			return this;
 		},

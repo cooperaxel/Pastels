@@ -7,8 +7,8 @@
 		this.observers = {};
 	};
 	
-    Pastels.version = '0.1.8';
-    Pastels.codename = 'Inchworm';
+    Pastels.version = '0.1.9';
+    Pastels.codename = 'Unmellow Yellow';
     
 	Pastels.prototype = {
 		
@@ -39,18 +39,31 @@
 			this.object.emit('destroy');
 		}
 	};
-	window.Pastels = Pastels;
+    
+    Pastels.require = function(component, callback) {
+        $.require('js/Pastels-'+component+'.js', callback);
+    };
     
     $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
         window[k] = function() {
             var $this = this, args = arguments;
-            $.require('js/Pastels-'+k+'.js', function() {
+            Pastels.require(k, function() {
                 if (window[k] !== $this) {
                     return window[k].apply(window, args);
                 }
             });
         }
     });
+    
+    $.prototype.PopOver = function(opt) {
+        if (!(PopOver instanceof Pastels)) {
+            Pastels.require('PopOver');
+        }
+		$.each(this, function(n) {
+			n.PopOver = new PopOver(this, opt);
+		});
+		return this;
+    };
     
 	$.prototype.dragNdrop = function() {
 		var self = this;
@@ -96,21 +109,42 @@
 			});
 		}
 	};
+    
+    window.Pastels = Pastels;
 })(window);
 
 $(function() {
     $().removeClass('preload');
+    window.scrollTo(0, 0);
     
     if ($.browser.webkit !== true) {
-        $('input[type=checkbox]', 'input[type=radio]').each(function() {
-            var $this = $(this),
-                type = this.type,
+        $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
+            var type = n.type,
                 span = $.create('span.'+type);
             
-            span.addClass($this.item(0).className);
-            $this.hide().after(span);
+            span.addClass(n.className);
+            this.hide().after(span);
             
-            span.mouseup($.invoke($this.click, $this));
+            span.mouseup($.invoke(this.click, this));
         });
     }
+    
+    var navs = $('nav.bar, .navbar');
+    navs.each(function() {
+        var $this = this,
+            li = $this.find('li'),
+            li_a = $this.find('li a');
+        
+        li_a.mousedown(function(e) {
+            li.removeClass('active');
+            $(this).parent().addClass('active');
+        });
+        li.mousedown(function(e) {
+            var self = $(this);
+            if (e.target != self.children('a').item(0))
+                self.children('a').emit('mousedown');
+        });
+    });
+    
+    $('.popover-handler').PopOver();
 });
