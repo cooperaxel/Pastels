@@ -1090,6 +1090,18 @@
                 return false;
             }
             return (window.matchMedia && window.matchMedia(q).matches);
+        },
+        mediaListener: function(q, f, onMatches) {
+            if (!q || !f || !window.matchMedia) return false;
+            var mql = window.matchMedia(q),
+                listener = function(mql) {
+                if (onMatches == null || (onMatches == true && mql.matches)) {
+                    f.call(window, mql);
+                }
+            };
+            mql.addListener(listener);
+            listener(mql);
+            return true;
         }
     });
         
