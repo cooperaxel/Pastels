@@ -52,18 +52,17 @@
                     return window[k].apply(window, args);
                 }
             });
-        }
+        };
+        $.prototype[k] = function(a1, a2, a3) {
+            if (!(k instanceof Pastels)) {
+                Pastels.require(k);
+            }
+            $.each(this, function(n) {
+                n[k] = eval("new "+k+"(this, a1, a2, a3);");
+            });
+            return this;
+        };
     });
-    
-    $.prototype.PopOver = function(opt) {
-        if (!(PopOver instanceof Pastels)) {
-            Pastels.require('PopOver');
-        }
-		$.each(this, function(n) {
-			n.PopOver = new PopOver(this, opt);
-		});
-		return this;
-    };
     
 	$.prototype.dragNdrop = function() {
 		var self = this;
@@ -115,7 +114,9 @@
 
 $(function() {
     $().removeClass('preload');
-    window.scrollTo(0, 0);
+    if ($.browser.mobile) {
+        window.scrollTo(0, 0);
+    }
     
     if ($.browser.webkit !== true) {
         $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
@@ -134,6 +135,14 @@ $(function() {
         var $this = this,
             li = $this.find('li'),
             li_a = $this.find('li a');
+        
+        $this.find('a').each(function() {
+            if (this.attr('href') == window.location.hash) {
+                li.removeClass('active');
+                this.parents('li').addClass('active');
+                return false;
+            }
+        });
         
         li_a.mousedown(function(e) {
             li.removeClass('active');
