@@ -83,17 +83,18 @@
             position: 'top-right',
 			autoexpire: true,
 			isAlert: false,
-            miniScreen: false
+            mobileMode: false
 		},
 		
 		prepare: function(h, c) {
-			this.object.css({ opacity:0 });
-			this.object.append($.create('header').append($.create('h1').html(h))).append($.create('section').append($.create('p').html(c)));
-			this.object.mousedown($.invoke(this.close, this));
+			var self = this;
+            self.object.css({ opacity:0 });
+            self.object.append($.create('header').append($.create('h1').html(h))).append($.create('section').append($.create('p').html(c)));
+            self.object.mousedown($.invoke(this.close, this));
             
-            if ($.media('screen and (max-width:700px)') || $.media('screen and (max-device-width:700px)')) {
-                this.options.miniScreen = true;
-            }
+            $.mediaListener('screen and (max-width:640px)', function(mql) {
+                self.options.mobileMode = mql.matches;
+            });
             
 			if(this.options.isAlert) {
 				var foo = $.create('footer');
@@ -106,8 +107,8 @@
 		},
 		
 		setPosition: function() {
-            if (this.options.miniScreen) {
-                this.object.css({ opacity:0, rotateX:90, origin:'0 0' });
+            if (this.options.mobileMode) {
+                this.object.css({ opacity:0, rotateX:-90, origin:'0 100%' });
                 
             } else {
                 var posX = 0, posY = 0;
@@ -143,8 +144,8 @@
 		
 		show: function() {
 			var self = this;
-            if (this.options.miniScreen) {
-                self.object.animate({ opacity:1, rotateX:0, origin:'0 0' }, self.options.duration, function() {
+            if (this.options.mobileMode) {
+                self.object.animate({ opacity:1, rotateX:0, origin:'0 100%' }, self.options.duration, function() {
                     this.emit('appear');
                 });
             } else {
@@ -166,8 +167,8 @@
 			this.object.off('mouseup mouseover mouseout');			
 			Stack.delete(self.index);
             
-            if (this.options.miniScreen) {
-                this.object.animate({ opacity:1, rotateX:-90, origin:'0 0' }, this.options.duration, function() {
+            if (this.options.mobileMode) {
+                this.object.animate({ opacity:1, rotateX:90, origin:'0 100%' }, this.options.duration, function() {
                     this.emit('disappear');
                     self.removeFromDOM();
                     self.destroy();
