@@ -7,8 +7,8 @@
 		this.observers = {};
 	};
 	
-    Pastels.version = '0.1.8';
-    Pastels.codename = 'Inchworm';
+    Pastels.version = '0.1.9';
+    Pastels.codename = 'Unmellow Yellow';
     
 	Pastels.prototype = {
 		
