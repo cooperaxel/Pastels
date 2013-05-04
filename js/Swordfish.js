@@ -14,8 +14,8 @@
         return this.init.apply(this, arguments);
     };
     
-    $.version = '0.1.3';
-    $.codename = 'Lefteye Flounder';
+    $.version = '0.1.4';
+    $.codename = 'Garpike';
     
     $.extend = function() {
         for(var i = 1; i < arguments.length; i++) {
@@ -1084,6 +1084,12 @@
                 }
             }
             return this;
+        },
+        media: function(q) {
+            if (!q || typeof q !== 'string') {
+                return false;
+            }
+            return (window.matchMedia && window.matchMedia(q).matches);
         }
     });
         
