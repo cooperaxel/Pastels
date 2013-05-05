@@ -209,17 +209,17 @@
         filter: function(f) {
             var a = [];
             if(f instanceof Function) {
-                $.each(this, function() {
-                    if(f.call(this) === true)
-                        a.push(this);
+                $.each(this, function(n) {
+                    if(f.call(this, n) === true)
+                        a.push(n);
                 });
             } else if(typeof f === "string") {
                 var p = $.parseSelector(f);
                 if(!p) return this;
                 
-                $.each(this, function() {
-                    if($.checkElement(this, p))
-                        a.push(this);
+                $.each(this, function(n) {
+                    if($.checkElement(n, p))
+                        a.push(n);
                 });
             }
             return new $(a);
@@ -229,9 +229,9 @@
                 var p = $.parseSelector(s);
                 if(!p) return this;
                 
-                $.each(this, function() {
-                    if($.checkElement(this, p))
-                        arguments[2].delete(arguments[1]);
+                $.each(this, function(n,i,t) {
+                    if($.checkElement(n, p))
+                        t.delete(i);
                 });
             } else {
                 if(!(s instanceof $)) s = [s];
@@ -351,7 +351,7 @@
             if (p instanceof Object) {
                 $.each(this, function(n) {
                     for (var s in p) {
-                        n[s] = p;
+                        n[s] = p[s];
                     }
                 });
             } else {
@@ -1060,19 +1060,21 @@
             if(!p) return false;
             var r = false,
                 s = document.createElement('script');
-            s.async = true;
-            s.type = 'text/javascript';
-            s.src = p;
-            s.onload = s.onreadystatechange = function() {
-                if (!r && (!this.readyState || this.readyState == 'complete')) {
-                    r = true;
-                    if (c) {
-                        r = c.apply($.window);
+            if ($('script[src="'+p+'"]').length == 0) {
+                s.async = true;
+                s.type = 'text/javascript';
+                s.src = p;
+                s.onload = s.onreadystatechange = function() {
+                    if (!r && (!this.readyState || this.readyState == 'complete')) {
+                        r = true;
+                        if (c) {
+                            r = c.apply($.window);
+                        }
                     }
                 }
+                var l = document.head.childNodes.last();
+                l.parentNode.insertBefore(s, l.nextSibling);
             }
-            var l = document.head.childNodes.last();
-            l.parentNode.insertBefore(s, l.nextSibling);
             return r;
         },
         delay: function(t) {
