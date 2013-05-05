@@ -50,17 +50,10 @@
         return this;
     };
     
-    $.prototype.Hint = function(opt) {
-        $.each(this, function() {
-            this.hint = new Hint($(this), opt);
-        });
-        return this;
-    };
-    
     Hint.prototype = {}.extend(Pastels.prototype, {
         defaults: {
             catch:'data-hint',
-            direction:'right',
+            direction:'bottom',
             trigger:'hover',
             delay: 200,
             delayOnClose: 1000,
