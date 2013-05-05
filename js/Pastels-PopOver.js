@@ -44,7 +44,7 @@
             }
         }
         
-        if (name) {
+        if (name && name.length > 0) {
             obj = $('#'+name);
         } else if (handler.hasAttr('id')) {
             obj = $('#popover-'+handler.attr('id'));
