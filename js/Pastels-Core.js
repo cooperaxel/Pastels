@@ -54,12 +54,17 @@
             });
         };
         $.prototype[k] = function(a1, a2, a3) {
-            if (!(k instanceof Pastels)) {
-                Pastels.require(k);
+            var self = this,
+            fu = function(k) {
+                $.each(self, function(n) {
+                    n[k] = eval("new "+k+"(this, a1, a2, a3);");   
+                });
+            };
+            if (!(k instanceof Pastels) && this.length > 0) {
+                Pastels.require(k, $.invoke(fu, window, k));
+            } else if (this.length > 0) {
+                fu(k);
             }
-            $.each(this, function(n) {
-                n[k] = eval("new "+k+"(this, a1, a2, a3);");
-            });
             return this;
         };
     });
@@ -118,17 +123,9 @@ $(function() {
         window.scrollTo(0, 0);
     }
     
-    if ($.browser.webkit !== true) {
-        $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
-            var type = n.type,
-                span = $.create('span.'+type);
-            
-            span.addClass(n.className);
-            this.hide().after(span);
-            
-            span.mouseup($.invoke(this.click, this));
-        });
-    }
+    $('.popover-handler').PopOver();
+    $('[data-hint]').Hint();
+    $('.switch, .switch-input').Switch();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
@@ -155,5 +152,15 @@ $(function() {
         });
     });
     
-    $('.popover-handler').PopOver();
+    if ($.browser.webkit !== true) {
+        $('input[type=checkbox]', 'input[type=radio]').each(function(n) {
+            var type = n.type,
+                span = $.create('span.'+type);
+            
+            span.addClass(n.className);
+            this.hide().after(span);
+            
+            span.mouseup($.invoke(this.click, this));
+        });
+    }
 });
