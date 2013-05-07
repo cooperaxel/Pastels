@@ -7,8 +7,8 @@
         this.observers = {};
     };
     
-    Pastels.version = '0.2.0';
-    Pastels.codename = 'Mango Tango';
+    Pastels.version = '0.2.1';
+    Pastels.codename = 'Apricot';
     
     Pastels.prototype = {
         
