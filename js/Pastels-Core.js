@@ -126,6 +126,7 @@ $(function() {
     $('.popover-handler').PopOver();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
+    $('.scroller').Scroller();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
