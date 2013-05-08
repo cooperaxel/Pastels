@@ -1158,6 +1158,35 @@ div.hint {
     }
 }
 
+/* ########################## */
+/* ## ## ## Scroller ## ## ## */
+
+.scroller {
+    
+    .scroll, .scroll .slider {
+        .block;
+        .size(7px, auto);
+        .round-corner(20px);
+    }
+    .scroll {
+        .margins(5px);
+        .background(rgba(0,0,0,0.3));
+        .position(absolute, 0, 0, 0, auto);
+        
+        .slider {
+            .background(rgba(0,0,0,0.5));
+            .position(absolute, 0, 0, auto, 0);
+            min-height:15px;
+        }
+    }
+    .content {
+        .position(absolute, 0, 0, 0, 0);
+    }
+    ::-webkit-scrollbar {
+        visibility:hidden;
+    }
+}
+
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */
 

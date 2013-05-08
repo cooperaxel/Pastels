@@ -2147,6 +2147,44 @@ div.hint {
   position: relative;
   z-index: 1;
 }
+/* ########################## */
+/* ## ## ## Scroller ## ## ## */
+.scroller .scroll,
+.scroller .scroll .slider {
+  display: block;
+  width: 7px;
+  height: auto;
+  border-radius: 20px;
+}
+.scroller .scroll {
+  margin: 5px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+}
+.scroller .scroll .slider {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  min-height: 15px;
+}
+.scroller .content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.scroller ::-webkit-scrollbar {
+  visibility: hidden;
+}
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */
 .filepicker {
