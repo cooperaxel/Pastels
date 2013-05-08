@@ -158,8 +158,9 @@
             $.each(this, function(n) {
                 for(var i = 0; i < n.childNodes.length; i++) {
                     if(n.childNodes[i].nodeType === 1 || n.childNodes[i].nodeType === 11) {
-                        if(p && !$.checkElement(n.childNodes[i], p))
+                        if(p && !$.checkElement(n.childNodes[i], p)) {
                             continue;
+                        }
                         a.push(n.childNodes[i]);
                     }
                 }
@@ -168,12 +169,12 @@
         },
         contents: function() {
             var a = [];
-            $.each(this, function() {
-                for(var i = 0; i < this.childNodes.length; i++) {
-                    if(this.childNodes[i].nodeType === 3) {
-                        a.push(this.childNodes[i]);
-                    } else if(this.childNodes[i].nodeType === 1 && this.childNodes[i].tagName.toLowerCase() !== 'script') {
-                        a.push.apply(a, $(this.childNodes[i]).contents());
+            $.each(this, function(n) {
+                for(var i = 0; i < n.childNodes.length; i++) {
+                    if(n.childNodes[i].nodeType === 3) {
+                        a.push(n.childNodes[i]);
+                    } else if(n.childNodes[i].nodeType === 1 && n.childNodes[i].tagName.toLowerCase() !== 'script') {
+                        a.push.apply(a, $(n.childNodes[i]).contents());
                     }
                 }
             });
@@ -182,17 +183,18 @@
         nodes: function(all) {
             var a = [];
             if(all) {
-                $.each(this, function() {
-                    for(var i = 0; i < this.childNodes.length; i++) {
-                        a.push(this.childNodes[i]);
-                        if(this.childNodes[i].nodeType === 1)
-                            a.push.apply(a, $(this.childNodes[i]).nodes(true));
+                $.each(this, function(n) {
+                    for(var i = 0; i < n.childNodes.length; i++) {
+                        a.push(n.childNodes[i]);
+                        if (n.childNodes[i].nodeType === 1) {
+                            a.push.apply(a, $(n.childNodes[i]).nodes(true));
+                        }
                     }
                 });
             } else {
-                $.each(this, function() {
-                    for(var i = 0; i < this.childNodes.length; i++) {
-                        a.push(this.childNodes[i]);
+                $.each(this, function(n) {
+                    for(var i = 0; i < n.childNodes.length; i++) {
+                        a.push(n.childNodes[i]);
                     }
                 });
             }
@@ -499,7 +501,11 @@
                     });
                     return this;
                 } else {
-                    return (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
+                    var r = (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
+                    if (typeof r === 'string' && r.slice(-2) === 'px') {
+                        r = parseInt(r.rbreak('px'));
+                    }
+                    return r;
                 }
             }
             return this;
@@ -579,6 +585,9 @@
             return this;
         },
         show: function(d) {
+            if (!d) {
+                d = 'block';
+            }
             $.each(this, function(n) {
                 n.style.display = d || null;
             });
