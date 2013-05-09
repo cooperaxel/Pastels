@@ -14,31 +14,27 @@
         
         this.options = {}.extend(Scroller.prototype.defaults, opt);
         
-        var scroll = obj.children('.scroll');
-        if (scroll.length > 0) {
-            this.scroll = scroll.eq(0);
-            var slider = this.scroll.children('.slider');
-            if (slider.length > 0) {
-                this.slider = slider.eq(0);
-                this.scroll.append(this.slider);
-            }
-        } else {
-            this.scroll = $.create('div.scroll');
-            this.slider = $.create('div.slider');
-            this.scroll.append(this.slider);
-            obj.append(this.scroll);
-        }
-        
         var content = obj.children('.content');
         if (content.length > 0) {
             this.content = content.eq(0);
         } else {
             this.content = $.create('div.content');
-            obj.nodes().not('.scroll').appendTo(this.content);
+            obj.nodes().appendTo(this.content);
             obj.append(this.content);
         }
         
-        this.object = obj;
+        this.scroll_x = $.create('div.scroll-x');
+        this.scroll_x.slider = $.create('div.slider');
+        this.scroll_x.append(this.scroll_x.slider);
+        obj.append(this.scroll_x);
+        
+        this.scroll_y = $.create('div.scroll-y');
+        this.scroll_y.slider = this.scroll_x.slider.clone();
+        this.scroll_y.append(this.scroll_y.slider);
+        obj.append(this.scroll_y);
+        
+        this.scrolls = $(this.scroll_x, this.scroll_y);
+        this.object = obj;        
         this.prepare();
         
         return this;
@@ -47,9 +43,8 @@
     Scroller.prototype = {}.extend(Pastels.prototype, {
         defaults: {
             duration: 300,
-            timeout: 1500,
+            timeout: 1000,
             showOnStart: false,
-            showOnScroll: true,
             showOnHover: true,
             showAlways: false
         },
@@ -59,47 +54,48 @@
             
             self.object.css({ overflow:'hidden' });
             self.content.css({ overflow:'scroll' });
-            
-            if (! $.browser.webkit) {
-                var mr = self.content.css('margin-right'),
-                    pr = self.content.css('padding-right');
-                self.content.css({ marginRight:(mr-30), paddingRight: (pr+30) });
-            }
-            
+            self.scrolls.css({ opacity:0 });
             if (self.object.css('position') === 'static') {
                 self.object.css({ position: 'relative' });
             }
-            self.slider.css({ position:'absolute', top:0 });
+            
+            if (! $.browser.webkit) {
+                self.content.css({ marginRight: '--20', paddingRight: '++20',
+                                  marginBottom: '--20', paddingBottom: '++20' });
+            }
+            if (self.content.scrollWidth() > self.content.clientWidth()) {
+                self.scroll_y.css({ marginBottom: '++7' });
+            }
+            if (self.content.scrollHeight() > self.content.clientHeight()) {
+                self.scroll_x.css({ marginRight: '++7' });
+            }
+            
+            self.scroll_x.slider.css({ position:'absolute', left:0 });
+            self.scroll_y.slider.css({ position:'absolute', top:0 });
             self.update();
             
             if (self.options.showOnHover) {
-                self.content.mouseover(function() {
-                    self.show();
-                }).mouseout(function() {
-                    self.hide();
-                });
+                self.content.mouseover($.invoke(self.show, self))
+                    .mouseout($.invoke(self.hide, self));
             }
-            if (! self.options.showOnStart) {
-                self.scroll.fadeOut(1);
-            }
-            if (self.options.showAlways) {
+            
+            if (self.options.showOnStart || self.options.showAlways) {
                 self.show();
             } else {
                 self.hide();
             }
             
-            self.content.scroll(function() {
-                self.update();
-                if (self.options.showOnScroll) {
-                    self.touch();
-                }
-            });
+            self.content.scroll($.invoke(self.touch, self));
         },
         update: function() {
             var self = this;
-            self.slider.css({
-                height: parseInt(self.content.height() * self.scroll.height() / self.content.scrollHeight()),
-                top: parseInt(self.content.scrollTop() * self.scroll.height() / self.content.scrollHeight())
+            self.scroll_x.slider.css({
+                width: parseInt(self.content.clientWidth() * self.scroll_x.width() / self.content.scrollWidth()),
+                left: parseInt(self.content.scrollLeft() * self.scroll_x.width() / self.content.scrollWidth())
+            });
+            self.scroll_y.slider.css({
+                height: parseInt(self.content.clientHeight() * self.scroll_y.height() / self.content.scrollHeight()),
+                top: parseInt(self.content.scrollTop() * self.scroll_y.height() / self.content.scrollHeight())
             });
             
             return this;
@@ -108,7 +104,12 @@
             if (this.timeout) {
                 this.timeout = clearTimeout(this.timeout);
             }
-            this.scroll.show().fadeIn(this.options.duration);
+            if (this.content.scrollWidth() > this.content.clientWidth()) {
+                this.scroll_x.show().fadeIn(this.options.duration);
+            }
+            if (this.content.scrollHeight() > this.content.clientHeight()) {
+                this.scroll_y.show().fadeIn(this.options.duration);
+            }
             
             return this;
         },
@@ -118,13 +119,17 @@
                 self.timeout = clearTimeout(self.timeout);
             }
             self.timeout = setTimeout(function() {
-                self.scroll.fadeOut(self.options.duration);
+                self.scrolls.fadeOut(self.options.duration);
             }, self.options.timeout);
             
             return this;
         },
         touch: function() {
-            this.show().hide();
+            if (this.content.scrollHeight() > this.content.height()) {
+                this.update().show().hide();
+            } else {
+                this.hide();
+            }
             return this;
         }
     });
