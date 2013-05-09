@@ -202,9 +202,9 @@
         },
         clone: function() {
             var a = [];
-            $.each(this, function() {
-                if(this.cloneNode)
-                    a.push(this.cloneNode(true));
+            $.each(this, function(n) {
+                if(n.cloneNode)
+                    a.push(n.cloneNode(true));
             });
             return $(a);
         },
@@ -455,6 +455,11 @@
             return getComputedStyle(this.active(), null).getPropertyValue(p);
         },
         css: function(p,v) {
+            if (p && v) {
+                var t = {};
+                t[p] = v;
+                p = t;
+            }
             if(p instanceof Object) {
                 var prefix = $.browser.prefix,
                     px = ['top','right','bottom','left','width','height','minWidth','minHeight','maxWidth','maxHeight',
@@ -466,16 +471,18 @@
                     t_v = '';
                 
                 for(var s in p) {
-                    if(px.indexOf(s) !== -1) {
+                    if (typeof p[s] === 'string' && (p[s].substr(0, 2) === '++' || p[s].substr(0, 2) === '--')) {
+                        // do nothing...
+                    } else if (px.indexOf(s) !== -1) {
                         p[s] = parseInt(p[s])+'px';
                     } else if(t_px.indexOf(s) !== -1) {
-                        t_v += s+'('+parseInt(p[s])+'px)';
+                        t_v += s+'('+parseInt(p[s])+'px) ';
                         delete p[s];
                     } else if(t_deg.indexOf(s) !== -1) {
-                        t_v += s+'('+parseInt(p[s])+'deg)';
+                        t_v += s+'('+parseInt(p[s])+'deg) ';
                         delete p[s];
                     } else if(t_other.indexOf(s) !== -1) {
-                        t_v += s+'('+p[s]+')';
+                        t_v += s+'('+p[s]+') ';
                         delete p[s];
                     }
                 }
@@ -491,22 +498,22 @@
                 
                 for(var s in p) {
                     $.each(this, function(n) {
-                        n.style[s] = p[s];
+                        if (typeof p[s] === 'string' && p[s].substr(0, 2) === '++') {
+                            this.css(s, parseInt(this.css(s)) + parseInt(p[s].lbreak('++')));
+                        } else if (typeof p[s] === 'string' && p[s].substr(0, 2) === '--') {
+                            this.css(s, parseInt(this.css(s)) - parseInt(p[s].lbreak('--')));
+                        } else {
+                            n.style[s] = p[s];
+                        }
                     });
                 }
             } else {
-                if(v !== undefined) {
-                    $.each(this, function(n) {
-                        n.style[p] = v;
-                    });
-                    return this;
-                } else {
-                    var r = (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
-                    if (typeof r === 'string' && r.slice(-2) === 'px') {
-                        r = parseInt(r.rbreak('px'));
-                    }
-                    return r;
+                p = p.dasherize();
+                var r = (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
+                if (typeof r === 'string' && r.slice(-2) === 'px') {
+                    r = parseInt(r.rbreak('px'));
                 }
+                return r;
             }
             return this;
         },
@@ -1199,6 +1206,11 @@
             }
         }
         return s.toString();
+    };
+    String.prototype.dasherize = function() {
+        return this.replace(/[A-Z]/g, function(char, index) {
+            return (index !== 0 ? '-' : '') + char.toLowerCase();
+        });
     };
     HTMLElement.prototype.hasClass = function(c) {
         if(!c) return true;
