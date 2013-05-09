@@ -1162,24 +1162,46 @@ div.hint {
 /* ## ## ## Scroller ## ## ## */
 
 .scroller {
+    @size: 5px;
+    position:relative;
     
-    .scroll, .scroll .slider {
-        .block;
-        .size(7px, auto);
-        .round-corner(20px);
+    .scroll-x, .scroll-y {
+        .margins(2px);
+        .background(rgba(0,0,0,0));
+        .shadow(0 0 2px rgba(255,255,255,0.6));
+        
+        &, .slider {
+            .block;
+            .round-corner(5px);
+        }
+        .slider {
+            .background(rgba(0,0,0,0.4));
+        }
     }
-    .scroll {
-        .margins(5px);
-        .background(rgba(0,0,0,0.3));
+    .scroll-y {
         .position(absolute, 0, 0, 0, auto);
         
+        &, .slider {
+            .size(@size, auto);
+        }
         .slider {
-            .background(rgba(0,0,0,0.5));
             .position(absolute, 0, 0, auto, 0);
             min-height:15px;
         }
     }
+    .scroll-x {
+        .position(absolute, auto, 0, 0, 0);
+        
+        &, .slider {
+            .size(auto, @size);
+        }
+        .slider {
+            .position(absolute, 0, auto, 0, 0);
+            min-width:15px;
+        }
+    }
     .content {
+        .margins(0, 5px);
         .position(absolute, 0, 0, 0, 0);
     }
     ::-webkit-scrollbar {

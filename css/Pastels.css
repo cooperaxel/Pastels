@@ -2149,25 +2149,44 @@ div.hint {
 }
 /* ########################## */
 /* ## ## ## Scroller ## ## ## */
-.scroller .scroll,
-.scroller .scroll .slider {
-  display: block;
-  width: 7px;
-  height: auto;
-  border-radius: 20px;
+.scroller {
+  position: relative;
 }
-.scroller .scroll {
-  margin: 5px;
+.scroller .scroll-x,
+.scroller .scroll-y {
+  margin: 2px;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+}
+.scroller .scroll-x,
+.scroller .scroll-y,
+.scroller .scroll-x .slider,
+.scroller .scroll-y .slider {
+  display: block;
+  border-radius: 5px;
+}
+.scroller .scroll-x .slider,
+.scroller .scroll-y .slider {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.scroller .scroll-y {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: auto;
 }
-.scroller .scroll .slider {
-  background-color: rgba(0, 0, 0, 0.5);
+.scroller .scroll-y,
+.scroller .scroll-y .slider {
+  width: 5px;
+  height: auto;
+}
+.scroller .scroll-y .slider {
   position: absolute;
   top: 0;
   right: 0;
@@ -2175,7 +2194,29 @@ div.hint {
   left: 0;
   min-height: 15px;
 }
+.scroller .scroll-x {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.scroller .scroll-x,
+.scroller .scroll-x .slider {
+  width: auto;
+  height: 5px;
+}
+.scroller .scroll-x .slider {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  min-width: 15px;
+}
 .scroller .content {
+  margin: 0;
+  padding: 5px;
   position: absolute;
   top: 0;
   right: 0;
