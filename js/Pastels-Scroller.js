@@ -46,7 +46,8 @@
             timeout: 1000,
             showOnStart: false,
             showOnHover: true,
-            showAlways: false
+            showAlways: false,
+            autoColor: true
         },
         
         prepare: function() {
@@ -57,6 +58,14 @@
             self.scrolls.css({ opacity:0 });
             if (self.object.css('position') === 'static') {
                 self.object.css({ position: 'relative' });
+            }
+            
+            if (self.options.autoColor) {
+                if ($.isBright(self.object.css('background-color'))) {
+                    self.object.removeClass('bright');
+                } else {
+                    self.object.addClass('bright');
+                }
             }
             
             if (! $.browser.webkit) {
