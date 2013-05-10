@@ -7,8 +7,8 @@
         this.observers = {};
     };
     
-    Pastels.version = '0.2.1';
-    Pastels.codename = 'Apricot';
+    Pastels.version = '0.2.2';
+    Pastels.codename = 'Wild Watermelon';
     
     Pastels.prototype = {
         
@@ -126,6 +126,7 @@ $(function() {
     $('.popover-handler').PopOver();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
+    $('.scroller').Scroller();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {

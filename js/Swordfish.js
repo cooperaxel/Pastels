@@ -85,6 +85,18 @@
                 this.push(o);
             return this;
         },
+        add: function() {
+            var a = [];
+            Array.prototype.push.apply(a, this);
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] instanceof Array) {
+                    Array.prototype.push.apply(a, arguments[i]);
+                } else {
+                    a.push(arguments[i]);
+                }
+            }
+            return $(a);
+        },
         delete: function(n,c) {
             if(!n && n != 0) n = this.g;
             if(!c) c = 1;
@@ -158,8 +170,9 @@
             $.each(this, function(n) {
                 for(var i = 0; i < n.childNodes.length; i++) {
                     if(n.childNodes[i].nodeType === 1 || n.childNodes[i].nodeType === 11) {
-                        if(p && !$.checkElement(n.childNodes[i], p))
+                        if(p && !$.checkElement(n.childNodes[i], p)) {
                             continue;
+                        }
                         a.push(n.childNodes[i]);
                     }
                 }
@@ -168,12 +181,12 @@
         },
         contents: function() {
             var a = [];
-            $.each(this, function() {
-                for(var i = 0; i < this.childNodes.length; i++) {
-                    if(this.childNodes[i].nodeType === 3) {
-                        a.push(this.childNodes[i]);
-                    } else if(this.childNodes[i].nodeType === 1 && this.childNodes[i].tagName.toLowerCase() !== 'script') {
-                        a.push.apply(a, $(this.childNodes[i]).contents());
+            $.each(this, function(n) {
+                for(var i = 0; i < n.childNodes.length; i++) {
+                    if(n.childNodes[i].nodeType === 3) {
+                        a.push(n.childNodes[i]);
+                    } else if(n.childNodes[i].nodeType === 1 && n.childNodes[i].tagName.toLowerCase() !== 'script') {
+                        a.push.apply(a, $(n.childNodes[i]).contents());
                     }
                 }
             });
@@ -182,17 +195,18 @@
         nodes: function(all) {
             var a = [];
             if(all) {
-                $.each(this, function() {
-                    for(var i = 0; i < this.childNodes.length; i++) {
-                        a.push(this.childNodes[i]);
-                        if(this.childNodes[i].nodeType === 1)
-                            a.push.apply(a, $(this.childNodes[i]).nodes(true));
+                $.each(this, function(n) {
+                    for(var i = 0; i < n.childNodes.length; i++) {
+                        a.push(n.childNodes[i]);
+                        if (n.childNodes[i].nodeType === 1) {
+                            a.push.apply(a, $(n.childNodes[i]).nodes(true));
+                        }
                     }
                 });
             } else {
-                $.each(this, function() {
-                    for(var i = 0; i < this.childNodes.length; i++) {
-                        a.push(this.childNodes[i]);
+                $.each(this, function(n) {
+                    for(var i = 0; i < n.childNodes.length; i++) {
+                        a.push(n.childNodes[i]);
                     }
                 });
             }
@@ -200,9 +214,9 @@
         },
         clone: function() {
             var a = [];
-            $.each(this, function() {
-                if(this.cloneNode)
-                    a.push(this.cloneNode(true));
+            $.each(this, function(n) {
+                if(n.cloneNode)
+                    a.push(n.cloneNode(true));
             });
             return $(a);
         },
@@ -453,6 +467,11 @@
             return getComputedStyle(this.active(), null).getPropertyValue(p);
         },
         css: function(p,v) {
+            if (p && v) {
+                var t = {};
+                t[p] = v;
+                p = t;
+            }
             if(p instanceof Object) {
                 var prefix = $.browser.prefix,
                     px = ['top','right','bottom','left','width','height','minWidth','minHeight','maxWidth','maxHeight',
@@ -464,16 +483,18 @@
                     t_v = '';
                 
                 for(var s in p) {
-                    if(px.indexOf(s) !== -1) {
+                    if (typeof p[s] === 'string' && (p[s].substr(0, 2) === '++' || p[s].substr(0, 2) === '--')) {
+                        // do nothing...
+                    } else if (px.indexOf(s) !== -1) {
                         p[s] = parseInt(p[s])+'px';
                     } else if(t_px.indexOf(s) !== -1) {
-                        t_v += s+'('+parseInt(p[s])+'px)';
+                        t_v += s+'('+parseInt(p[s])+'px) ';
                         delete p[s];
                     } else if(t_deg.indexOf(s) !== -1) {
-                        t_v += s+'('+parseInt(p[s])+'deg)';
+                        t_v += s+'('+parseInt(p[s])+'deg) ';
                         delete p[s];
                     } else if(t_other.indexOf(s) !== -1) {
-                        t_v += s+'('+p[s]+')';
+                        t_v += s+'('+p[s]+') ';
                         delete p[s];
                     }
                 }
@@ -489,18 +510,22 @@
                 
                 for(var s in p) {
                     $.each(this, function(n) {
-                        n.style[s] = p[s];
+                        if (typeof p[s] === 'string' && p[s].substr(0, 2) === '++') {
+                            this.css(s, parseInt(this.css(s)) + parseInt(p[s].lbreak('++')));
+                        } else if (typeof p[s] === 'string' && p[s].substr(0, 2) === '--') {
+                            this.css(s, parseInt(this.css(s)) - parseInt(p[s].lbreak('--')));
+                        } else {
+                            n.style[s] = p[s];
+                        }
                     });
                 }
             } else {
-                if(v !== undefined) {
-                    $.each(this, function(n) {
-                        n.style[p] = v;
-                    });
-                    return this;
-                } else {
-                    return (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
+                p = p.dasherize();
+                var r = (this.active().style[p] ? this.active().style[p] : this.getStyle(p));
+                if (typeof r === 'string' && r.slice(-2) === 'px') {
+                    r = parseInt(r.rbreak('px'));
                 }
+                return r;
             }
             return this;
         },
@@ -579,6 +604,9 @@
             return this;
         },
         show: function(d) {
+            if (!d) {
+                d = 'block';
+            }
             $.each(this, function(n) {
                 n.style.display = d || null;
             });
@@ -1104,6 +1132,78 @@
             mql.addListener(listener);
             listener(mql);
             return true;
+        },
+        rgbToHex: function(c) {
+            if (c.substr(0, 1) === '#') {
+                return c;
+            }
+            if (c === 'transparent') {
+                c = 'rgba(0,0,0,0)';
+            }
+            var digits = /rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*(\d*)/.exec(c),
+                r = {
+                    toString: function() { return '#' + this.hex; }
+                };
+            if (digits) {
+                r.red = parseInt(digits[1]);
+                r.green = parseInt(digits[2]);
+                r.blue = parseInt(digits[3]);
+                if (digits[4] != null && digits[4] !== '') {
+                    r.alpha = parseFloat(digits[4]);
+                } else {
+                    r.alpha = 1;
+                }
+                r.rgb = r.blue | (r.green << 8) | (r.red << 16);
+                r.hex = ('000000'+r.rgb.toString(16)).slice(-6);
+            }
+            return r;
+        },
+        hexToRgb: function(c) {
+            if (c.length < 6) {
+                var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                c = c.replace(shorthandRegex, function(m, r, g, b) {
+                    return r + r + g + g + b + b;
+                });
+            }
+            
+            var digits = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex),
+                r = {
+                    toString: function() { return this.rgb; }
+                };
+            if (digits) {
+                r.red = parseInt(digits[1], 16);
+                r.green = parseInt(digits[2], 16);
+                r.blue = parseInt(digits[3], 16);
+                r.rgb = 'rgba('+r.red+','+r.green+','+r.blue+',1)';
+            }
+            return r;
+        },
+        isBright: function(c) {
+            var alpha;
+            if (typeof c === 'string') {
+                if (c.substr(0, 1) === '#') {
+                    c = c.substring(1);
+                } else {
+                    c = $.rgbToHex(c);
+                }
+            }
+            if (c instanceof Object) {
+                alpha = c.alpha;
+                c = c.hex;
+            }
+            var rgb = parseInt(c, 16),
+                r = (rgb >> 16) & 0xff,
+                g = (rgb >>  8) & 0xff,
+                b = (rgb >>  0) & 0xff,
+                lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            
+            if ((alpha > 0 && alpha * lum < 50) || (alpha == null && lum < 50)) {
+                return false;
+            }
+            return true;
+        },
+        isDark: function(c) {
+            return !$.isBright(c);
         }
     });
         
@@ -1190,6 +1290,11 @@
             }
         }
         return s.toString();
+    };
+    String.prototype.dasherize = function() {
+        return this.replace(/[A-Z]/g, function(char, index) {
+            return (index !== 0 ? '-' : '') + char.toLowerCase();
+        });
     };
     HTMLElement.prototype.hasClass = function(c) {
         if(!c) return true;

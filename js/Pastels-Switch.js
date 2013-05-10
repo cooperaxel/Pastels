@@ -38,6 +38,10 @@
                 this.object.append(this.container);
             }
         }
+        this.input.addClass('inactive').hide();
+        this.divinput = $.create('div.switch-input');
+        this.input.after(this.divinput);
+        
         this.prepare();
         
         return this;
@@ -53,18 +57,19 @@
         prepare: function() {
             var self = this;
             
-            if(this.options.localValue) {
-                var l = localStorage.getObject('switch-'+this.object.attr('id'));
-                if(l === 'on')
-                    this.setOn();
-                else if(l === 'off')
-                    this.setOff();
+            if(self.options.localValue) {
+                var l = localStorage.getObject('switch-'+self.object.attr('id'));
+                if(l === 'on') {
+                    self.setOn();
+                } else if(l === 'off') {
+                    self.setOff();
+                }
             }
             
-            if (this.object.is('.checked') || this.input.is(':checked')) {
-                this.setOn();
+            if (self.object.is('.checked') || self.input.is(':checked')) {
+                self.setOn();
             } else {
-                this.setOff();
+                self.setOff();
             }
             
             self.object.mouseup(function() {
@@ -80,7 +85,7 @@
             this.slider.animate({ marginLeft: 0 }, this.options.duration);
             
             this.status = true;
-            this.object.addClass('checked');
+            this.object.add(this.divinput).addClass('checked');
             this.input.prop('checked', true);
             this.object.emit('switchOn');
             if(this.options.localValue)
@@ -92,11 +97,12 @@
             this.slider.animate({ marginLeft: -(width-10) }, this.options.duration);
             
             this.status = false;
-            this.object.removeClass('checked');
+            this.object.add(this.divinput).removeClass('checked');
             this.input.prop('checked', false);
             this.object.emit('switchOff');
-            if(this.options.localValue)
+            if(this.options.localValue) {
                 localStorage.setObject('switch-'+this.object.attr('id'), 'off');
+            }
         }
     });
     window.Switch = Switch;
