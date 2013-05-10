@@ -85,6 +85,18 @@
                 this.push(o);
             return this;
         },
+        add: function() {
+            var a = [];
+            Array.prototype.push.apply(a, this);
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] instanceof Array) {
+                    Array.prototype.push.apply(a, arguments[i]);
+                } else {
+                    a.push(arguments[i]);
+                }
+            }
+            return $(a);
+        },
         delete: function(n,c) {
             if(!n && n != 0) n = this.g;
             if(!c) c = 1;
@@ -1120,6 +1132,78 @@
             mql.addListener(listener);
             listener(mql);
             return true;
+        },
+        rgbToHex: function(c) {
+            if (c.substr(0, 1) === '#') {
+                return c;
+            }
+            if (c === 'transparent') {
+                c = 'rgba(0,0,0,0)';
+            }
+            var digits = /rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*(\d*)/.exec(c),
+                r = {
+                    toString: function() { return '#' + this.hex; }
+                };
+            if (digits) {
+                r.red = parseInt(digits[1]);
+                r.green = parseInt(digits[2]);
+                r.blue = parseInt(digits[3]);
+                if (digits[4] != null && digits[4] !== '') {
+                    r.alpha = parseFloat(digits[4]);
+                } else {
+                    r.alpha = 1;
+                }
+                r.rgb = r.blue | (r.green << 8) | (r.red << 16);
+                r.hex = ('000000'+r.rgb.toString(16)).slice(-6);
+            }
+            return r;
+        },
+        hexToRgb: function(c) {
+            if (c.length < 6) {
+                var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+                c = c.replace(shorthandRegex, function(m, r, g, b) {
+                    return r + r + g + g + b + b;
+                });
+            }
+            
+            var digits = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex),
+                r = {
+                    toString: function() { return this.rgb; }
+                };
+            if (digits) {
+                r.red = parseInt(digits[1], 16);
+                r.green = parseInt(digits[2], 16);
+                r.blue = parseInt(digits[3], 16);
+                r.rgb = 'rgba('+r.red+','+r.green+','+r.blue+',1)';
+            }
+            return r;
+        },
+        isBright: function(c) {
+            var alpha;
+            if (typeof c === 'string') {
+                if (c.substr(0, 1) === '#') {
+                    c = c.substring(1);
+                } else {
+                    c = $.rgbToHex(c);
+                }
+            }
+            if (c instanceof Object) {
+                alpha = c.alpha;
+                c = c.hex;
+            }
+            var rgb = parseInt(c, 16),
+                r = (rgb >> 16) & 0xff,
+                g = (rgb >>  8) & 0xff,
+                b = (rgb >>  0) & 0xff,
+                lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            
+            if ((alpha > 0 && alpha * lum < 50) || (alpha == null && lum < 50)) {
+                return false;
+            }
+            return true;
+        },
+        isDark: function(c) {
+            return !$.isBright(c);
         }
     });
         
