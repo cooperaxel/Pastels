@@ -7,8 +7,8 @@
         this.observers = {};
     };
     
-    Pastels.version = '0.2.1';
-    Pastels.codename = 'Apricot';
+    Pastels.version = '0.2.2';
+    Pastels.codename = 'Wild Watermelon';
     
     Pastels.prototype = {
         
