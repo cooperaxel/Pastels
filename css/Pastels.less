@@ -186,6 +186,7 @@ body.preload * {
         opacity:0;
     }
 }
+::-moz-focus-inner { border: 0; padding: 0; margin:0; }
 
 /* ###################### */
 /* ## ## ## Text ## ## ## */
@@ -1118,31 +1119,40 @@ div.hint {
             .inline-block;
             .vertical-top;
         }
-        .switch-input {
+        input.switch-input {
+            display:none;
+        }
+        div.switch-input {
             .square(20px);
             .margins(-1px -11px, 0) !important;
+            .linear-gradient(top, white, #e2e2e2);
             .border(rgba(129,129,129,1), 1px);
             .round-corner(20px) !important;
             .shadow(inset 0 0 0 1px white~"," 0 0 7px rgba(0,0,0,0.4));
             .sizing(content-box);
+            line-height:20px;
             position:relative;
-            z-index:3;
-            -moz-appearance:radio;
-            -webkit-appearance:none;
+            z-index:39;
             
-            &::before, &:checked::before {
+            &.checked {
+                .linear-gradient(top, #eaeaea, white);
+            }
+            &::before, &.checked::before {
                 content:"ON" !important;
                 top:3px; left:-30px;
             }
-            &::after, &:checked::after {
+            &::after, &.checked::after {
                 content:"OFF" !important;
                 top:-12px; left:28px;
             }
-            &::before, &::after, &:checked::before, &:checked::after {
+            &::before, &::after, &.checked::before, &.checked::after {
                 .block !important;
                 .non-events;
                 color:#555;
-                font:bold 12px Verdana, Arial, sans-serif;
+                font-family:"Verdana", "Arial", "sans-serif";
+                font-size:12px;
+                font-weight:bold;
+                line-height:15px;
                 position:relative;
                 opacity:1 !important;
             }
@@ -1151,6 +1161,7 @@ div.hint {
             .size(55px, 20px);
             .margins(0 0 0 -45px, 0);
             .linear-gradient(bottom, rgb(255,255,255), rgb(230,230,230));
+            .round-corner(10px);
             .shadow(inset 0 0 7px #bababa);
             position:relative;
             z-index:1;
@@ -1162,31 +1173,20 @@ div.hint {
 /* ## ## ## Scroller ## ## ## */
 
 .scroller {
-    @size: 5px;
+    @size: 6px;
     position:relative;
     
     .scroll-x, .scroll-y {
         .margins(2px);
-        .background(rgba(0,0,0,0));
-        .shadow(0 0 2px rgba(255,255,255,0.6));
+        .background(transparent);
         
         &, .slider {
             .block;
             .round-corner(5px);
         }
         .slider {
-            .background(rgba(0,0,0,0.4));
-        }
-    }
-    .scroll-y {
-        .position(absolute, 0, 0, 0, auto);
-        
-        &, .slider {
-            .size(@size, auto);
-        }
-        .slider {
-            .position(absolute, 0, 0, auto, 0);
-            min-height:15px;
+            .background(rgba(0,0,0,0.5));
+            .shadow(0 0 2px rgba(255,255,255,0.6));
         }
     }
     .scroll-x {
@@ -1200,12 +1200,53 @@ div.hint {
             min-width:15px;
         }
     }
+    .scroll-y {
+        .position(absolute, 0, 0, 0, auto);
+        
+        &, .slider {
+            .size(@size, auto);
+        }
+        .slider {
+            .position(absolute, 0, 0, auto, 0);
+            min-height:15px;
+        }
+    }
     .content {
         .margins(0, 5px);
         .position(absolute, 0, 0, 0, 0);
     }
     ::-webkit-scrollbar {
         visibility:hidden;
+    }
+    
+    &.xm {
+        .scroll-x, .scroll-x .slider { .size(auto, 2px); }
+        .scroll-y, .scroll-y .slider { .size(2px, auto); }
+    }
+    &.mini {
+        .scroll-x, .scroll-x .slider { .size(auto, 3px); }
+        .scroll-y, .scroll-y .slider { .size(3px, auto); }
+    }
+    &.small {
+        .scroll-x, .scroll-x .slider { .size(auto, 4px); }
+        .scroll-y, .scroll-y .slider { .size(4px, auto); }
+    }
+    &.large {
+        .scroll-x, .scroll-x .slider { .size(auto, 7px); }
+        .scroll-y, .scroll-y .slider { .size(7px, auto); }
+    }
+    &.xl {
+        .scroll-x, .scroll-x .slider { .size(auto, 10px); }
+        .scroll-y, .scroll-y .slider { .size(10px, auto); }
+    }
+    
+    &.bright {
+        .scroll-x, .scroll-y {
+            .slider {
+                .background(rgba(255,255,255,0.7));
+                .shadow(0 0 2px rgba(0,0,0,0.4));
+            }
+        }
     }
 }
 

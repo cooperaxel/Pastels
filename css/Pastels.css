@@ -92,6 +92,11 @@ body.preload * {
 :focus :-ms-input-placeholder {
   opacity: 0;
 }
+::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
 /* ###################### */
 /* ## ## ## Text ## ## ## */
 h1,
@@ -2081,11 +2086,20 @@ div.hint {
   display: inline-block;
   vertical-align: top;
 }
-.switch .switch-container .switch-input {
+.switch .switch-container input.switch-input {
+  display: none;
+}
+.switch .switch-container div.switch-input {
   width: 20px;
   height: 20px;
   margin: -1px -11px !important;
   padding: 0 !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e2e2e2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e2e2e2);
+  background-image: -moz-linear-gradient(top, #ffffff, #e2e2e2);
+  background-image: -ms-linear-gradient(top, #ffffff, #e2e2e2);
+  background-image: -o-linear-gradient(top, #ffffff, #e2e2e2);
+  background-image: linear-gradient(top, #ffffff, #e2e2e2);
   border-color: #818181;
   border-width: 1px;
   border-style: solid;
@@ -2100,31 +2114,41 @@ div.hint {
   -ms-box-sizing: content-box;
   -o-box-sizing: content-box;
   box-sizing: content-box;
+  line-height: 20px;
   position: relative;
-  z-index: 3;
-  -moz-appearance: radio;
-  -webkit-appearance: none;
+  z-index: 39;
 }
-.switch .switch-container .switch-input::before,
-.switch .switch-container .switch-input:checked::before {
+.switch .switch-container div.switch-input.checked {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#ffffff));
+  background-image: -webkit-linear-gradient(top, #eaeaea, #ffffff);
+  background-image: -moz-linear-gradient(top, #eaeaea, #ffffff);
+  background-image: -ms-linear-gradient(top, #eaeaea, #ffffff);
+  background-image: -o-linear-gradient(top, #eaeaea, #ffffff);
+  background-image: linear-gradient(top, #eaeaea, #ffffff);
+}
+.switch .switch-container div.switch-input::before,
+.switch .switch-container div.switch-input.checked::before {
   content: "ON" !important;
   top: 3px;
   left: -30px;
 }
-.switch .switch-container .switch-input::after,
-.switch .switch-container .switch-input:checked::after {
+.switch .switch-container div.switch-input::after,
+.switch .switch-container div.switch-input.checked::after {
   content: "OFF" !important;
   top: -12px;
   left: 28px;
 }
-.switch .switch-container .switch-input::before,
-.switch .switch-container .switch-input::after,
-.switch .switch-container .switch-input:checked::before,
-.switch .switch-container .switch-input:checked::after {
+.switch .switch-container div.switch-input::before,
+.switch .switch-container div.switch-input::after,
+.switch .switch-container div.switch-input.checked::before,
+.switch .switch-container div.switch-input.checked::after {
   display: block;
   pointer-events: none;
   color: #555;
-  font: bold 12px Verdana, Arial, sans-serif;
+  font-family: "Verdana", "Arial", "sans-serif";
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
   position: relative;
   opacity: 1 !important;
 }
@@ -2139,6 +2163,7 @@ div.hint {
   background-image: -ms-linear-gradient(bottom, #ffffff, #e6e6e6);
   background-image: -o-linear-gradient(bottom, #ffffff, #e6e6e6);
   background-image: linear-gradient(bottom, #ffffff, #e6e6e6);
+  border-radius: 10px;
   -webkit-box-shadow: inset 0 0 7px #bababa;
   -moz-box-shadow: inset 0 0 7px #bababa;
   -ms-box-shadow: inset 0 0 7px #bababa;
@@ -2156,12 +2181,7 @@ div.hint {
 .scroller .scroll-y {
   margin: 2px;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0);
-  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
-  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
-  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
-  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  background-color: transparent;
 }
 .scroller .scroll-x,
 .scroller .scroll-y,
@@ -2172,27 +2192,12 @@ div.hint {
 }
 .scroller .scroll-x .slider,
 .scroller .scroll-y .slider {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.scroller .scroll-y {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: auto;
-}
-.scroller .scroll-y,
-.scroller .scroll-y .slider {
-  width: 5px;
-  height: auto;
-}
-.scroller .scroll-y .slider {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: auto;
-  left: 0;
-  min-height: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -ms-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  -o-box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
 }
 .scroller .scroll-x {
   position: absolute;
@@ -2204,7 +2209,7 @@ div.hint {
 .scroller .scroll-x,
 .scroller .scroll-x .slider {
   width: auto;
-  height: 5px;
+  height: 6px;
 }
 .scroller .scroll-x .slider {
   position: absolute;
@@ -2213,6 +2218,26 @@ div.hint {
   bottom: 0;
   left: 0;
   min-width: 15px;
+}
+.scroller .scroll-y {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+}
+.scroller .scroll-y,
+.scroller .scroll-y .slider {
+  width: 6px;
+  height: auto;
+}
+.scroller .scroll-y .slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  min-height: 15px;
 }
 .scroller .content {
   margin: 0;
@@ -2225,6 +2250,65 @@ div.hint {
 }
 .scroller ::-webkit-scrollbar {
   visibility: hidden;
+}
+.scroller.xm .scroll-x,
+.scroller.xm .scroll-x .slider {
+  width: auto;
+  height: 2px;
+}
+.scroller.xm .scroll-y,
+.scroller.xm .scroll-y .slider {
+  width: 2px;
+  height: auto;
+}
+.scroller.mini .scroll-x,
+.scroller.mini .scroll-x .slider {
+  width: auto;
+  height: 3px;
+}
+.scroller.mini .scroll-y,
+.scroller.mini .scroll-y .slider {
+  width: 3px;
+  height: auto;
+}
+.scroller.small .scroll-x,
+.scroller.small .scroll-x .slider {
+  width: auto;
+  height: 4px;
+}
+.scroller.small .scroll-y,
+.scroller.small .scroll-y .slider {
+  width: 4px;
+  height: auto;
+}
+.scroller.large .scroll-x,
+.scroller.large .scroll-x .slider {
+  width: auto;
+  height: 7px;
+}
+.scroller.large .scroll-y,
+.scroller.large .scroll-y .slider {
+  width: 7px;
+  height: auto;
+}
+.scroller.xl .scroll-x,
+.scroller.xl .scroll-x .slider {
+  width: auto;
+  height: 10px;
+}
+.scroller.xl .scroll-y,
+.scroller.xl .scroll-y .slider {
+  width: 10px;
+  height: auto;
+}
+.scroller.bright .scroll-x .slider,
+.scroller.bright .scroll-y .slider {
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */
