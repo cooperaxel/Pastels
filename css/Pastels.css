@@ -1635,8 +1635,8 @@ div.segmentedcontrol.mini button {
     padding: 0 25px 8px;
   }
 }
-/* ########################### */
-/* ## ## ## UIPopOver ## ## ## */
+/* ######################### */
+/* ## ## ## PopOver ## ## ## */
 .popover {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e6e6e6));
   background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
@@ -1859,7 +1859,7 @@ div.segmentedcontrol.mini button {
 }
 .popover.dark,
 .popover.dark .popover-arrow {
-  background-color: #363636;
+  background: #363636;
   border-color: #000000 !important;
 }
 .popover.dark.selectable ul li.active {
@@ -2309,6 +2309,18 @@ div.hint {
   -ms-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   -o-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+@media screen and (max-width:640px) {
+  .scroller .scroll-x,
+  .scroller .scroll-x .slider {
+    width: auto;
+    height: 3px;
+  }
+  .scroller .scroll-y,
+  .scroller .scroll-y .slider {
+    width: 3px;
+    height: auto;
+  }
 }
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */

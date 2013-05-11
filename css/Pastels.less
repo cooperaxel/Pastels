@@ -817,8 +817,8 @@ div.segmentedcontrol {
     }
 }
 
-/* ########################### */
-/* ## ## ## UIPopOver ## ## ## */
+/* ######################### */
+/* ## ## ## PopOver ## ## ## */
 
 .popover { 
     .linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
@@ -948,7 +948,7 @@ div.segmentedcontrol {
             border-width:1px 0 0 1px;
         }
         &, .popover-arrow {
-            .background(rgb(54,54,54));
+            background:rgb(54,54,54);
             border-color:rgb(0,0,0) !important;
         }
         
@@ -1247,6 +1247,11 @@ div.hint {
                 .shadow(0 0 2px rgba(0,0,0,0.4));
             }
         }
+    }
+    
+    @media @max_640 {
+        .scroll-x, .scroll-x .slider { .size(auto, 3px); }
+        .scroll-y, .scroll-y .slider { .size(3px, auto); }
     }
 }
 
