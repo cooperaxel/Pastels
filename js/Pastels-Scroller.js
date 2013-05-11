@@ -13,6 +13,7 @@
         }
         
         this.options = {}.extend(Scroller.prototype.defaults, opt);
+        obj.addClass('scroller');
         
         var content = obj.children('.content');
         if (content.length > 0) {
@@ -34,7 +35,7 @@
         obj.append(this.scroll_y);
         
         this.scrolls = $(this.scroll_x, this.scroll_y);
-        this.object = obj;        
+        this.object = obj;
         this.prepare();
         
         return this;

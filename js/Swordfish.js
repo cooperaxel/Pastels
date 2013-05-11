@@ -14,8 +14,8 @@
         return this.init.apply(this, arguments);
     };
     
-    $.version = '0.1.4';
-    $.codename = 'Garpike';
+    $.version = '0.1.5';
+    $.codename = 'Dragonet';
     
     $.extend = function() {
         for(var i = 1; i < arguments.length; i++) {
@@ -535,20 +535,31 @@
                 function: 'ease-in-out',
                 delay: 0,
                 additive: false,
-            },  self = this, prefix = $.browser.prefix, n;
+            },
+                self = this,
+                prefix = $.browser.prefix,
+                n;
             
-            if(o >= 0) o = {duration:o};
-            if(o) def.extend(o);
+            if (o > 0) {
+                o = { duration: o };
+            } else if (o === 0) {
+                this.css(p);
+            }
+            if (o) {
+                def.extend(o);
+            }
             
-            if(a === true) def.additive = true;
+            if (a === true) {
+                def.additive = true;
+            }
             
-            if($.animations) {
+            if ($.animations) {
                 n = {};
                 n['transition'] = 'all '+def.duration+'ms '+def.function+' '+def.delay+'ms';
                 n[prefix+'transition'] = n['transition'];
             }
             
-            if(def.additive && this.transformMap) {
+            if (def.additive && this.transformMap) {
                 p = this.transformMap.extend(p);
             }
             
@@ -563,7 +574,6 @@
                 setTimeout(function() {
                     c.call(self);
                 }, def.duration + def.delay);
-                //self.on($.browser.prefix.split('-').join('')+'TransitionEnd TransitionEnd', $.invoke(c, self));
             }
             return this;
         },
@@ -573,6 +583,91 @@
             p[$.browser.prefix+'transition'] = null;
             this.transformMap = undefined;
             this.css(p);
+            return this;
+        },
+        effect: function(e) {
+            var args = arguments;
+            args[0] = { opacity: 1 };
+            
+            switch (e) {
+                case 'scale':
+                case 'zoomIn':
+                case 'zoomOut':
+                    args[0].extend({ scale: 1 });
+                    break;
+                case 'slideDown':
+                case 'slideUp':
+                    args[0].extend({ translateY: 0 });
+                    break;
+                case 'stuckToRight':
+                case 'stuckToLeft':
+                    args[0].extend({ rotateY: 0 });
+                    break;
+                case 'stuckToTop':
+                case 'stuckToBottom':
+                    args[0].extend({ rotateX: 0 });
+                    break;
+                case 'skewUpperRight':
+                case 'skewBottomRight':
+                    args[0].extend({ skewX: 0, translateX: 0 });
+                    break;
+            }
+            this.clearAnimation().closeEffect(e, 0);
+            args[3] = true;
+            this.animate.apply(this, args);
+            return this;
+        },
+        closeEffect: function(e) {
+            var args = arguments;
+            args[0] = { opacity: 0 };
+            
+            switch (e) {
+                case 'scale':
+                case 'zoomIn':
+                    args[0].extend({ scale: 0.01 });
+                    break;
+                case 'zoomOut':
+                    args[0].extend({ scale: 3 });
+                    break;
+                case 'slideDown':
+                    args[0].extend({ translateY: -30 });
+                    break;
+                case 'slideUp':
+                    args[0].extend({ translateY: 30 });
+                    break;
+                case 'stuckToRight':
+                    args[0].extend({ rotateY: 90, origin: '100% 50% 0' });
+                    break;
+                case 'stuckToLeft':
+                    args[0].extend({ rotateY: 90, origin: '0 50% 0' });
+                    break;
+                case 'stuckToTop':
+                    args[0].extend({ rotateX: 90, origin: '50% 0 0' });
+                    break;
+                case 'stuckToBottom':
+                    args[0].extend({ rotateX: 90, origin: '50% 100% 0' });
+                    break;
+                case 'skewUpperRight':
+                    args[0].extend({ skewX: -40, translateX: this.clientWidth() });
+                    break;
+                case 'skewBottomRight':
+                    args[0].extend({ skewX: 40, translateX: this.clientWidth() });
+                    break;
+            }
+            this.animate.apply(this, args);
+            return this;
+        },
+        transformOrigin: function(a,b,c) {
+            if (!a) { a = '50%'; }
+            if (!b) { b = '50%'; }
+            if (!c) { c = '0'; }
+            var arr = [a,b,c];
+            for (var i = 0; i < arr.length; i++) {
+                if (!isNaN(arr[i])) {
+                    arr[i] += 'px';
+                }
+            }
+            this.css({ origin: arr.join(' ') });
             return this;
         },
         scrollTo: function(x, y, t) {
@@ -1234,7 +1329,6 @@
     window.$ = $;
     window.Swordfish = $;
     
-    
     String.prototype.trim = function() {
         var s = this, whitespace = ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000',
         i = 0;
@@ -1395,6 +1489,7 @@
     Object.prototype.on = function(n, f) {
         if (!n) return false;
         if (!f) return this.emit(n);
+        var fu;
         n = n.split(' ').clean('');
         if(! this._observers) {
             this._observers = {};
@@ -1406,13 +1501,17 @@
                 this._observers[n[i]] = [];
         
             for(var j = 1; j < arguments.length; j++) {
-                if(! arguments[j] instanceof Function) continue; 
-                if(this._observers[n[i]].searchFunc(arguments[j]) !== -1)
-                    this.off(n[i]);
+                if(! arguments[j] instanceof Function) {
+                    continue;
+                }
                 this._observers[n[i]].push(arguments[j]);
+                fu = arguments[j];
                 
-                if(this.addEventListener)
-                    this.addEventListener(n[i], arguments[j], false);
+                if(this.addEventListener) {
+                    this.addEventListener(n[i], function(e) {
+                        fu.call($(this), e, this);
+                    }, false);
+                }
             }
         }
         return this;
