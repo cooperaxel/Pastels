@@ -99,7 +99,7 @@
         defaults: {
             align: false,
             dark: false,
-            effect: 'scale',
+            effect: 'slide',
             position: 'auto',
             parentPositioning: true,
             duration: 300,
@@ -108,14 +108,13 @@
             roundCorner: true,
             inheritWidth: false,
             overlay: false,
+            closeOthers: true,
             selectList: false,
             changeValueOnSelect: false,
             defaultsActions: true,
             movementX: 0,
             movementY: 0,
-            margin: 1,
-            translateY: 0,
-            scale: 0.1
+            margin: 1
         },
         prepare: function() {
             var self = this,
@@ -140,27 +139,24 @@
                 object.addClass('dark');
             }
             if (self.options.defaultsActions) {
+                object.mousedown(function(e) {
+                    e.stopPropagation();
+                });
+                
                 handler.mousedown(function(e) {
                     e.stopPropagation();
-                    $.document.emit('mousedown');
-                    
-                    object.mousedown(function(e) {
-                        e.stopPropagation();
-                    });
-                
-                    $.document.on('mouseup', function() {
-                        $.document.on('mousedown', function() {
-                            self.close();
-                            $.document.off('mousedown mouseup');
-                        });
-                    });
-                    
-                    if(self.options.refreshPosition) {
-                        self.insertToDOM();
-                        self.setPosition();
+                    if (self.options.closeOthers) {
+                        $.document.emit('mousedown');
                     }
-                    
-                    self.show();
+                    if (object.hasClass('active')) {
+                        self.close();
+                    } else {
+                        if(self.options.refreshPosition) {
+                            self.insertToDOM();
+                            self.setPosition();
+                        }
+                        self.show();
+                    }
                 });
                 
                 object.find('button[type=cancel]').mouseup(function() {
@@ -175,11 +171,11 @@
             }
             if (self.options.selectList) {
                 var c = self.selectList.children('li');
-
+                
                 c.mouseup(function(e) {
                     e.stopPropagation();
-                    var n = this.getAttribute('name');
-                    object.emit('selected', { index: c.indexOf(this), value: (n ? n : this.innerHTML) });
+                    var n = this.attr('name');
+                    object.emit('selected', { index: c.indexOf(this), value: (n ? n : this.html()) });
                     self.close();
                 }).mouseover(function(e) {
                     e.stopPropagation();
@@ -228,7 +224,7 @@
                 arrow = self.arrow, 
                 posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
                 position = 'below',
-                origin = self.handler.origin();
+                origin = handler.origin();
             
             object.show().opacity(0);
             
@@ -241,8 +237,8 @@
             }           
             
             if(self.options.position === 'auto') {
-                var bh = $().clientHeight(), bw = $().clientWidth();
-                if(origin.x < bh/2 || object.clientHeight() > origin.y) {
+                var bh = $().clientHeight();
+                if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
                     position = 'below';
                 } else {
                     position = 'above';
@@ -316,39 +312,57 @@
             object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
             
             if(['below','above'].indexOf(position) !== -1) {
-                object.css({ origin: (arrowX+arrowLength+2)+'px '+arrowY+'px' });
+                object.transformOrigin(arrowX+arrowLength+2, arrowY);
             } else {
-                object.css({ origin: arrowX+'px '+(arrowY+arrowRadius+2)+'px' });
+                object.transformOrigin(arrowX, arrowY+arrowRadius+2);
             }
         },
-        
         show: function() {
             var self = this,
                 object = self.object;
-            self.insertToDOM();
+            
             if(! object.hasClass('active')) {
-                object.show().animate({ opacity:1, translateY:0, scale:1 }, self.options.duration, function() {
+                self.insertToDOM();
+                object.addClass('active');
+                object.show().effect(self.getEffect(), self.options.duration, function() {
                     object.find('input, textarea').focus();
-                    object.addClass('active');
                     object.emit('appear');
+                });
+                
+                $.document.on('mouseup', function() {
+                    $.document.on('mousedown', function(e) {
+                        if (e.target !== object.item()) {
+                            self.close();
+                            $.document.off('mousedown mouseup');
+                        }
+                    });
                 });
             }
             return self;
         },
-        
         close: function() {
             var self = this,
                 object = self.object;
             if(object.hasClass('active')) {
-                object.animate({ opacity: 0, translateY: -self.options.translateY, scale: self.options.scale }, self.options.duration, function() {
-                    object.removeClass('active');
+                object.closeEffect(self.getEffect(), self.options.duration, function() {
                     object.emit('disappear');
-                    object.css({ opacity:0, translateY: self.options.translateY, scale: self.options.scale, display:'none' });
-                    setTimeout(function() { self.removeFromDOM(); }, 100);
+                    object.removeClass('active');
+                    object.hide();
+                    self.removeFromDOM();
                 });
             }
             return self;
-        },      
+        },
+        getEffect: function() {
+            if (this.options.effect === 'slide') {
+                if (this.object.hasClass('below')) {
+                    return 'slideDown';
+                } else {
+                    return 'slideUp';
+                }
+            }
+            return this.options.effect;
+        }
     }); 
     window.PopOver = PopOver;
     
