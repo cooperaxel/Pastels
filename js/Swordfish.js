@@ -14,8 +14,8 @@
         return this.init.apply(this, arguments);
     };
     
-    $.version = '0.1.4';
-    $.codename = 'Garpike';
+    $.version = '0.1.5';
+    $.codename = 'Dragonet';
     
     $.extend = function() {
         for(var i = 1; i < arguments.length; i++) {
@@ -1234,7 +1234,6 @@
     window.$ = $;
     window.Swordfish = $;
     
-    
     String.prototype.trim = function() {
         var s = this, whitespace = ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000',
         i = 0;
@@ -1395,6 +1394,7 @@
     Object.prototype.on = function(n, f) {
         if (!n) return false;
         if (!f) return this.emit(n);
+        var fu;
         n = n.split(' ').clean('');
         if(! this._observers) {
             this._observers = {};
@@ -1406,13 +1406,17 @@
                 this._observers[n[i]] = [];
         
             for(var j = 1; j < arguments.length; j++) {
-                if(! arguments[j] instanceof Function) continue; 
-                if(this._observers[n[i]].searchFunc(arguments[j]) !== -1)
-                    this.off(n[i]);
+                if(! arguments[j] instanceof Function) {
+                    continue;
+                }
                 this._observers[n[i]].push(arguments[j]);
+                fu = arguments[j];
                 
-                if(this.addEventListener)
-                    this.addEventListener(n[i], arguments[j], false);
+                if(this.addEventListener) {
+                    this.addEventListener(n[i], function(e) {
+                        fu.call($(this), e, this);
+                    }, false);
+                }
             }
         }
         return this;
