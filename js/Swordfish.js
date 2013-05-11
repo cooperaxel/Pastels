@@ -535,20 +535,31 @@
                 function: 'ease-in-out',
                 delay: 0,
                 additive: false,
-            },  self = this, prefix = $.browser.prefix, n;
+            },
+                self = this,
+                prefix = $.browser.prefix,
+                n;
             
-            if(o >= 0) o = {duration:o};
-            if(o) def.extend(o);
+            if (o > 0) {
+                o = { duration: o };
+            } else if (o === 0) {
+                this.css(p);
+            }
+            if (o) {
+                def.extend(o);
+            }
             
-            if(a === true) def.additive = true;
+            if (a === true) {
+                def.additive = true;
+            }
             
-            if($.animations) {
+            if ($.animations) {
                 n = {};
                 n['transition'] = 'all '+def.duration+'ms '+def.function+' '+def.delay+'ms';
                 n[prefix+'transition'] = n['transition'];
             }
             
-            if(def.additive && this.transformMap) {
+            if (def.additive && this.transformMap) {
                 p = this.transformMap.extend(p);
             }
             
@@ -563,7 +574,6 @@
                 setTimeout(function() {
                     c.call(self);
                 }, def.duration + def.delay);
-                //self.on($.browser.prefix.split('-').join('')+'TransitionEnd TransitionEnd', $.invoke(c, self));
             }
             return this;
         },
@@ -573,6 +583,91 @@
             p[$.browser.prefix+'transition'] = null;
             this.transformMap = undefined;
             this.css(p);
+            return this;
+        },
+        effect: function(e) {
+            var args = arguments;
+            args[0] = { opacity: 1 };
+            
+            switch (e) {
+                case 'scale':
+                case 'zoomIn':
+                case 'zoomOut':
+                    args[0].extend({ scale: 1 });
+                    break;
+                case 'slideDown':
+                case 'slideUp':
+                    args[0].extend({ translateY: 0 });
+                    break;
+                case 'stuckToRight':
+                case 'stuckToLeft':
+                    args[0].extend({ rotateY: 0 });
+                    break;
+                case 'stuckToTop':
+                case 'stuckToBottom':
+                    args[0].extend({ rotateX: 0 });
+                    break;
+                case 'skewUpperRight':
+                case 'skewBottomRight':
+                    args[0].extend({ skewX: 0, translateX: 0 });
+                    break;
+            }
+            this.clearAnimation().closeEffect(e, 0);
+            args[3] = true;
+            this.animate.apply(this, args);
+            return this;
+        },
+        closeEffect: function(e) {
+            var args = arguments;
+            args[0] = { opacity: 0 };
+            
+            switch (e) {
+                case 'scale':
+                case 'zoomIn':
+                    args[0].extend({ scale: 0.01 });
+                    break;
+                case 'zoomOut':
+                    args[0].extend({ scale: 3 });
+                    break;
+                case 'slideDown':
+                    args[0].extend({ translateY: -30 });
+                    break;
+                case 'slideUp':
+                    args[0].extend({ translateY: 30 });
+                    break;
+                case 'stuckToRight':
+                    args[0].extend({ rotateY: 90, origin: '100% 50% 0' });
+                    break;
+                case 'stuckToLeft':
+                    args[0].extend({ rotateY: 90, origin: '0 50% 0' });
+                    break;
+                case 'stuckToTop':
+                    args[0].extend({ rotateX: 90, origin: '50% 0 0' });
+                    break;
+                case 'stuckToBottom':
+                    args[0].extend({ rotateX: 90, origin: '50% 100% 0' });
+                    break;
+                case 'skewUpperRight':
+                    args[0].extend({ skewX: -40, translateX: this.clientWidth() });
+                    break;
+                case 'skewBottomRight':
+                    args[0].extend({ skewX: 40, translateX: this.clientWidth() });
+                    break;
+            }
+            this.animate.apply(this, args);
+            return this;
+        },
+        transformOrigin: function(a,b,c) {
+            if (!a) { a = '50%'; }
+            if (!b) { b = '50%'; }
+            if (!c) { c = '0'; }
+            var arr = [a,b,c];
+            for (var i = 0; i < arr.length; i++) {
+                if (!isNaN(arr[i])) {
+                    arr[i] += 'px';
+                }
+            }
+            this.css({ origin: arr.join(' ') });
             return this;
         },
         scrollTo: function(x, y, t) {
