@@ -1820,11 +1820,11 @@ div.segmentedcontrol.mini button {
   border-color: transparent;
   border-width: 1px 0;
   border-style: solid;
-  -webkit-transition: background-image 0.2s ease-in-out;
-  -moz-transition: background-image 0.2s ease-in-out;
-  -ms-transition: background-image 0.2s ease-in-out;
-  -o-transition: background-image 0.2s ease-in-out;
-  transition: background-image 0.2s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   text-align: left;
   font-family: Arial, sans-serif;
   font-size: 14px;
