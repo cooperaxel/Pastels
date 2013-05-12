@@ -13,29 +13,34 @@
         }
         
         this.options = {}.extend(Scroller.prototype.defaults, opt);
-        obj.addClass('scroller');
         
-        var content = obj.children('.content');
-        if (content.length > 0) {
-            this.content = content.eq(0);
+        if (!(obj.item() instanceof HTMLDivElement)) {
+            this.content = obj;
+            this.object = $.create('div.scroller');
+            this.content.wrap(this.object);
         } else {
-            this.content = $.create('div.content');
-            obj.nodes().appendTo(this.content);
-            obj.append(this.content);
+            var content = obj.children('.content');
+            if (content.length > 0) {
+                this.content = content.eq(0);
+            } else {
+                this.content = $.create('div.content');
+                obj.nodes().appendTo(this.content);
+                obj.append(this.content);
+            }
+            this.object = obj.addClass('scroller');
         }
         
         this.scroll_x = $.create('div.scroll-x');
         this.scroll_x.slider = $.create('div.slider');
         this.scroll_x.append(this.scroll_x.slider);
-        obj.append(this.scroll_x);
+        this.object.append(this.scroll_x);
         
         this.scroll_y = $.create('div.scroll-y');
         this.scroll_y.slider = this.scroll_x.slider.clone();
         this.scroll_y.append(this.scroll_y.slider);
-        obj.append(this.scroll_y);
+        this.object.append(this.scroll_y);
         
         this.scrolls = $(this.scroll_x, this.scroll_y);
-        this.object = obj;
         this.prepare();
         
         return this;
@@ -44,7 +49,7 @@
     Scroller.prototype = {}.extend(Pastels.prototype, {
         defaults: {
             duration: 300,
-            timeout: 1000,
+            timeout: 800,
             showOnStart: false,
             showOnHover: true,
             showAlways: false,
@@ -54,9 +59,9 @@
         prepare: function() {
             var self = this;
             
-            self.object.css({ overflow:'hidden' });
-            self.content.css({ overflow:'scroll' });
-            self.scrolls.css({ opacity:0 });
+            self.object.css({ overflow:'visible', width: self.content.offset().width, height: self.content.offset().height });
+            self.content.css({ overflow:'scroll', margin: 0 });
+            self.scrolls.css({ opacity: 0 });
             if (self.object.css('position') === 'static') {
                 self.object.css({ position: 'relative' });
             }
