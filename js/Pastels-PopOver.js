@@ -172,6 +172,10 @@
             if (self.options.selectList) {
                 var c = self.selectList.children('li');
                 
+                if (! self.selectList.parent().item().Scroller) {
+                    self.selectList.Scroller();
+                }
+                
                 c.mouseup(function(e) {
                     e.stopPropagation();
                     var n = this.attr('name');
