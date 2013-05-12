@@ -44,11 +44,15 @@
         $.require('js/Pastels-'+component+'.js', callback);
     };
     
+    Pastels.includes = [];
+    
     $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
         window[k] = function() {
-            var $this = this, args = arguments;
-            Pastels.require(k, function() {
+            var $this = this,
+                args = arguments;
+            return Pastels.require(k, function() {
                 if (window[k] !== $this) {
+                    Pastels.includes.push(k);
                     return window[k].apply(window, args);
                 }
             });
@@ -57,12 +61,13 @@
             var self = this,
             fu = function(k) {
                 $.each(self, function(n) {
-                    n[k] = eval("new "+k+"(this, a1, a2, a3);");   
+                    n[k] = eval("new "+k+"(this, a1, a2, a3);");
                 });
             };
-            if (!(k instanceof Pastels) && this.length > 0) {
+            if (Pastels.includes.indexOf(k) === -1 && self.length > 0) {
                 Pastels.require(k, $.invoke(fu, window, k));
-            } else if (this.length > 0) {
+                Pastels.includes.push(k);
+            } else if (self.length > 0) {
                 fu(k);
             }
             return this;
@@ -123,10 +128,10 @@ $(function() {
         window.scrollTo(0, 0);
     }
     
+    $('.scroller').Scroller();
     $('.popover-handler').PopOver();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
-    $('.scroller').Scroller();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
