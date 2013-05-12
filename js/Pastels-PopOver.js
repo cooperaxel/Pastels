@@ -17,28 +17,8 @@
         this.options = {}.extend(PopOver.prototype.defaults, opt);
         this.handler = handler;
         
-        if(data) {
-            if(data.indexOf('no-arrow') !== -1) {
-                this.options.arrow = false;
-            }
-            if(data.indexOf('no-round-corner') !== -1) {
-                this.options.roundCorner = false;
-            }
-            if(data.indexOf('inherit-width') !== -1) {
-                this.options.inheritWidth = true;
-            }
-            if(data.indexOf('overlay') !== -1) {
-                this.options.overlay = true;
-            }
-            if (data.indexOf('no-animation') !== -1) {
-                this.options.duration = 0;
-            }
-            if (data.indexOf('change-on-select') !== -1) {
-                this.options.changeValueOnSelect = true;
-            }
-            if (data.indexOf('dark') !== -1) {
-                this.options.dark = true;
-            }
+        if (data) {
+            this.options.extend($.parseData(data));
         }
         
         if (name && name.length > 0) {
@@ -121,6 +101,56 @@
                 object = self.object,
                 handler = self.handler;
             
+            if (self.options.selectList) {
+                var c = self.selectList.children('li');
+                
+                if (! self.selectList.item().Scroller) {
+                    self.selectList.Scroller();
+                }
+                
+                c.mouseup(function(e) {
+                    e.stopPropagation();
+                    var n = this.attr('name');
+                    object.emit('selected', { index: c.indexOf(this), value: (n ? n : this.html()) });
+                    self.close();
+                }).mouseover(function(e) {
+                    c.removeClass('active');
+                    this.addClass('active');
+                }).mouseout(function() {
+                    this.removeClass('active');
+                }).click(function(e) {
+                    var a = this.children('a');
+                    if (a.length === 1) {
+                        a.active().click();
+                    }
+                });
+            } else if (this.object.hasClass('tabbed')) {
+                var aside = object.children('aside'),
+                    sections = object.children('section'),
+                    li = aside.find('li');
+                
+                sections.hide();
+                
+                li.mouseup(function() {
+                    var id = this.attr('id'),
+                        max = 0;
+                    
+                    sections.css({ opacity: 0 }).show().each(function(e,i) {
+                        var height = this.clientHeight();
+                        if (max < height) {
+                            max = height;
+                        }
+                    }).hide().css({ opacity: 1 });
+                    aside.css({ height: max });
+                    
+                    li.removeClass('active');
+                    this.addClass('active');
+                    sections.filter('#section-'+id).show();
+                });
+                
+                li.get(0).mouseup();
+            }
+            
             if (self.options.arrow) {
                 if(object.children('.popover-arrow').length == 0) {
                     self.arrow = $.create('.popover-arrow');
@@ -167,53 +197,6 @@
                     object.emit('submit');
                     self.close();
                 });
-            
-            }
-            if (self.options.selectList) {
-                var c = self.selectList.children('li');
-                
-                c.mouseup(function(e) {
-                    e.stopPropagation();
-                    var n = this.attr('name');
-                    object.emit('selected', { index: c.indexOf(this), value: (n ? n : this.html()) });
-                    self.close();
-                }).mouseover(function(e) {
-                    e.stopPropagation();
-                    c.removeClass('active');
-                    this.addClass('active');
-                }).mouseout(function() {
-                    this.removeClass('active');
-                }).click(function(e) {
-                    var a = this.children('a');
-                    if (a.length === 1) {
-                        a.active().click();
-                    }
-                });
-            } else if (this.object.hasClass('tabbed')) {
-                var aside = object.children('aside'),
-                    sections = object.children('section'),
-                    li = aside.find('li');
-                
-                sections.hide();
-                
-                li.mouseup(function() {
-                    var id = this.attr('id'),
-                        max = 0;
-                    
-                    sections.css({ opacity: 0 }).show().each(function(e,i) {
-                        var height = this.clientHeight();
-                        if (max < height) {
-                            max = height;
-                        }
-                    }).hide().css({ opacity: 1 });
-                    aside.css({ height: max });
-                    
-                    li.removeClass('active');
-                    this.addClass('active');
-                    sections.filter('#section-'+id).show();
-                });
-                
-                li.get(0).mouseup();
             }
         },
         
@@ -228,7 +211,7 @@
             
             object.show().opacity(0);
             
-            if(self.options.arrow) {
+            if (self.options.arrow) {
                 arrowLength = parseInt(arrow.height()/2)+1;
                 arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * arrow.clientHeight())/2))+1;
             } else {
@@ -236,7 +219,7 @@
                 arrowRadius = 1;
             }           
             
-            if(self.options.position === 'auto') {
+            if (self.options.position === 'auto') {
                 var bh = $().clientHeight();
                 if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
                     position = 'below';

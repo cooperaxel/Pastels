@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.3
-*  codename:    Sunburnt Cyclops
+*  version:     0.2.4
+*  codename:    Smashed Pumpkin
 */
 
 @blue:#1a9cff;
@@ -59,8 +59,8 @@
 }
 .outset-shadow (@color: rgba(0,0,0,0.1), @blur: 15px) { box-shadow:1px 0 @blur @color, -1px 0 @blur @color, 0 1px @blur @color, 0 -1px @blur @color; }
 .inset-shadow (@color: rgba(255,255,255,0.3), @blur: 0) { box-shadow:inset 0 0 @blur 1px @color; }
-
 .round-corner (@radius: 5px) { border-radius:@radius; }
+
 .text-shadow (@str: none) {
     -webkit-text-shadow:@str;
     -moz-text-shadow:@str;
@@ -913,7 +913,7 @@ div.segmentedcontrol {
     &.selectable ul, div.tabbed aside ul {
         .block;
         .margins(0, 1px 1px);
-        max-height:300px;
+        max-height:250px;
         overflow-x:hidden;
         overflow-y:scroll;
         list-style-type:none;
@@ -925,7 +925,7 @@ div.segmentedcontrol {
     &.selectable li {
         .margins(-1px 0 0 0, 3px 15px 3px 10px);
         .border(transparent, 1px 0);
-        .transition(.2s, background-image);
+        .transition(.1s);
         text-align:left;
         font-family:Arial, sans-serif;
         font-size:14px;
@@ -1149,7 +1149,6 @@ div.hint {
                 .block !important;
                 .non-events;
                 color:#555;
-                font-family:"Verdana", "Arial", "sans-serif";
                 font-size:12px;
                 font-weight:bold;
                 line-height:15px;
@@ -1174,6 +1173,9 @@ div.hint {
 
 .scroller {
     @size: 6px;
+    .inline-block;
+    .vertical-middle;
+    .margins(0, 0);
     position:relative;
     
     .scroll-x, .scroll-y {

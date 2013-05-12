@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.3
-*  codename:    Sunburnt Cyclops
+*  version:     0.2.4
+*  codename:    Smashed Pumpkin
 */
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
@@ -1805,7 +1805,7 @@ div.segmentedcontrol.mini button {
   display: block;
   margin: 0;
   padding: 1px 1px;
-  max-height: 300px;
+  max-height: 250px;
   overflow-x: hidden;
   overflow-y: scroll;
   list-style-type: none;
@@ -1820,11 +1820,11 @@ div.segmentedcontrol.mini button {
   border-color: transparent;
   border-width: 1px 0;
   border-style: solid;
-  -webkit-transition: background-image 0.2s ease-in-out;
-  -moz-transition: background-image 0.2s ease-in-out;
-  -ms-transition: background-image 0.2s ease-in-out;
-  -o-transition: background-image 0.2s ease-in-out;
-  transition: background-image 0.2s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   text-align: left;
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -2145,7 +2145,6 @@ div.hint {
   display: block;
   pointer-events: none;
   color: #555;
-  font-family: "Verdana", "Arial", "sans-serif";
   font-size: 12px;
   font-weight: bold;
   line-height: 15px;
@@ -2175,6 +2174,10 @@ div.hint {
 /* ########################## */
 /* ## ## ## Scroller ## ## ## */
 .scroller {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
   position: relative;
 }
 .scroller .scroll-x,

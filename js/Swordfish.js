@@ -14,8 +14,8 @@
         return this.init.apply(this, arguments);
     };
     
-    $.version = '0.1.5';
-    $.codename = 'Dragonet';
+    $.version = '0.1.6';
+    $.codename = 'Wobbegong';
     
     $.extend = function() {
         for(var i = 1; i < arguments.length; i++) {
@@ -1299,6 +1299,27 @@
         },
         isDark: function(c) {
             return !$.isBright(c);
+        },
+        parseData: function(data) {
+            if (!data) {
+                return null;
+            }
+            var r = {},
+                spl = data.split(' '), p;
+            
+            if (spl.length > 0) {
+                for (var s in spl) {
+                    if (spl[s].indexOf('=') !== -1) {
+                        p = spl[s].split('=');
+                        r[p[0]] = p[1];
+                    } else if (spl[s].substr(0, 3) === 'no-') {
+                        r[spl[s].substring(3)] = false;
+                    } else {
+                        r[spl[s]] = true;
+                    }
+                }
+            }
+            return r;
         }
     });
         
