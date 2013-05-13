@@ -25,13 +25,13 @@
             return this.object.item(0).parentNode ? true : false;
         },
         insertToDOM: function(p) {
-            if(! this.inDOM()) {
+            if(! this.inDOM() && this.object) {
                 if(!p) p = $();
                 p.append(this.object);
             }
         },
         removeFromDOM: function() {
-            if(this.inDOM()) {
+            if(this.inDOM() && this.object) {
                 this.object.remove();
             }
         },
