@@ -37,6 +37,12 @@
         },
         destroy: function() {
             this.object.emit('destroy');
+        },
+        load: function() {
+            for (var i = 0; i < arguments.length; i++) {
+                Pastels.require(arguments[i]);
+            }
+            return this;
         }
     };
     
@@ -46,7 +52,7 @@
     
     Pastels.includes = [];
     
-    $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
+    $.each(['Alert','Hint','Notification','PopOver','Scroller','Selectable','Switch','Typeahead'], function(k) {
         window[k] = function() {
             var $this = this,
                 args = arguments;
@@ -132,6 +138,7 @@ $(function() {
     $('.popover-handler').PopOver();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
+    $('.typeahead').Typeahead();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
