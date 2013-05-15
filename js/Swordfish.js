@@ -343,8 +343,8 @@
                 parent: a.offsetParent,
                 top: a.offsetTop,
                 width: a.offsetWidth,
-                right: window.outerWidth - a.clientWidth - a.offsetLeft,
-                bottom: window.outerHeight - a.clientHeight - a.offsetTop
+                right: a.offsetParent.clientWidth - a.clientWidth - a.offsetLeft,
+                bottom: a.offsetParent.clientHeight - a.clientHeight - a.offsetTop
             };
         },
         origin: function() {
@@ -426,6 +426,12 @@
         },
         tag: function() {
             return this.active().tagName.toLowerCase();
+        },
+        isInFlow: function() {
+            if (['static','relative'].indexOf(this.css('position')) !== -1 && this.css('float') === 'none') {
+                return true;
+            }
+            return false;
         },
         data: function(p,v,d) {
             if(p && v) {
@@ -1182,21 +1188,17 @@
         require: function(p, c) {
             if(!p) return false;
             var r = false,
-                s = document.createElement('script');
+                s = $.create('script');
             if ($('script[src="'+p+'"]').length == 0) {
-                s.async = true;
-                s.type = 'text/javascript';
-                s.src = p;
-                s.onload = s.onreadystatechange = function() {
-                    if (!r && (!this.readyState || this.readyState == 'complete')) {
-                        r = true;
-                        if (c) {
+                s.prop({ async: true, type: 'text/javascript', src: p });
+                if (c) {
+                    s.on('load readystatechange', function() {
+                        if (!r && (!this.readyState || this.readyState == 'complete')) {
                             r = c.apply($.window);
                         }
-                    }
+                    });
                 }
-                var l = document.head.childNodes.last();
-                l.parentNode.insertBefore(s, l.nextSibling);
+                $('head').append(s);
             }
             return r;
         },
@@ -1317,6 +1319,38 @@
                     } else {
                         r[spl[s]] = true;
                     }
+                }
+            }
+            return r;
+        },
+        parseArguments: function(args) {
+            var arg,
+                r = {
+                    strings: [],
+                    numbers: [],
+                    booleans: [],
+                    arrays: [],
+                    functions: [],
+                    objects: [],
+                    others: []
+                };
+            
+            for (var i = 0; i < args.length; i++) {
+                arg = args[i];
+                if (typeof arg === 'string') {
+                    r.strings.push(arg);
+                } else if (typeof arg === 'number' && isFinite(arg)) {
+                    r.numbers.push(arg);
+                } else if (arg === true || arg === false) {
+                    r.booleans.push(arg);
+                } else if (arg instanceof Array) {
+                    r.arrays.push(arg);
+                } else if (arg instanceof Function) {
+                    r.functions.push(arg);
+                } else if (arg instanceof Object) {
+                    r.objects.push(arg);
+                } else {
+                    r.others.push(arg);
                 }
             }
             return r;
@@ -1510,28 +1544,30 @@
     Object.prototype.on = function(n, f) {
         if (!n) return false;
         if (!f) return this.emit(n);
-        var fu;
+        var fu, off = $.parseArguments(arguments).booleans.contains(false);
         n = n.split(' ').clean('');
         if(! this._observers) {
             this._observers = {};
             this.hideProperties(['_observers']);
         }
             
-        for(var i = 0; i < n.length; i++) {
-            if(!this._observers[n[i]])
+        for (var i = 0; i < n.length; i++) {
+            if (!this._observers[n[i]]) {
                 this._observers[n[i]] = [];
-        
-            for(var j = 1; j < arguments.length; j++) {
-                if(! arguments[j] instanceof Function) {
+            }
+            
+            for (var j = 1; j < arguments.length; j++) {
+                if (! arguments[j] instanceof Function) {
                     continue;
                 }
-                this._observers[n[i]].push(arguments[j]);
                 fu = arguments[j];
+                if (this._observers[n[i]].searchFunc(fu) >= 0 && off === false) {
+                    this.off(n[i], fu);
+                }
+                this._observers[n[i]].push(fu);
                 
-                if(this.addEventListener) {
-                    this.addEventListener(n[i], function(e) {
-                        fu.call($(this), e, this);
-                    }, false);
+                if (this.addEventListener) {
+                    this.addEventListener(n[i], fu, false);
                 }
             }
         }
@@ -1542,8 +1578,9 @@
         n = n.split(' ').clean('');
     
         function removeListener(a, b, c) {
-            if(a.removeEventListener)
+            if(a.removeEventListener) {
                 a.removeEventListener(b, a._observers[b][c]);
+            }
             a._observers[b][c] = null;
         }
         for(var i = 0; i < n.length; i++) {
@@ -1594,7 +1631,9 @@
             }
         } else if (this._observers && this._observers[n]) {
             for(var i = 0; i < this._observers[n].length; i++) {
-                this._observers[n][i].apply(this, a);
+                if (this._observers[n][i] instanceof Function) {
+                    this._observers[n][i].apply(this, a);
+                }
             }
         }
         return this;
@@ -1724,8 +1763,13 @@
             }
         }
     }
-    Array.prototype.contains = function(a) {
-        return this.indexOf(a) !== -1;
+    Array.prototype.contains = function() {
+        for (var i = 0; i < arguments.length; i++) {
+            if (this.indexOf(arguments[i]) === -1) {
+                return false;
+            }
+        }
+        return true;
     };
     Array.prototype.diff = function(a) {
         return this.filter(function (el) { return !a.contains(el); });
