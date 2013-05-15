@@ -4,155 +4,155 @@
 
 (function(window) {
     
-    var Typeahead = function(input, list, opt) {
+    var Typeahead = function(input, opt) {
         if(!(this instanceof Typeahead)) {
-            return new Typeahead(handler, list, opt);
+            return new Typeahead(input, opt);
         }
-
-        var self = this, data = input.data('typeahead');
         
-        this.options = {}.extend(Typeahead.prototype.defaults, opt);
-        this.input = input;
-        this.list = list;
+        var self = this,
+            data = input.data('typeahead');
         
-        if(data) {
-            var m = parseInt(data);
-            if(m > 0) {
-                this.options.visibleElements = m;
-            }
-            if(data.indexOf('inheritWidth') !== -1) {
-                this.options.inheritWidth = true;
-            }
-            if(data.indexOf('onfocus') !== -1) {
-                this.options.showOnFocus = true;
-            }
-            if(data.indexOf('asc') !== -1) {
-                this.options.sort = 'asc';
-            } else if(data.indexOf('desc') !== -1) {
-                this.options.sort = 'desc';
-            }
+        self.options = {}.extend(Typeahead.prototype.defaults, opt);
+        self.input = input;
+        
+        if (data) {
+            self.options.extend($.parseData(data));
         }
-
-        this.prepare();
-
-        return this;
-    };
-    
-    $.prototype.Typeahead = function(opt) {
-        $.each(this, function() {
-            var name = this.getAttribute('name'),
-                obj = name ? $('ul#typeahead-'+name) : null;
-                
-            this.typeahead = new Typeahead($(this), obj, opt);
+        
+        Pastels.load(self.required, function() {
+            self.selectable = new Selectable(self.input, self.options);
+            self.selectable.object.addClass('typeahead');
+            self.prepare();
         });
-        return this;
+        
+        return self;
     };
     
     Typeahead.prototype = {}.extend(Pastels.prototype, {
+        required: ['PopOver', 'Selectable'],
         defaults: {
+            position: 'below',
             align: 'left',
-            inheritWidth: false,
+            allowDividers: false,
+            allowReclick: true,
+            arrow: false,
+            inheritWidth: true,
+            roundCorner: false,
+            defaultActions: false,
+            refreshPosition: true,
+            sort: false,
+            
             showOnFocus: false,
             showAllValues: false,
-            enterToComplete: false,
-            visibleElements: 0,
-            sort: false
+            autoComplete: false,
+            minLength: 1,
+            items: 0
         },
         prepare: function() {
-            var self = this;
-            this.input.popover = new PopOver(this.list, this.input, { position:'below', arrow: false, inheritWidth: this.options.inheritWidth, align: this.options.align, defaultsActions: false, translateY: 0 });
+            var self = this,
+                select = self.selectable,
+                list = select.list,
+                li = list.children('li');
             
-            if(! this.list)
-                this.list = this.input.popover.selectList;
-            
-            if(this.options.sort == 'asc') {
-                this.list.children('li').sort();
-            } else if(this.options.sort == 'desc') {
-                this.list.children('li').sort().reverse();
+            if (self.options.sort === 'asc') {
+                li.sort();
+            } else if (self.options.sort === 'desc') {
+                li.sort().reverse();
             }
             
-            if(self.options.visibleElements > 0 && li.length > self.options.visibleElements) {
-                self.input.popover.object.show();
-                self.list.css({ maxHeight: li.clientHeight()*self.options.visibleElements });
-                self.input.popover.object.hide();
+            list.css({ minHeight: li.clientHeight() });
+            if(self.options.items > 0 && li.length > self.options.items) {
+                select.object.show();
+                list.css({ maxHeight: li.clientHeight() * self.options.items });
+                select.object.hide();
             }
             
-            this.input.mousedown(function() {
-                self.show();
+            if (self.options.showOnFocus) {
+                self.input.focus(function() {
+                    self.show();
+                });
+            }
+            self.input.blur(function() {
+                self.close();
+            });
+            
+            var li_mouseup = function() {
+                self.input.value($(this).text()).change().blur();
+            };
+            
+            select.object.on('appear', function() {
+                li.mouseup(li_mouseup);
+            }).on('disappear', function() {
+                li.off('mouseup', li_mouseup);
             });
             
             self.input.keyup(function(e) {
                 var k = e.keyCode;
-                if(k == 27)
+                if (k == 27) {
                     self.close();
-                else if(k != 38 && k != 40)
+                } else if (k != 38 && k != 40) {
                     self.show();
-                //e.preventDefault();
+                }
             }).keydown(function(e) {
                 var k = e.keyCode;
-                if(k == 13 || k == 38 || k == 40) {
-                    var act = self.input.popover.selectList.children('li.active!.hidden');
+                if (k == 13 || k == 38 || k == 40) {
+                    var act = list.children('li.active!.hidden');
                     
-                    if(act.length == 0) {
-                        if(k == 38)
-                            act = self.input.popover.selectList.children('li!.hidden').eq(-1).addClass('active');
-                        if(k == 40)
-                            act = self.input.popover.selectList.children('li!.hidden').eq(0).addClass('active');
+                    if (act.length == 0) {
+                        if (k == 38) {
+                            act = list.children('li!.hidden').eq(-1).addClass('active');
+                        }
+                        if (k == 40) {
+                            act = list.children('li!.hidden').eq(0).addClass('active');
+                        }
                     } else {
-                        if(k == 13) {
+                        if (k == 13) {
                             act.emit('mouseup');
                             return 0;
-                        } else if(k == 38) {
+                        } else if (k == 38) {
                             var n = act.prev('!.hidden').addClass('active');
-                            self.list.scrollTop(n.offset().top - self.list.clientHeight()/2);
-                        } else if(k == 40) {
+                            list.scrollTop(n.offset().top - select.list.clientHeight()/2);
+                        } else if (k == 40) {
                             var n = act.next('!.hidden').addClass('active');
-                            self.list.scrollTop(n.offset().top - self.list.clientHeight()/2);
+                            list.scrollTop(n.offset().top - select.list.clientHeight()/2);
                         }
                         act.removeClass('active');
                     }
                     e.preventDefault();
                 }
-            }).blur(function() {
-                self.close();
-            });
-            
-            self.input.popover.selectList.children('li').mouseup(function() {
-                self.input.value(this.innerHTML).focus().change();
             });
         },
-        
         refresh: function() {
-            var self = this, li = this.list.children('li').removeClass('active');
+            var self = this,
+                select = self.selectable,
+                li = select.list.children('li').removeClass('active');
             
-            if(!this.options.showAllValues) {
-                li.filter(function() { return (this.innerHTML.indexOf(self.input.value()) === 0 ? true : false); }).show().removeClass('hidden');
-                li.filter(function() { return (this.innerHTML.indexOf(self.input.value()) !== 0 ? true : false); }).hide().addClass('hidden');
+            if (! self.options.showAllValues) {
+                li.filter(function() { return (this.text().indexOf(self.input.value()) === 0 ? true : false); }).show().removeClass('hidden');
+                li.filter(function() { return (this.text().indexOf(self.input.value()) !== 0 ? true : false); }).hide().addClass('hidden');
             }
             
             var nh = li.not('.hidden');
             
             if(nh.length > 0 && nh.filter('.active').length === 0) {
-                this.input.popover.object.show();
+                select.object.show();
                 nh.first().addClass('active');
             } else {
-                this.input.popover.object.hide();
+                select.object.hide();
                 nh.removeClass('active');
             }
         },
-        
         show: function() {
-            var self = this;
-            this.input.popover.show();
+            this.selectable.popover.show();
             this.refresh();
+            return this;
         },
-        
         close: function() {
-            var self = this;
-            
-            self.input.popover.close();
+            this.selectable.popover.close();
+            return this;
         }
     });
-    window.Typeahead = Typeahead;
     
+    window.Typeahead = Typeahead;
+    Pastels.push('Typeahead');
 })(window);

@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.4
-*  codename:    Smashed Pumpkin
+*  version:     0.2.5
+*  codename:    Blooming Daffodil
 */
 
 @blue:#1a9cff;
@@ -825,8 +825,8 @@ div.segmentedcontrol {
     .border(rgba(169, 169, 169, 1));
     .round-corner(4px);
     .shadow(e("inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2)"));
-    min-height:40px; 
-    min-width:60px; 
+    min-height:10px; 
+    min-width:20px; 
     padding:0; 
     font:12px Tahoma,Arial; 
     color:#555;
@@ -907,8 +907,41 @@ div.segmentedcontrol {
     &.arrow-mini.above      .popover-arrow      { bottom:-5px; }
     
     &.selectable {
-        .margins(0, 7px 0);
+        .margins(0, 8px 0);
         min-width:35px;
+        
+        li {
+            .size(100%, 24px);
+            .margins(-1px 0 0 0, 0);
+            .border(transparent, 1px 0);
+            .transition(.1s);
+            text-align:left;
+            font-family:Arial, sans-serif;
+            font-size:14px;
+            line-height:20px;
+            
+            &.active {
+                .background(rgb(69,69,69));
+                color:#fafafa;
+            }
+            &.divider {
+                .size(auto, 1px);
+                .margins(8px 1px, 0);
+                .background(rgb(210,210,210)) !important;
+                .shadow(0 1px 0 rgba(255,255,255,0.7));
+                border-width:0 !important;
+            }
+            span, a {
+                .block !important;
+                .margins(0, 3px 20px 0 15px);
+                font:inherit;
+            }
+            a {
+                .transition(0) !important;
+                color:inherit !important;
+                text-decoration:none !important;
+            }
+        }
     }
     &.selectable ul, div.tabbed aside ul {
         .block;
@@ -921,21 +954,6 @@ div.segmentedcontrol {
         &::-webkit-scrollbar { 
             display: none; 
         }
-    }
-    &.selectable li {
-        .margins(-1px 0 0 0, 3px 15px 3px 10px);
-        .border(transparent, 1px 0);
-        .transition(.1s);
-        text-align:left;
-        font-family:Arial, sans-serif;
-        font-size:14px;
-    }
-    &.selectable ul li.active {
-        .background(rgb(69,69,69));
-        color:#fafafa;
-    }
-    li a {
-        .transition(none) !important;
     }
     
     &.dark {
@@ -952,10 +970,16 @@ div.segmentedcontrol {
             border-color:rgb(0,0,0) !important;
         }
         
-        &.selectable ul li.active {
-            .background(rgb(225,225,225));
-            background-image:none;
-            color:#000;
+        &.selectable li {
+            &.active {
+                .background(rgb(225,225,225));
+                background-image:none;
+                color:#000;
+            }
+            &.divider {
+                .background(rgb(30,30,30)) !important;
+                .shadow(0 1px 0 rgba(255,255,255,0.2));
+            }
         }
     }
 }
@@ -1214,8 +1238,10 @@ div.hint {
         }
     }
     .content {
-        .margins(0, 5px);
+        .size(100%, 100%);
+        .margins(0, 0);
         .position(absolute, 0, 0, 0, 0);
+        overflow:hidden;
     }
     ::-webkit-scrollbar {
         visibility:hidden;
@@ -1241,7 +1267,6 @@ div.hint {
         .scroll-x, .scroll-x .slider { .size(auto, 10px); }
         .scroll-y, .scroll-y .slider { .size(10px, auto); }
     }
-    
     &.bright {
         .scroll-x, .scroll-y {
             .slider {

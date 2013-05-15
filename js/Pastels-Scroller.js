@@ -14,16 +14,16 @@
         
         this.options = {}.extend(Scroller.prototype.defaults, opt);
         
-        if (!(obj.item() instanceof HTMLDivElement)) {
+        if (!(obj.item() instanceof HTMLDivElement) && !(obj.item() instanceof HTMLBodyElement)) {
             this.content = obj;
             this.object = $.create('div.scroller');
             this.content.wrap(this.object);
         } else {
             var content = obj.children('.content');
             if (content.length > 0) {
-                this.content = content.eq(0);
+                this.content = content.eq(0).removeClass('content');
             } else {
-                this.content = $.create('div.content');
+                this.content = $.create('div');
                 obj.nodes().appendTo(this.content);
                 obj.append(this.content);
             }
@@ -53,14 +53,24 @@
             showOnStart: false,
             showOnHover: true,
             showAlways: false,
-            autoColor: true
+            autoColor: true,
+            vertical: true,
+            horizontal: false
         },
         
         prepare: function() {
             var self = this;
             
-            self.object.css({ overflow:'visible', width: self.content.offset().width, height: self.content.offset().height });
-            self.content.css({ overflow:'scroll', margin: 0 });
+            if (self.object.parent().isInFlow() === false) {
+                self.object.css({ width: self.content.offset().width, height: self.content.offset().height });
+            }
+            self.content.addClass('content');
+            if (self.options.vertical) {
+                self.content.css({ overflowY: 'scroll' });
+            }
+            if (self.options.horizontal) {
+                self.content.css({ overflowX: 'scroll' });
+            }
             self.scrolls.css({ opacity: 0 });
             if (self.object.css('position') === 'static') {
                 self.object.css({ position: 'relative' });
@@ -104,14 +114,18 @@
         },
         update: function() {
             var self = this;
-            self.scroll_x.slider.css({
-                width: parseInt(self.content.clientWidth() * self.scroll_x.width() / self.content.scrollWidth()),
-                left: parseInt(self.content.scrollLeft() * self.scroll_x.width() / self.content.scrollWidth())
-            });
-            self.scroll_y.slider.css({
-                height: parseInt(self.content.clientHeight() * self.scroll_y.height() / self.content.scrollHeight()),
-                top: parseInt(self.content.scrollTop() * self.scroll_y.height() / self.content.scrollHeight())
-            });
+            if (self.options.horizontal) {
+                self.scroll_x.slider.css({
+                    width: parseInt(self.content.clientWidth() * self.scroll_x.width() / self.content.scrollWidth()),
+                    left: parseInt(self.content.scrollLeft() * self.scroll_x.width() / self.content.scrollWidth())
+                });
+            }
+            if (self.options.vertical) {
+                self.scroll_y.slider.css({
+                    height: parseInt(self.content.clientHeight() * self.scroll_y.height() / self.content.scrollHeight()),
+                    top: parseInt(self.content.scrollTop() * self.scroll_y.height() / self.content.scrollHeight())
+                });
+            }
             
             return this;
         },
@@ -119,10 +133,10 @@
             if (this.timeout) {
                 this.timeout = clearTimeout(this.timeout);
             }
-            if (this.content.scrollWidth() > this.content.clientWidth()) {
+            if (this.options.horizontal && this.content.scrollWidth() > this.content.clientWidth()) {
                 this.scroll_x.show().fadeIn(this.options.duration);
             }
-            if (this.content.scrollHeight() > this.content.clientHeight()) {
+            if (this.options.vertical && this.content.scrollHeight() > this.content.clientHeight()) {
                 this.scroll_y.show().fadeIn(this.options.duration);
             }
             
@@ -148,6 +162,7 @@
             return this;
         }
     });
-    window.Scroller = Scroller;
     
+    window.Scroller = Scroller;
+    Pastels.push('Scroller');
 })(window);

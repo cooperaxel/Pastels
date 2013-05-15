@@ -192,6 +192,7 @@
             }, this.options.timer);
         }
     });
+    
     window.Notification = Notification;
-
+    Pastels.push('Notification');
 })(window);

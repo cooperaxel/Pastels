@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.4
-*  codename:    Smashed Pumpkin
+*  version:     0.2.5
+*  codename:    Blooming Daffodil
 */
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
@@ -1653,8 +1653,8 @@ div.segmentedcontrol.mini button {
   -ms-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
   -o-box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
   box-shadow: inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2);
-  min-height: 40px;
-  min-width: 60px;
+  min-height: 10px;
+  min-width: 20px;
   padding: 0;
   font: 12px Tahoma,Arial;
   color: #555;
@@ -1797,8 +1797,59 @@ div.segmentedcontrol.mini button {
 }
 .popover.selectable {
   margin: 0;
-  padding: 7px 0;
+  padding: 8px 0;
   min-width: 35px;
+}
+.popover.selectable li {
+  width: 100%;
+  height: 24px;
+  margin: -1px 0 0 0;
+  padding: 0;
+  border-color: transparent;
+  border-width: 1px 0;
+  border-style: solid;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+.popover.selectable li.active {
+  background-color: #454545;
+  color: #fafafa;
+}
+.popover.selectable li.divider {
+  width: auto;
+  height: 1px;
+  margin: 8px 1px;
+  padding: 0;
+  background-color: #d2d2d2 !important;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  border-width: 0 !important;
+}
+.popover.selectable li span,
+.popover.selectable li a {
+  display: block;
+  margin: 0;
+  padding: 3px 20px 0 15px;
+  font: inherit;
+}
+.popover.selectable li a {
+  -webkit-transition: all 0 ease-in-out !important;
+  -moz-transition: all 0 ease-in-out !important;
+  -ms-transition: all 0 ease-in-out !important;
+  -o-transition: all 0 ease-in-out !important;
+  transition: all 0 ease-in-out !important;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 .popover.selectable ul,
 .popover div.tabbed aside ul {
@@ -1813,32 +1864,6 @@ div.segmentedcontrol.mini button {
 .popover.selectable ul::-webkit-scrollbar,
 .popover div.tabbed aside ul::-webkit-scrollbar {
   display: none;
-}
-.popover.selectable li {
-  margin: -1px 0 0 0;
-  padding: 3px 15px 3px 10px;
-  border-color: transparent;
-  border-width: 1px 0;
-  border-style: solid;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-.popover.selectable ul li.active {
-  background-color: #454545;
-  color: #fafafa;
-}
-.popover li a {
-  -webkit-transition: all none ease-in-out !important;
-  -moz-transition: all none ease-in-out !important;
-  -ms-transition: all none ease-in-out !important;
-  -o-transition: all none ease-in-out !important;
-  transition: all none ease-in-out !important;
 }
 .popover.dark {
   -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) , 0 0 5px rgba(0, 0, 0, 0.7);
@@ -1862,10 +1887,18 @@ div.segmentedcontrol.mini button {
   background: #363636;
   border-color: #000000 !important;
 }
-.popover.dark.selectable ul li.active {
+.popover.dark.selectable li.active {
   background-color: #e1e1e1;
   background-image: none;
   color: #000;
+}
+.popover.dark.selectable li.divider {
+  background-color: #1e1e1e !important;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 div.tabbed {
   display: -webkit-box;
@@ -2243,13 +2276,16 @@ div.hint {
   min-height: 15px;
 }
 .scroller .content {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  padding: 5px;
+  padding: 0;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 .scroller ::-webkit-scrollbar {
   visibility: hidden;
