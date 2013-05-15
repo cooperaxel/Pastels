@@ -3,12 +3,53 @@
 "use strict";
 
 (function(window) {
-    var Pastels = function() {
-        this.observers = {};
-    };
     
-    Pastels.version = '0.2.4';
-    Pastels.codename = 'Smashed Pumpkin';
+    var Pastels = (function() {}).extend({
+        
+        version: '0.2.4',
+        codename: 'Smashed Pumpkin',
+        
+        includes: [],
+        require: function(component, callback) {
+            if (this.has(component) === false) {
+                $.require('js/Pastels-'+component+'.js', function(window) {
+                    if (callback) {
+                        callback.apply(window);
+                    }
+                });
+            } else if (callback) {
+                callback.apply($.window);
+            }
+        },
+        push: function(a) {
+            if (this.includes.indexOf(a) === -1) {
+                Array.prototype.push.call(this.includes, a);
+                this.emit('pushed', { value: a });
+            }
+        },
+        load: function(a, b) {
+            if (typeof a === 'string') {
+                a = [a];
+            }
+            if (this.includes.contains.apply(this.includes, a) === false) {
+                for (var i = 0; i < a.length; i++) {
+                    if (this.has(a[i]) === false) {
+                        this.require(a[i]);
+                    }
+                }
+                this.on('pushed', function() {
+                    if (Pastels.includes.contains.apply(Pastels.includes, a)) {
+                        b.apply(Pastels);
+                    }
+                }, false);
+            } else {
+                b.apply(this);
+            }
+        },
+        has: function(a) {
+            return (this.includes.indexOf(a) !== -1);
+        }
+    });
     
     Pastels.prototype = {
         
@@ -38,19 +79,14 @@
         destroy: function() {
             this.object.emit('destroy');
         },
-        load: function() {
-            for (var i = 0; i < arguments.length; i++) {
-                Pastels.require(arguments[i]);
+        send: function(event, extra) {
+            this.emit('Pastels.'+event, extra);
+            if (this.object) {
+                this.object.emit('Pastels.'+event, extra);
             }
             return this;
         }
     };
-    
-    Pastels.require = function(component, callback) {
-        $.require('js/Pastels-'+component+'.js', callback);
-    };
-    
-    Pastels.includes = [];
     
     $.each(['Alert','Hint','Notification','PopOver','Scroller','Selectable','Switch','Typeahead'], function(k) {
         window[k] = function() {
@@ -58,7 +94,6 @@
                 args = arguments;
             return Pastels.require(k, function() {
                 if (window[k] !== $this) {
-                    Pastels.includes.push(k);
                     return window[k].apply(window, args);
                 }
             });
@@ -70,15 +105,18 @@
                     n[k] = eval("new "+k+"(this, a1, a2, a3);");
                 });
             };
-            if (Pastels.includes.indexOf(k) === -1 && self.length > 0) {
+            if (!Pastels.has(k) && self.length > 0) {
                 Pastels.require(k, $.invoke(fu, window, k));
-                Pastels.includes.push(k);
             } else if (self.length > 0) {
                 fu(k);
             }
             return this;
         };
     });
+    
+    $.prototype.PastelsListener = function(event, callback) {
+        return this.on('Pastels.'+event, callback);
+    };
     
     $.prototype.dragNdrop = function() {
         var self = this;
@@ -136,9 +174,10 @@ $(function() {
     
     $('.scroller').Scroller();
     $('.popover-handler').PopOver();
+    $('.selectable-handler').Selectable();
+    $('.typeahead-handler').Typeahead();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
-    $('.typeahead').Typeahead();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
