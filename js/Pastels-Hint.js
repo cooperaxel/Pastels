@@ -123,6 +123,7 @@
             }, self.options.delayOnClose);
         }
     });
-    window.Hint = Hint;
     
+    window.Hint = Hint;
+    Pastels.push('Hint');
 })(window);

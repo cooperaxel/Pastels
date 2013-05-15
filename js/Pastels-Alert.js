@@ -88,6 +88,7 @@
             });
         }
     });
-    window.Alert = Alert;
     
+    window.Alert = Alert;
+    Pastels.push('Alert');
 })(window);
