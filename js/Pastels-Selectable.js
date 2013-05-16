@@ -35,7 +35,8 @@
     Selectable.prototype = {}.extend(Pastels.prototype, {
         required: ['PopOver'],
         defaults: {
-            allowDividers: true
+            allowDividers: true,
+            fullsizeOnSmallScreen: true
         },
         prepare: function() {
             var self = this,
@@ -59,6 +60,26 @@
                 });
             }
             
+            if (self.options.fullsizeOnSmallScreen) {
+                var po = self.popover;
+                
+                $.mediaListener(Pastels.media.small, function(mql) {
+                    if (mql.matches) {
+                        if (po.arrow) {
+                            po.arrow.hide();
+                        }
+                        po.object.css({ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 0 });
+                        po.options.setPosition = false;
+                    } else {
+                        if (po.arrow) {
+                            po.arrow.show();
+                        }
+                        po.object.css({ position: 'absolute', top: null, right: null, bottom: null, left: null, borderRadius: null });
+                        po.options.setPosition = true;
+                    }
+                });
+            }
+            
             c.mouseup(function(e) {
                 e.stopPropagation();
                 var $this = $(this),
@@ -69,16 +90,17 @@
                 }
                 self.value = value;
                 self.send('selected', { index: c.indexOf(this), value: self.value });
-            }).mouseover(function(e) {
+            }).on('mouseover touchstart', function(e) {
                 c.removeClass('active');
                 this.addClass('active');
             }).mouseout(function() {
                 this.removeClass('active');
-            }).click(function(e) {
+            }).on('click touchend', function(e) {
                 var a = $(this).children('a');
                 if (a.length === 1) {
                     a.active().click();
                 }
+                self.close();
             });
             return self;
         },
