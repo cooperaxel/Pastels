@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.5
-*  codename:    Blooming Daffodil
+*  version:     0.2.6
+*  codename:    Heat Wave
 */
 
 @blue:#1a9cff;
@@ -471,7 +471,7 @@ input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
     font-size:13px;
     color:#666;
     overflow:visible;
-    vertical-align:top;
+    vertical-align:middle;
     
     &:hover {
         .border(rgba(149,149,149,1));
@@ -1279,6 +1279,33 @@ div.hint {
     @media @max_640 {
         .scroll-x, .scroll-x .slider { .size(auto, 3px); }
         .scroll-y, .scroll-y .slider { .size(3px, auto); }
+    }
+}
+
+/* ############################# */
+/* ## ## ## ImageSlider ## ## ## */
+
+.image-slider {
+    position:relative;
+    z-index:20;
+    overflow:hidden;
+    
+    img {
+        .non-events;
+        position:absolute;
+        top:0; right:0; bottom:0; left:0;
+        opacity:0;
+        z-index:9;
+        
+        &.active {
+            z-index:10;
+        }
+    }
+    .slice {
+        background-repeat:no-repeat;
+        position:absolute;
+        top:0; bottom:0;
+        z-index:11;
     }
 }
 

@@ -37,7 +37,7 @@
                 
                 if(n.nodeType === 1 || n.nodeType === 3 || n.nodeType === 9) {
                     this.push(n);
-                } else if(n instanceof Array) {
+                } else if(n instanceof Array || n instanceof $) {
                     this.push.apply(this, n);
                 } else if(typeof n === "string") {
                     this.selector = n;
@@ -77,12 +77,13 @@
             return this[i];
         },
         include: function(o) {
-            if(o instanceof Array)
+            if (o instanceof Array) {
                 this.push.apply(this, o);
-            else if(typeof o === "string")
+            } else if (typeof o === 'string') {
                 this.push.apply(this, $(o));
-            else 
+            } else {
                 this.push(o);
+            }
             return this;
         },
         add: function() {
@@ -482,14 +483,14 @@
                 var prefix = $.browser.prefix,
                     px = ['top','right','bottom','left','width','height','minWidth','minHeight','maxWidth','maxHeight',
                         'paddingTop','paddingRight','paddingBottom','paddingLeft','marginTop','marginRight','marginBottom','marginLeft',
-                        'borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth'],
+                        'borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth','backgroundPositionX','backgroundPositionY'],
                     t_px = ['translateX','translateY','translateZ'],
                     t_deg = ['rotateX','rotateY','rotateZ','skewX','skewY','skewZ'],
                     t_other = ['translate','translate3d','rotate','rotate3d','skew','scale','scale3d','scaleX','scaleY','scaleZ'],
                     t_v = '';
                 
                 for(var s in p) {
-                    if (typeof p[s] === 'string' && (p[s].substr(0, 2) === '++' || p[s].substr(0, 2) === '--')) {
+                    if (p[s] == null || typeof p[s] === 'string' && (p[s].substr(0, 2) === '++' || p[s].substr(0, 2) === '--')) {
                         // do nothing...
                     } else if (px.indexOf(s) !== -1) {
                         p[s] = parseInt(p[s])+'px';
@@ -520,6 +521,8 @@
                             this.css(s, parseInt(this.css(s)) + parseInt(p[s].lbreak('++')));
                         } else if (typeof p[s] === 'string' && p[s].substr(0, 2) === '--') {
                             this.css(s, parseInt(this.css(s)) - parseInt(p[s].lbreak('--')));
+                        } else if (n.style.removeProperty && p[s] == null) {
+                            n.style.removeProperty(s.dasherize());
                         } else {
                             n.style[s] = p[s];
                         }
@@ -591,27 +594,35 @@
             this.css(p);
             return this;
         },
-        effect: function(e) {
-            var args = arguments;
+        effect: function(e,x) {
+            var args = arguments, y = null;
             args[0] = { opacity: 1 };
+            
+            if (x instanceof Object && x.extra) {
+                y = x.extra;
+            }
             
             switch (e) {
                 case 'scale':
                 case 'zoomIn':
                 case 'zoomOut':
-                    args[0].extend({ scale: 1 });
+                    args[0].extend({ scale: (y ? y : 1) });
                     break;
                 case 'slideDown':
                 case 'slideUp':
-                    args[0].extend({ translateY: 0 });
+                    args[0].extend({ translateY: (y ? y : 0) });
+                    break;
+                case 'slideLeft':
+                case 'slideRight':
+                    args[0].extend({ translateX: (y ? y : 0) });
                     break;
                 case 'stuckToRight':
                 case 'stuckToLeft':
-                    args[0].extend({ rotateY: 0 });
+                    args[0].extend({ rotateY: (y ? y : 0) });
                     break;
                 case 'stuckToTop':
                 case 'stuckToBottom':
-                    args[0].extend({ rotateX: 0 });
+                    args[0].extend({ rotateX: (y ? y : 0) });
                     break;
                 case 'skewUpperRight':
                 case 'skewBottomRight':
@@ -623,41 +634,51 @@
             this.animate.apply(this, args);
             return this;
         },
-        closeEffect: function(e) {
-            var args = arguments;
+        closeEffect: function(e,x) {
+            var args = arguments, y = null;
             args[0] = { opacity: 0 };
+            
+            if (x instanceof Object && x.extra) {
+                y = x.extra;
+            }
             
             switch (e) {
                 case 'scale':
                 case 'zoomIn':
-                    args[0].extend({ scale: 0.01 });
+                    args[0].extend({ scale: (y ? y : 0.01) });
                     break;
                 case 'zoomOut':
-                    args[0].extend({ scale: 3 });
+                    args[0].extend({ scale: (y ? y : 3) });
                     break;
                 case 'slideDown':
-                    args[0].extend({ translateY: -30 });
+                    args[0].extend({ translateY: -(y ? y : 30) });
                     break;
                 case 'slideUp':
-                    args[0].extend({ translateY: 30 });
+                    args[0].extend({ translateY: (y ? y : 30) });
+                    break;
+                case 'slideLeft':
+                    args[0].extend({ translateX: (y ? y : 30) });
+                    break;
+                case 'slideRight':
+                    args[0].extend({ translateX: -(y ? y : 30) });
                     break;
                 case 'stuckToRight':
-                    args[0].extend({ rotateY: 90, origin: '100% 50% 0' });
+                    args[0].extend({ rotateY: (y ? y : 90), origin: '100% 50% 0' });
                     break;
                 case 'stuckToLeft':
-                    args[0].extend({ rotateY: 90, origin: '0 50% 0' });
+                    args[0].extend({ rotateY: (y ? y : 90), origin: '0 50% 0' });
                     break;
                 case 'stuckToTop':
-                    args[0].extend({ rotateX: 90, origin: '50% 0 0' });
+                    args[0].extend({ rotateX: (y ? y : 90), origin: '50% 0 0' });
                     break;
                 case 'stuckToBottom':
-                    args[0].extend({ rotateX: 90, origin: '50% 100% 0' });
+                    args[0].extend({ rotateX: (y ? y : 90), origin: '50% 100% 0' });
                     break;
                 case 'skewUpperRight':
-                    args[0].extend({ skewX: -40, translateX: this.clientWidth() });
+                    args[0].extend({ skewX: -(y ? y : 40), translateX: this.clientWidth() });
                     break;
                 case 'skewBottomRight':
-                    args[0].extend({ skewX: 40, translateX: this.clientWidth() });
+                    args[0].extend({ skewX: (y ? y : 40), translateX: this.clientWidth() });
                     break;
             }
             this.animate.apply(this, args);
@@ -918,10 +939,10 @@
                 var l = t.length;
                 for(var i = 0; i < t.length; i++) {
                     t.get(i);
-                    if(c.call(t.eq(i), t[i], i, t) === false)
+                    if(c.call(t.eq(i), t[i], i, t) === false) {
                         return false;
-                    
-                        if(l !== t.length) {
+                    }
+                    if(l !== t.length) {
                         i = i + (t.length - l);
                         l = t.length;
                     }
@@ -1357,7 +1378,8 @@
         }
     });
         
-    $.each(['click','mouseup','mousedown','mouseout','mouseover','mouseleave','mouseenter','keydown','keyup','keypress','blur','submit','change','scroll'], function(n,i) {
+    $.each(['click','mouseup','mousedown','mouseout','mouseover','mouseleave','mouseenter','keydown','keyup','keypress',
+            'blur','submit','change','scroll','resize','touchstart','touchmove','touchend'], function(n,i) {
         $.prototype[n] = function(f) { return this.on(n, f); };
     });
     $.each(['width', 'height'], function(n,i) {

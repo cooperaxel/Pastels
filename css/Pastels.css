@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.5
-*  codename:    Blooming Daffodil
+*  version:     0.2.6
+*  codename:    Heat Wave
 */
 /* ############################ */
 /* ## ## ## UIElements ## ## ## */
@@ -942,7 +942,7 @@ textarea {
   font-size: 13px;
   color: #666;
   overflow: visible;
-  vertical-align: top;
+  vertical-align: middle;
 }
 input[type="text"]:hover,
 input[type="password"]:hover,
@@ -2360,6 +2360,33 @@ div.hint {
     width: 3px;
     height: auto;
   }
+}
+/* ############################# */
+/* ## ## ## ImageSlider ## ## ## */
+.image-slider {
+  position: relative;
+  z-index: 20;
+  overflow: hidden;
+}
+.image-slider img {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 9;
+}
+.image-slider img.active {
+  z-index: 10;
+}
+.image-slider .slice {
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 11;
 }
 /* ############################## */
 /* ## ## ## UIFilePicker ## ## ## */

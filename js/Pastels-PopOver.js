@@ -34,7 +34,7 @@
         } else {
             self.object = $.create('div.popover');
         }
-
+        
         self.insertToDOM();
         self.prepare();
         if (! self.options.refreshPosition) {
@@ -54,6 +54,7 @@
             parentPositioning: false,
             duration: 300,
             refreshPosition: true,
+            setPosition: true,
             arrow: true,
             roundCorner: true,
             inheritWidth: false,
@@ -71,7 +72,7 @@
             var self = this,
                 object = self.object,
                 handler = self.handler;
-                        
+            
             if (this.object.hasClass('tabbed')) {
                 var aside = object.children('aside'),
                     sections = object.children('section'),
@@ -135,103 +136,105 @@
         },
         
         setPosition: function() {
-            var self = this,
-                object = self.object,
-                handler = self.handler, 
-                arrow = self.arrow, 
-                posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
-                position = 'below',
-                origin = handler.origin();
-            
-            object.show().opacity(0);
-            
-            if (self.options.arrow) {
-                arrowLength = parseInt(arrow.height()/2)+1;
-                arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * arrow.clientHeight())/2))+1;
-            } else {
-                arrowLength = 1;
-                arrowRadius = 1;
-            }           
-            
-            if (self.options.position === 'auto') {
-                var bh = $().clientHeight();
-                if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
-                    position = 'below';
-                } else {
-                    position = 'above';
-                }
-            } else {
-                position = self.options.position;
-            }
-            
-            if (position === 'below') {
-                posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
-                posY = origin.y + handler.clientHeight() + arrowRadius + self.options.margin;
-                arrowX = object.clientWidth()/2 - arrowLength;
-                arrowY = -arrowLength-1;
-                self.radio = -1;
-                if (self.options.parentPositioning || handler.offset().bottom < 10) {
-                    posY += handler.parent().clientHeight() - handler.clientHeight() - handler.offset().top;
-                }
-            } else if (position === 'above') {
-                posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
-                posY = origin.y - object.clientHeight() - arrowRadius - self.options.margin;
-                arrowX = object.clientWidth()/2 - arrowLength;
-                arrowY = object.clientHeight() - arrowLength;
-                self.radio = 1;
-                if (self.options.parentPositioning || handler.offset().top < 10) {
-                    posY -= handler.offset().top;
-                }
-            } else if (position === 'right') {
-                posX = origin.x + handler.clientWidth() + arrowRadius + self.options.margin;
-                posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
-                arrowX = -arrowLength-1;
-                arrowY = object.clientHeight()/2 - arrowLength;
+            if (this.options.setPosition !== false) {
+                var self = this,
+                    object = self.object,
+                    handler = self.handler, 
+                    arrow = self.arrow, 
+                    posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
+                    position = 'below',
+                    origin = handler.origin();
                 
-            } else if (position === 'left') {
-                posX = origin.x - object.clientWidth() - arrowRadius - self.options.margin;
-                posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
-                arrowX = object.clientWidth() - arrowLength;
-                arrowY = object.clientHeight()/2 - arrowLength;
-            }
-            
-            if (self.options.align === 'left') {
-                posX = origin.x;
-            } else if (self.options.align === 'right') {
-                posX = origin.x + handler.clientWidth() - object.clientWidth();
-            }
-            
-            if (posX < 0) {
-                arrowX = arrowX + posX;
-                posX = handler.offset().left;
-            }
-            var diff = posX + object.clientWidth() - window.outerWidth;
-            if (diff > 0) {
-                arrowX = arrowX + diff + handler.offset().right;
-                posX = window.outerWidth - object.clientWidth() - handler.offset().right;
-            }
-            
-            if (self.options.arrow) {
-                arrow.css({ left: arrowX, top: arrowY });
-            }
-            if (self.options.overlay) {
-                posY = posY - handler.clientHeight();
-            }
-            
-            self.options.translateY = self.options.translateY * self.radio;
-            object.removeClass('below above right left').addClass(position);
-            
-            if (handler.parents('.fixed').length > 0) {
-                object.css({ position:'fixed' });
-            } else {
-                object.css({ position:'absolute' });
-            }
-            object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
-            
-            if(['below','above'].indexOf(position) !== -1) {
-                object.transformOrigin(arrowX+arrowLength+2, arrowY);
-            } else {
-                object.transformOrigin(arrowX, arrowY+arrowRadius+2);
+                object.show().opacity(0);
+                
+                if (self.options.arrow) {
+                    arrowLength = parseInt(arrow.height()/2)+1;
+                    arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * arrow.clientHeight())/2))+1;
+                } else {
+                    arrowLength = 1;
+                    arrowRadius = 1;
+                }           
+                
+                if (self.options.position === 'auto') {
+                    var bh = $().clientHeight();
+                    if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
+                        position = 'below';
+                    } else {
+                        position = 'above';
+                    }
+                } else {
+                    position = self.options.position;
+                }
+                
+                if (position === 'below') {
+                    posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
+                    posY = origin.y + handler.clientHeight() + arrowRadius + self.options.margin;
+                    arrowX = object.clientWidth()/2 - arrowLength;
+                    arrowY = -arrowLength-1;
+                    self.radio = -1;
+                    if (self.options.parentPositioning || handler.offset().bottom < 10) {
+                        posY += handler.parent().clientHeight() - handler.clientHeight() - handler.offset().top;
+                    }
+                } else if (position === 'above') {
+                    posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
+                    posY = origin.y - object.clientHeight() - arrowRadius - self.options.margin;
+                    arrowX = object.clientWidth()/2 - arrowLength;
+                    arrowY = object.clientHeight() - arrowLength;
+                    self.radio = 1;
+                    if (self.options.parentPositioning || handler.offset().top < 10) {
+                        posY -= handler.offset().top;
+                    }
+                } else if (position === 'right') {
+                    posX = origin.x + handler.clientWidth() + arrowRadius + self.options.margin;
+                    posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
+                    arrowX = -arrowLength-1;
+                    arrowY = object.clientHeight()/2 - arrowLength;
+                    
+                } else if (position === 'left') {
+                    posX = origin.x - object.clientWidth() - arrowRadius - self.options.margin;
+                    posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
+                    arrowX = object.clientWidth() - arrowLength;
+                    arrowY = object.clientHeight()/2 - arrowLength;
+                }
+                
+                if (self.options.align === 'left') {
+                    posX = origin.x;
+                } else if (self.options.align === 'right') {
+                    posX = origin.x + handler.clientWidth() - object.clientWidth();
+                }
+                
+                if (posX < 0) {
+                    arrowX = arrowX + posX;
+                    posX = handler.offset().left;
+                }
+                var diff = posX + object.clientWidth() - window.outerWidth;
+                if (diff > 0) {
+                    arrowX = arrowX + diff + handler.offset().right;
+                    posX = window.outerWidth - object.clientWidth() - handler.offset().right;
+                }
+                
+                if (self.options.arrow) {
+                    arrow.css({ left: arrowX, top: arrowY });
+                }
+                if (self.options.overlay) {
+                    posY = posY - handler.clientHeight();
+                }
+                
+                self.options.translateY = self.options.translateY * self.radio;
+                object.removeClass('below above right left').addClass(position);
+                
+                if (handler.parents('.fixed').length > 0) {
+                    object.css({ position:'fixed' });
+                } else {
+                    object.css({ position:'absolute' });
+                }
+                object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
+                
+                if(['below','above'].indexOf(position) !== -1) {
+                    object.transformOrigin(arrowX+arrowLength+2, arrowY);
+                } else {
+                    object.transformOrigin(arrowX, arrowY+arrowRadius+2);
+                }
             }
         },
         show: function() {

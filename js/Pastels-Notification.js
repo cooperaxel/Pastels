@@ -94,7 +94,7 @@
             self.object.append($.create('header').append($.create('h1').html(h))).append($.create('section').append($.create('p').html(c)));
             self.object.mousedown($.invoke(this.close, this));
             
-            $.mediaListener('screen and (max-width:640px)', function(mql) {
+            $.mediaListener(Pastels.media.small, function(mql) {
                 self.options.mobileMode = mql.matches;
             });
             

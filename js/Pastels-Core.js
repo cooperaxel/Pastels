@@ -6,8 +6,8 @@
     
     var Pastels = (function() {}).extend({
         
-        version: '0.2.5',
-        codename: 'Blooming Daffodil',
+        version: '0.2.6',
+        codename: 'Heat Wave',
         
         includes: [],
         require: function(component, callback) {
@@ -48,6 +48,15 @@
         },
         has: function(a) {
             return (this.includes.indexOf(a) !== -1);
+        },
+        media: {
+            micro: 'screen and (max-width:320px)',
+            mini: 'screen and (max-width:480px)',
+            small: 'screen and (max-width:640px)',
+            medium: 'screen and (max-width:960px)',
+            large: 'screen and (max-width:1025px)',
+            xl: 'screen and (max-width:1280px)',
+            xxl: 'screen and (min-width:1281px)'
         }
     });
     
@@ -88,7 +97,7 @@
         }
     };
     
-    $.each(['Alert','Hint','Notification','PopOver','Scroller','Selectable','Switch','Typeahead'], function(k) {
+    $.each(['Alert','Hint','ImageSlider','Notification','PopOver','Scroller','Selectable','Switch','Typeahead'], function(k) {
         window[k] = function() {
             var $this = this,
                 args = arguments;
@@ -178,6 +187,7 @@ $(function() {
     $('.typeahead-handler').Typeahead();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
+    $('.image-slider').ImageSlider();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {
