@@ -64,6 +64,7 @@
             selectList: false,
             changeValueOnSelect: false,
             defaultActions: true,
+            fullsizeOnSmallScreen: true,
             movementX: 0,
             movementY: 0,
             margin: 1
@@ -131,6 +132,18 @@
                 object.find('button[type=submit]').mouseup(function() {
                     object.emit('submit');
                     self.close();
+                });
+            }
+            if (self.options.fullsizeOnSmallScreen) {
+                $.mediaListener(Pastels.media.small, function(mql) {
+                    if (mql.matches) {
+                        self.object.addClass('fullsize');
+                        self.object.scrollTo(0,0);
+                        self.options.setPosition = false;
+                    } else {
+                        self.object.removeClass('fullsize');
+                        self.options.setPosition = true;
+                    }
                 });
             }
         },

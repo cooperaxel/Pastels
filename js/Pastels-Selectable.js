@@ -41,7 +41,9 @@
         prepare: function() {
             var self = this,
                 c = self.list.children('li');
-                
+            
+            self.insertToDOM();
+            
             c.each(function(n) {
                 if (! this.hasClass('divider')) {
                     var children = this.children();
@@ -56,27 +58,7 @@
             
             if (! self.object.item().Scroller && self.object.scrollHeight() > self.object.clientHeight()) {
                 Pastels.load('Scroller', function() {
-                    self.object.item().Scroller = new Scroller(self.object.item().Scroller);
-                });
-            }
-            
-            if (self.options.fullsizeOnSmallScreen) {
-                var po = self.popover;
-                
-                $.mediaListener(Pastels.media.small, function(mql) {
-                    if (mql.matches) {
-                        if (po.arrow) {
-                            po.arrow.hide();
-                        }
-                        po.object.css({ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 0 });
-                        po.options.setPosition = false;
-                    } else {
-                        if (po.arrow) {
-                            po.arrow.show();
-                        }
-                        po.object.css({ position: 'absolute', top: null, right: null, bottom: null, left: null, borderRadius: null });
-                        po.options.setPosition = true;
-                    }
+                    self.object.item().Scroller = new Scroller(self.list);
                 });
             }
             
@@ -95,13 +77,15 @@
                 this.addClass('active');
             }).mouseout(function() {
                 this.removeClass('active');
-            }).on('click touchend', function(e) {
+            }).click(function(e) {
                 var a = $(this).children('a');
                 if (a.length === 1) {
                     a.active().click();
                 }
                 self.close();
             });
+            
+            self.removeFromDOM();
             return self;
         },
         show: function() {
