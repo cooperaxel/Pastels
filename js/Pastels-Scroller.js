@@ -11,39 +11,44 @@
         if (!obj) {
             return null;
         }
+        var self = this;
+        self.options = {}.extend(Scroller.prototype.defaults, opt);
         
-        this.options = {}.extend(Scroller.prototype.defaults, opt);
+        if (self.options.preventOnMobile && $.browser.mobile) {
+            obj.removeClass('scroller content');
+            return self;
+        }
         
         if (!(obj.item() instanceof HTMLDivElement) && !(obj.item() instanceof HTMLBodyElement)) {
-            this.content = obj;
-            this.object = $.create('div.scroller');
-            this.content.wrap(this.object);
+            self.content = obj;
+            self.object = $.create('div.scroller');
+            self.content.wrap(self.object);
         } else {
             var content = obj.children('.content');
             if (content.length > 0) {
-                this.content = content.eq(0).removeClass('content');
+                self.content = content.eq(0).removeClass('content');
             } else {
-                this.content = $.create('div');
-                obj.nodes().appendTo(this.content);
-                obj.append(this.content);
+                self.content = $.create('div');
+                obj.nodes().appendTo(self.content);
+                obj.append(self.content);
             }
-            this.object = obj.addClass('scroller');
+            self.object = obj.addClass('scroller');
         }
         
-        this.scroll_x = $.create('div.scroll-x');
-        this.scroll_x.slider = $.create('div.slider');
-        this.scroll_x.append(this.scroll_x.slider);
-        this.object.append(this.scroll_x);
+        self.scroll_x = $.create('div.scroll-x');
+        self.scroll_x.slider = $.create('div.slider');
+        self.scroll_x.append(self.scroll_x.slider);
+        self.object.append(self.scroll_x);
         
-        this.scroll_y = $.create('div.scroll-y');
-        this.scroll_y.slider = this.scroll_x.slider.clone();
-        this.scroll_y.append(this.scroll_y.slider);
-        this.object.append(this.scroll_y);
+        self.scroll_y = $.create('div.scroll-y');
+        self.scroll_y.slider = self.scroll_x.slider.clone();
+        self.scroll_y.append(self.scroll_y.slider);
+        self.object.append(self.scroll_y);
         
-        this.scrolls = $(this.scroll_x, this.scroll_y);
-        this.prepare();
+        self.scrolls = $(self.scroll_x, self.scroll_y);
+        self.prepare();
         
-        return this;
+        return self;
     };
     
     Scroller.prototype = {}.extend(Pastels.prototype, {
@@ -55,13 +60,14 @@
             showAlways: false,
             autoColor: true,
             vertical: true,
-            horizontal: false
+            horizontal: false,
+            preventOnMobile: true
         },
         
         prepare: function() {
             var self = this;
             
-            if (self.object.parent().isInFlow() === false) {
+            if (self.object.parent().item() != document && self.object.parent().isInFlow() === false) {
                 self.object.css({ width: self.content.offset().width, height: self.content.offset().height });
             }
             self.content.addClass('content');
@@ -85,8 +91,16 @@
             }
             
             if (! $.browser.webkit) {
+                if (self.object.item() === document.body) {
+                    $('html').css({ overflow:'hidden' });
+                    $().css({ overflow:'hidden' });
+                    self.content.children().css({ marginRight: '--15' });
+                }
                 self.content.css({ marginRight: '--20', paddingRight: '++20',
-                                  marginBottom: '--20', paddingBottom: '++20' });
+                                marginBottom: '--20', paddingBottom: '++20' });
+            }
+            if ($.browser.firefox && self.content.item() === document.body) {
+                self.content.css({ overflowY: 'hidden', overflowX: 'hidden' });
             }
             if (self.content.scrollWidth() > self.content.clientWidth()) {
                 self.scroll_y.css({ marginBottom: '++7' });
@@ -100,17 +114,23 @@
             self.update();
             
             if (self.options.showOnHover) {
-                self.content.mouseover($.invoke(self.show, self))
+                self.content.mouseover(function() { self.update().show(); })
                     .mouseout($.invoke(self.hide, self));
             }
             
             if (self.options.showOnStart || self.options.showAlways) {
-                self.show();
+                self.update().show();
             } else {
                 self.hide();
             }
             
-            self.content.scroll($.invoke(self.touch, self));
+            self.content.on('touchstart', function(e) {
+                self.update().show();
+            });
+            self.content.scroll(function(e) {
+                self.touch();
+            });
+            self.update();
         },
         update: function() {
             var self = this;
@@ -154,11 +174,7 @@
             return this;
         },
         touch: function() {
-            if (this.content.scrollHeight() > this.content.height()) {
-                this.update().show().hide();
-            } else {
-                this.hide();
-            }
+            this.update().show().hide();
             return this;
         }
     });
