@@ -181,10 +181,10 @@ $(function() {
         window.scrollTo(0, 0);
     }
     
-    $('.scroller').Scroller();
     $('.popover-handler').PopOver();
     $('.selectable-handler').Selectable();
     $('.typeahead-handler').Typeahead();
+    $('.scroller').Scroller();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
     $('.image-slider').ImageSlider();
