@@ -14,8 +14,8 @@
         return this.init.apply(this, arguments);
     };
     
-    $.version = '0.1.6';
-    $.codename = 'Wobbegong';
+    $.version = '0.1.7';
+    $.codename = 'Poacher';
     
     $.extend = function() {
         for(var i = 1; i < arguments.length; i++) {
@@ -33,20 +33,20 @@
         init: function() {
             for(var i = 0; i < arguments.length; i++) {
                 var n = arguments[i];
-                if(n === undefined) continue;
+                if(n == null) continue;
                 
-                if(n.nodeType === 1 || n.nodeType === 3 || n.nodeType === 9) {
+                if (n.nodeType && (n.nodeType === 1 || n.nodeType === 3 || n.nodeType === 9)) {
                     this.push(n);
-                } else if(n instanceof Array || n instanceof $) {
+                } else if (n instanceof Array || n instanceof $) {
                     this.push.apply(this, n);
-                } else if(typeof n === "string") {
+                } else if (typeof n === "string") {
                     this.selector = n;
                     n = document.querySelectorAll(n);
                     this.push.apply(this, n);
-                } else if(n instanceof Function) {
+                } else if (n instanceof Function) {
                     $.ready(window, n);
                     return $.window;
-                } else if(n instanceof Object && n.hasOwnProperty('url')) {
+                } else if (n instanceof Object && n.hasOwnProperty('url')) {
                     $.ajax(n);
                     return $.window; 
                 } 
@@ -213,6 +213,19 @@
             }
             return $(a);
         },
+        has: function(h) {
+            var r = [];
+            if (typeof h === 'string' || h instanceof HTMLElement) {
+                h = $(h);
+            }
+            $.each(this, function(n) {
+                var nodes = this.nodes();
+                if (nodes.contains.apply(nodes, h)) {
+                    r.push(n);
+                }
+            });
+            return $(r);
+        },
         clone: function() {
             var a = [];
             $.each(this, function(n) {
@@ -337,15 +350,23 @@
             }
         },
         offset: function() {
-            var a = this.active();
+            var a = this.active(),
+                right, bottom;
+            if (a.offsetParent && a.offsetParent.clientWidth) {
+                right = a.offsetParent.clientWidth - a.clientWidth - a.offsetLeft;
+                bottom = a.offsetParent.clientHeight - a.clientHeight - a.offsetTop;
+            } else {
+                right = window.outerWidth - a.clientWidth - a.offsetLeft;
+                bottom = window.outerHeight - a.clientHeight - a.offsetTop;
+            }
             return {
                 height: a.offsetHeight,
                 left: a.offsetLeft,
                 parent: a.offsetParent,
                 top: a.offsetTop,
                 width: a.offsetWidth,
-                right: a.offsetParent.clientWidth - a.clientWidth - a.offsetLeft,
-                bottom: a.offsetParent.clientHeight - a.clientHeight - a.offsetTop
+                right: right,
+                bottom: bottom
             };
         },
         origin: function() {
@@ -789,6 +810,33 @@
             if(!e) return null;
             $.each(this, function(n) {
                 n.emit(e, a);
+            });
+            return this;
+        },
+        dragging: function(f, m) {
+            if (!f) {
+                return this;
+            }
+            this.on('mousedown touchstart', function(e) {
+                var x = 0, y = 0, r;
+                this.on('mousemove touchmove', function(v) {
+                    x = v.pageX - e.pageX;
+                    y = e.pageY - v.pageY;
+                    r = { up: false, down: false, left: false, right: false };
+                    
+                    if (x > 0) { r.right = true; }
+                    else if (x < 0) { r.left = true; }
+                    
+                    if (y > 0) { r.up = true; }
+                    else if (y < 0) { r.down = true; }
+                    
+                    if (m) {
+                        m.call($(this), r, v);
+                    }
+                });
+                this.on('mouseup touchend', function(v) {
+                    f.call($(this), r, v);
+                });
             });
             return this;
         },
@@ -1385,7 +1433,7 @@
     $.each(['width', 'height'], function(n,i) {
         $.prototype[n] = function(v) { return v === undefined ? parseInt(this.css(n)) : this.css(n,v); };
     });
-    $.each(['clientWidth','clientHeight','scrollWidth','scrollHeight'], function(n,i) {
+    $.each(['clientWidth','clientHeight','scrollWidth','scrollHeight','offsetWidth','offsetHeight'], function(n,i) {
         $.prototype[n] = function() { return this.active()[n]; };
     });
     $.each(['scrollLeft','scrollTop'], function(n,i) {
@@ -1783,7 +1831,32 @@
                 delete this[prop];
                 this[prop] = val;
             }
-        }
+        };
+    }
+    if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun) {
+            if (this == null) {
+                throw new TypeError();
+            }
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun != "function") {
+                throw new TypeError();
+            }
+            
+            var res = [];
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++) {
+                if (i in t) {
+                    var val = t[i];
+                    if (fun.call(thisp, val, i, t)) {
+                        res.push(val);
+                    }
+                }
+            }
+            
+            return res;
+        };
     }
     Array.prototype.contains = function() {
         for (var i = 0; i < arguments.length; i++) {
