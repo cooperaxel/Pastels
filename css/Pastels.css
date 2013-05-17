@@ -384,7 +384,7 @@ nav.bar ul li,
 .navbar ol li,
 nav.bar ol li {
   display: inline-block;
-  margin: 0 -1px 0 0;
+  margin: -1px -1px 0 0;
   padding: 0;
   border-color: transparent;
   border-width: 0 1px;
@@ -685,6 +685,10 @@ nav.bar.flex span.inline-block {
   height: 100%;
 }
 @media screen and (max-width:960px) {
+  .navbar li,
+  nav.bar li {
+    margin: 0 -1px 0 0 !important;
+  }
   .navbar h1,
   nav.bar h1 {
     padding: 0 10px;
@@ -699,6 +703,10 @@ nav.bar.flex span.inline-block {
   }
 }
 @media screen and (max-width:640px) {
+  .navbar li,
+  nav.bar li {
+    margin: 0 -1px 0 0 !important;
+  }
   .navbar h1,
   nav.bar h1 {
     display: none;
@@ -1900,6 +1908,20 @@ div.segmentedcontrol.mini button {
   -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 }
+.popover.fullsize {
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.popover.fullsize .popover-arrow {
+  display: none;
+}
+.popover.fullsize ul {
+  max-height: none;
+}
 div.tabbed {
   display: -webkit-box;
   display: -moz-box;
@@ -2212,12 +2234,15 @@ div.hint {
   margin: 0;
   padding: 0;
   position: relative;
+  overflow: hidden;
 }
 .scroller .scroll-x,
 .scroller .scroll-y {
   margin: 2px;
   padding: 0;
   background-color: transparent;
+  overflow: hidden;
+  z-index: 100;
 }
 .scroller .scroll-x,
 .scroller .scroll-y,
