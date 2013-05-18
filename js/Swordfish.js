@@ -1287,7 +1287,7 @@
             }
             return (window.matchMedia && window.matchMedia(q).matches);
         },
-        mediaListener: function(q, f, onMatches) {
+        mediaListener: function(q, f, onMatches, c) {
             if (!q || !f || !window.matchMedia) return false;
             var mql = window.matchMedia(q),
                 listener = function(mql) {
@@ -1296,7 +1296,9 @@
                 }
             };
             mql.addListener(listener);
-            listener(mql);
+            if (c !== false) {
+                listener(mql);
+            }
             return true;
         },
         rgbToHex: function(c) {
@@ -1373,7 +1375,7 @@
         },
         parseData: function(data) {
             if (!data) {
-                return null;
+                return {};
             }
             var r = {},
                 spl = data.split(' '), p;
