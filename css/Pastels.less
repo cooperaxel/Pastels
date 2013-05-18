@@ -1,6 +1,6 @@
 /* LESS(CSS) User Interface document
-*  version:     0.2.6
-*  codename:    Heat Wave
+*  version:     0.2.7
+*  codename:    Cherry Limeade
 */
 
 @blue:#1a9cff;
@@ -277,7 +277,7 @@ a {
         
         li {
             .inline-block;
-            .margins(0 -1px 0 0, 0);
+            .margins(-1px -1px 0 0, 0);
             .border(transparent, 0 1px);
             .transition(.3s);
             .vertical-top;
@@ -312,8 +312,8 @@ a {
     }
     h1 {
         .inline-block;
-        .margins(0, 0 5px);
-        .text-shadow(0 1px 0 white);
+        .margins(-2px 0 0, 0 7px);
+        .text-shadow(0 -2px 0 white);
         .user-select(none);
     }
     &.dark {
@@ -323,6 +323,7 @@ a {
         
         ul, ol {
             li {
+                .margins(-1px -1px -1px 0, 0);
                 .border(transparent, 1px 0);
                 .sizing(border-box);
                 
@@ -342,6 +343,10 @@ a {
                     }
                 }
             }
+        }
+        h1 {
+            .text-shadow(0 -2px 0 black);
+            color:rgb(232,232,232);
         }
     }
     
@@ -365,6 +370,9 @@ a {
     }
     
     @media @max_960 {
+        li {
+            margin:0 -1px 0 0 !important;
+        }
         h1 {
             padding:0 10px;
         }
@@ -373,6 +381,9 @@ a {
         }
     }
     @media @max_640 {
+        li {
+            margin:0 -1px 0 0 !important;
+        }
         h1 {
             display:none;
         }
@@ -824,7 +835,7 @@ div.segmentedcontrol {
     .linear-gradient(top, rgb(255,255,255), rgb(230,230,230));
     .border(rgba(169, 169, 169, 1));
     .round-corner(4px);
-    .shadow(e("inset 0 0 0 1px white, inset 0 0 10px rgba(0,0,0,0.1), 0 0 20px rgba(0,0,0,0.2)"));
+    .shadow(inset 0 0 0 1px white~"," inset 0 0 10px rgba(0,0,0,0.1)~"," 0 0 25px rgba(0,0,0,0.25));
     min-height:10px; 
     min-width:20px; 
     padding:0; 
@@ -912,13 +923,14 @@ div.segmentedcontrol {
         
         li {
             .size(100%, 24px);
-            .margins(-1px 0 0 0, 0);
+            .margins(-1px -1px 0 -1px, 0);
             .border(transparent, 1px 0);
             .transition(.1s);
             text-align:left;
             font-family:Arial, sans-serif;
             font-size:14px;
             line-height:20px;
+            position:relative;
             
             &.active {
                 .background(rgb(69,69,69));
@@ -926,14 +938,26 @@ div.segmentedcontrol {
             }
             &.divider {
                 .size(auto, 1px);
-                .margins(8px 1px, 0);
+                .margins(8px -1px, 0);
                 .background(rgb(210,210,210)) !important;
                 .shadow(0 1px 0 rgba(255,255,255,0.7));
                 border-width:0 !important;
             }
+            &.submenu::after, &.checked::after {
+                font-size:16px;
+                color:inherit;
+                position:absolute; top:2px; bottom:0; right:7px;
+            }
+            &.submenu::after {
+                content:"❯";
+            }
+            &.checked::after {
+                content:"✔";
+            }
             span, a {
                 .block !important;
-                .margins(0, 3px 20px 0 15px);
+                .margins(0, 3px 25px 0 15px);
+                .text-shadow(none);
                 font:inherit;
             }
             a {
@@ -980,6 +1004,18 @@ div.segmentedcontrol {
                 .background(rgb(30,30,30)) !important;
                 .shadow(0 1px 0 rgba(255,255,255,0.2));
             }
+        }
+    }
+    
+    &.fullscreen {
+        .round-corner(0);
+        position:fixed;
+        top:-1px; right:-1px; bottom:-1px; left:-1px;
+        .popover-arrow {
+            display:none;
+        }
+        ul {
+            max-height:none;
         }
     }
 }
@@ -1201,10 +1237,13 @@ div.hint {
     .vertical-middle;
     .margins(0, 0);
     position:relative;
+    overflow:hidden;
     
     .scroll-x, .scroll-y {
         .margins(2px);
         .background(transparent);
+        overflow:hidden;
+        z-index:100;
         
         &, .slider {
             .block;

@@ -13,6 +13,7 @@
         
         self.options = {}.extend(Selectable.prototype.defaults, opt);
         self.handler = handler;
+        self.submenus = [];
         
         Pastels.load(self.required, function() {
             self.popover = new PopOver(handler, self.options);
@@ -35,73 +36,103 @@
     Selectable.prototype = {}.extend(Pastels.prototype, {
         required: ['PopOver'],
         defaults: {
+            scroller: true,
             allowDividers: true,
-            fullsizeOnSmallScreen: true
+            allowSubmenu: true,
+            fullscreen: true
+        },
+        submenuDefaults: {
+            arrow: false,
+            closeOthers: false,
+            position: 'horizontal',
+            align: 'top',
+            defaultActions: false,
+            margin: 0
         },
         prepare: function() {
             var self = this,
-                c = self.list.children('li');
-                
+                c = self.list.children('li!.divider');
+            
+            self.insertToDOM();
+            
             c.each(function(n) {
-                if (! this.hasClass('divider')) {
-                    var children = this.children();
-                    
-                    if (children.length === 0 || ['span','a'].indexOf(children.item().tagName.toLowerCase()) === -1) {
-                        var span = $.create('span');
-                        this.nodes().appendTo(span);
-                        this.append(span);
+                var children = this.children(),
+                    ul = children.filter('ul');
+                
+                if (children.length === 0 || ['span','a'].indexOf(children.item().tagName.toLowerCase()) === -1) {
+                    var span = $.create('span');
+                    this.contents().eq(0).appendTo(span);
+                    this.prepend(span);
+                }
+                if (ul.length > 0) {
+                    if (self.options.allowSubmenu) {
+                        var opt = { object: ul.eq(0), dark: self.object.hasClass('dark'), movementY: -self.object.paddingHeight()/2 };
+                        n.Selectable = new Selectable(this, opt.extend(Selectable.prototype.submenuDefaults));
+                        n.addClass('submenu');
+                    } else {
+                        ul.remove();
                     }
                 }
             });
             
-            if (! self.object.item().Scroller && self.object.scrollHeight() > self.object.clientHeight()) {
-                Pastels.load('Scroller', function() {
-                    self.object.item().Scroller = new Scroller(self.object.item().Scroller);
-                });
-            }
-            
-            if (self.options.fullsizeOnSmallScreen) {
-                var po = self.popover;
-                
-                $.mediaListener(Pastels.media.small, function(mql) {
-                    if (mql.matches) {
-                        if (po.arrow) {
-                            po.arrow.hide();
-                        }
-                        po.object.css({ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 0 });
-                        po.options.setPosition = false;
-                    } else {
-                        if (po.arrow) {
-                            po.arrow.show();
-                        }
-                        po.object.css({ position: 'absolute', top: null, right: null, bottom: null, left: null, borderRadius: null });
-                        po.options.setPosition = true;
-                    }
+            if (self.options.scroller && self.scroller == null) {
+                Pastels.load(['Scroller'], function() {
+                    self.scroller = new Scroller(self.list);
                 });
             }
             
             c.mouseup(function(e) {
                 e.stopPropagation();
-                var $this = $(this),
-                    n = $this.attr('name'),
-                    value = (n ? n : $this.text());
-                if (value !== self.value) {
-                    self.send('changed', { index: c.indexOf(this), oldValue: self.value, value: value });
+                if (this.Selectable == null) {
+                    var $this = $(this),
+                        n = $this.attr('name'),
+                        value = (n ? n : $this.text()),
+                        a = $this.children('a');
+                    
+                    if (value !== self.value) {
+                        self.emit('changed', { index: c.indexOf(this), oldValue: self.value, value: value });
+                    }
+                    self.value = value;
+                    self.emit('selected', { index: c.indexOf(this), value: self.value });
+                    
+                    if (a.length === 1) {
+                        a.active().click();
+                    }
+                    self.close();
+                    $().emit('mousedown');
+                } else {
+                    if (this.Selectable.popover.isActive()) {
+                        this.Selectable.close();
+                    } else {
+                        this.Selectable.show();
+                    }
                 }
-                self.value = value;
-                self.send('selected', { index: c.indexOf(this), value: self.value });
-            }).on('mouseover touchstart', function(e) {
+            }).mouseover(function(e) {
                 c.removeClass('active');
                 this.addClass('active');
-            }).mouseout(function() {
+            }).mouseout(function(e) {
                 this.removeClass('active');
-            }).on('click touchend', function(e) {
-                var a = $(this).children('a');
-                if (a.length === 1) {
-                    a.active().click();
-                }
-                self.close();
             });
+            
+            if (self.options.fullscreen) {
+                self.popover.on('fullscreen.entered', function() {
+                    if (self.scroller && self.scroller.object) {
+                        self.scroller.object.css({
+                            width: self.object.width(),
+                            height: self.object.height()
+                        });
+                    }
+                    self.list.css({ maxHeight: self.object.width() });
+                });
+                self.popover.on('fullscreen.leaved', function() {
+                    if (self.scroller && self.scroller.object) {
+                        self.scroller.restoreSize();
+                    }
+                    self.list.css({ maxHeight: null });
+                });
+            }
+            
+            self.removeFromDOM();
             return self;
         },
         show: function() {

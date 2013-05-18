@@ -26,7 +26,7 @@
         self.handler = handler;
         self.object.html(handler.attr(self.options.catch));
                 
-        switch (this.options.trigger) {
+        switch (self.options.trigger) {
             case 'click': {
                 s = 'mousedown';
                 e = 'mouseup';
@@ -111,7 +111,9 @@
             self.insertToDOM();
             self.setPosition();
             
-            clearTimeout(self.timeout);
+            if (self.timeout) {
+                self.timeout = clearTimeout(self.timeout);
+            }
             self.timeout = setTimeout($.invoke(self.object.fadeIn, self.object, [self.options.duration]), self.options.delay);
         },
         

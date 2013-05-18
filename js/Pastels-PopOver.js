@@ -14,7 +14,12 @@
             obj;
         
         if (opt && opt.object instanceof Swordfish) {
-            obj = opt.object;
+            if (opt.object.is('div')) {
+                obj = opt.object;
+            } else {
+                obj = $.create('div.popover');
+                obj.append(opt.object);
+            }
             delete opt.object;
         } else if (name && name.length > 0) {
             obj = $('#'+name);
@@ -22,12 +27,8 @@
             obj = $('#popover-'+handler.attr('id'));
         }
         
-        self.options = {}.extend(PopOver.prototype.defaults, opt);
+        self.options = {}.extend(PopOver.prototype.defaults, opt, $.parseData(data));
         self.handler = handler;
-        
-        if (data) {
-            self.options.extend($.parseData(data));
-        }
         
         if(obj && obj.length > 0) {
             self.object = obj.addClass('popover');
@@ -37,9 +38,6 @@
         
         self.insertToDOM();
         self.prepare();
-        if (! self.options.refreshPosition) {
-            self.setPosition();
-        }
         self.removeFromDOM();
         
         return self;
@@ -64,6 +62,7 @@
             selectList: false,
             changeValueOnSelect: false,
             defaultActions: true,
+            fullscreen: false,
             movementX: 0,
             movementY: 0,
             margin: 1
@@ -118,9 +117,6 @@
                 object.addClass('dark');
             }
             if (self.options.defaultActions) {
-                object.mousedown(function(e) {
-                    e.stopPropagation();
-                });
                 self.handler.mousedown(function() {
                     self.show();
                 });
@@ -133,109 +129,150 @@
                     self.close();
                 });
             }
+            if (self.options.fullscreen) {
+                $.mediaListener(Pastels.media.small, $.invoke(self.setPosition, self), false, false);
+            }
+            if (! self.options.refreshPosition) {
+                self.setPosition();
+            }
+            object.mousedown(function(e) {
+                e.stopPropagation();
+            });
         },
         
         setPosition: function() {
-            if (this.options.setPosition !== false) {
-                var self = this,
-                    object = self.object,
-                    handler = self.handler, 
-                    arrow = self.arrow, 
-                    posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
-                    position = 'below',
-                    origin = handler.origin();
+            var self = this,
+                object = self.object;
+            
+            if (self.options.fullscreen) {
+                var mql = $.media(Pastels.media.small),
+                    hc = object.hasClass('fullscreen');
                 
-                object.show().opacity(0);
-                
-                if (self.options.arrow) {
-                    arrowLength = parseInt(arrow.height()/2)+1;
-                    arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * arrow.clientHeight())/2))+1;
-                } else {
-                    arrowLength = 1;
-                    arrowRadius = 1;
-                }           
-                
-                if (self.options.position === 'auto') {
-                    var bh = $().clientHeight();
-                    if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
-                        position = 'below';
-                    } else {
-                        position = 'above';
-                    }
-                } else {
-                    position = self.options.position;
+                if (mql === true && hc === false) {
+                    object.addClass('fullscreen');
+                    self.emit('fullscreen.entered');
+                } else if (mql === false && hc === true) {
+                    object.removeClass('fullscreen');
+                    self.emit('fullscreen.leaved');
                 }
-                
-                if (position === 'below') {
-                    posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
-                    posY = origin.y + handler.clientHeight() + arrowRadius + self.options.margin;
-                    arrowX = object.clientWidth()/2 - arrowLength;
-                    arrowY = -arrowLength-1;
-                    self.radio = -1;
-                    if (self.options.parentPositioning || handler.offset().bottom < 10) {
-                        posY += handler.parent().clientHeight() - handler.clientHeight() - handler.offset().top;
-                    }
-                } else if (position === 'above') {
-                    posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
-                    posY = origin.y - object.clientHeight() - arrowRadius - self.options.margin;
-                    arrowX = object.clientWidth()/2 - arrowLength;
-                    arrowY = object.clientHeight() - arrowLength;
-                    self.radio = 1;
-                    if (self.options.parentPositioning || handler.offset().top < 10) {
-                        posY -= handler.offset().top;
-                    }
-                } else if (position === 'right') {
-                    posX = origin.x + handler.clientWidth() + arrowRadius + self.options.margin;
-                    posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
-                    arrowX = -arrowLength-1;
-                    arrowY = object.clientHeight()/2 - arrowLength;
-                    
-                } else if (position === 'left') {
-                    posX = origin.x - object.clientWidth() - arrowRadius - self.options.margin;
-                    posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
-                    arrowX = object.clientWidth() - arrowLength;
-                    arrowY = object.clientHeight()/2 - arrowLength;
+                if (mql === true) {
+                    return self;
                 }
+            }
+            
+            var handler = self.handler, 
+                arrow = self.arrow, 
+                posX = 0, posY = 0, arrowX = 0, arrowY = 0, arrowLength = 0, arrowRadius = 0,
+                position = '',
+                origin = handler.origin();
+            
+            object.show().opacity(0);
+            
+            if (self.options.arrow) {
+                arrowLength = parseInt(arrow.height()/2)+1;
+                arrowRadius = parseInt(Math.ceil((Math.sqrt(2) * arrow.clientHeight())/2))+1;
+            } else {
+                arrowLength = 1;
+                arrowRadius = 1;
+            }           
+            
+            if (['auto','vertical'].contains(self.options.position)) {
+                var bh = $().clientHeight();
+                if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
+                    position = 'below';
+                } else {
+                    position = 'above';
+                }
+            } else if (self.options.position === 'horizontal') {
+                var bw = $().clientWidth();
+                if (object.clientWidth() > origin.x || origin.x + handler.clientWidth() + object.clientWidth() < bw) {
+                    position = 'right';
+                } else {
+                    position = 'left';
+                }
+            } else {
+                position = self.options.position;
+            }
+            
+            if (position === 'below') {
+                posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
+                posY = origin.y + handler.clientHeight() + arrowRadius + self.options.margin;
+                arrowX = object.clientWidth()/2 - arrowLength;
+                arrowY = -arrowLength-1;
+                self.radio = -1;
+                if (self.options.parentPositioning || handler.offset().bottom < 10) {
+                    posY += handler.parent().clientHeight() - handler.clientHeight() - handler.offset().top;
+                }
+            } else if (position === 'above') {
+                posX = origin.x + handler.clientWidth()/2 - object.clientWidth()/2;
+                posY = origin.y - object.clientHeight() - arrowRadius - self.options.margin;
+                arrowX = object.clientWidth()/2 - arrowLength;
+                arrowY = object.clientHeight() - arrowLength;
+                self.radio = 1;
+                if (self.options.parentPositioning || handler.offset().top < 10) {
+                    posY -= handler.offset().top;
+                }
+            } else if (position === 'right') {
+                posX = origin.x + handler.clientWidth() + arrowRadius + self.options.margin;
+                posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
+                arrowX = -arrowLength-1;
+                arrowY = object.clientHeight()/2 - arrowLength;
                 
+            } else if (position === 'left') {
+                posX = origin.x - object.clientWidth() - arrowRadius - self.options.margin;
+                posY = origin.y + handler.clientHeight()/2 - object.clientHeight()/2;
+                arrowX = object.clientWidth() - arrowLength;
+                arrowY = object.clientHeight()/2 - arrowLength;
+            }
+            
+            if (['below','above'].contains(position)) {
                 if (self.options.align === 'left') {
                     posX = origin.x;
                 } else if (self.options.align === 'right') {
                     posX = origin.x + handler.clientWidth() - object.clientWidth();
                 }
-                
-                if (posX < 0) {
-                    arrowX = arrowX + posX;
-                    posX = handler.offset().left;
-                }
-                var diff = posX + object.clientWidth() - window.outerWidth;
-                if (diff > 0) {
-                    arrowX = arrowX + diff + handler.offset().right;
-                    posX = window.outerWidth - object.clientWidth() - handler.offset().right;
-                }
-                
-                if (self.options.arrow) {
-                    arrow.css({ left: arrowX, top: arrowY });
-                }
-                if (self.options.overlay) {
-                    posY = posY - handler.clientHeight();
-                }
-                
-                self.options.translateY = self.options.translateY * self.radio;
-                object.removeClass('below above right left').addClass(position);
-                
-                if (handler.parents('.fixed').length > 0) {
-                    object.css({ position:'fixed' });
-                } else {
-                    object.css({ position:'absolute' });
-                }
-                object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
-                
-                if(['below','above'].indexOf(position) !== -1) {
-                    object.transformOrigin(arrowX+arrowLength+2, arrowY);
-                } else {
-                    object.transformOrigin(arrowX, arrowY+arrowRadius+2);
+            } else if (['left','right'].contains(position)) {
+                if (self.options.align === 'top') {
+                    posY = origin.y;
+                } else if (self.options.align === 'bottom') {
+                    posY = origin.y + handler.clientHeight() - object.clientWidth();
                 }
             }
+            
+            if (posX < 0) {
+                arrowX = arrowX + posX;
+                posX = handler.offset().left;
+            }
+            var diff = posX + object.clientWidth() - window.outerWidth;
+            if (diff > 0) {
+                arrowX = arrowX + diff + handler.offset().right;
+                posX = window.outerWidth - object.clientWidth() - handler.offset().right;
+            }
+            
+            if (self.options.arrow) {
+                arrow.css({ left: arrowX, top: arrowY });
+            }
+            if (self.options.overlay) {
+                posY = posY - handler.clientHeight();
+            }
+            
+            object.removeClass('below above right left').addClass(position);
+            self.position = position;
+            
+            if (handler.parents('.fixed').length > 0) {
+                object.css({ position:'fixed' });
+            } else {
+                object.css({ position:'absolute' });
+            }
+            object.css({ left: posX+self.options.movementX, top: posY+self.options.movementY, opacity:0, translateY: self.options.translateY, scale: self.options.scale }).hide();
+            
+            if(['below','above'].indexOf(position) !== -1) {
+                object.transformOrigin(arrowX+arrowLength+2, arrowY);
+            } else {
+                object.transformOrigin(arrowX, arrowY+arrowRadius+2);
+            }
+            self.emit('position.changed');
+            return self;
         },
         show: function() {
             var self = this,
@@ -248,7 +285,7 @@
                 return self;
             }
             if (self.options.closeOthers) {
-                $.document.emit('mousedown');
+                $().emit('mousedown');
             }
             self.insertToDOM();
             if(self.options.refreshPosition) {
@@ -261,15 +298,15 @@
                 
                 var mousedown = function(e) {
                     if (e.target !== object.item()) {
-                        $.document.off('mousedown', mousedown).off('mouseup', mouseup);
+                        $().off('mousedown', mousedown).off('mouseup', mouseup);
                         self.close();
                     }
                 };
                 var mouseup = function() {
-                    $.document.on('mousedown', mousedown);
+                    $().on('mousedown', mousedown, false);
                 };
                 
-                $.document.on('mousedown', mousedown, false);
+                $().on('mousedown', mousedown, false);
             });
             return self;
         },
@@ -288,10 +325,15 @@
         },
         getEffect: function() {
             if (this.options.effect === 'slide') {
-                if (this.object.hasClass('below')) {
-                    return 'slideDown';
-                } else {
-                    return 'slideUp';
+                switch (this.position) {
+                    case 'below':
+                        return 'slideDown';
+                    case 'above':
+                        return 'slideUp';
+                    case 'left':
+                        return 'slideLeft';
+                    case 'right':
+                        return 'slideRight';
                 }
             }
             return this.options.effect;

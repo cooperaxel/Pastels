@@ -6,8 +6,8 @@
     
     var Pastels = (function() {}).extend({
         
-        version: '0.2.6',
-        codename: 'Heat Wave',
+        version: '0.2.7',
+        codename: 'Cherry Limeade',
         
         includes: [],
         require: function(component, callback) {
@@ -181,10 +181,10 @@ $(function() {
         window.scrollTo(0, 0);
     }
     
-    $('.scroller').Scroller();
     $('.popover-handler').PopOver();
     $('.selectable-handler').Selectable();
     $('.typeahead-handler').Typeahead();
+    $('.scroller').Scroller();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
     $('.image-slider').ImageSlider();
