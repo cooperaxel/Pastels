@@ -35,8 +35,9 @@
     Selectable.prototype = {}.extend(Pastels.prototype, {
         required: ['PopOver'],
         defaults: {
-            allowDividers: true,
-            fullsizeOnSmallScreen: true
+            scroller: true,
+            allowDividers: true,            
+            fullscreen: true
         },
         prepare: function() {
             var self = this,
@@ -56,9 +57,9 @@
                 }
             });
             
-            if (! self.object.item().Scroller && self.object.scrollHeight() > self.object.clientHeight()) {
+            if (self.options.scroller && self.scroller == null) {
                 Pastels.load('Scroller', function() {
-                    self.object.item().Scroller = new Scroller(self.list);
+                    self.scroller = new Scroller(self.list);
                 });
             }
             
@@ -84,6 +85,24 @@
                 }
                 self.close();
             });
+            
+            if (self.options.fullscreen) {
+                self.popover.on('fullscreen.entered', function() {
+                    if (self.scroller && self.scroller.object) {
+                        self.scroller.object.css({
+                            width: self.object.width(),
+                            height: self.object.height()
+                        });
+                    }
+                    self.list.css({ maxHeight: self.object.width() });
+                });
+                self.popover.on('fullscreen.leaved', function() {
+                    if (self.scroller && self.scroller.object) {
+                        self.scroller.restoreSize();
+                    }
+                    self.list.css({ maxHeight: null });
+                });
+            }
             
             self.removeFromDOM();
             return self;
