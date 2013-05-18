@@ -61,14 +61,16 @@
             autoColor: true,
             vertical: true,
             horizontal: false,
-            preventOnMobile: true
+            preventOnMobile: false
         },
         
         prepare: function() {
             var self = this;
             
-            if (self.object.parent().item() != document && self.object.parent().isInFlow() === false) {
-                self.object.css({ width: self.content.offset().width, height: self.content.offset().height });
+            if (self.object.parent().isInFlow() === false) {
+                self.options.width = self.content.offsetWidth();
+                self.options.height = self.content.offsetHeight();
+                self.restoreSize();
             }
             self.content.addClass('content');
             if (self.options.vertical) {
@@ -176,6 +178,15 @@
         touch: function() {
             this.update().show().hide();
             return this;
+        },
+        restoreSize: function(z) {
+            var self = this;
+            if (!z && self.options.width && self.options.height) {
+                self.object.css({ width: self.options.width, height: self.options.height });
+            } else {
+                self.object.css({ width: null, height: null });
+            }
+            return self;
         }
     });
     
