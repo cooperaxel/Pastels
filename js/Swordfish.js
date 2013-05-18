@@ -378,6 +378,12 @@
             }
             return { x: x, y: y };
         },
+        paddingWidth: function() {
+            return this.clientWidth() - this.width();
+        },
+        paddingHeight: function() {
+            return this.clientHeight() - this.height();
+        },
         prop: function(p,v) {
             if (p != undefined && v != undefined) {
                 var t = p;
@@ -794,22 +800,25 @@
         
         on: function(e, f) {
             if(!(f instanceof Function)) return this.active().emit(e);
+            var args = arguments;
             $.each(this, function(n) {
-                n.on(e,f);
+                n.on.apply(n, args);
             });
             return this;
         },
         off: function(e, f) {
             if(!e) return false;
+            var args = arguments;
             $.each(this, function(n) {
-                n.off(e, f);
+                n.off.apply(n, args);
             });
             return this;
         },
-        emit: function(e, a) {
+        emit: function(e) {
             if(!e) return null;
+            var args = arguments;
             $.each(this, function(n) {
-                n.emit(e, a);
+                n.emit.apply(n, args);
             });
             return this;
         },
@@ -1430,7 +1439,7 @@
         
     $.each(['click','mouseup','mousedown','mouseout','mouseover','mouseleave','mouseenter','keydown','keyup','keypress',
             'blur','submit','change','scroll','resize','touchstart','touchmove','touchend'], function(n,i) {
-        $.prototype[n] = function(f) { return this.on(n, f); };
+        $.prototype[n] = function(f) { var args = [n]; Array.prototype.push.apply(args, arguments); return this.on.apply(this, args); };
     });
     $.each(['width', 'height'], function(n,i) {
         $.prototype[n] = function(v) { return v === undefined ? parseInt(this.css(n)) : this.css(n,v); };
@@ -1445,7 +1454,9 @@
         $.prototype[n] = function() { 
             var prop = {};
             prop[n] = arguments[0];
-            this.animate(prop, arguments[1], arguments[2], true);
+            arguments[0] = prop;
+            arguments[3] = true;
+            this.animate.apply(this, arguments);
             return this;
         };
     });
@@ -1615,15 +1626,19 @@
     };
     Object.prototype.on = function(n, f) {
         if (!n) return false;
+        if (this == document) return document.body.on.apply(document.body, arguments);
         if (!f) return this.emit(n);
-        var fu, off = $.parseArguments(arguments).booleans.contains(false);
+        var off = $.parseArguments(arguments).booleans.contains(false);
         n = n.split(' ').clean('');
-        if(! this._observers) {
+        if (! this._observers) {
             this._observers = {};
             this.hideProperties(['_observers']);
         }
             
         for (var i = 0; i < n.length; i++) {
+            if (n[i].length == 0) {
+                continue;
+            }
             if (!this._observers[n[i]]) {
                 this._observers[n[i]] = [];
             }
@@ -1632,44 +1647,44 @@
                 if (! arguments[j] instanceof Function) {
                     continue;
                 }
-                fu = arguments[j];
-                if (this._observers[n[i]].searchFunc(fu) >= 0 && off === false) {
-                    this.off(n[i], fu);
+                if (this._observers[n[i]].searchFunc(arguments[j]) >= 0 && off === false) {
+                    this.off(n[i], arguments[j]);
                 }
-                this._observers[n[i]].push(fu);
+                this._observers[n[i]].push(arguments[j]);
                 
                 if (this.addEventListener) {
-                    this.addEventListener(n[i], fu, false);
+                    this.addEventListener(n[i], arguments[j], false);
                 }
             }
         }
         return this;
     };
     Object.prototype.off = function(n, f) {
-        if(!n || !this._observers) return false;
+        if (!n || !this._observers) return false;
+        if (this == document) return document.body.off.apply(document.body, arguments);
         n = n.split(' ').clean('');
     
         function removeListener(a, b, c) {
-            if(a.removeEventListener) {
+            if (a.removeEventListener) {
                 a.removeEventListener(b, a._observers[b][c]);
             }
             a._observers[b][c] = null;
         }
-        for(var i = 0; i < n.length; i++) {
-            if(!this._observers[n[i]]) continue;
+        for (var i = 0; i < n.length; i++) {
+            if (!this._observers[n[i]]) continue;
             
             var j = 0, m = this._observers[n[i]].length;
             
-            if(f instanceof Function) {
+            if (f instanceof Function) {
                 j = this._observers[n[i]].searchFunc(f);
                 
-                if(j !== -1) {
+                if (j !== -1) {
                     removeListener(this, n[i], j);
                 } else {
                     this.off(n[i]);
                 }
             } else {
-                for(; j < m; j++) {
+                for (; j < m; j++) {
                     removeListener(this, n[i], j);
                 }
             }
@@ -1679,6 +1694,7 @@
     };
     Object.prototype.emit = function(n, a) {
         if (!n) return false;
+        if (this == document) return document.body.emit.apply(document.body, arguments);
 
         if (a) {
             a = Array.prototype.slice.call(arguments);
