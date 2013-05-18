@@ -14,7 +14,12 @@
             obj;
         
         if (opt && opt.object instanceof Swordfish) {
-            obj = opt.object;
+            if (opt.object.is('div')) {
+                obj = opt.object;
+            } else {
+                obj = $.create('div.popover');
+                obj.append(opt.object);
+            }
             delete opt.object;
         } else if (name && name.length > 0) {
             obj = $('#'+name);
@@ -112,9 +117,6 @@
                 object.addClass('dark');
             }
             if (self.options.defaultActions) {
-                object.mousedown(function(e) {
-                    e.stopPropagation();
-                });
                 self.handler.mousedown(function() {
                     self.show();
                 });
@@ -133,6 +135,9 @@
             if (! self.options.refreshPosition) {
                 self.setPosition();
             }
+            object.mousedown(function(e) {
+                e.stopPropagation();
+            });
         },
         
         setPosition: function() {
@@ -171,12 +176,19 @@
                 arrowRadius = 1;
             }           
             
-            if (self.options.position === 'auto') {
+            if (['auto','vertical'].contains(self.options.position)) {
                 var bh = $().clientHeight();
                 if (object.clientHeight() > origin.y || origin.y + handler.clientHeight() + object.clientHeight() < bh/2) {
                     position = 'below';
                 } else {
                     position = 'above';
+                }
+            } else if (self.options.position === 'horizontal') {
+                var bw = $().clientWidth();
+                if (object.clientWidth() > origin.x || origin.x + handler.clientWidth() + object.clientWidth() < bw) {
+                    position = 'right';
+                } else {
+                    position = 'left';
                 }
             } else {
                 position = self.options.position;
@@ -213,10 +225,18 @@
                 arrowY = object.clientHeight()/2 - arrowLength;
             }
             
-            if (self.options.align === 'left') {
-                posX = origin.x;
-            } else if (self.options.align === 'right') {
-                posX = origin.x + handler.clientWidth() - object.clientWidth();
+            if (['below','above'].contains(position)) {
+                if (self.options.align === 'left') {
+                    posX = origin.x;
+                } else if (self.options.align === 'right') {
+                    posX = origin.x + handler.clientWidth() - object.clientWidth();
+                }
+            } else if (['left','right'].contains(position)) {
+                if (self.options.align === 'top') {
+                    posY = origin.y;
+                } else if (self.options.align === 'bottom') {
+                    posY = origin.y + handler.clientHeight() - object.clientWidth();
+                }
             }
             
             if (posX < 0) {
@@ -236,8 +256,8 @@
                 posY = posY - handler.clientHeight();
             }
             
-            self.options.translateY = self.options.translateY * self.radio;
             object.removeClass('below above right left').addClass(position);
+            self.position = position;
             
             if (handler.parents('.fixed').length > 0) {
                 object.css({ position:'fixed' });
@@ -265,7 +285,7 @@
                 return self;
             }
             if (self.options.closeOthers) {
-                $.document.emit('mousedown');
+                $().emit('mousedown');
             }
             self.insertToDOM();
             if(self.options.refreshPosition) {
@@ -278,15 +298,15 @@
                 
                 var mousedown = function(e) {
                     if (e.target !== object.item()) {
-                        $.document.off('mousedown', mousedown).off('mouseup', mouseup);
+                        $().off('mousedown', mousedown).off('mouseup', mouseup);
                         self.close();
                     }
                 };
                 var mouseup = function() {
-                    $.document.on('mousedown', mousedown);
+                    $().on('mousedown', mousedown, false);
                 };
                 
-                $.document.on('mousedown', mousedown, false);
+                $().on('mousedown', mousedown, false);
             });
             return self;
         },
@@ -305,10 +325,15 @@
         },
         getEffect: function() {
             if (this.options.effect === 'slide') {
-                if (this.object.hasClass('below')) {
-                    return 'slideDown';
-                } else {
-                    return 'slideUp';
+                switch (this.position) {
+                    case 'below':
+                        return 'slideDown';
+                    case 'above':
+                        return 'slideUp';
+                    case 'left':
+                        return 'slideLeft';
+                    case 'right':
+                        return 'slideRight';
                 }
             }
             return this.options.effect;
