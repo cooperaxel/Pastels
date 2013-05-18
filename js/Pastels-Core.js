@@ -6,8 +6,8 @@
     
     var Pastels = (function() {}).extend({
         
-        version: '0.2.6',
-        codename: 'Heat Wave',
+        version: '0.2.7',
+        codename: 'Cherry Limeade',
         
         includes: [],
         require: function(component, callback) {
