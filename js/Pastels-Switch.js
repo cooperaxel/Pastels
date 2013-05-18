@@ -105,6 +105,7 @@
             }
         }
     });
-    window.Switch = Switch;
     
+    window.Switch = Switch;
+    Pastels.push('Switch');
 })(window);

@@ -11,51 +11,75 @@
         if (!obj) {
             return null;
         }
+        var self = this;
+        self.options = {}.extend(Scroller.prototype.defaults, opt);
         
-        this.options = {}.extend(Scroller.prototype.defaults, opt);
-        
-        var content = obj.children('.content');
-        if (content.length > 0) {
-            this.content = content.eq(0);
-        } else {
-            this.content = $.create('div.content');
-            obj.nodes().appendTo(this.content);
-            obj.append(this.content);
+        if (self.options.preventOnMobile && $.browser.mobile) {
+            obj.removeClass('scroller content');
+            return self;
         }
         
-        this.scroll_x = $.create('div.scroll-x');
-        this.scroll_x.slider = $.create('div.slider');
-        this.scroll_x.append(this.scroll_x.slider);
-        obj.append(this.scroll_x);
+        if (!(obj.item() instanceof HTMLDivElement) && !(obj.item() instanceof HTMLBodyElement)) {
+            self.content = obj;
+            self.object = $.create('div.scroller');
+            self.content.wrap(self.object);
+        } else {
+            var content = obj.children('.content');
+            if (content.length > 0) {
+                self.content = content.eq(0).removeClass('content');
+            } else {
+                self.content = $.create('div');
+                obj.nodes().appendTo(self.content);
+                obj.append(self.content);
+            }
+            self.object = obj.addClass('scroller');
+        }
         
-        this.scroll_y = $.create('div.scroll-y');
-        this.scroll_y.slider = this.scroll_x.slider.clone();
-        this.scroll_y.append(this.scroll_y.slider);
-        obj.append(this.scroll_y);
+        self.scroll_x = $.create('div.scroll-x');
+        self.scroll_x.slider = $.create('div.slider');
+        self.scroll_x.append(self.scroll_x.slider);
+        self.object.append(self.scroll_x);
         
-        this.scrolls = $(this.scroll_x, this.scroll_y);
-        this.object = obj;        
-        this.prepare();
+        self.scroll_y = $.create('div.scroll-y');
+        self.scroll_y.slider = self.scroll_x.slider.clone();
+        self.scroll_y.append(self.scroll_y.slider);
+        self.object.append(self.scroll_y);
         
-        return this;
+        self.scrolls = $(self.scroll_x, self.scroll_y);
+        self.prepare();
+        
+        return self;
     };
     
     Scroller.prototype = {}.extend(Pastels.prototype, {
         defaults: {
             duration: 300,
-            timeout: 1000,
+            timeout: 800,
             showOnStart: false,
             showOnHover: true,
             showAlways: false,
-            autoColor: true
+            autoColor: true,
+            vertical: true,
+            horizontal: false,
+            preventOnMobile: false
         },
         
         prepare: function() {
             var self = this;
             
-            self.object.css({ overflow:'hidden' });
-            self.content.css({ overflow:'scroll' });
-            self.scrolls.css({ opacity:0 });
+            if (self.object.parent().isInFlow() === false) {
+                self.options.width = self.content.offsetWidth();
+                self.options.height = self.content.offsetHeight();
+                self.restoreSize();
+            }
+            self.content.addClass('content');
+            if (self.options.vertical) {
+                self.content.css({ overflowY: 'scroll' });
+            }
+            if (self.options.horizontal) {
+                self.content.css({ overflowX: 'scroll' });
+            }
+            self.scrolls.css({ opacity: 0 });
             if (self.object.css('position') === 'static') {
                 self.object.css({ position: 'relative' });
             }
@@ -67,10 +91,9 @@
                     self.object.addClass('bright');
                 }
             }
-            
-            if (! $.browser.webkit) {
-                self.content.css({ marginRight: '--20', paddingRight: '++20',
-                                  marginBottom: '--20', paddingBottom: '++20' });
+            self.adjustDefaultScrolls();
+            if ($.browser.firefox && self.content.item() === document.body) {
+                self.content.css({ overflowY: 'hidden', overflowX: 'hidden' });
             }
             if (self.content.scrollWidth() > self.content.clientWidth()) {
                 self.scroll_y.css({ marginBottom: '++7' });
@@ -84,43 +107,60 @@
             self.update();
             
             if (self.options.showOnHover) {
-                self.content.mouseover($.invoke(self.show, self))
+                self.content.mouseover(function() { self.update().show(); })
                     .mouseout($.invoke(self.hide, self));
             }
             
             if (self.options.showOnStart || self.options.showAlways) {
-                self.show();
+                self.update().show();
             } else {
                 self.hide();
             }
             
-            self.content.scroll($.invoke(self.touch, self));
+            self.content.on('touchstart', function(e) {
+                self.update().show();
+            });
+            self.content.scroll(function(e) {
+                self.touch();
+            });
+            self.update();
         },
         update: function() {
             var self = this;
-            self.scroll_x.slider.css({
-                width: parseInt(self.content.clientWidth() * self.scroll_x.width() / self.content.scrollWidth()),
-                left: parseInt(self.content.scrollLeft() * self.scroll_x.width() / self.content.scrollWidth())
-            });
-            self.scroll_y.slider.css({
-                height: parseInt(self.content.clientHeight() * self.scroll_y.height() / self.content.scrollHeight()),
-                top: parseInt(self.content.scrollTop() * self.scroll_y.height() / self.content.scrollHeight())
-            });
+            if (self.options.horizontal) {
+                self.scroll_x.slider.css({
+                    width: parseInt(self.content.clientWidth() * self.scroll_x.width() / self.content.scrollWidth()),
+                    left: parseInt(self.content.scrollLeft() * self.scroll_x.width() / self.content.scrollWidth())
+                });
+            }
+            if (self.options.vertical) {
+                self.scroll_y.slider.css({
+                    height: parseInt(self.content.clientHeight() * self.scroll_y.height() / self.content.scrollHeight()),
+                    top: parseInt(self.content.scrollTop() * self.scroll_y.height() / self.content.scrollHeight())
+                });
+            }
             
             return this;
         },
         show: function() {
-            if (this.timeout) {
-                this.timeout = clearTimeout(this.timeout);
+            var self = this, s = false;
+            if (self.timeout) {
+                self.timeout = clearTimeout(self.timeout);
             }
-            if (this.content.scrollWidth() > this.content.clientWidth()) {
-                this.scroll_x.show().fadeIn(this.options.duration);
+            if (self.horizontalNeeded()) {
+                self.scroll_x.show().fadeIn(self.options.duration);
+                s = true;
             }
-            if (this.content.scrollHeight() > this.content.clientHeight()) {
-                this.scroll_y.show().fadeIn(this.options.duration);
+            if (self.verticalNeeded()) {
+                self.scroll_y.show().fadeIn(self.options.duration);
+                s = true;
             }
-            
-            return this;
+            if (s) {
+                self.hideDefaultScrolls();
+            } else {
+                self.showDefaultScrolls();
+            }
+            return self;
         },
         hide: function() {
             var self = this;
@@ -134,14 +174,58 @@
             return this;
         },
         touch: function() {
-            if (this.content.scrollHeight() > this.content.height()) {
-                this.update().show().hide();
-            } else {
-                this.hide();
-            }
+            this.update().show().hide();
             return this;
+        },
+        horizontalNeeded: function() {
+            return this.options.horizontal && this.content.scrollWidth() > this.content.clientWidth();
+        },
+        verticalNeeded: function() {
+            return this.options.vertical && this.content.scrollHeight() > this.content.clientHeight();
+        },
+        restoreSize: function(z) {
+            var self = this;
+            if (!z && self.options.width && self.options.height) {
+                self.object.css({ width: self.options.width, height: self.options.height });
+            } else {
+                self.object.css({ width: null, height: null });
+            }
+        },
+        adjustDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit) {
+                if (self.horizontalNeeded() || self.verticalNeeded()) {
+                    self.hideDefaultScrolls();
+                } else {
+                    self.showDefaultScrolls();
+                }
+            }
+        },
+        showDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit && self.content.hasClass('hidden-scrolls')) {
+                if (self.object.item() === document.body) {
+                    
+                }
+                self.content.css({ overflowY: null, overflowX: null, marginRight: null, paddingRight: null, marginBottom: null, paddingBottom: null });
+                self.content.removeClass('hidden-scrolls');
+            }
+        },
+        hideDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit && !self.content.hasClass('hidden-scrolls')) {
+                if (self.object.item() === document.body) {
+                    $('html').css({ overflow:'hidden' });
+                    $().css({ overflow:'hidden' });
+                    self.content.children().css({ marginRight: '--15' });
+                }
+                self.content.css({ marginRight: 20, paddingRight: 20,
+                                marginBottom: 20, paddingBottom: 20 });
+                self.content.addClass('hidden-scrolls');
+            }
         }
     });
-    window.Scroller = Scroller;
     
+    window.Scroller = Scroller;
+    Pastels.push('Scroller');
 })(window);

@@ -3,12 +3,62 @@
 "use strict";
 
 (function(window) {
-    var Pastels = function() {
-        this.observers = {};
-    };
     
-    Pastels.version = '0.2.2';
-    Pastels.codename = 'Wild Watermelon';
+    var Pastels = (function() {}).extend({
+        
+        version: '0.2.7',
+        codename: 'Cherry Limeade',
+        
+        includes: [],
+        require: function(component, callback) {
+            if (this.has(component) === false) {
+                $.require('js/Pastels-'+component+'.js', function(window) {
+                    if (callback) {
+                        callback.apply(window);
+                    }
+                });
+            } else if (callback) {
+                callback.apply($.window);
+            }
+        },
+        push: function(a) {
+            if (this.includes.indexOf(a) === -1) {
+                Array.prototype.push.call(this.includes, a);
+                this.emit('pushed', { value: a });
+            }
+        },
+        load: function(a, b) {
+            if (typeof a === 'string') {
+                a = [a];
+            }
+            if (this.includes.contains.apply(this.includes, a) === false) {
+                for (var i = 0; i < a.length; i++) {
+                    if (this.has(a[i]) === false) {
+                        this.require(a[i]);
+                    }
+                }
+                this.on('pushed', function() {
+                    if (Pastels.includes.contains.apply(Pastels.includes, a)) {
+                        b.apply(Pastels);
+                    }
+                }, false);
+            } else {
+                b.apply(this);
+            }
+        },
+        has: function(a) {
+            return (this.includes.indexOf(a) !== -1);
+        },
+        media: {
+            micro: 'screen and (max-width:320px)',
+            mini: 'screen and (max-width:480px)',
+            small: 'screen and (max-width:640px)',
+            medium: 'screen and (max-width:960px)',
+            large: 'screen and (max-width:1025px)',
+            xl: 'screen and (max-width:1280px)',
+            xxl: 'screen and (min-width:1281px)'
+        }
+    });
     
     Pastels.prototype = {
         
@@ -25,29 +75,33 @@
             return this.object.item(0).parentNode ? true : false;
         },
         insertToDOM: function(p) {
-            if(! this.inDOM()) {
+            if(! this.inDOM() && this.object) {
                 if(!p) p = $();
                 p.append(this.object);
             }
         },
         removeFromDOM: function() {
-            if(this.inDOM()) {
+            if(this.inDOM() && this.object) {
                 this.object.remove();
             }
         },
         destroy: function() {
             this.object.emit('destroy');
+        },
+        send: function(event, extra) {
+            this.emit('Pastels.'+event, extra);
+            if (this.object) {
+                this.object.emit('Pastels.'+event, extra);
+            }
+            return this;
         }
     };
     
-    Pastels.require = function(component, callback) {
-        $.require('js/Pastels-'+component+'.js', callback);
-    };
-    
-    $.each(['Alert','Hint','Notification','PopOver','Scroller','Switch','Typeahead'], function(k) {
+    $.each(['Alert','Hint','ImageSlider','Notification','PopOver','Scroller','Selectable','Switch','Typeahead'], function(k) {
         window[k] = function() {
-            var $this = this, args = arguments;
-            Pastels.require(k, function() {
+            var $this = this,
+                args = arguments;
+            return Pastels.require(k, function() {
                 if (window[k] !== $this) {
                     return window[k].apply(window, args);
                 }
@@ -57,17 +111,21 @@
             var self = this,
             fu = function(k) {
                 $.each(self, function(n) {
-                    n[k] = eval("new "+k+"(this, a1, a2, a3);");   
+                    n[k] = eval("new "+k+"(this, a1, a2, a3);");
                 });
             };
-            if (!(k instanceof Pastels) && this.length > 0) {
+            if (!Pastels.has(k) && self.length > 0) {
                 Pastels.require(k, $.invoke(fu, window, k));
-            } else if (this.length > 0) {
+            } else if (self.length > 0) {
                 fu(k);
             }
             return this;
         };
     });
+    
+    $.prototype.PastelsListener = function(event, callback) {
+        return this.on('Pastels.'+event, callback);
+    };
     
     $.prototype.dragNdrop = function() {
         var self = this;
@@ -124,9 +182,12 @@ $(function() {
     }
     
     $('.popover-handler').PopOver();
+    $('.selectable-handler').Selectable();
+    $('.typeahead-handler').Typeahead();
+    $('.scroller').Scroller();
     $('[data-hint]').Hint();
     $('.switch, .switch-input').Switch();
-    $('.scroller').Scroller();
+    $('.image-slider').ImageSlider();
     
     var navs = $('nav.bar, .navbar');
     navs.each(function() {

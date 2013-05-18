@@ -77,6 +77,8 @@
         timeout: undefined,
         expired: false,
         defaults: {
+            effect: 'skewUpperRight',
+            mobileEffect: 'stuckToBottom',
             duration: 800,
             timer: 7000,
             margin: 40,
@@ -92,7 +94,7 @@
             self.object.append($.create('header').append($.create('h1').html(h))).append($.create('section').append($.create('p').html(c)));
             self.object.mousedown($.invoke(this.close, this));
             
-            $.mediaListener('screen and (max-width:640px)', function(mql) {
+            $.mediaListener(Pastels.media.small, function(mql) {
                 self.options.mobileMode = mql.matches;
             });
             
@@ -138,18 +140,18 @@
                     posY = $().clientHeight() - (this.object.clientHeight() + this.options.margin) * (this.index+1);
                 }
                 
-                this.object.css({ position:'fixed', top: posY, right: posX, opacity:0, skewY:15, translateY: -this.object.clientHeight() });
+                this.object.css({ position:'fixed', top: posY, right: posX, opacity: 0 });
             }
         },
         
         show: function() {
             var self = this;
             if (this.options.mobileMode) {
-                self.object.animate({ opacity:1, rotateX:0, origin:'0 100%' }, self.options.duration, function() {
+                self.object.effect(self.options.mobileEffect, self.options.duration, function() {
                     this.emit('appear');
                 });
             } else {
-                self.object.animate({ opacity:1, skewY:0, translateY:0 }, self.options.duration, function() {
+                self.object.effect(self.options.effect, self.options.duration, function() {
                     this.emit('appear');
                 });
             }
@@ -168,13 +170,13 @@
             Stack.delete(self.index);
             
             if (this.options.mobileMode) {
-                this.object.animate({ opacity:1, rotateX:90, origin:'0 100%' }, this.options.duration, function() {
+                this.object.closeEffect(self.options.mobileEffect, this.options.duration, function() {
                     this.emit('disappear');
                     self.removeFromDOM();
                     self.destroy();
                 });
             } else {
-                this.object.animate({ opacity:0, skewX:-40, translateX: (self.object.clientWidth() + this.options.margin*2) }, this.options.duration, function() {
+                this.object.closeEffect(self.options.effect, this.options.duration, function() {
                     this.emit('disappear');
                     self.removeFromDOM();
                     self.destroy();
@@ -190,6 +192,7 @@
             }, this.options.timer);
         }
     });
+    
     window.Notification = Notification;
-
+    Pastels.push('Notification');
 })(window);
