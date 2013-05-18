@@ -1836,6 +1836,7 @@ div.segmentedcontrol.mini button {
   font-family: Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
+  position: relative;
 }
 .popover.selectable li.active {
   background-color: #454545;
@@ -1844,7 +1845,7 @@ div.segmentedcontrol.mini button {
 .popover.selectable li.divider {
   width: auto;
   height: 1px;
-  margin: 8px 1px;
+  margin: 8px -1px;
   padding: 0;
   background-color: #d2d2d2 !important;
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -1854,11 +1855,31 @@ div.segmentedcontrol.mini button {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
   border-width: 0 !important;
 }
+.popover.selectable li.submenu::after,
+.popover.selectable li.checked::after {
+  font-size: 16px;
+  color: inherit;
+  position: absolute;
+  top: 2px;
+  bottom: 0;
+  right: 7px;
+}
+.popover.selectable li.submenu::after {
+  content: "❯";
+}
+.popover.selectable li.checked::after {
+  content: "✔";
+}
 .popover.selectable li span,
 .popover.selectable li a {
   display: block;
   margin: 0;
-  padding: 3px 20px 0 15px;
+  padding: 3px 25px 0 15px;
+  -webkit-text-shadow: none;
+  -moz-text-shadow: none;
+  -ms-text-shadow: none;
+  -o-text-shadow: none;
+  text-shadow: none;
   font: inherit;
 }
 .popover.selectable li a {

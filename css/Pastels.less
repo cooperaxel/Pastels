@@ -930,6 +930,7 @@ div.segmentedcontrol {
             font-family:Arial, sans-serif;
             font-size:14px;
             line-height:20px;
+            position:relative;
             
             &.active {
                 .background(rgb(69,69,69));
@@ -937,14 +938,26 @@ div.segmentedcontrol {
             }
             &.divider {
                 .size(auto, 1px);
-                .margins(8px 1px, 0);
+                .margins(8px -1px, 0);
                 .background(rgb(210,210,210)) !important;
                 .shadow(0 1px 0 rgba(255,255,255,0.7));
                 border-width:0 !important;
             }
+            &.submenu::after, &.checked::after {
+                font-size:16px;
+                color:inherit;
+                position:absolute; top:2px; bottom:0; right:7px;
+            }
+            &.submenu::after {
+                content:"❯";
+            }
+            &.checked::after {
+                content:"✔";
+            }
             span, a {
                 .block !important;
-                .margins(0, 3px 20px 0 15px);
+                .margins(0, 3px 25px 0 15px);
+                .text-shadow(none);
                 font:inherit;
             }
             a {
