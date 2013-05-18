@@ -91,16 +91,7 @@
                     self.object.addClass('bright');
                 }
             }
-            
-            if (! $.browser.webkit) {
-                if (self.object.item() === document.body) {
-                    $('html').css({ overflow:'hidden' });
-                    $().css({ overflow:'hidden' });
-                    self.content.children().css({ marginRight: '--15' });
-                }
-                self.content.css({ marginRight: '--20', paddingRight: '++20',
-                                marginBottom: '--20', paddingBottom: '++20' });
-            }
+            self.adjustDefaultScrolls();
             if ($.browser.firefox && self.content.item() === document.body) {
                 self.content.css({ overflowY: 'hidden', overflowX: 'hidden' });
             }
@@ -152,17 +143,24 @@
             return this;
         },
         show: function() {
-            if (this.timeout) {
-                this.timeout = clearTimeout(this.timeout);
+            var self = this, s = false;
+            if (self.timeout) {
+                self.timeout = clearTimeout(self.timeout);
             }
-            if (this.options.horizontal && this.content.scrollWidth() > this.content.clientWidth()) {
-                this.scroll_x.show().fadeIn(this.options.duration);
+            if (self.horizontalNeeded()) {
+                self.scroll_x.show().fadeIn(self.options.duration);
+                s = true;
             }
-            if (this.options.vertical && this.content.scrollHeight() > this.content.clientHeight()) {
-                this.scroll_y.show().fadeIn(this.options.duration);
+            if (self.verticalNeeded()) {
+                self.scroll_y.show().fadeIn(self.options.duration);
+                s = true;
             }
-            
-            return this;
+            if (s) {
+                self.hideDefaultScrolls();
+            } else {
+                self.showDefaultScrolls();
+            }
+            return self;
         },
         hide: function() {
             var self = this;
@@ -179,6 +177,12 @@
             this.update().show().hide();
             return this;
         },
+        horizontalNeeded: function() {
+            return this.options.horizontal && this.content.scrollWidth() > this.content.clientWidth();
+        },
+        verticalNeeded: function() {
+            return this.options.vertical && this.content.scrollHeight() > this.content.clientHeight();
+        },
         restoreSize: function(z) {
             var self = this;
             if (!z && self.options.width && self.options.height) {
@@ -186,7 +190,39 @@
             } else {
                 self.object.css({ width: null, height: null });
             }
-            return self;
+        },
+        adjustDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit) {
+                if (self.horizontalNeeded() || self.verticalNeeded()) {
+                    self.hideDefaultScrolls();
+                } else {
+                    self.showDefaultScrolls();
+                }
+            }
+        },
+        showDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit && self.content.hasClass('hidden-scrolls')) {
+                if (self.object.item() === document.body) {
+                    
+                }
+                self.content.css({ overflowY: null, overflowX: null, marginRight: null, paddingRight: null, marginBottom: null, paddingBottom: null });
+                self.content.removeClass('hidden-scrolls');
+            }
+        },
+        hideDefaultScrolls: function() {
+            var self = this;
+            if (! $.browser.webkit && !self.content.hasClass('hidden-scrolls')) {
+                if (self.object.item() === document.body) {
+                    $('html').css({ overflow:'hidden' });
+                    $().css({ overflow:'hidden' });
+                    self.content.children().css({ marginRight: '--15' });
+                }
+                self.content.css({ marginRight: 20, paddingRight: 20,
+                                marginBottom: 20, paddingBottom: 20 });
+                self.content.addClass('hidden-scrolls');
+            }
         }
     });
     
